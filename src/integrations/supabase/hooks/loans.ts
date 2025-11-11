@@ -1,0 +1,183 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "../supabase";
+import { Loan, LoanRepayment, CreateLoanData, AddRepaymentData, LoansSummary } from "@/types/loans.types";
+
+export const useLoans = (storeId?: string) => {
+  return useQuery({
+    queryKey: ["loans", storeId],
+    queryFn: async () => {
+      if (!storeId) return [] as Loan[];
+      const { data, error } = await supabase
+        .from("loans")
+        .select("*")
+        .eq("store_id", storeId)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return (data || []) as Loan[];
+    },
+    enabled: !!storeId,
+  });
+};
+
+export const useLoan = (loanId?: string) => {
+  return useQuery({
+    queryKey: ["loan", loanId],
+    queryFn: async () => {
+      if (!loanId) return null;
+      const { data, error } = await supabase
+        .from("loans")
+        .select("*")
+        .eq("id", loanId)
+        .single();
+      if (error) throw error;
+      return data as Loan;
+    },
+    enabled: !!loanId,
+  });
+};
+
+export const useCreateLoan = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: CreateLoanData) => {
+      const { data, error } = await supabase
+        .from("loans")
+        .insert(payload)
+        .select()
+        .single();
+      if (error) throw error;
+      return data as Loan;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["loans", data.store_id] });
+      queryClient.invalidateQueries({ queryKey: ["loans-summary", data.store_id] });
+    }
+  });
+};
+
+export const useUpdateLoanStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ loanId, status }: { loanId: string; status: Loan["status"] }) => {
+      const { data, error } = await supabase
+        .from("loans")
+        .update({ status })
+        .eq("id", loanId)
+        .select()
+        .single();
+      if (error) throw error;
+      return data as Loan;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["loans", data.store_id] });
+      queryClient.invalidateQueries({ queryKey: ["loans-summary", data.store_id] });
+    }
+  });
+};
+
+export const useDeleteLoan = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ loanId }: { loanId: string }) => {
+      const { error } = await supabase.from("loans").delete().eq("id", loanId);
+      if (error) throw error;
+      return loanId;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["loans"] });
+      queryClient.invalidateQueries({ queryKey: ["loans-summary"] });
+    }
+  });
+};
+
+export const useRepayments = (loanId?: string) => {
+  return useQuery({
+    queryKey: ["loan-repayments", loanId],
+    queryFn: async () => {
+      if (!loanId) return [] as LoanRepayment[];
+      const { data, error } = await supabase
+        .from("loan_repayments")
+        .select("*")
+        .eq("loan_id", loanId)
+        .order("paid_at", { ascending: false });
+      if (error) throw error;
+      return (data || []) as LoanRepayment[];
+    },
+    enabled: !!loanId,
+  });
+};
+
+export const useAddRepayment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: AddRepaymentData) => {
+      const { data, error } = await supabase
+        .from("loan_repayments")
+        .insert(payload)
+        .select()
+        .single();
+      if (error) throw error;
+      return data as LoanRepayment;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
+      // Also refresh loans summary by store; fetch the loan to get store_id
+    }
+  });
+};
+
+// Fetch all repayments for loans belonging to a store (for aggregation on the page)
+export const useRepaymentsByStore = (storeId?: string) => {
+  return useQuery({
+    queryKey: ["loan-repayments-by-store", storeId],
+    queryFn: async () => {
+      if (!storeId) return [] as LoanRepayment[];
+      const { data, error } = await supabase
+        .from("loan_repayments")
+        .select("id, loan_id, amount, paid_at, note, created_at, loans!inner(store_id)")
+        .eq("loans.store_id", storeId)
+        .order("paid_at", { ascending: false });
+      if (error) throw error;
+      return (data || []) as unknown as LoanRepayment[];
+    },
+    enabled: !!storeId,
+  });
+};
+
+export const useLoansSummary = (storeId?: string) => {
+  return useQuery({
+    queryKey: ["loans-summary", storeId],
+    queryFn: async () => {
+      if (!storeId) return null as LoansSummary | null;
+      const { data: loans, error } = await supabase
+        .from("loans")
+        .select("*")
+        .eq("store_id", storeId);
+      if (error) throw error;
+      const { data: allRepayments, error: rErr } = await supabase
+        .from("loan_repayments")
+        .select("loan_id, amount");
+      if (rErr) throw rErr;
+
+      const total_loans = loans?.length || 0;
+      const active_loans = loans?.filter(l => l.status === 'active').length || 0;
+      const completed_loans = loans?.filter(l => l.status === 'completed').length || 0;
+      // total payable = principal + interest amount (interest_rate stored as decimal)
+      const total_principal = loans?.reduce((sum, l: any) => {
+        const principal = Number(l.principal || 0);
+        const rateDecimal = Number(l.interest_rate || 0);
+        const interestAmount = principal * rateDecimal;
+        return sum + principal + interestAmount;
+      }, 0) || 0;
+      const repaidByLoan = new Map<string, number>();
+      (allRepayments || []).forEach(r => {
+        repaidByLoan.set(r.loan_id, (repaidByLoan.get(r.loan_id) || 0) + Number(r.amount || 0));
+      });
+      const total_repaid = (loans || []).reduce((sum: number, l: any) => sum + (repaidByLoan.get(l.id) || 0), 0);
+      const outstanding_balance = Math.max(0, total_principal - total_repaid);
+
+      return { total_loans, active_loans, completed_loans, total_principal, total_repaid, outstanding_balance } as LoansSummary;
+    },
+    enabled: !!storeId,
+  });
+};

@@ -1,0 +1,21 @@
+{
+  "name": "SheBalance - Store Management",
+  "short_name": "SheBalance",
+  "description": "Powerful store management platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/Shebanlace_favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Shebanlace_favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 

@@ -1,0 +1,214 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { format, parseISO, isValid } from "date-fns";
+import { QRCodeSVG } from "qrcode.react";
+import { Printer, Share2, CheckCircle } from "lucide-react";
+import toast from "react-hot-toast";
+import { useStore } from "@/integrations/supabase/hooks/stores";
+import { useSalesRep } from "@/integrations/supabase/hooks/sales_reps";
+import { generateSalesReceipt, generateSalesReceiptWithAvatarAsync } from "@/utils/pdfGenerator";
+import { formatNumber } from "@/utils/formatNumber";
+
+const SalesReceiptModal = ({ isOpen, onClose, sale }) => {
+  if (!sale) return null;
+  const { data: store } = useStore(sale.store_id);
+  const { data: salesRep } = useSalesRep(sale.sales_rep_id || null);
+
+  const formatDate = (dateString) => {
+    if (!dateString || typeof dateString !== "string") return "Invalid Date";
+    const date = parseISO(dateString);
+    return isValid(date) ? format(date, "dd MMM yyyy, HH:mm") : "Invalid Date";
+  };
+
+  // Function to get confirmed by info from sale record
+  const getConfirmedBy = () => {
+    // First check if sale has confirmed_by field directly
+    if (sale.confirmed_by) {
+      return sale.confirmed_by;
+    }
+    
+    // If not, try to parse from note field
+    if (sale.note) {
+      const confirmMatch = sale.note.match(/Confirmed by:\s*([^,\n]+)/i);
+      if (confirmMatch) {
+        return confirmMatch[1].trim();
+      }
+    }
+    
+    return null;
+  };
+
+  const confirmedBy = getConfirmedBy();
+  
+  // Check if this is a self-checkout transaction
+  const isSelfCheckout = sale.sales_rep_name === 'Self Checkout';
+
+  const receiptUrl = `${window.location.origin}/receipt-pdf/${sale.id}`;
+
+  const handleShare = async () => {
+    try {
+      if (!store || !store.name) {
+        toast.error("Store information is still loading. Please try again in a moment.");
+        return;
+      }
+      let pdf;
+      if (store?.store_avatar) {
+        pdf = await generateSalesReceiptWithAvatarAsync(sale, store, salesRep);
+      } else {
+        pdf = generateSalesReceipt(sale, store, salesRep);
+      }
+      const pdfBlob = pdf.output("blob");
+
+      if (navigator.share) {
+        const file = new File([pdfBlob], "receipt.pdf", {
+          type: "application/pdf",
+        });
+        await navigator.share({
+          title: "Sales Receipt",
+          text: `Sales Receipt from ${store?.name || "Our Store"}`,
+          files: [file],
+        });
+      } else {
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        window.open(pdfUrl, "_blank");
+        toast.success("Receipt PDF opened in new tab!");
+      }
+    } catch (error) {
+      toast.error("Failed to share receipt");
+      console.error(error);
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const totalAmount =
+    sale.items?.reduce(
+      (sum, item) => sum + (item.unit_price || 0) * (item.quantity || 0),
+      0,
+    ) || 0;
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="flex justify-between items-center">
+            <span>Sale Receipt - {store?.name}</span>
+            <div className="flex space-x-2">
+              <Button variant="outline" size="icon" onClick={handleShare}>
+                <Share2 className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="icon" onClick={handlePrint}>
+                <Printer className="h-4 w-4" />
+              </Button>
+            </div>
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="mt-4 space-y-4">
+          <div className="text-center flex flex-col items-center">
+            {store?.store_avatar && (
+              <img
+                src={store.store_avatar}
+                alt="Store Avatar"
+                className="max-w-[80px] max-h-[80px] object-contain rounded mb-2"
+              />
+            )}
+            <h2 className="text-2xl font-bold">{store?.name || "Our Store"}</h2>
+            {store?.location && (
+              <p className="text-muted-foreground">{store.location}</p>
+            )}
+          </div>
+
+          <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+            <p>
+              <strong>Transaction ID:</strong> {sale.id || "N/A"}
+            </p>
+            <p>
+              <strong>Date:</strong> {formatDate(sale.created_at)}
+            </p>
+            <p>
+              <strong>Sold by:</strong>{" "}
+              {sale.sales_rep_name || salesRep?.sales_rep_name || "N/A"}
+            </p>
+            {/* Confirmed by section: only show if present */}
+            {confirmedBy && (
+              <p className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                <strong>Confirmed by:</strong>{" "}
+                <span className="ml-1 text-green-700 dark:text-green-400 font-medium">
+                  {confirmedBy}
+                </span>
+              </p>
+            )}
+            <p>
+              <strong>Payment Mode:</strong> {sale.payment_mode || "N/A"}
+            </p>
+            {sale.note && (
+              <p>
+                <strong>Note:</strong> {sale.note}
+              </p>
+            )}
+          </div>
+
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Product</TableHead>
+                <TableHead>Quantity</TableHead>
+                <TableHead>Unit Price</TableHead>
+                <TableHead>Total</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {sale.items?.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell>{item.product?.name || "N/A"}</TableCell>
+                  <TableCell>{item.quantity || "0"}</TableCell>
+                  <TableCell>₦{formatNumber(item.unit_price || 0)}</TableCell>
+                  <TableCell>
+                    ₦
+                    {formatNumber(
+                      (item.unit_price || 0) * (item.quantity || 0),
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+
+          <div className="flex justify-between items-center bg-muted/50 p-4 rounded-lg">
+            <span className="font-bold text-lg">Total Amount:</span>
+            <span className="font-bold text-lg">
+              ₦{formatNumber(sale?.total_price)}
+            </span>
+          </div>
+
+          <div className="flex justify-center">
+            <QRCodeSVG value={receiptUrl} />
+          </div>
+
+          <p className="text-center text-sm text-muted-foreground">
+            {store?.store_footnote || "Thank you for your patronage"}
+          </p>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default SalesReceiptModal;
