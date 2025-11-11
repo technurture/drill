@@ -3,25 +3,22 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
+
 export default defineConfig(({ mode }) => ({
+  root: path.resolve(__dirname, "client"),
   server: {
-    // host: "::",
-    host: true,
-    port: 8082,
+    host: "0.0.0.0",
+    port: 5000,
     strictPort: true,
     hmr: {
-      host: "localhost",
-      port: 8082,
+      host: "0.0.0.0",
+      port: 5000,
       protocol: "ws",
     },
-    origin: "http://localhost:8082",
   },
   build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-      },
-    },
+    outDir: path.resolve(__dirname, "client/dist"),
+    emptyOutDir: true,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
@@ -70,7 +67,7 @@ export default defineConfig(({ mode }) => ({
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./client/src"),
     },
   },
 }));

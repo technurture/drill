@@ -7,7 +7,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./client/src/*"]
     },
     "noImplicitAny": false,
     "noUnusedParameters": false,
@@ -17,7 +17,12 @@
     "strictNullChecks": false,
     "esModuleInterop": true,
     "target": "ES2020",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
-  "exclude": ["node_modules"]
+  "include": ["client/src", "server"],
+  "exclude": ["node_modules", "client/dist"]
 }
