@@ -4,6 +4,34 @@
 
 SheBalance is a comprehensive Progressive Web Application (PWA) designed to empower women entrepreneurs in Nigeria with digital tools for managing their businesses. The platform provides inventory management, sales tracking, financial record keeping, savings plans, loan management, and agent-based growth features. Built with React, TypeScript, and Supabase, the application supports offline functionality and push notifications to serve users in various connectivity environments.
 
+## Migration Status
+
+✅ **Successfully migrated from Lovable to Replit** (November 11, 2025)
+
+### Migration Changes
+- **Project Structure**: Reorganized to Replit fullstack template structure
+  - Frontend code moved to `client/src/`
+  - Public assets moved to `client/public/`
+  - Added `server/` directory for future backend extensions
+- **Build Configuration**: Updated Vite, TypeScript, and Tailwind configs for new structure
+- **Package Management**: Using npm with Node.js 20
+- **Development Server**: Vite dev server running on port 5000
+
+### Required Setup
+
+**IMPORTANT**: You need to configure your environment variables before the application will work.
+
+1. Create a `.env` file in the root directory (use `.env.example` as a template)
+2. Add your Supabase credentials:
+   ```
+   VITE_SUPABASE_PROJECT_URL=your_supabase_project_url
+   VITE_SUPABASE_API_KEY=your_supabase_anon_key
+   ```
+3. (Optional) Add Firebase credentials for push notifications
+4. Restart the application workflow after adding environment variables
+
+You can add environment variables using the Secrets tab in Replit, or by creating a `.env` file.
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
