@@ -32,9 +32,26 @@ SheBalance is a comprehensive Progressive Web Application (PWA) designed to empo
 
 You can add environment variables using the Secrets tab in Replit, or by creating a `.env` file.
 
+## Recent Changes
+
+**November 12, 2025**: Multi-language Support Completed
+- ✅ Implemented i18next translation system supporting 5 languages:
+  - English (en) - Default
+  - Igbo (ig) - Full translation coverage
+  - Yoruba (yo) - Full translation coverage
+  - Hausa (ha) - Full translation coverage
+  - Nigerian Pidgin (pidgin) - Full translation coverage
+- ✅ Updated all dashboard navigation items to use translations:
+  - Dashboard, Inventory, Sales, Finance, Savings, Loans, Settings, Help, Sign Out
+- ✅ Updated landing page with full translations in all languages
+- ✅ Language selection available in Settings page
+- Translation files located in: `client/src/i18n/resources/[language]/subheadings.json`
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Database Backend: Using Supabase (not Neon PostgreSQL)
+Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## System Architecture
 

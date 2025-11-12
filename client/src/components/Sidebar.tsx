@@ -34,6 +34,7 @@ import { SubscriptionContext } from "@/contexts/SubscriptionContext";
 import LogoutModal from "./ui/modals/LogoutModal";
 import { requestNotificationPermission } from "@/integrations/firebase/firebase";
 import favicon from "../../public/favicon.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Sidebar = ({ onClose, isSideBar }) => {
   const { user } = useAuth();
@@ -42,6 +43,7 @@ const Sidebar = ({ onClose, isSideBar }) => {
   const subscription = useContext(SubscriptionContext);
   const [isLogoutModal, setLogoutModal] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const { tSubheading } = useLanguage();
 
   useEffect(() => {
     if (user?.id) {
@@ -53,49 +55,49 @@ const Sidebar = ({ onClose, isSideBar }) => {
     { 
       path: "/dashboard", 
       icon: LayoutDashboard, 
-      label: "Dashboard",
+      label: tSubheading("dashboard"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
     { 
       path: "/dashboard/inventory", 
       icon: Package, 
-      label: "Inventory",
+      label: tSubheading("inventory"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
     { 
       path: "/dashboard/sales", 
       icon: BarChart2, 
-      label: "Sales",
+      label: tSubheading("sales"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
     { 
       path: "/dashboard/finance", 
       icon: Coins, 
-      label: "Finance",
+      label: tSubheading("finance"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
     { 
       path: "/dashboard/savings", 
       icon: PiggyBank, 
-      label: "Savings",
+      label: tSubheading("savings"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
     { 
       path: "/dashboard/loans", 
       icon: Banknote, 
-      label: "Loans",
+      label: tSubheading("loans"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
     { 
       path: "/dashboard/settings", 
       icon: Settings, 
-      label: "Settings",
+      label: tSubheading("settings"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },
@@ -235,14 +237,14 @@ const Sidebar = ({ onClose, isSideBar }) => {
               to="/dashboard/help"
               onClick={onClose}
               className={`flex items-center ${collapsed ? 'justify-center' : 'space-x-3'} p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group`}
-              title={collapsed ? "Help" : undefined}
+              title={collapsed ? tSubheading("help") : undefined}
             >
               <div className="w-8 h-8 bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400 rounded-lg flex items-center justify-center">
                 <HelpCircle size={16} />
               </div>
               {!collapsed && (
                 <span className="font-medium text-sm text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
-                  Help
+                  {tSubheading("help")}
                 </span>
               )}
             </Link>
@@ -251,14 +253,14 @@ const Sidebar = ({ onClose, isSideBar }) => {
               onClick={() => setLogoutModal(true)}
               variant="ghost"
               className={`w-full ${collapsed ? 'justify-center p-3' : 'justify-start space-x-3 p-3'} rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 group`}
-              title={collapsed ? "Sign Out" : undefined}
+              title={collapsed ? tSubheading("signOut") : undefined}
             >
               <div className="w-8 h-8 bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 rounded-lg flex items-center justify-center">
                 <LogOut size={16} />
               </div>
               {!collapsed && (
                 <span className="font-medium text-sm text-gray-600 dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400">
-                  Sign Out
+                  {tSubheading("signOut")}
                 </span>
               )}
             </Button>
