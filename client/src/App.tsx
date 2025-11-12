@@ -5,6 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { StoreProvider } from "./contexts/StoreContext";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import { Toaster } from "@/components/ui/sonner";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
@@ -66,10 +67,11 @@ function App() {
             <ObscurityProvider>
               <SubscriptionProvider>
                 <ThemeProvider>
-                  <Toaster />
-                  <PWAInstallPopup />
-                  <ScrollToTop />
-                  <Routes>
+                  <LanguageProvider>
+                    <Toaster />
+                    <PWAInstallPopup />
+                    <ScrollToTop />
+                    <Routes>
                     <Route path="/" element={<LandingPageWrapper />} />
                     <Route path="/landing" element={<Landing />} />
                     <Route path="/signup" element={<Signup />} />
@@ -240,6 +242,7 @@ function App() {
                       }
                     />
                   </Routes>
+                  </LanguageProvider>
                 </ThemeProvider>
               </SubscriptionProvider>
             </ObscurityProvider>

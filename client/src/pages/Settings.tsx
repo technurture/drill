@@ -14,6 +14,7 @@ import { StoreContext } from "@/contexts/StoreContext";
 import { useUpdateStoreName, useUpdateStoreLocation } from "@/integrations/supabase/hooks/stores";
 import { useUser, useHideBalance } from "@/integrations/supabase/hooks/users";
 import Deletion from "@/components/settings/Deletion";
+import LanguageSelector from "@/components/settings/LanguageSelector";
 import { Store } from "@/types/database.types";
 import { useStore as useStoreData } from "@/integrations/supabase/hooks/stores";
 import { useLocations, useMarketsByLocation } from "@/integrations/supabase/hooks/locations";
@@ -387,6 +388,9 @@ const Settings = () => {
             />
           </CardContent>
         </Card>
+
+        {/* Language Settings */}
+        <LanguageSelector />
 
         {/* PWA Installation */}
         {!isInstalled && (

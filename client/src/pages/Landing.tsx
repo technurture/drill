@@ -20,42 +20,44 @@ import {
   Zap
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Landing = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { tSubheading } = useLanguage();
 
   const faqs = [
     {
-      question: "What is SheBalance?",
+      question: tSubheading('landing.faq.q1'),
       answer: "SheBalance is a mobile platform designed specifically for women entrepreneurs to track their business finances, manage inventory, join savings groups, and build financial confidence. It's built with local languages and simple interfaces to make financial management accessible to every woman."
     },
     {
-      question: "Is SheBalance free to use?",
+      question: tSubheading('landing.faq.q2'),
       answer: "Yes! SheBalance offers a free tier with essential features to help you get started. We also offer premium features for advanced business needs. You can start with the free version and upgrade when you're ready."
     },
     {
-      question: "Can I use SheBalance offline?",
+      question: tSubheading('landing.faq.q3'),
       answer: "Absolutely! SheBalance works offline, so you can track your sales and expenses even without internet connection. Your data will sync when you're back online."
     },
     {
-      question: "What languages does SheBalance support?",
+      question: tSubheading('landing.faq.q4'),
       answer: "SheBalance supports multiple local languages to ensure every woman can use the app comfortably. We're constantly adding more languages based on user needs."
     },
     {
-      question: "How secure is my financial data?",
+      question: tSubheading('landing.faq.q5'),
       answer: "Your data security is our top priority. We use industry-standard encryption and security measures to protect your financial information. Your data is private and secure."
     },
     {
-      question: "Can I export my reports?",
+      question: tSubheading('landing.faq.q6'),
       answer: "Yes! You can download and share your financial reports. This is especially useful for loan applications, business planning, or sharing with family members."
     },
     {
-      question: "What if I'm not tech-savvy?",
+      question: tSubheading('landing.faq.q7'),
       answer: "Don't worry! SheBalance is designed to be simple and intuitive. We use familiar icons, voice instructions, and step-by-step guidance to make it easy for everyone to use."
     },
     {
-      question: "How does the savings (Esusu) feature work?",
+      question: tSubheading('landing.faq.q8'),
       answer: "You can join existing savings groups or create your own. The app helps you track contributions, set goals, and manage group savings transparently and securely."
     }
   ];
@@ -63,22 +65,22 @@ const Landing = () => {
   const features = [
     {
       icon: TrendingUp,
-      title: "Track Your Business — Stress-Free",
+      title: tSubheading('landing.features.trackBusiness'),
       description: "Whether you sell in the market, run a small shop, or hustle from home, SheBalance helps you keep track of every naira. No need for fancy accounting — just a few taps, and you're in charge."
     },
     {
       icon: Smartphone,
-      title: "Built for You — With Love and Understanding",
+      title: tSubheading('landing.features.builtForYou'),
       description: "Designed with women like you in mind, SheBalance speaks your language — literally. With local language options, simple icons, and voice instructions, it's easy for every woman to feel confident using it."
     },
     {
       icon: BarChart3,
-      title: "Know Your Numbers. Make Better Moves.",
+      title: tSubheading('landing.features.knowNumbers'),
       description: "No more guessing where your money went. See what's coming in, what's going out, and what's left to save. SheBalance shows you the full picture — so you can make smarter choices."
     },
     {
       icon: BookOpen,
-      title: "Learn While You Earn",
+      title: tSubheading('landing.features.learnEarn'),
       description: "You don't need a classroom to grow. SheBalance shares small, powerful lessons on saving, planning, and business tips — right inside the app, as you use it. Every day, you grow stronger."
     }
   ];
@@ -163,16 +165,16 @@ const Landing = () => {
           <div className="text-center">
             <Badge className="mb-4 sm:mb-6 bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 border-green-200 dark:border-green-800">
               <Star className="w-4 h-4 mr-2" />
-              Empowering Women Entrepreneurs
+              {tSubheading('landing.hero.badge')}
             </Badge>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg">
-              Welcome to{' '}
+              {tSubheading('landing.hero.title').split(' ').slice(0, 2).join(' ')}{' '}
               <span className="text-green-400">
                 SheBalance
               </span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-100 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
-              Where Every Woman's Hustle Finds Power and Purpose
+              {tSubheading('landing.hero.subtitle')}
             </p>
             <p className="text-base sm:text-lg text-gray-200 mb-10 sm:mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
               You work hard. You provide. You plan for tomorrow with what little you have today. 
@@ -185,7 +187,7 @@ const Landing = () => {
                 onClick={() => navigate('/signup')}
                 className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
               >
-                Start Your Journey
+                {tSubheading('landing.hero.ctaPrimary')}
               </Button>
               <Button 
                 size="lg"
@@ -193,7 +195,7 @@ const Landing = () => {
                 onClick={() => navigate('/login')}
                 className="border-2 border-green-600 text-green-600 hover:bg-green-50 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-green-600 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
               >
-                I Already Have an Account
+                {tSubheading('landing.hero.ctaSecondary')}
               </Button>
             </div>
           </div>
@@ -205,7 +207,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              SheBalance is more than an app
+              {tSubheading('landing.about.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               It's your financial companion. Your silent business partner. Your daily reminder 
@@ -240,7 +242,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Who is SheBalance For?
+              {tSubheading('landing.whoFor.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               SheBalance is for you, the woman who:
@@ -274,7 +276,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              What You Get Inside the App
+              {tSubheading('landing.appFeatures.title')}
             </h2>
           </div>
 
@@ -298,10 +300,10 @@ const Landing = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Frequently Asked Questions
+              {tSubheading('landing.faq.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
-              Everything you need to know about SheBalance
+              {tSubheading('landing.faq.subtitle')}
             </p>
           </div>
 
@@ -352,7 +354,7 @@ const Landing = () => {
             {/* CTA Content */}
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Your Future is in Your Hands — and Your Phone
+                {tSubheading('landing.cta.title')}
               </h2>
               <p className="text-xl text-green-100 mb-6 leading-relaxed">
                 At SheBalance, we believe that when a woman understands her money, she multiplies 
@@ -368,7 +370,7 @@ const Landing = () => {
                   className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold"
                 >
                   <Zap className="w-5 h-5 mr-2" />
-                  Start Your Journey Today
+                  {tSubheading('landing.cta.primaryButton')}
                 </Button>
                 <Button 
                   size="lg"
@@ -376,7 +378,7 @@ const Landing = () => {
                   onClick={() => navigate('/login')}
                   className="border-2 border-green-50 text-white hover:bg-white hover:text-green-600 dark:border-white px-8 py-4 text-lg"
                 >
-                  I'm Ready to Login
+                  {tSubheading('landing.cta.secondaryButton')}
                 </Button>
               </div>
             </div>
