@@ -1,4 +1,4 @@
-modules = ["nodejs-20", "web", "bun"]
+modules = ["nodejs-20", "web"]
 [agent]
 expertMode = true
 integrations = ["javascript_database:1.0.0"]
@@ -38,6 +38,10 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 38377
+externalPort = 3001
 
 [[ports]]
 localPort = 42273
