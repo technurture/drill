@@ -11,6 +11,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import DashboardLayout from "./components/DashboardLayout";
 import PWAInstallPopup from "./components/PWAInstallPopup";
+import { OfflineIndicator } from "./components/OfflineIndicator";
+import { setupAutoSync } from "./services/offlineSync";
 import LandingPageWrapper from "./components/LandingPageWrapper";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
@@ -58,6 +60,14 @@ function ScrollToTop() {
   return null;
 }
 
+function OfflineSync() {
+  useEffect(() => {
+    setupAutoSync();
+  }, []);
+
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -70,6 +80,8 @@ function App() {
                   <LanguageProvider>
                     <Toaster />
                     <PWAInstallPopup />
+                    <OfflineIndicator />
+                    <OfflineSync />
                     <ScrollToTop />
                     <Routes>
                     <Route path="/" element={<LandingPageWrapper />} />

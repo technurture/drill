@@ -35,16 +35,51 @@ export default defineConfig(({ mode }) => ({
       ],
       workbox: {
         maximumFileSizeToCacheInBytes: 7000000,
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/.*\.supabase\.co\/.*$/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'supabase-api-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30,
+              },
+            },
+          },
+          {
+            urlPattern: /\.(?:js|css)$/i,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'static-resources',
+            },
+          },
+        ],
       },
       devOptions: {
-        enabled: false,
+        enabled: true,
       },
       manifest: {
         name: "SheBalance",
         short_name: "SheBalance",
-        description: "Keeping your day to day stock",
+        description: "Empowering women entrepreneurs with business and inventory management",
         display: "standalone",
-        theme_color: "#ffffff",
+        theme_color: "#16a34a",
+        background_color: "#ffffff",
         icons: [
           {
             src: "Shebanlace_favicon.png",
