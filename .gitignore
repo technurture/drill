@@ -28,7 +28,6 @@ logs/
 ormconfig.*
 dist/
 certbot
-resources/
 
 compare.1.json
 compare.2.json

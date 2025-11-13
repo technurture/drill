@@ -1,0 +1,101 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "For Women Wey Dey Do Business",
+      "title": "Make Your Business Strong",
+      "subtitle": "Simple, strong tools for women wey dey hustle. Track money, grow sales, build your money future.",
+      "ctaPrimary": "Start Free Today",
+      "ctaSecondary": "Learn More"
+    },
+    "about": {
+      "title": "Wetin Be SheBalance?"
+    },
+    "features": {
+      "trackBusiness": "Track Your Business, Your Own Way",
+      "builtForYou": "We Build Am For You, By Women Wey Understand",
+      "knowNumbers": "Know Your Numbers — Well Well",
+      "learnEarn": "Learn As You Dey Make Money"
+    },
+    "whoFor": {
+      "title": "Who SheBalance Dey For?"
+    },
+    "appFeatures": {
+      "title": "Wetin You Fit Do With SheBalance"
+    },
+    "faq": {
+      "title": "Questions Wey People Dey Ask",
+      "subtitle": "Everything wey you need to know about SheBalance",
+      "q1": "Wetin be SheBalance?",
+      "q2": "SheBalance dey free to use?",
+      "q3": "I fit use SheBalance without internet?",
+      "q4": "Which languages SheBalance dey support?",
+      "q5": "My money data dey safe?",
+      "q6": "I fit download my reports?",
+      "q7": "I no sabi technology well. I fit still use am?",
+      "q8": "How I go join savings group?"
+    },
+    "cta": {
+      "title": "Your Money. Your Power. Your Future.",
+      "primaryButton": "Start Your Journey",
+      "secondaryButton": "Sign In"
+    }
+  },
+  "dashboard": "Dashboard",
+  "inventory": "Things wey dey shop",
+  "sales": "Sales",
+  "finance": "Money",
+  "loans": "Borrow money",
+  "savings": "Save money",
+  "reports": "Reports",
+  "settings": "Settings",
+  "profile": "Profile",
+  "help": "Help",
+  "logout": "Comot",
+  "stores": "Shops",
+  "products": "Products",
+  "addProduct": "Add product",
+  "editProduct": "Change product",
+  "deleteProduct": "Delete product",
+  "lowStock": "Product don small",
+  "outOfStock": "Product don finish",
+  "restock": "Add more product",
+  "addSale": "Add sale",
+  "viewSales": "See sales",
+  "editSale": "Change sale",
+  "deleteSale": "Delete sale",
+  "totalSales": "All sales",
+  "todaySales": "Today sales",
+  "income": "Money wey enter",
+  "expenses": "Money wey comot",
+  "netIncome": "Profit",
+  "addIncome": "Add money wey enter",
+  "addExpense": "Add money wey comot",
+  "viewTransactions": "See all money movement",
+  "createLoan": "Borrow money",
+  "viewLoans": "See loans",
+  "loanRepayment": "Pay back loan",
+  "activeLoans": "Loans wey dey active",
+  "completedLoans": "Loans wey don finish",
+  "createSavingsPlan": "Make savings plan",
+  "viewSavings": "See savings",
+  "addContribution": "Put money",
+  "withdraw": "Collect money",
+  "activePlans": "Plans wey dey active",
+  "completedPlans": "Plans wey don finish",
+  "salesReport": "Sales report",
+  "inventoryReport": "Products report",
+  "financeReport": "Money report",
+  "dailyReport": "Everyday report",
+  "weeklyReport": "Every week report",
+  "monthlyReport": "Every month report",
+  "yearlyReport": "Every year report",
+  "accountSettings": "Account settings",
+  "storeSettings": "Shop settings",
+  "notifications": "Notifications",
+  "language": "Language",
+  "theme": "Look",
+  "helpCenter": "Help place",
+  "faq": "Questions wey people dey ask",
+  "contactSupport": "Talk to support",
+  "tutorials": "How to use am"
+}

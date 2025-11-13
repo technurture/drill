@@ -1,0 +1,101 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Fún Àwọn Obìnrin Oníṣòwò",
+      "title": "Fún Iṣẹ́ Rẹ Ní Agbára",
+      "subtitle": "Àwọn irinṣẹ́ tó rọrùn tó sì lágbára fún àwọn obìnrin tó ń ṣiṣẹ́ takuntakun. Tọ́jú owó, mú títà pọ̀ sí, kọ́ ọjọ́ ìwájú owó rẹ.",
+      "ctaPrimary": "Bẹ̀rẹ̀ Lọ́fẹ̀ẹ́ Lónìí",
+      "ctaSecondary": "Kọ́ Síi"
+    },
+    "about": {
+      "title": "Kí Ni SheBalance?"
+    },
+    "features": {
+      "trackBusiness": "Tọ́jú Iṣẹ́ Rẹ, Ní Ọ̀nà Rẹ",
+      "builtForYou": "A Kọ́ Ọ Fún Ẹ, Látọ̀dọ̀ Àwọn Obìnrin Tó Mọ̀",
+      "knowNumbers": "Mọ Iye Owó Rẹ — Lọ́nà Tó Yé",
+      "learnEarn": "Kọ́ẹkọ́ Bí O Ṣe Ń Jèrè"
+    },
+    "whoFor": {
+      "title": "Ta Ni SheBalance Wà Fún?"
+    },
+    "appFeatures": {
+      "title": "Ohun Tó Lè Ṣe Pẹ̀lú SheBalance"
+    },
+    "faq": {
+      "title": "Àwọn Ìbéèrè Tó Wọ́pọ̀",
+      "subtitle": "Gbogbo ohun tó yẹ kó mọ̀ nípa SheBalance",
+      "q1": "Kí ni SheBalance?",
+      "q2": "Ṣé SheBalance jẹ́ ọ̀fẹ́?",
+      "q3": "Ṣé mo lè lo SheBalance láìsí intánẹ́ẹ̀tì?",
+      "q4": "Irú èdè wo ni SheBalance ń ṣàtìlẹyìn?",
+      "q5": "Ṣé data owó mi wà ní àbò?",
+      "q6": "Ṣé mo lè ṣàgbéjáde àwọn ìròyìn mi?",
+      "q7": "Mi ò mọ̀ẹ̀rọ ayárabíàṣá dáadáa. Ṣé mo lè lò ó?",
+      "q8": "Báwo ni n ṣe lè darapọ̀ mọ́ ẹgbẹ́ ìfowópamọ́?"
+    },
+    "cta": {
+      "title": "Owó Rẹ. Agbára Rẹ. Ọjọ́ Ìwájú Rẹ.",
+      "primaryButton": "Bẹ̀rẹ̀ Ìrìnàjò Rẹ",
+      "secondaryButton": "Wọlé"
+    }
+  },
+  "dashboard": "Pátákó",
+  "inventory": "Ìkójọpọ̀ ọjà",
+  "sales": "Títà",
+  "finance": "Owó",
+  "loans": "Àwín",
+  "savings": "Ìfowópamọ́",
+  "reports": "Ìròyìn",
+  "settings": "Ètò",
+  "profile": "Ọ̀rọ̀ ara ẹni",
+  "help": "Ìrànlọ́wọ́",
+  "logout": "Jáde",
+  "stores": "Àwọn ilé ìtajà",
+  "products": "Àwọn ọjà",
+  "addProduct": "Ṣàfikún ọjà",
+  "editProduct": "Ṣàtúnṣe ọjà",
+  "deleteProduct": "Pa ọjà rẹ́",
+  "lowStock": "Ọjà kéré",
+  "outOfStock": "Ọjà ti tán",
+  "restock": "Ṣàfikún ọjà",
+  "addSale": "Ṣàfikún títà",
+  "viewSales": "Wo àwọn títà",
+  "editSale": "Ṣàtúnṣe títà",
+  "deleteSale": "Pa títà rẹ́",
+  "totalSales": "Àpapọ̀ títà",
+  "todaySales": "Títà lónìí",
+  "income": "Owó wọlé",
+  "expenses": "Ìnáwó",
+  "netIncome": "Èrè",
+  "addIncome": "Ṣàfikún owó wọlé",
+  "addExpense": "Ṣàfikún ìnáwó",
+  "viewTransactions": "Wo àwọn ìṣòwò",
+  "createLoan": "Ṣẹ̀dá àwín",
+  "viewLoans": "Wo àwọn àwín",
+  "loanRepayment": "Ìsanpadà àwín",
+  "activeLoans": "Àwọn àwín tó ń lọ",
+  "completedLoans": "Àwọn àwín tó ti parí",
+  "createSavingsPlan": "Ṣẹ̀dá ètò ìfowópamọ́",
+  "viewSavings": "Wo ìfowópamọ́",
+  "addContribution": "Ṣàfikún owó",
+  "withdraw": "Yọ owó",
+  "activePlans": "Àwọn ètò tó ń lọ",
+  "completedPlans": "Àwọn ètò tó ti parí",
+  "salesReport": "Ìròyìn títà",
+  "inventoryReport": "Ìròyìn ìkójọpọ̀",
+  "financeReport": "Ìròyìn owó",
+  "dailyReport": "Ìròyìn ojoojúmọ́",
+  "weeklyReport": "Ìròyìn ọ̀sẹ̀",
+  "monthlyReport": "Ìròyìn oṣù",
+  "yearlyReport": "Ìròyìn ọdún",
+  "accountSettings": "Ètò àkáǹtì",
+  "storeSettings": "Ètò ilé ìtajà",
+  "notifications": "Àwọn ìkìlọ̀",
+  "language": "Èdè",
+  "theme": "Àpẹẹrẹ",
+  "helpCenter": "Ibi ìrànlọ́wọ́",
+  "faq": "Àwọn ìbéèrè tó wọ́pọ̀",
+  "contactSupport": "Kàn sí àtìlẹyìn",
+  "tutorials": "Ẹ̀kọ́"
+}

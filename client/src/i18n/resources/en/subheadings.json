@@ -1,0 +1,101 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "For Women Entrepreneurs",
+      "title": "Empower Your Business",
+      "subtitle": "Simple, powerful tools for women who hustle. Track money, grow sales, and build your financial future.",
+      "ctaPrimary": "Start Free Today",
+      "ctaSecondary": "Learn More"
+    },
+    "about": {
+      "title": "What is SheBalance?"
+    },
+    "features": {
+      "trackBusiness": "Track Your Business, Your Way",
+      "builtForYou": "Built for You, by Women Who Understand",
+      "knowNumbers": "Know Your Numbers — Clearly",
+      "learnEarn": "Learn As You Earn"
+    },
+    "whoFor": {
+      "title": "Who is SheBalance For?"
+    },
+    "appFeatures": {
+      "title": "What You Can Do with SheBalance"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about SheBalance",
+      "q1": "What is SheBalance?",
+      "q2": "Is SheBalance free to use?",
+      "q3": "Can I use SheBalance offline?",
+      "q4": "What languages does SheBalance support?",
+      "q5": "Is my financial data secure?",
+      "q6": "Can I download my reports?",
+      "q7": "I'm not good with technology. Can I still use this?",
+      "q8": "How do I join a savings group?"
+    },
+    "cta": {
+      "title": "Your Money. Your Power. Your Future.",
+      "primaryButton": "Start Your Journey",
+      "secondaryButton": "Sign In"
+    }
+  },
+  "dashboard": "Dashboard",
+  "inventory": "Inventory",
+  "sales": "Sales",
+  "finance": "Finance",
+  "loans": "Loans",
+  "savings": "Savings",
+  "reports": "Reports",
+  "settings": "Settings",
+  "profile": "Profile",
+  "help": "Help",
+  "logout": "Logout",
+  "stores": "Stores",
+  "products": "Products",
+  "addProduct": "Add Product",
+  "editProduct": "Edit Product",
+  "deleteProduct": "Delete Product",
+  "lowStock": "Low Stock",
+  "outOfStock": "Out of Stock",
+  "restock": "Restock",
+  "addSale": "Add Sale",
+  "viewSales": "View Sales",
+  "editSale": "Edit Sale",
+  "deleteSale": "Delete Sale",
+  "totalSales": "Total Sales",
+  "todaySales": "Today's Sales",
+  "income": "Income",
+  "expenses": "Expenses",
+  "netIncome": "Net Income",
+  "addIncome": "Add Income",
+  "addExpense": "Add Expense",
+  "viewTransactions": "View Transactions",
+  "createLoan": "Create Loan",
+  "viewLoans": "View Loans",
+  "loanRepayment": "Loan Repayment",
+  "activeLoans": "Active Loans",
+  "completedLoans": "Completed Loans",
+  "createSavingsPlan": "Create Savings Plan",
+  "viewSavings": "View Savings",
+  "addContribution": "Add Contribution",
+  "withdraw": "Withdraw",
+  "activePlans": "Active Plans",
+  "completedPlans": "Completed Plans",
+  "salesReport": "Sales Report",
+  "inventoryReport": "Inventory Report",
+  "financeReport": "Finance Report",
+  "dailyReport": "Daily Report",
+  "weeklyReport": "Weekly Report",
+  "monthlyReport": "Monthly Report",
+  "yearlyReport": "Yearly Report",
+  "accountSettings": "Account Settings",
+  "storeSettings": "Store Settings",
+  "notifications": "Notifications",
+  "language": "Language",
+  "theme": "Theme",
+  "helpCenter": "Help Center",
+  "faq": "FAQ",
+  "contactSupport": "Contact Support",
+  "tutorials": "Tutorials"
+}

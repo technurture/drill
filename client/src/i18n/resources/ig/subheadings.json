@@ -1,0 +1,101 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Maka Ụmụ Nwanyị Na-azụ Ahịa",
+      "title": "Mee ka Azụmaahịa Gị Dịkwuo Ike",
+      "subtitle": "Ngwa dị mfe na ike maka ụmụ nwanyị na-arụsị ọrụ ike. Chekwaa ego, mee ka ahịa too, wuo ọdịnihu ego gị.",
+      "ctaPrimary": "Malite Ugbu A N'efu",
+      "ctaSecondary": "Mụtakwuo"
+    },
+    "about": {
+      "title": "Gịnị Bụ SheBalance?"
+    },
+    "features": {
+      "trackBusiness": "Chekwaa Azụmaahịa Gị N'ụzọ Gị",
+      "builtForYou": "Emere Gị, Site N'aka Ụmụ Nwanyị Na-aghọta",
+      "knowNumbers": "Mara Ọnụọgụgụ Gị — N'ụzọ Doro Anya",
+      "learnEarn": "Mụta Ka Ị Na-akpata Ego"
+    },
+    "whoFor": {
+      "title": "Ònyé Bụ SheBalance Bụ Ya?"
+    },
+    "appFeatures": {
+      "title": "Ihe Ị Nwere Ike Ime Na SheBalance"
+    },
+    "faq": {
+      "title": "Ajụjụ A Na-ajụkarị",
+      "subtitle": "Ihe niile ị kwesịrị ịma gbasara SheBalance",
+      "q1": "Gịnị bụ SheBalance?",
+      "q2": "Ọ bụ n'efu ka a na-eji SheBalance?",
+      "q3": "Enwere m ike iji SheBalance mgbe m na-enweghị intanetị?",
+      "q4": "Kedụ asụsụ ndị SheBalance na-akwado?",
+      "q5": "Ọ bụ data ego m echekwabara nke ọma?",
+      "q6": "Enwere m ike ibudata akụkọ m?",
+      "q7": "Anaghị m amara teknụzụ nke ọma. Enwere m ike iji nke a?",
+      "q8": "Kedu ka m ga-esi sonye na otu nchekwa?"
+    },
+    "cta": {
+      "title": "Ego Gị. Ike Gị. Ọdịnihu Gị.",
+      "primaryButton": "Malite Njem Gị",
+      "secondaryButton": "Bata"
+    }
+  },
+  "dashboard": "Dashbọọdụ",
+  "inventory": "Ngwa ahịa",
+  "sales": "Ahịa",
+  "finance": "Ego",
+  "loans": "Mgbazinye ego",
+  "savings": "Nchekwa ego",
+  "reports": "Akụkọ",
+  "settings": "Ntọala",
+  "profile": "Profaịlụ",
+  "help": "Enyemaka",
+  "logout": "Pụọ",
+  "stores": "Ụlọ ahịa",
+  "products": "Ngwaahịa",
+  "addProduct": "Tinye ngwaahịa",
+  "editProduct": "Dezie ngwaahịa",
+  "deleteProduct": "Hichapụ ngwaahịa",
+  "lowStock": "Ngwaahịa dị ole",
+  "outOfStock": "Ngwaahịa gwụrụ",
+  "restock": "Tinye ngwaahịa ọzọ",
+  "addSale": "Tinye ahịa",
+  "viewSales": "Lee ahịa",
+  "editSale": "Dezie ahịa",
+  "deleteSale": "Hichapụ ahịa",
+  "totalSales": "Mkpokọta ahịa",
+  "todaySales": "Ahịa taa",
+  "income": "Ego abata",
+  "expenses": "Mmefu ego",
+  "netIncome": "Ego fọdụrụ",
+  "addIncome": "Tinye ego abata",
+  "addExpense": "Tinye mmefu ego",
+  "viewTransactions": "Lee mgbanwe ego",
+  "createLoan": "Mepụta mgbazinye ego",
+  "viewLoans": "Lee mgbazinye ego",
+  "loanRepayment": "Nkwụghachi ugwo",
+  "activeLoans": "Mgbazinye ego dị ndụ",
+  "completedLoans": "Mgbazinye ego kwụrụ",
+  "createSavingsPlan": "Mepụta atụmatụ nchekwa",
+  "viewSavings": "Lee nchekwa ego",
+  "addContribution": "Tinye ego",
+  "withdraw": "Wepụ ego",
+  "activePlans": "Atụmatụ dị ndụ",
+  "completedPlans": "Atụmatụ emechara",
+  "salesReport": "Akụkọ ahịa",
+  "inventoryReport": "Akụkọ ngwa ahịa",
+  "financeReport": "Akụkọ ego",
+  "dailyReport": "Akụkọ kwa ụbọchị",
+  "weeklyReport": "Akụkọ kwa izu",
+  "monthlyReport": "Akụkọ kwa ọnwa",
+  "yearlyReport": "Akụkọ kwa afọ",
+  "accountSettings": "Ntọala akaụntụ",
+  "storeSettings": "Ntọala ụlọ ahịa",
+  "notifications": "Ozi",
+  "language": "Asụsụ",
+  "theme": "Ọdịdị",
+  "helpCenter": "Ebe enyemaka",
+  "faq": "Ajụjụ a na-ajụkarị",
+  "contactSupport": "Kpọtụrụ ndị nkwado",
+  "tutorials": "Nkuzi"
+}

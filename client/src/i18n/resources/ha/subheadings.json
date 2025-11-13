@@ -1,0 +1,101 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Domin Mata 'Yan Kasuwa",
+      "title": "Ƙarfafa Kasuwancin Ku",
+      "subtitle": "Kayan aiki masu sauƙi da ƙarfi domin mata masu aiki. Lura da kuɗi, ƙara cinikin, gina makomar kuɗin ku.",
+      "ctaPrimary": "Fara Kyauta Yau",
+      "ctaSecondary": "Koyi Ƙari"
+    },
+    "about": {
+      "title": "Menene SheBalance?"
+    },
+    "features": {
+      "trackBusiness": "Lura da Kasuwancin Ku, Ta Hanyar Ku",
+      "builtForYou": "An Gina Shi Domin Ku, Ta Matan Da Suka Fahimta",
+      "knowNumbers": "San Lambobin Ku — A Fili",
+      "learnEarn": "Koyi Yayin Da Kuke Samun Kuɗi"
+    },
+    "whoFor": {
+      "title": "Wa Ne SheBalance?"
+    },
+    "appFeatures": {
+      "title": "Abin Da Za Ku Iya Yi Da SheBalance"
+    },
+    "faq": {
+      "title": "Tambayoyin Da Ake Yawa",
+      "subtitle": "Duk abin da kuke buƙatar sani game da SheBalance",
+      "q1": "Menene SheBalance?",
+      "q2": "Shin SheBalance kyauta ne?",
+      "q3": "Zan iya amfani da SheBalance ba tare da intanet ba?",
+      "q4": "Wane harshe SheBalance ke goyan baya?",
+      "q5": "Shin bayanan kuɗina suna da aminci?",
+      "q6": "Zan iya sauke rahotannina?",
+      "q7": "Ban kware da fasaha ba. Zan iya amfani da wannan?",
+      "q8": "Ta yaya zan shiga ƙungiyar ajiya?"
+    },
+    "cta": {
+      "title": "Kuɗin Ku. Ikonku. Makomarku.",
+      "primaryButton": "Fara Tafiyar Ku",
+      "secondaryButton": "Shiga"
+    }
+  },
+  "dashboard": "Dashboard",
+  "inventory": "Kayan Kasuwanci",
+  "sales": "Cinikin",
+  "finance": "Kuɗi",
+  "loans": "Bashi",
+  "savings": "Ajiya",
+  "reports": "Rahoton",
+  "settings": "Saitunan",
+  "profile": "Bayanan sirri",
+  "help": "Taimako",
+  "logout": "Fita",
+  "stores": "Shaguna",
+  "products": "Kayayyaki",
+  "addProduct": "Ƙara Kaya",
+  "editProduct": "Gyara Kaya",
+  "deleteProduct": "Share Kaya",
+  "lowStock": "Kayan da suka ƙare",
+  "outOfStock": "Kaya sun ƙare",
+  "restock": "Ƙara Kaya",
+  "addSale": "Ƙara Cinikin",
+  "viewSales": "Duba Cinikin",
+  "editSale": "Gyara Cinikin",
+  "deleteSale": "Share Cinikin",
+  "totalSales": "Jimlar Cinikin",
+  "todaySales": "Cinikin Yau",
+  "income": "Kuɗin shiga",
+  "expenses": "Kashe kuɗi",
+  "netIncome": "Riba",
+  "addIncome": "Ƙara kuɗin shiga",
+  "addExpense": "Ƙara kashe kuɗi",
+  "viewTransactions": "Duba Ma'amaloli",
+  "createLoan": "Ƙirƙiri Bashi",
+  "viewLoans": "Duba Bashin",
+  "loanRepayment": "Biyan Bashi",
+  "activeLoans": "Bashin da ake bi",
+  "completedLoans": "Bashin da aka biya",
+  "createSavingsPlan": "Ƙirƙiri Tsarin Ajiya",
+  "viewSavings": "Duba Ajiya",
+  "addContribution": "Ƙara Kuɗi",
+  "withdraw": "Cire Kuɗi",
+  "activePlans": "Tsare-tsaren da ake bi",
+  "completedPlans": "Tsare-tsaren da aka kammala",
+  "salesReport": "Rahoton Cinikin",
+  "inventoryReport": "Rahoton Kayayyaki",
+  "financeReport": "Rahoton Kuɗi",
+  "dailyReport": "Rahoton Yau da kullun",
+  "weeklyReport": "Rahoton Mako-mako",
+  "monthlyReport": "Rahoton Wata-wata",
+  "yearlyReport": "Rahoton Shekara-shekara",
+  "accountSettings": "Saitunan Asusun",
+  "storeSettings": "Saitunan Shago",
+  "notifications": "Sanarwa",
+  "language": "Harshe",
+  "theme": "Kama",
+  "helpCenter": "Cibiyar Taimako",
+  "faq": "Tambayoyin da ake yawa",
+  "contactSupport": "Tuntuɓi Tallafi",
+  "tutorials": "Koyarwa"
+}
