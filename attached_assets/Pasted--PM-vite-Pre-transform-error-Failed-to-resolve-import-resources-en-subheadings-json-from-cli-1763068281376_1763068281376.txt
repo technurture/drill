@@ -1,0 +1,40 @@
+ PM [vite] Pre-transform error: Failed to resolve import "./resources/en/subheadings.json" from "client/src/i18n/i18n.ts". Does the file exist?
+12:52:08 PM [vite] Internal server error: Failed to resolve import "./resources/en/subheadings.json" from "client/src/i18n/i18n.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/mac/Desktop/Desktop/Olamide/drill/client/src/i18n/i18n.ts:6:26
+  3  |  import LanguageDetector from 'i18next-browser-languagedetector';
+  4  |  import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from './constants';
+  5  |  import enSubheadings from './resources/en/subheadings.json';
+     |                             ^
+  6  |  import igSubheadings from './resources/ig/subheadings.json';
+  7  |  import yoSubheadings from './resources/yo/subheadings.json';
+      at TransformPluginContext._formatError (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+      at TransformPluginContext.error (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+      at normalizeUrl (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+      at async file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+      at async PluginContainer.transform (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+      at async loadAndTransform (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+      at async viteTransformMiddleware (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
+
+warn - The class `ease-[cubic-bezier(0.25,0.46,0.45,0.94)]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.25,0.46,0.45,0.94)&rsqb;` to silence this warning.
+12:52:50 PM [vite] Internal server error: Failed to resolve import "./resources/en/subheadings.json" from "client/src/i18n/i18n.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/mac/Desktop/Desktop/Olamide/drill/client/src/i18n/i18n.ts:6:26
+  3  |  import LanguageDetector from 'i18next-browser-languagedetector';
+  4  |  import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from './constants';
+  5  |  import enSubheadings from './resources/en/subheadings.json';
+     |                             ^
+  6  |  import igSubheadings from './resources/ig/subheadings.json';
+  7  |  import yoSubheadings from './resources/yo/subheadings.json';
+      at TransformPluginContext._formatError (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49258:41)
+      at TransformPluginContext.error (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49253:16)
+      at normalizeUrl (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64291:23)
+      at async file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64423:39
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:64350:7)
+      at async PluginContainer.transform (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:49099:18)
+      at async loadAndTransform (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:51977:27)
+      at async viteTransformMiddleware (file:///Users/mac/Desktop/Desktop/Olamide/drill/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:62105:24)
