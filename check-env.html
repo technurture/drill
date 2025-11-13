@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Environment Check</title>
+</head>
+<body>
+    <h1>Environment Variables Check</h1>
+    <div id="results"></div>
+    
+    <script type="module">
+        const results = document.getElementById('results');
+        
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_PROJECT_URL;
+        const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY;
+        
+        let html = '<h2>Results:</h2><ul>';
+        
+        html += `<li><strong>VITE_SUPABASE_PROJECT_URL:</strong> ${supabaseUrl || '❌ NOT FOUND'}</li>`;
+        html += `<li><strong>VITE_SUPABASE_API_KEY:</strong> ${supabaseKey ? '✅ Found (length: ' + supabaseKey.length + ')' : '❌ NOT FOUND'}</li>`;
+        html += '</ul>';
+        
+        if (supabaseUrl && supabaseKey) {
+            html += '<h2 style="color: green;">✅ All environment variables are loaded correctly!</h2>';
+        } else {
+            html += '<h2 style="color: red;">❌ Environment variables are missing!</h2>';
+            html += '<h3>Troubleshooting:</h3><ol>';
+            html += '<li>Make sure .env file is in the ROOT folder (same as package.json)</li>';
+            html += '<li>Stop the dev server (Ctrl+C) and start again: npm run dev</li>';
+            html += '<li>Clear browser cache and hard refresh (Ctrl+Shift+R)</li>';
+            html += '</ol>';
+        }
+        
+        results.innerHTML = html;
+    </script>
+</body>
+</html>
