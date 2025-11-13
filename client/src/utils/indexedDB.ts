@@ -9,9 +9,9 @@ interface SheBalanceDB extends DBSchema {
       table: string;
       data: any;
       timestamp: number;
-      synced: boolean;
+      synced: number;
     };
-    indexes: { 'by-synced': boolean; 'by-timestamp': number };
+    indexes: { 'by-synced': number; 'by-timestamp': number };
   };
   'cached-data': {
     key: string;
@@ -25,7 +25,7 @@ interface SheBalanceDB extends DBSchema {
 }
 
 const DB_NAME = 'shebalance-db';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 let dbInstance: IDBPDatabase<SheBalanceDB> | null = null;
 
@@ -35,11 +35,20 @@ export async function getDB(): Promise<IDBPDatabase<SheBalanceDB>> {
   }
 
   dbInstance = await openDB<SheBalanceDB>(DB_NAME, DB_VERSION, {
-    upgrade(db) {
+    async upgrade(db, oldVersion, newVersion, transaction) {
       if (!db.objectStoreNames.contains('offline-queue')) {
         const queueStore = db.createObjectStore('offline-queue', { keyPath: 'id' });
         queueStore.createIndex('by-synced', 'synced');
         queueStore.createIndex('by-timestamp', 'timestamp');
+      } else if (oldVersion < 2) {
+        const queueStore = transaction.objectStore('offline-queue');
+        const items = await queueStore.getAll();
+        items.forEach(item => {
+          if (typeof item.synced === 'boolean') {
+            item.synced = item.synced ? 1 : 0;
+            queueStore.put(item);
+          }
+        });
       }
 
       if (!db.objectStoreNames.contains('cached-data')) {
@@ -65,20 +74,30 @@ export async function addToOfflineQueue(
     table,
     data,
     timestamp: Date.now(),
-    synced: false,
+    synced: 0,
   });
+
+  if ('serviceWorker' in navigator && 'sync' in ServiceWorkerRegistration.prototype) {
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      await registration.sync.register('offline-sync');
+      console.log('Background sync registered for queued item');
+    } catch (error) {
+      console.warn('Background sync registration failed:', error);
+    }
+  }
 }
 
 export async function getOfflineQueue() {
   const db = await getDB();
-  return db.getAllFromIndex('offline-queue', 'by-synced', false);
+  return db.getAllFromIndex('offline-queue', 'by-synced', 0);
 }
 
 export async function markQueueItemSynced(id: string): Promise<void> {
   const db = await getDB();
   const item = await db.get('offline-queue', id);
   if (item) {
-    item.synced = true;
+    item.synced = 1;
     await db.put('offline-queue', item);
   }
 }
