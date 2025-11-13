@@ -58,8 +58,25 @@ You can add environment variables using the Secrets tab in Replit, or by creatin
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Database Backend: Using Supabase (not Neon PostgreSQL)
+Database Backend: Using Supabase ONLY (NOT PostgreSQL/Neon)
 Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
+
+### Critical: Database Configuration
+
+**IMPORTANT**: SheBalance uses **Supabase exclusively** for all database operations.
+- ✅ All authentication: Supabase Auth
+- ✅ All data storage: Supabase PostgreSQL database
+- ✅ Real-time features: Supabase Realtime
+- ❌ Does NOT use: Replit PostgreSQL database
+- ❌ Does NOT use: Any local database
+- ❌ Unused files: `server/db.ts` removed (was PostgreSQL template code)
+
+**Database configuration location**: `client/src/integrations/supabase/supabase.ts`
+**Required environment variables**: 
+  - `VITE_SUPABASE_PROJECT_URL`
+  - `VITE_SUPABASE_API_KEY`
+
+See `DATABASE_CONFIGURATION.md` for complete details.
 
 ## System Architecture
 

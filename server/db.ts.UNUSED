@@ -1,3 +1,14 @@
+/*
+ * THIS FILE IS NOT USED IN THIS APPLICATION
+ * 
+ * SheBalance uses Supabase for all database operations, not PostgreSQL.
+ * This file was part of a template but is not connected to the application.
+ * 
+ * Database configuration is in: client/src/integrations/supabase/supabase.ts
+ * 
+ * DO NOT USE THIS FILE - kept for reference only
+ */
+
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import ws from "ws";
