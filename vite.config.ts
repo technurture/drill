@@ -8,12 +8,12 @@ export default defineConfig(({ mode }) => ({
   root: path.resolve(__dirname, "client"),
   server: {
     host: "0.0.0.0",
-    port: 5000,
+    port: 5173,
     strictPort: true,
     allowedHosts: true,
     hmr: {
       host: "0.0.0.0",
-      port: 5000,
+      port: 5173,
       protocol: "ws",
     },
   },
