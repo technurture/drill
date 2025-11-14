@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Product } from "../../../types/database.types";
+import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 
 const fromSupabase = async (query) => {
   const { data, error } = await query;
@@ -10,7 +11,10 @@ const fromSupabase = async (query) => {
 
 export const useAddProduct = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  
+  return useOfflineMutation({
+    tableName: "products",
+    action: "create",
     mutationFn: async (newProduct: any) => {
       console.log("AddProduct mutation called with:", newProduct);
       if (!newProduct.store_id) {
@@ -33,6 +37,12 @@ export const useAddProduct = () => {
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
+    getOptimisticData: (variables) => ({
+      id: crypto.randomUUID(),
+      ...variables,
+      created_at: new Date().toISOString(),
+      updated_at: null,
+    } as Product),
   });
 };
 

@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
+import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 
 export interface FinancialRecord {
   id: string;
@@ -74,7 +75,9 @@ export const useFinancialRecords = (storeId?: string) => {
 export const useAddFinancialRecord = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "financial_records",
+    action: "create",
     mutationFn: async (newRecord: AddFinancialRecordData) => {
       console.log("Finance Hook - Attempting to insert record:", newRecord);
       
@@ -118,7 +121,14 @@ export const useAddFinancialRecord = () => {
     },
     onError: (error) => {
       console.error("Finance Hook - Mutation error:", error);
-    }
+    },
+    getOptimisticData: (variables) => ({
+      id: crypto.randomUUID(),
+      ...variables,
+      amount: String(variables.amount),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    } as FinancialRecord),
   });
 };
 

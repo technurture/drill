@@ -26,7 +26,7 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
       if (!isOnline) {
         console.log(`📴 Offline: Queueing ${config.action} operation for ${config.tableName}`);
         
-        // Queue the operation for later sync
+        // Queue the FULL operation payload for later sync - preserve all nested data
         const queueData: any = { ...variables };
         
         // Generate temporary ID if creating a new record
@@ -34,12 +34,26 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
           queueData.id = crypto.randomUUID();
         }
         
+        // CRITICAL: For sales with items, generate stable IDs for each item
+        // This ensures we can track which items were synced during retries
+        if (config.tableName === 'sales' && queueData.items) {
+          queueData.items = queueData.items.map((item: any) => ({
+            ...item,
+            id: item.id || crypto.randomUUID(), // Generate stable ID for deduplication
+          }));
+        }
+        
+        // CRITICAL: Queue the complete payload including nested data (items, etc.)
+        // The sync service will use this full payload when replaying the mutation
         await addToOfflineQueue(config.action, config.tableName, queueData);
         
-        // Return optimistic data if available, otherwise return the queued data
+        // Log queued data for verification (truncate for readability)
+        const dataPreview = JSON.stringify(queueData, null, 2).substring(0, 300);
+        console.log(`✅ Queued for sync: ${config.action} on ${config.tableName}`, dataPreview);
+        
+        // Return optimistic data for UI responsiveness
         const optimisticData = config.getOptimisticData?.(variables) ?? queueData;
         
-        console.log(`✅ Queued for sync: ${config.action} on ${config.tableName}`, optimisticData);
         return optimisticData as TData;
       }
       

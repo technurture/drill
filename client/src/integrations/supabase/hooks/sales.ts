@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Sale, SaleItem } from "../../../types/database.types";
+import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 
 const fromSupabase = async (query) => {
   const { data, error } = await query;
@@ -83,7 +84,10 @@ export const useGetSale = (saleId: string) =>
 
 export const useAddSale = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  
+  return useOfflineMutation({
+    tableName: "sales",
+    action: "create",
     mutationFn: async (newSale: {
       total_price: number;
       payment_mode: "cash" | "credit" | "bank_transfer" | "POS";
@@ -127,6 +131,15 @@ export const useAddSale = () => {
       queryClient.invalidateQueries({
         queryKey: ["sales", variables.store_id],
       });
+    },
+    getOptimisticData: (variables) => {
+      const { items, ...saleData } = variables;
+      return {
+        id: crypto.randomUUID(),
+        ...saleData,
+        created_at: new Date().toISOString(),
+        items: [],
+      } as unknown as Sale;
     },
   });
 };

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Loan, LoanRepayment, CreateLoanData, AddRepaymentData, LoansSummary } from "@/types/loans.types";
+import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 
 export const useLoans = (storeId?: string) => {
   return useQuery({
@@ -38,7 +39,10 @@ export const useLoan = (loanId?: string) => {
 
 export const useCreateLoan = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  
+  return useOfflineMutation({
+    tableName: "loans",
+    action: "create",
     mutationFn: async (payload: CreateLoanData) => {
       const { data, error } = await supabase
         .from("loans")
@@ -51,7 +55,13 @@ export const useCreateLoan = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["loans", data.store_id] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary", data.store_id] });
-    }
+    },
+    getOptimisticData: (variables) => ({
+      id: crypto.randomUUID(),
+      ...variables,
+      status: 'active',
+      created_at: new Date().toISOString(),
+    } as unknown as Loan),
   });
 };
 
@@ -109,7 +119,10 @@ export const useRepayments = (loanId?: string) => {
 
 export const useAddRepayment = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  
+  return useOfflineMutation({
+    tableName: "loan_repayments",
+    action: "create",
     mutationFn: async (payload: AddRepaymentData) => {
       const { data, error } = await supabase
         .from("loan_repayments")
@@ -122,7 +135,12 @@ export const useAddRepayment = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
       // Also refresh loans summary by store; fetch the loan to get store_id
-    }
+    },
+    getOptimisticData: (variables) => ({
+      id: crypto.randomUUID(),
+      ...variables,
+      created_at: new Date().toISOString(),
+    } as unknown as LoanRepayment),
   });
 };
 

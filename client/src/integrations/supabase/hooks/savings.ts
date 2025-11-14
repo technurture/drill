@@ -7,6 +7,7 @@ import {
   AddContributionData,
   SavingsSummary 
 } from "@/types/savings.types";
+import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 
 // Fetch all savings plans for a store with contributions
 export const useSavingsPlans = (storeId?: string) => {
@@ -83,7 +84,9 @@ export const useSavingsContributions = (planId?: string) => {
 export const useCreateSavingsPlan = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "savings_plans",
+    action: "create",
     mutationFn: async (newPlan: CreateSavingsPlanData & { store_id: string; user_id: string }) => {
       const { data, error } = await supabase
         .from("savings_plans")
@@ -97,6 +100,13 @@ export const useCreateSavingsPlan = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["savings-plans", data.store_id] });
     },
+    getOptimisticData: (variables) => ({
+      id: crypto.randomUUID(),
+      ...variables,
+      current_amount: "0",
+      status: "active",
+      created_at: new Date().toISOString(),
+    } as unknown as SavingsPlan),
   });
 };
 
@@ -104,7 +114,9 @@ export const useCreateSavingsPlan = () => {
 export const useAddContribution = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "savings_contributions",
+    action: "create",
     mutationFn: async (contribution: AddContributionData & { store_id: string; user_id: string }) => {
       console.log("Adding contribution:", contribution);
       
@@ -129,7 +141,12 @@ export const useAddContribution = () => {
     },
     onError: (error) => {
       console.error("Error adding contribution:", error);
-    }
+    },
+    getOptimisticData: (variables) => ({
+      id: crypto.randomUUID(),
+      ...variables,
+      created_at: new Date().toISOString(),
+    } as unknown as SavingsContribution),
   });
 };
 

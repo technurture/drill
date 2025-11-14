@@ -8,12 +8,31 @@ async function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Syncs all queued offline operations to Supabase.
+ * 
+ * Supported operations:
+ * - Sales (complex): Has nested sale_items array - requires special handling
+ * - Financial Records (simple): Income/expense records - standard insert
+ * - Savings Plans (simple): Savings plan creation - standard insert
+ * - Savings Contributions (simple): Contribution records - standard insert
+ */
 export async function syncOfflineData(): Promise<{ success: number; failed: number }> {
   const queue = await getOfflineQueue();
   let success = 0;
   let failed = 0;
 
-  console.log(`Starting offline sync - ${queue.length} items in queue`);
+  console.log(`🔄 Starting offline sync - ${queue.length} items in queue`);
+  
+  // Log queue summary for debugging
+  if (queue.length > 0) {
+    const summary = queue.reduce((acc, item) => {
+      const key = `${item.table}-${item.action}`;
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    console.log('📊 Queue summary:', summary);
+  }
 
   for (const item of queue) {
     let attempts = 0;
@@ -24,16 +43,119 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
         const { action, table, data } = item;
         let result;
 
-        switch (action) {
-          case 'create':
-            result = await supabase.from(table).insert(data);
-            break;
-          case 'update':
-            result = await supabase.from(table).update(data).eq('id', data.id);
-            break;
-          case 'delete':
-            result = await supabase.from(table).delete().eq('id', data.id);
-            break;
+        // Handle special cases for tables with complex nested data
+        if (table === 'sales' && action === 'create') {
+          // Sales have nested sale_items that need to be handled separately
+          const { items, ...saleData } = data;
+
+          // Check if sale already exists (from previous partial sync attempt)
+          let sale = null;
+          const { data: existingSale, error: lookupError } = await supabase
+            .from('sales')
+            .select('*')
+            .eq('id', saleData.id)
+            .maybeSingle();
+
+          // Handle lookup errors - treat as retriable
+          if (lookupError) {
+            console.error(`Error checking for existing sale ${saleData.id}:`, lookupError);
+            result = { error: lookupError };
+          } else if (existingSale) {
+            console.log(`✓ Sale ${saleData.id} already synced, proceeding to sync items`);
+            sale = existingSale;
+            result = { data: sale }; // Initialize result as success
+          } else {
+            // Insert the sale first
+            const { data: newSale, error: saleError } = await supabase
+              .from('sales')
+              .insert([saleData])
+              .select()
+              .single();
+
+            if (saleError) {
+              result = { error: saleError };
+              sale = null;
+            } else {
+              sale = newSale;
+              result = { data: sale }; // Initialize result as success
+            }
+          }
+
+          // Only attempt items insertion if we have a sale AND no errors so far
+          if (sale && !result?.error && items && items.length > 0) {
+            // Check which items are already inserted
+            const { data: existingItems, error: itemCheckError } = await supabase
+              .from('sale_items')
+              .select('id')
+              .eq('sale_id', sale.id);
+            
+            if (itemCheckError) {
+              console.error(`Error checking existing sale items:`, itemCheckError);
+              result = { error: itemCheckError };
+            } else {
+              const existingItemIds = new Set((existingItems || []).map((i: any) => i.id));
+              const itemsToInsert = items.filter((item: any) => !existingItemIds.has(item.id));
+
+              if (itemsToInsert.length > 0) {
+                console.log(`📤 Inserting ${itemsToInsert.length} sale items (IDs: ${itemsToInsert.map((i: any) => i.id).join(', ')})`);
+                
+                // Insert items one at a time to track which ones succeed/fail
+                let itemsSucceeded = 0;
+                let firstItemError = null;
+                
+                for (const item of itemsToInsert) {
+                  const { error: singleItemError } = await supabase.from('sale_items').insert({
+                    ...item,
+                    sale_id: sale.id,
+                  });
+                  
+                  if (singleItemError) {
+                    console.error(`Failed to insert sale item ${item.id}:`, singleItemError);
+                    if (!firstItemError) firstItemError = singleItemError;
+                  } else {
+                    itemsSucceeded++;
+                  }
+                }
+                
+                if (firstItemError) {
+                  console.error(`⚠️ Partial items sync: ${itemsSucceeded}/${itemsToInsert.length} succeeded`);
+                  result = { error: firstItemError, data: sale };
+                } else {
+                  console.log(`✓ All ${itemsToInsert.length} sale items inserted successfully`);
+                  result = { data: sale }; // Success!
+                }
+              } else {
+                console.log(`✓ All ${items.length} sale items already synced`);
+                result = { data: sale };
+              }
+            }
+          }
+          
+          // Ensure result is always defined
+          if (!result) {
+            result = { error: new Error('Sales sync incomplete: no result generated') };
+          }
+        } else {
+          // Standard CRUD operations for simple tables
+          // Handles: financial_records, savings_plans, savings_contributions, products, loans, loan_repayments
+          console.log(`📤 Syncing ${action} on ${table}:`, JSON.stringify(data, null, 2).substring(0, 200));
+          
+          switch (action) {
+            case 'create':
+              result = await supabase.from(table).insert(data);
+              break;
+            case 'update':
+              result = await supabase.from(table).update(data).eq('id', data.id);
+              break;
+            case 'delete':
+              result = await supabase.from(table).delete().eq('id', data.id);
+              break;
+          }
+          
+          // Ensure result is always defined for standard operations too
+          if (!result) {
+            result = { error: new Error(`${table} sync incomplete: no result generated`) };
+          }
         }
 
         if (result && result.error) {
@@ -46,7 +168,7 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
           await removeQueueItem(item.id);
           success++;
           synced = true;
-          console.log(`✓ Synced ${action} on ${table}`);
+          console.log(`✓ Synced ${action} on ${table}${table === 'sales' && data.items ? ` with ${data.items.length} items` : ''}`);
         }
       } catch (error) {
         console.error(`Exception while syncing item ${item.id} (attempt ${attempts + 1}/${MAX_RETRY_ATTEMPTS}):`, error);
