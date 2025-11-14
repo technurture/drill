@@ -17,15 +17,18 @@ import {
   ChevronUp,
   Star,
   Shield,
-  Zap
+  Zap,
+  LayoutDashboard
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Landing = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { tSubheading } = useLanguage();
+  const { user } = useAuth();
 
   const faqs = [
     {
@@ -115,19 +118,31 @@ const Landing = () => {
               </span>
             </div>
             <div className="flex items-center space-x-4">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate('/login')}
-                className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400"
-              >
-                Login
-              </Button>
-              <Button 
-                onClick={() => navigate('/signup')}
-                className="bg-green-600 hover:bg-green-700 text-white"
-              >
-                Get Started
-              </Button>
+              {user ? (
+                <Button 
+                  onClick={() => navigate('/dashboard')}
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                >
+                  <LayoutDashboard className="w-4 h-4 mr-2" />
+                  Dashboard
+                </Button>
+              ) : (
+                <>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => navigate('/login')}
+                    className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400"
+                  >
+                    Login
+                  </Button>
+                  <Button 
+                    onClick={() => navigate('/signup')}
+                    className="bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    Get Started
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -182,21 +197,34 @@ const Landing = () => {
               you take charge of your money, grow your business, and build the future you've always dreamed of.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Button 
-                size="lg"
-                onClick={() => navigate('/signup')}
-                className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
-              >
-                {tSubheading('landing.hero.ctaPrimary')}
-              </Button>
-              <Button 
-                size="lg"
-                variant="outline"
-                onClick={() => navigate('/login')}
-                className="border-2 border-green-600 text-green-600 hover:bg-green-50 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-green-600 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
-              >
-                {tSubheading('landing.hero.ctaSecondary')}
-              </Button>
+              {user ? (
+                <Button 
+                  size="lg"
+                  onClick={() => navigate('/dashboard')}
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
+                >
+                  <LayoutDashboard className="w-5 h-5 mr-2" />
+                  Go to Dashboard
+                </Button>
+              ) : (
+                <>
+                  <Button 
+                    size="lg"
+                    onClick={() => navigate('/signup')}
+                    className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
+                  >
+                    {tSubheading('landing.hero.ctaPrimary')}
+                  </Button>
+                  <Button 
+                    size="lg"
+                    variant="outline"
+                    onClick={() => navigate('/login')}
+                    className="border-2 border-green-600 text-green-600 hover:bg-green-50 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-green-600 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
+                  >
+                    {tSubheading('landing.hero.ctaSecondary')}
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -364,22 +392,35 @@ const Landing = () => {
                 So whether you're buying, selling, saving, or just starting out — let SheBalance walk with you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:justify-start justify-center">
-                <Button 
-                  size="lg"
-                  onClick={() => navigate('/signup')}
-                  className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold"
-                >
-                  <Zap className="w-5 h-5 mr-2" />
-                  {tSubheading('landing.cta.primaryButton')}
-                </Button>
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  onClick={() => navigate('/login')}
-                  className="border-2 border-green-50 text-white hover:bg-white hover:text-green-600 dark:border-white px-8 py-4 text-lg"
-                >
-                  {tSubheading('landing.cta.secondaryButton')}
-                </Button>
+                {user ? (
+                  <Button 
+                    size="lg"
+                    onClick={() => navigate('/dashboard')}
+                    className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold"
+                  >
+                    <LayoutDashboard className="w-5 h-5 mr-2" />
+                    Go to Dashboard
+                  </Button>
+                ) : (
+                  <>
+                    <Button 
+                      size="lg"
+                      onClick={() => navigate('/signup')}
+                      className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold"
+                    >
+                      <Zap className="w-5 h-5 mr-2" />
+                      {tSubheading('landing.cta.primaryButton')}
+                    </Button>
+                    <Button 
+                      size="lg"
+                      variant="outline"
+                      onClick={() => navigate('/login')}
+                      className="border-2 border-green-50 text-white hover:bg-white hover:text-green-600 dark:border-white px-8 py-4 text-lg"
+                    >
+                      {tSubheading('landing.cta.secondaryButton')}
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </div>

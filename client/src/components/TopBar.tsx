@@ -124,7 +124,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
           {/* Logo and Store Info */}
           <div className="flex items-center space-x-3">
             <div 
-              onClick={() => navigate("/dashboard")} 
+              onClick={() => navigate("/")} 
               className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
             >
               <img

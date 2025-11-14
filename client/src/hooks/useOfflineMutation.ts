@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient, UseMutationOptions } from "@tanstack/react-query";
 import { useOfflineStatus } from "./useOfflineStatus";
 import { addToOfflineQueue } from "@/utils/indexedDB";
+import { toast } from "sonner";
 
 interface OfflineMutationConfig<TData, TVariables> {
   tableName: string;
@@ -50,6 +51,13 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
         // Log queued data for verification (truncate for readability)
         const dataPreview = JSON.stringify(queueData, null, 2).substring(0, 300);
         console.log(`✅ Queued for sync: ${config.action} on ${config.tableName}`, dataPreview);
+        
+        // Show user-friendly toast notification
+        const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';
+        toast.success(`Action ${actionText} and saved locally!`, {
+          description: 'Your data will sync automatically when you come back online.',
+          duration: 5000,
+        });
         
         // Return optimistic data for UI responsiveness
         const optimisticData = config.getOptimisticData?.(variables) ?? queueData;
