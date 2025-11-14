@@ -1,0 +1,76 @@
+mac@MACs-MacBook-Air drill % npm run build
+
+> vite_react_shadcn_ts@0.0.0 build
+> tsc && vite build --outDir client/dist
+
+client/src/integrations/supabase/supabase.ts:3:33 - error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+
+3 const supabaseUrl = import.meta.env.VITE_SUPABASE_PROJECT_URL;
+                                  ~~~
+
+client/src/integrations/supabase/supabase.ts:4:33 - error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+
+4 const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY;
+                                  ~~~
+
+client/src/main.tsx:2:17 - error TS5097: An import path can only end with a '.tsx' extension when 'allowImportingTsExtensions' is enabled.
+
+2 import App from "./App.tsx";
+                  ~~~~~~~~~~~
+
+client/src/services/offlineSync.ts:76:26 - error TS2339: Property 'sync' does not exist on type 'ServiceWorkerRegistration'.
+
+76       await registration.sync.register('offline-sync');
+                            ~~~~
+
+client/src/sw-custom.ts:120:39 - error TS2304: Cannot find name 'SyncEvent'.
+
+120 self.addEventListener('sync', (event: SyncEvent) => {
+                                          ~~~~~~~~~
+
+client/src/utils/indexedDB.ts:83:26 - error TS2339: Property 'sync' does not exist on type 'ServiceWorkerRegistration'.
+
+83       await registration.sync.register('offline-sync');
+                            ~~~~
+
+server/controllers/example.controller.ts:21:42 - error TS2339: Property 'items' does not exist on type '{ products: { Row: Product; Insert: Omit<Product, "id">; Update: Partial<Product>; }; sales: { Row: Sale; Insert: Omit<Sale, "id" | "created_at">; Update: Partial<...>; }; sale_items: { ...; }; users: { ...; }; stores: { ...; }; store_sales_reps: { ...; }; }'.
+
+21 type Item = Database['public']['Tables']['items']['Row'];
+                                            ~~~~~~~
+
+server/controllers/example.controller.ts:22:48 - error TS2339: Property 'items' does not exist on type '{ products: { Row: Product; Insert: Omit<Product, "id">; Update: Partial<Product>; }; sales: { Row: Sale; Insert: Omit<Sale, "id" | "created_at">; Update: Partial<...>; }; sale_items: { ...; }; users: { ...; }; stores: { ...; }; store_sales_reps: { ...; }; }'.
+
+22 type ItemInsert = Database['public']['Tables']['items']['Insert'];
+                                                  ~~~~~~~
+
+server/controllers/example.controller.ts:23:48 - error TS2339: Property 'items' does not exist on type '{ products: { Row: Product; Insert: Omit<Product, "id">; Update: Partial<Product>; }; sales: { Row: Sale; Insert: Omit<Sale, "id" | "created_at">; Update: Partial<...>; }; sale_items: { ...; }; users: { ...; }; stores: { ...; }; store_sales_reps: { ...; }; }'.
+
+23 type ItemUpdate = Database['public']['Tables']['items']['Update'];
+                                                  ~~~~~~~
+
+server/db.ts:1:34 - error TS2307: Cannot find module '@neondatabase/serverless' or its corresponding type declarations.
+
+1 import { Pool, neonConfig } from '@neondatabase/serverless';
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+server/db.ts:2:25 - error TS2307: Cannot find module 'drizzle-orm/neon-serverless' or its corresponding type declarations.
+
+2 import { drizzle } from 'drizzle-orm/neon-serverless';
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+server/db.ts:4:25 - error TS2307: Cannot find module '@shared/schema' or its corresponding type declarations.
+
+4 import * as schema from "@shared/schema";
+                          ~~~~~~~~~~~~~~~~
+
+
+Found 12 errors in 7 files.
+
+Errors  Files
+     2  client/src/integrations/supabase/supabase.ts:3
+     1  client/src/main.tsx:2
+     1  client/src/services/offlineSync.ts:76
+     1  client/src/sw-custom.ts:120
+     1  client/src/utils/indexedDB.ts:83
+     3  server/controllers/example.controller.ts:21
+     3  server/db.ts:1

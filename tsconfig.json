@@ -4,6 +4,7 @@
     "paths": {
       "@/*": ["./client/src/*"]
     },
+    "types": ["vite/client"],
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
@@ -18,8 +19,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"]
   },
-  "include": ["client/src", "server"],
-  "exclude": ["node_modules", "client/dist", "**/*.d.ts", "!client/src/vite-env.d.ts", "!client/src/paystack.d.ts"]
+  "include": ["client/src/**/*", "client/src/vite-env.d.ts", "server"],
+  "exclude": ["node_modules", "client/dist"]
 }

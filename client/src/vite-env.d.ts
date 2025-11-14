@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference lib="webworker" />
 
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_PROJECT_URL: string
@@ -24,6 +25,17 @@ interface SyncManager {
 interface ServiceWorkerRegistration {
   readonly sync: SyncManager;
 }
+
+declare var ExtendableEvent: {
+  prototype: ExtendableEvent;
+  new(type: string, eventInitDict?: ExtendableEventInit): ExtendableEvent;
+};
+
+interface ExtendableEvent extends Event {
+  waitUntil(f: Promise<any>): void;
+}
+
+interface ExtendableEventInit extends EventInit {}
 
 interface SyncEvent extends ExtendableEvent {
   readonly lastChance: boolean;
