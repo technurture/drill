@@ -33,7 +33,6 @@ import { StoreSelector } from "./sidebar/StoreSelector";
 import { SubscriptionContext } from "@/contexts/SubscriptionContext";
 import LogoutModal from "./ui/modals/LogoutModal";
 import { requestNotificationPermission } from "@/integrations/firebase/firebase";
-import favicon from "../../public/favicon.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Sidebar = ({ onClose, isSideBar }) => {
