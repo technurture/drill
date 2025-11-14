@@ -1,0 +1,98 @@
+Access to fetch at 'https://storeer-m3c1.onrender.com/send-notification' from origin 'http://localhost:5004' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.Understand this error
+pushNotification.ts:7  POST https://storeer-m3c1.onrender.com/send-notification net::ERR_FAILED
+sendPushNotification @ pushNotification.ts:7
+pushNotification @ AddSales.tsx:251
+handleCheckout @ AddSales.tsx:339
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+pushNotification.ts:18 Error: TypeError: Failed to fetch
+    at sendPushNotification (pushNotification.ts:7:3)
+    at pushNotification (AddSales.tsx:251:9)
+    at handleCheckout (AddSales.tsx:339:9)
+(anonymous) @ pushNotification.ts:18
+Promise.catch
+sendPushNotification @ pushNotification.ts:18
+pushNotification @ AddSales.tsx:251
+handleCheckout @ AddSales.tsx:339
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+sales:1 Access to fetch at 'https://storeer-m3c1.onrender.com/send-notification' from origin 'http://localhost:5004' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.Understand this error
+pushNotification.ts:7  POST https://storeer-m3c1.onrender.com/send-notification net::ERR_FAILED
+sendPushNotification @ pushNotification.ts:7
+pushNotification @ AddSales.tsx:251
+handleCheckout @ AddSales.tsx:339
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+pushNotification.ts:18 Error: TypeError: Failed to fetch
+    at sendPushNotification (pushNotification.ts:7:3)
+    at pushNotification (AddSales.tsx:251:9)
+    at handleCheckout (AddSales.tsx:339:9)
+(anonymous) @ pushNotification.ts:18
+Promise.catch
+sendPushNotification @ pushNotification.ts:18
+pushNotification @ AddSales.tsx:251
+handleCheckout @ AddSales.tsx:339
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+chunk-FWFYZ7QY.js?v=1f218ae9:283 workbox Using NetworkFirst to respond to 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5'
+chunk-FWFYZ7QY.js?v=1f218ae9:283 workbox Using NetworkFirst to respond to 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/sales?select=*%2Citems%3Asale_items%28*%2Cproduct%3Aproducts%28*%29%29&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6'
+pushNotification.ts:18 Error: TypeError: Failed to fetch
+    at sendPushNotification (pushNotification.ts:7:3)
+    at pushNotification (AddSales.tsx:251:9)
+    at handleCheckout (AddSales.tsx:339:9)
