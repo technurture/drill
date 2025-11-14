@@ -5,7 +5,6 @@ import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { NetworkFirst, CacheFirst, StaleWhileRevalidate, NetworkOnly } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { handleOfflineSync } from './sw-sync-handler';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -117,31 +116,35 @@ registerRoute(
   })
 );
 
-self.addEventListener('sync', (event: SyncEvent) => {
-  console.log('[SW] Sync event received:', event.tag);
-  
-  if (event.tag === 'offline-sync') {
-    event.waitUntil(
-      handleOfflineSync()
-        .then(result => {
-          console.log('[SW] Background sync completed:', result);
-          
-          return self.clients.matchAll().then(clients => {
-            clients.forEach(client => {
-              client.postMessage({
-                type: 'SYNC_COMPLETE',
-                payload: result
-              });
-            });
-          });
-        })
-        .catch(error => {
-          console.error('[SW] Background sync failed:', error);
-          throw error;
-        })
-    );
-  }
-});
+// Service Worker background sync is disabled in favor of the main app's offlineSync.ts
+// which has proper authentication and error handling.
+// The app automatically syncs when coming back online via window 'online' event listener.
+// 
+// self.addEventListener('sync', (event: SyncEvent) => {
+//   console.log('[SW] Sync event received:', event.tag);
+//   
+//   if (event.tag === 'offline-sync') {
+//     event.waitUntil(
+//       handleOfflineSync()
+//         .then(result => {
+//           console.log('[SW] Background sync completed:', result);
+//           
+//           return self.clients.matchAll().then(clients => {
+//             clients.forEach(client => {
+//               client.postMessage({
+//                 type: 'SYNC_COMPLETE',
+//                 payload: result
+//               });
+//             });
+//           });
+//         })
+//         .catch(error => {
+//           console.error('[SW] Background sync failed:', error);
+//           throw error;
+//         })
+//     );
+//   }
+// });
 
 self.addEventListener('install', (event) => {
   console.log('[SW] Service worker installing...');

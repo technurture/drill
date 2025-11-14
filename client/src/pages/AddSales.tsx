@@ -30,6 +30,7 @@ import { checkSalesRestriction } from "@/utils/subscriptionHelpers/salesRestrict
 import { sendPushNotification } from "@/utils/pushNotification";
 import React from "react";
 import NoStoreMessage from "@/components/NoStoreMessage";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 interface CartItem extends Product {
   cartQuantity: number;
@@ -50,6 +51,7 @@ const AddSales = () => {
   
   // Sales and notification hooks
   const { user } = useAuth();
+  const { isOnline } = useOfflineStatus();
   const addSale = useAddSale();
   const addFinancialRecord = useAddFinancialRecord();
   const addNotification = useAddNotification();
@@ -289,7 +291,7 @@ const AddSales = () => {
       //   return;
       // }
 
-      const saleData = {
+      const saleData: any = {
         total_price: getTotalAmount,
         payment_mode: paymentMode,
         store_id: theStore?.id || "",
@@ -305,11 +307,26 @@ const AddSales = () => {
         })),
       };
 
+      // When offline, attach financial record data to the sale for later creation during sync
+      // This prevents foreign key constraint errors when the sale doesn't exist in Supabase yet
+      if (!isOnline && theStore?.id && user?.id) {
+        console.log('📴 Offline: Attaching financial record data to sale for later creation');
+        saleData.financial_record_data = {
+          store_id: theStore.id,
+          user_id: user.id,
+          type: 'income',
+          reason: 'Sales of products',
+          amount: Number(getTotalAmount),
+          date: saleData.created_date,
+        };
+      }
+
       // Add sale to database
       const createdSale = await addSale.mutateAsync(saleData);
 
-      // Create linked finance income record
-      if (theStore?.id && user?.id && createdSale?.id) {
+      // Create linked finance income record ONLY when online
+      // When offline, this will be created during sync by offlineSync.ts
+      if (isOnline && theStore?.id && user?.id && createdSale?.id) {
         await addFinancialRecord.mutateAsync({
           store_id: theStore.id,
           user_id: user.id,

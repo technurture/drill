@@ -46,7 +46,7 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
         // Handle special cases for tables with complex nested data
         if (table === 'sales' && action === 'create') {
           // Sales have nested sale_items that need to be handled separately
-          const { items, ...saleData } = data;
+          const { items, financial_record_data, ...saleData } = data;
 
           // Check if sale already exists (from previous partial sync attempt)
           let sale = null;
@@ -127,6 +127,41 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
               } else {
                 console.log(`✓ All ${items.length} sale items already synced`);
                 result = { data: sale };
+              }
+            }
+          }
+
+          // After successfully syncing sale and items, create the linked financial record if needed
+          // This resolves the race condition where financial records tried to reference sales that don't exist yet
+          if (sale && !result?.error && financial_record_data) {
+            console.log('💰 Creating linked financial record for sale:', sale.id);
+            
+            // Check if financial record already exists
+            const { data: existingFinRecord, error: finLookupError } = await supabase
+              .from('financial_records')
+              .select('id')
+              .eq('sale_id', sale.id)
+              .maybeSingle();
+            
+            if (finLookupError) {
+              console.error('Error checking for existing financial record:', finLookupError);
+              result = { error: finLookupError };
+            } else if (existingFinRecord) {
+              console.log('✓ Financial record already exists for this sale');
+            } else {
+              // Create the financial record with the real sale_id from Supabase
+              const { error: finRecordError } = await supabase
+                .from('financial_records')
+                .insert({
+                  ...financial_record_data,
+                  sale_id: sale.id, // Use the real sale.id from Supabase, not the temporary one
+                });
+              
+              if (finRecordError) {
+                console.error('Failed to create financial record:', finRecordError);
+                result = { error: finRecordError };
+              } else {
+                console.log('✓ Financial record created successfully');
               }
             }
           }
