@@ -97,5 +97,15 @@
   "helpCenter": "Ebe enyemaka",
   "faq": "Ajụjụ a na-ajụkarị",
   "contactSupport": "Kpọtụrụ ndị nkwado",
-  "tutorials": "Nkuzi"
+  "tutorials": "Nkuzi",
+  "offline": {
+    "indicator": {
+      "offline": "Ị nọghị na intanetị",
+      "online": "Ị laghachila na intanetị!",
+      "syncing": "Na-emekọrịta mgbanwe...",
+      "syncComplete": "Mgbanwe niile emekọrịtala",
+      "pendingChanges": "mgbanwe na-eche",
+      "syncNow": "Mekọrịta Ugbu A"
+    }
+  }
 }

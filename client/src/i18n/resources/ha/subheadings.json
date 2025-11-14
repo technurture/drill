@@ -97,5 +97,15 @@
   "helpCenter": "Cibiyar Taimako",
   "faq": "Tambayoyin da ake yawa",
   "contactSupport": "Tuntuɓi Tallafi",
-  "tutorials": "Koyarwa"
+  "tutorials": "Koyarwa",
+  "offline": {
+    "indicator": {
+      "offline": "Kun ba tare da intanet",
+      "online": "Kun dawo kan intanet!",
+      "syncing": "Ana aiwatar da canje-canje...",
+      "syncComplete": "An kammala duk canje-canje",
+      "pendingChanges": "canje-canje ke jira",
+      "syncNow": "Aiwatar Yanzu"
+    }
+  }
 }

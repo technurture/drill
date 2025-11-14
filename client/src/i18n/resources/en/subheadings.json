@@ -97,5 +97,15 @@
   "helpCenter": "Help Center",
   "faq": "FAQ",
   "contactSupport": "Contact Support",
-  "tutorials": "Tutorials"
+  "tutorials": "Tutorials",
+  "offline": {
+    "indicator": {
+      "offline": "You're offline",
+      "online": "You're back online!",
+      "syncing": "Syncing changes...",
+      "syncComplete": "All changes synced",
+      "pendingChanges": "changes pending sync",
+      "syncNow": "Sync Now"
+    }
+  }
 }

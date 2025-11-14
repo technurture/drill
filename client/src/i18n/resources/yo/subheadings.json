@@ -97,5 +97,15 @@
   "helpCenter": "Ibi ìrànlọ́wọ́",
   "faq": "Àwọn ìbéèrè tó wọ́pọ̀",
   "contactSupport": "Kàn sí àtìlẹyìn",
-  "tutorials": "Ẹ̀kọ́"
+  "tutorials": "Ẹ̀kọ́",
+  "offline": {
+    "indicator": {
+      "offline": "O wà ní àìsí íntánẹ́ẹ̀tì",
+      "online": "O ti padà sórí íntánẹ́ẹ̀tì!",
+      "syncing": "Ń mú àwọn àyípadà pọ̀...",
+      "syncComplete": "Gbogbo àyípadà ti parí",
+      "pendingChanges": "àwọn àyípadà ń dúró",
+      "syncNow": "Mú Pọ̀ Báyìí"
+    }
+  }
 }

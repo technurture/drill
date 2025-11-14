@@ -97,5 +97,15 @@
   "helpCenter": "Help place",
   "faq": "Questions wey people dey ask",
   "contactSupport": "Talk to support",
-  "tutorials": "How to use am"
+  "tutorials": "How to use am",
+  "offline": {
+    "indicator": {
+      "offline": "You no get internet",
+      "online": "Internet don come back!",
+      "syncing": "Dey sync changes...",
+      "syncComplete": "All changes don sync finish",
+      "pendingChanges": "changes wey dey wait",
+      "syncNow": "Sync Now"
+    }
+  }
 }
