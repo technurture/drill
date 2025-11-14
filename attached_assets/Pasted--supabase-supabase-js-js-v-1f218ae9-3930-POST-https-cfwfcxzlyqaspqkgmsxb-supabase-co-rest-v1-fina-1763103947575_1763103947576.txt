@@ -1,0 +1,84 @@
+@supabase_supabase-js.js?v=1f218ae9:3930  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/financial_records?columns=%22store_id%22%2C%22user_id%22%2C%22type%22%2C%22reason%22%2C%22amount%22%2C%22date%22%2C%22sale_id%22&select=* 409 (Conflict)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:3930
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:3951
+fulfilled @ @supabase_supabase-js.js?v=1f218ae9:3903
+Promise.then
+step @ @supabase_supabase-js.js?v=1f218ae9:3916
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:3918
+__awaiter6 @ @supabase_supabase-js.js?v=1f218ae9:3900
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:3941
+then @ @supabase_supabase-js.js?v=1f218ae9:89Understand this error
+finance.ts:107 Finance Hook - Insert result: {data: null, error: {…}}
+finance.ts:110 Finance Hook - Insert error: {code: '23503', details: 'Key (sale_id)=(5436edcd-0654-4e6e-a0c4-4d6e4acf310b) is not present in table "sales".', hint: null, message: 'insert or update on table "financial_records" viol…n key constraint "financial_records_sale_id_fkey"'}
+mutationFn @ finance.ts:110
+await in mutationFn
+mutationFn @ useOfflineMutation.ts:62
+fn @ @tanstack_react-query.js?v=1f218ae9:1236
+run @ @tanstack_react-query.js?v=1f218ae9:513
+start @ @tanstack_react-query.js?v=1f218ae9:555
+execute @ @tanstack_react-query.js?v=1f218ae9:1272
+await in execute
+mutate @ @tanstack_react-query.js?v=1f218ae9:2692
+handleCheckout @ AddSales.tsx:313
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+useOfflineMutation.ts:75 ❌ Mutation error for financial_records: {code: '23503', details: 'Key (sale_id)=(5436edcd-0654-4e6e-a0c4-4d6e4acf310b) is not present in table "sales".', hint: null, message: 'insert or update on table "financial_records" viol…n key constraint "financial_records_sale_id_fkey"'}
+onError @ useOfflineMutation.ts:75
+execute @ @tanstack_react-query.js?v=1f218ae9:1301
+await in execute
+mutate @ @tanstack_react-query.js?v=1f218ae9:2692
+handleCheckout @ AddSales.tsx:313
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+finance.ts:123 Finance Hook - Mutation error: {code: '23503', details: 'Key (sale_id)=(5436edcd-0654-4e6e-a0c4-4d6e4acf310b) is not present in table "sales".', hint: null, message: 'insert or update on table "financial_records" viol…n key constraint "financial_records_sale_id_fkey"'}
+onError @ finance.ts:123
+onError @ useOfflineMutation.ts:76
+execute @ @tanstack_react-query.js?v=1f218ae9:1301
+await in execute
+mutate @ @tanstack_react-query.js?v=1f218ae9:2692
+handleCheckout @ AddSales.tsx:313
+await in handleCheckout
+callCallback2 @ chunk-276SZO74.js?v=1f218ae9:3674
+invokeGuardedCallbackDev @ chunk-276SZO74.js?v=1f218ae9:3699
+invokeGuardedCallback @ chunk-276SZO74.js?v=1f218ae9:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-276SZO74.js?v=1f218ae9:3736
+executeDispatch @ chunk-276SZO74.js?v=1f218ae9:7014
+processDispatchQueueItemsInOrder @ chunk-276SZO74.js?v=1f218ae9:7034
+processDispatchQueue @ chunk-276SZO74.js?v=1f218ae9:7043
+dispatchEventsForPlugins @ chunk-276SZO74.js?v=1f218ae9:7051
+(anonymous) @ chunk-276SZO74.js?v=1f218ae9:7174
+batchedUpdates$1 @ chunk-276SZO74.js?v=1f218ae9:18913
+batchedUpdates @ chunk-276SZO74.js?v=1f218ae9:3579
+dispatchEventForPluginEventSystem @ chunk-276SZO74.js?v=1f218ae9:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-276SZO74.js?v=1f218ae9:5478
+dispatchEvent @ chunk-276SZO74.js?v=1f218ae9:5472
+dispatchDiscreteEvent @ chunk-276SZO74.js?v=1f218ae9:5449Understand this error
+AddSales.tsx:383 Checkout error: {code: '23503', details: 'Key (sale_id)=(5436edcd-0654-4e6e-a0c4-4d6e4acf310b) is not present in table "sales".', hint: null, message: 'insert or update on table "financial_records" viol…n key constraint "financial_records_sale_id_fkey"'}

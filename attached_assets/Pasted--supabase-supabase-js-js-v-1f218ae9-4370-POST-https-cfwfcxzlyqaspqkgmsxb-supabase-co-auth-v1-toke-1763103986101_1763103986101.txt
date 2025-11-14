@@ -1,0 +1,289 @@
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at @supabase_supabase-js.js?v=1f218ae9:4436:32
+    at @supabase_supabase-js.js?v=1f218ae9:4448:7
+    at new Promise (<anonymous>)
+    at retryable (@supabase_supabase-js.js?v=1f218ae9:4431:19)
+    at SupabaseAuthClient._refreshAccessToken (@supabase_supabase-js.js?v=1f218ae9:6535:20)
+    at SupabaseAuthClient._callRefreshToken (@supabase_supabase-js.js?v=1f218ae9:6663:42)
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at async @supabase_supabase-js.js?v=1f218ae9:4436:26
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at async @supabase_supabase-js.js?v=1f218ae9:4436:26
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at async @supabase_supabase-js.js?v=1f218ae9:4436:26
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at async @supabase_supabase-js.js?v=1f218ae9:4436:26
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at async @supabase_supabase-js.js?v=1f218ae9:4436:26
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4370  POST https://cfwfcxzlyqaspqkgmsxb.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_INTERNET_DISCONNECTED
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4370
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4651
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:4653 TypeError: Failed to fetch
+    at @supabase_supabase-js.js?v=1f218ae9:4370:23
+    at _handleRequest2 (@supabase_supabase-js.js?v=1f218ae9:4651:20)
+    at _request (@supabase_supabase-js.js?v=1f218ae9:4641:22)
+    at @supabase_supabase-js.js?v=1f218ae9:6540:22
+    at async @supabase_supabase-js.js?v=1f218ae9:4436:26
+_handleRequest2 @ @supabase_supabase-js.js?v=1f218ae9:4653
+await in _handleRequest2
+_request @ @supabase_supabase-js.js?v=1f218ae9:4641
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6540
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4436
+await in (anonymous)
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:4448
+retryable @ @supabase_supabase-js.js?v=1f218ae9:4431
+_refreshAccessToken @ @supabase_supabase-js.js?v=1f218ae9:6535
+_callRefreshToken @ @supabase_supabase-js.js?v=1f218ae9:6663
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6857
+_useSession @ @supabase_supabase-js.js?v=1f218ae9:5977
+await in _useSession
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:6848
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5944
+(anonymous) @ @supabase_supabase-js.js?v=1f218ae9:5061Understand this error
+@supabase_supabase-js.js?v=1f218ae9:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
