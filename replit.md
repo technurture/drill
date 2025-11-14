@@ -10,6 +10,17 @@ Preferred communication style: Simple, everyday language.
 Database Backend: Using Supabase ONLY (NOT PostgreSQL/Neon)
 Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
+## Recent Changes (November 14, 2025)
+
+### Offline Functionality Enhancements
+- **Toast Notifications for Offline Actions**: Users now receive clear feedback when performing actions while offline (creating savings plans, adding sales, etc.). A success toast appears confirming the action was saved locally and will sync when back online.
+- **Implementation**: Enhanced `useOfflineMutation` hook with toast notifications that display for 5 seconds with a description encouraging users to reconnect for data sync.
+
+### Navigation Improvements
+- **Logo Navigation**: The SheBalance logo in the TopBar is now clickable and navigates users to the landing page ('/'), allowing authenticated users to return to the home page.
+- **Dashboard Access on Landing**: Authenticated users visiting the landing page now see a "Dashboard" button instead of Login/Signup buttons, enabling quick access to their dashboard without re-authentication.
+- **Seamless User Experience**: Changes apply to both the header navigation and all CTA buttons throughout the landing page.
+
 ## System Architecture
 
 ### Frontend Architecture
