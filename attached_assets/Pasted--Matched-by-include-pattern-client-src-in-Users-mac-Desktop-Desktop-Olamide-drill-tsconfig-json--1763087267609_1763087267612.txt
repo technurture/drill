@@ -1,0 +1,916 @@
+ Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/StoreContext.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/StoreContext.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/SubscriptionContext.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/SubscriptionContext.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/ThemeContext.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/ThemeContext.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/ToastProvider.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/contexts/ToastProvider.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/use-toast.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/use-toast.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/useOfflineStatus.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/useOfflineStatus.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/usePermissions.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/usePermissions.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/usePushNotifications.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/usePushNotifications.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/useReferrals.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/hooks/useReferrals.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/i18n/constants.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/i18n/constants.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/i18n/i18n.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/i18n/i18n.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/firebase/firebase.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/firebase/firebase.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/auth.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/auth.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/admin.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/admin.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/earning.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/earning.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/finance.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/finance.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/loans.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/loans.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/locations.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/locations.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/marketers.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/marketers.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/notifications.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/notifications.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/product-mutations.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/product-mutations.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/products.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/products.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/receipts.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/receipts.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/sale_items.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/sale_items.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/sales.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/sales.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/sales_reps.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/sales_reps.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/savings.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/savings.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/stores.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/stores.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/user-language.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/user-language.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/users.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/users.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/withdrawal.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/hooks/withdrawal.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/index.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/index.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/supabase.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/integrations/supabase/supabase.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/lib/utils.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/lib/utils.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/main.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/main.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/adapters/SupabaseBackendAdapter.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/adapters/SupabaseBackendAdapter.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/hooks/useNetworkStatus.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/hooks/useNetworkStatus.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/hooks/useOffline.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/hooks/useOffline.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/queue/ActionQueueRepository.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/queue/ActionQueueRepository.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/storage/db.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/storage/db.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/sync/OfflineSyncManager.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/sync/OfflineSyncManager.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/types/index.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/types/index.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/ui/OfflineBanner.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/ui/OfflineBanner.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/ui/OfflineProvider.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/offline/ui/OfflineProvider.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/AddSales.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/AddSales.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/AdminDashboard.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/AdminDashboard.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/AdminLogin.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/AdminLogin.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Cart.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Cart.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/CreateStore.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/CreateStore.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Dashboard.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Dashboard.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Earnings.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Earnings.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/EmailVerification.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/EmailVerification.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Finance.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Finance.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Help.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Help.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Index.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Index.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Inventory.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Inventory.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Landing.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Landing.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Loans.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Loans.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Login.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Login.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Notification.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Notification.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/ResetPassword.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/ResetPassword.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Sales.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Sales.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Savings.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Savings.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Settings.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Settings.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Signup.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Signup.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/StoreContext.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/StoreContext.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Subscription.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/Subscription.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/TermsAndPrivacy.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/TermsAndPrivacy.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminAgents.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminAgents.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminHelp.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminHelp.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminHome.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminHome.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminLoans.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminLoans.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminLocations.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminLocations.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminSettings.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminSettings.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminStores.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminStores.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminUsers.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/admin/AdminUsers.tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/edit-product/[id].d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/pages/edit-product/[id].tsx'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/services/offlineSync.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/services/offlineSync.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/sw-custom.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/sw-custom.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/sw-sync-handler.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/sw-sync-handler.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/types/database.types.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/types/database.types.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/types/loans.types.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/types/loans.types.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/types/savings.types.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/types/savings.types.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/axios.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/axios.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/cacheUtils.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/cacheUtils.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/cookieUtils.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/cookieUtils.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/exportUtils.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/exportUtils.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/formatNumber.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/formatNumber.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/google_sheet.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/google_sheet.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/helpers.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/helpers.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/indexedDB.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/indexedDB.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/pushNotification.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/pushNotification.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/salesUtils.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/salesUtils.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/inventoryRestriction.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/inventoryRestriction.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/salesRepRestriction.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/salesRepRestriction.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/salesRestriction.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/salesRestriction.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/storeRestriction.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionHelpers/storeRestriction.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionNotifications.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/subscriptionNotifications.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/toastUtils.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/toastUtils.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+error TS6305: Output file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/validation.d.ts' has not been built from source file '/Users/mac/Desktop/Desktop/Olamide/drill/client/src/utils/validation.ts'.
+  The file is in the program because:
+    Matched by include pattern 'client/src' in '/Users/mac/Desktop/Desktop/Olamide/drill/tsconfig.json'
+
+  tsconfig.json:26:15
+    26   "include": ["client/src", "server"],
+                     ~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+tsconfig.json:7:27 - error TS5103: Invalid value for '--ignoreDeprecations'.
+
+7     "ignoreDeprecations": "6.0",
+                            ~~~~~
+
+
+Found 214 errors in the same file, starting at: tsconfig.json:7
+
+mac@MACs-MacBook-Air drill % 
