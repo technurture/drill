@@ -1,0 +1,269 @@
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
+connect @ @supabase_supabase-js.js?v=d72977be:2611
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:2586
+(anonymous) @ @supabase_supabase-js.js?v=d72977be:1546Understand this error
+@supabase_supabase-js.js?v=d72977be:2611 WebSocket connection to 'wss://cfwfcxzlyqaspqkgmsxb.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmd2ZjeHpseXFhc3Bxa2dtc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzMDEyNTEsImV4cCI6MjA2OTg3NzI1MX0.hMhKWhzrfslc3LIFjuq-q9ik9YSWx81OPmgUVet617c&vsn=1.0.0' failed: 
