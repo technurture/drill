@@ -37,7 +37,6 @@ export default defineConfig(({ mode }) => ({
       injectManifest: {
         maximumFileSizeToCacheInBytes: 7000000,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,mp3,json}'],
-        navigateFallback: null,
       },
       devOptions: {
         enabled: true,
