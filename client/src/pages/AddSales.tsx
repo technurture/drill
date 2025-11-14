@@ -245,11 +245,16 @@ const AddSales = () => {
     );
   }, [cartItems]);
 
-  const pushNotification = (message: string, title: string) => {
-    if (token) {
-      for (const device of token) {
-        sendPushNotification(device?.token, message, title, "/dashboard/notes");
+  const pushNotification = async (message: string, title: string) => {
+    try {
+      if (token && Array.isArray(token)) {
+        const promises = token.map(device => 
+          sendPushNotification(device?.token, message, title, "/dashboard/notes")
+        );
+        await Promise.allSettled(promises);
       }
+    } catch (error) {
+      console.log("Push notification error (non-critical):", error);
     }
   };
 
@@ -339,7 +344,7 @@ const AddSales = () => {
         pushNotification(
           `New sale by Admin: ${productNames} for ₦${getTotalAmount.toFixed(2)}`,
           "New Sale",
-        );
+        ).catch(err => console.log("Push notification error:", err));
 
         // Check for low stock and send notifications
         for (const item of cartItems) {
@@ -358,7 +363,7 @@ const AddSales = () => {
             pushNotification(
               `${item.name} has ${updatedQuantity} units remaining`,
               "Low stock Alert",
-            );
+            ).catch(err => console.log("Push notification error:", err));
           }
         }
       }
