@@ -10,7 +10,15 @@ Preferred communication style: Simple, everyday language.
 Database Backend: Using Supabase ONLY (NOT PostgreSQL/Neon)
 Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
-## Recent Changes (November 14, 2025)
+## Recent Changes
+
+### Vercel Deployment Configuration (November 15, 2025)
+- **Build Output Directory**: Restructured build configuration to output to root `dist` directory instead of `client/dist` for Vercel compatibility.
+- **Vercel Configuration**: Updated `vercel.json` with proper build command, output directory, and framework settings.
+- **Package Scripts**: Simplified build script to use default Vite output configuration.
+- **Successful Build Test**: Verified build process generates all required assets including PWA manifest, service worker, and bundled JavaScript/CSS.
+
+### Offline Functionality Enhancements (November 14, 2025)
 
 ### Offline Functionality Enhancements
 - **Toast Notifications for Offline Actions**: Users now receive clear feedback when performing actions while offline (creating savings plans, adding sales, etc.). A success toast appears confirming the action was saved locally and will sync when back online.
