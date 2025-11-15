@@ -6,6 +6,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(({ mode }) => ({
   root: path.resolve(__dirname, "client"),
+  envDir: path.resolve(__dirname),
   server: {
     host: "0.0.0.0",
     port: 5000,
