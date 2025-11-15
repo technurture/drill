@@ -12,6 +12,12 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+### Environment Variables Configuration (November 15, 2025)
+- **Universal Environment Loading**: Configured Vite to load environment variables from root directory using `envDir` option.
+- **Cross-Directory Access**: Environment variables are now accessible from anywhere in the codebase (root or client directories).
+- **Documentation**: Created comprehensive `ENVIRONMENT_SETUP.md` guide with setup instructions and best practices.
+- **Template File**: Enhanced `.env.example` with detailed comments and configuration notes.
+
 ### Vercel Deployment Configuration (November 15, 2025)
 - **Build Output Directory**: Restructured build configuration to output to root `dist` directory instead of `client/dist` for Vercel compatibility.
 - **Vercel Configuration**: Updated `vercel.json` with proper build command, output directory, and framework settings.
