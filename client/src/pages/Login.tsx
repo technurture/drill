@@ -46,7 +46,7 @@ const Login = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation(['auth', 'notifications']);
 
 
 
@@ -69,7 +69,7 @@ const Login = () => {
 
   const handlePasswordReset = async () => {
     if (!email) {
-      toast.error("Please enter your email address first");
+      toast.error(t('notifications:auth.enterEmailFirst'));
       return;
     }
     setIsLoading((prev) => ({ ...prev, passwordReset: true }));
@@ -78,7 +78,7 @@ const Login = () => {
       const { error } = await supabase.auth.resetPasswordForEmail(email);
       if (error) throw error;
       
-      toast.success("Verification code sent to your email!");
+      toast.success(t('notifications:auth.verificationCodeSent'));
       // Navigate to email verification with password reset flag
       navigate("/email-verification", {
         state: {
@@ -87,7 +87,7 @@ const Login = () => {
         },
       });
     } catch (error: any) {
-      toast.error(error?.message || "Failed to send reset email");
+      toast.error(error?.message || t('notifications:auth.failedResetEmail'));
     } finally {
       setIsLoading((prev) => ({ ...prev, passwordReset: false }));
     }
@@ -230,14 +230,14 @@ const Login = () => {
                 className="flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
               >
                 <HelpCircle className="mr-2 h-4 w-4" />
-                Need help?
+                {t('auth:login.needHelp')}
               </button>
               <button
                 onClick={() => navigate("/landing")}
                 className="flex items-center text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
               >
                 <Sparkles className="mr-2 h-4 w-4" />
-                Learn more about SheBalance
+                {t('auth:login.learnMore')}
               </button>
             </div>
           </div>

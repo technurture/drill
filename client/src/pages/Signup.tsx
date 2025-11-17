@@ -39,6 +39,7 @@ import { supabase } from "../integrations/supabase/supabase";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAgents } from "@/integrations/supabase/hooks/users";
 import { validateNigerianPhoneNumber } from "@/utils/validation";
+import { useTranslation } from "react-i18next";
 
 
 interface State {
@@ -103,6 +104,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const { data: agents } = useAgents();
+  const { t } = useTranslation(['auth', 'notifications']);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -112,45 +114,45 @@ const Signup = () => {
     try {
       // Validation
       if (!state.email.trim()) {
-        toast.error("Please enter your email address");
+        toast.error(t('notifications:validation.enterEmail'));
         return;
       }
       
       if (!state.phoneNumber.trim()) {
-        toast.error("Please enter your phone number");
+        toast.error(t('notifications:validation.enterPhone'));
         return;
       }
       
       // Validate Nigerian phone number
       const phoneValidation = validateNigerianPhoneNumber(state.phoneNumber);
       if (!phoneValidation.isValid) {
-        toast.error(phoneValidation.error || "Please enter a valid Nigerian phone number");
+        toast.error(phoneValidation.error || t('notifications:validation.invalidPhone'));
         return;
       }
       
       if (state.password.length < 8) {
-        toast.error("Password must be at least 8 characters long");
+        toast.error(t('notifications:validation.passwordLength'));
         return;
       }
       
       if (state.password !== state.confirmPassword) {
-        toast.error("Passwords do not match");
+        toast.error(t('notifications:validation.passwordsMismatch'));
         return;
       }
       
       if (!state.gender) {
-        toast.error("Please select your gender");
+        toast.error(t('notifications:validation.selectGender'));
         return;
       }
       
       if (!state.ageRange) {
-        toast.error("Please select your age range");
+        toast.error(t('notifications:validation.selectAgeRange'));
         return;
       }
       
       // Agent name validation
       if (state.isAgent && !state.name.trim()) {
-        toast.error("Please enter your agent name");
+        toast.error(t('notifications:validation.enterAgentName'));
         return;
       }
       
@@ -163,7 +165,7 @@ const Signup = () => {
           .single();
         
         if (existingAgent) {
-          toast.error("This agent name is already taken. Please choose a different name.");
+          toast.error(t('notifications:validation.agentNameTaken'));
           return;
         }
       }
@@ -177,7 +179,7 @@ const Signup = () => {
         registered_by: state.registeredBy === "none" ? null : state.registeredBy
       });
       
-      toast.success("Verification email sent!");
+      toast.success(t('notifications:auth.verificationEmailSent'));
       navigate("/email-verification", {
         state: {
           email: state.email,
@@ -224,10 +226,10 @@ const Signup = () => {
                 <img src="/Shebanlace_favicon.png" alt="SheBalance" className="w-8 h-8" />
               </div>
               <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-                Create Your Account
+                {t('auth:signup.title')}
               </CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">
-                Join SheBalance and start managing your business
+                {t('auth:signup.subtitle')}
               </CardDescription>
             </CardHeader>
 
@@ -236,13 +238,13 @@ const Signup = () => {
                 {/* Email Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Email Address
+                    {t('auth:signup.emailLabel')}
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       id="email"
-                      placeholder="Enter your email"
+                      placeholder={t('auth:signup.emailPlaceholder')}
                       type="email"
                       required
                       value={state.email}
@@ -260,13 +262,13 @@ const Signup = () => {
                 {/* Phone Number Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Phone Number
+                    {t('auth:signup.phoneLabel')}
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       id="phoneNumber"
-                      placeholder="+2348012345678 or 08012345678"
+                      placeholder={t('auth:signup.phonePlaceholder')}
                       type="tel"
                       required
                       value={state.phoneNumber}
@@ -280,20 +282,20 @@ const Signup = () => {
                     />
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Enter Nigerian phone number with country code (+234) or starting with 0
+                    {t('auth:signup.phoneHelper')}
                   </p>
                 </div>
 
                 {/* Password Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Password
+                    {t('auth:signup.passwordLabel')}
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       id="password"
-                      placeholder="Create a strong password"
+                      placeholder={t('auth:signup.passwordPlaceholder')}
                       type={showPassword ? "text" : "password"}
                       required
                       value={state.password}
@@ -320,20 +322,20 @@ const Signup = () => {
                     </Button>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Password must be at least 8 characters long
+                    {t('auth:signup.passwordHelper')}
                   </p>
                 </div>
 
                 {/* Confirm Password Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Confirm Password
+                    {t('auth:signup.confirmPasswordLabel')}
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       id="confirmPassword"
-                      placeholder="Confirm your password"
+                      placeholder={t('auth:signup.confirmPasswordPlaceholder')}
                       type={showPassword ? "text" : "password"}
                       required
                       value={state.confirmPassword}
@@ -351,7 +353,7 @@ const Signup = () => {
                 {/* Gender Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Gender
+                    {t('auth:signup.genderLabel')}
                   </label>
                   <Select
                     value={state.gender}
@@ -363,11 +365,11 @@ const Signup = () => {
                     }
                   >
                     <SelectTrigger className="h-12 bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 focus:border-purple-500 dark:focus:border-purple-400">
-                      <SelectValue placeholder="Select your gender" />
+                      <SelectValue placeholder={t('auth:signup.genderPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="male">{t('auth:signup.male')}</SelectItem>
+                      <SelectItem value="female">{t('auth:signup.female')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -375,7 +377,7 @@ const Signup = () => {
                 {/* Age Range Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Age Range
+                    {t('auth:signup.ageRangeLabel')}
                   </label>
                   <Select
                     value={state.ageRange}
@@ -387,12 +389,12 @@ const Signup = () => {
                     }
                   >
                     <SelectTrigger className="h-12 bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 focus:border-purple-500 dark:focus:border-purple-400">
-                      <SelectValue placeholder="Select your age range" />
+                      <SelectValue placeholder={t('auth:signup.ageRangePlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="18-35">18-35</SelectItem>
-                      <SelectItem value="35-40">35-40</SelectItem>
-                      <SelectItem value="40 above">40 above</SelectItem>
+                      <SelectItem value="18-35">{t('auth:signup.age1835')}</SelectItem>
+                      <SelectItem value="35-40">{t('auth:signup.age3540')}</SelectItem>
+                      <SelectItem value="40 above">{t('auth:signup.age40Plus')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -400,7 +402,7 @@ const Signup = () => {
                 {/* Registered By Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Registered By
+                    {t('auth:signup.registeredByLabel')}
                   </label>
                   <Select
                     value={state.registeredBy}
@@ -412,10 +414,10 @@ const Signup = () => {
                     }
                   >
                     <SelectTrigger className="h-12 bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 focus:border-purple-500 dark:focus:border-purple-400">
-                      <SelectValue placeholder="Select who registered you" />
+                      <SelectValue placeholder={t('auth:signup.registeredByPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="none">None (Self Registration)</SelectItem>
+                      <SelectItem value="none">{t('auth:signup.selfRegistration')}</SelectItem>
                       {agents?.map((agent) => (
                         <SelectItem key={agent.id} value={agent.id}>
                           {agent.name || agent.email}
@@ -429,7 +431,7 @@ const Signup = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Sign up as an Agent
+                      {t('auth:signup.agentToggleLabel')}
                     </label>
                     <Switch
                       checked={state.isAgent}
@@ -442,7 +444,7 @@ const Signup = () => {
                     />
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Enable this if you want to sign up as a SheBalance agent
+                    {t('auth:signup.agentToggleHelper')}
                   </p>
                 </div>
 
@@ -450,13 +452,13 @@ const Signup = () => {
                 {state.isAgent && (
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Agent Name
+                      {t('auth:signup.agentNameLabel')}
                     </label>
                     <div className="relative">
                       <UserPlus className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                       <Input
                         id="name"
-                        placeholder="Enter your unique agent name"
+                        placeholder={t('auth:signup.agentNamePlaceholder')}
                         type="text"
                         required={state.isAgent}
                         value={state.name}
@@ -470,26 +472,26 @@ const Signup = () => {
                       />
                     </div>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      This name must be unique and will be used to identify you as an agent
+                      {t('auth:signup.agentNameHelper')}
                     </p>
                   </div>
                 )}
 
 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4">
   <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-    By creating an account, you agree to our{" "}
+    {t('auth:signup.agreeText')}{" "}
     <a
       href="/termsandprivacy"
       className="text-green-600 dark:text-green-400 hover:underline font-medium"
     >
-      Terms of Service
+      {t('auth:signup.termsOfService')}
     </a>{" "}
-    and{" "}
+    {t('auth:signup.and')}{" "}
     <a
       href="/termsandprivacy"
       className="text-green-600 dark:text-green-400 hover:underline font-medium"
     >
-      Privacy Policy
+      {t('auth:signup.privacyPolicy')}
     </a>
   </p>
 </div>
@@ -506,11 +508,11 @@ const Signup = () => {
                   {state.loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating account...
+                      {t('auth:signup.creatingAccount')}
                     </>
                   ) : (
                     <>
-                      Create Account
+                      {t('auth:signup.signUpButton')}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </>
                   )}
@@ -524,12 +526,12 @@ const Signup = () => {
           {/* Bottom Links */}
           <div className="mt-8 text-center space-y-4">
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Already have an account?{" "}
+              {t('auth:signup.haveAccount')}{" "}
               <button
                 onClick={() => navigate("/login")}
                 className="text-purple-600 dark:text-green-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
               >
-                Sign in here
+                {t('auth:signup.signInHere')}
               </button>
             </p>
             
@@ -539,7 +541,7 @@ const Signup = () => {
                 className="flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
               >
                 <HelpCircle className="mr-2 h-4 w-4" />
-                Need help?
+                {t('auth:signup.needHelp')}
               </button>
             </div>
           </div>
