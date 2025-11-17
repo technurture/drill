@@ -42,8 +42,10 @@ import {
   GraduationCap
 } from 'lucide-react';
 import { useHelpCategories, useHelpArticles } from '@/integrations/supabase/hooks/admin';
+import { useTranslation } from 'react-i18next';
 
 const Help = () => {
+  const { t } = useTranslation('pages');
   const [activeTab, setActiveTab] = useState('user-manual');
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -65,7 +67,7 @@ const Help = () => {
   });
 
   const languages = [
-    { value: 'all', label: 'All Languages' },
+    { value: 'all', label: t('help.allLanguages') },
     { value: 'english', label: 'English' },
     { value: 'yoruba', label: 'Yoruba' },
     { value: 'hausa', label: 'Hausa' },
@@ -466,10 +468,10 @@ const Help = () => {
         <div className="text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <HelpCircle className="w-8 h-8 text-green-600" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Help Center</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('help.title')}</h1>
           </div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Find answers to your questions and learn how to use SheBalance effectively
+            {t('help.description')}
           </p>
         </div>
 
@@ -481,24 +483,24 @@ const Help = () => {
               className="flex items-center gap-2 py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-green-600 dark:data-[state=active]:text-green-400"
             >
               <BookOpen className="w-4 h-4" />
-              <span className="hidden sm:inline">User Manual</span>
-              <span className="sm:hidden">Manual</span>
+              <span className="hidden sm:inline">{t('help.userManual')}</span>
+              <span className="sm:hidden">{t('help.manual')}</span>
             </TabsTrigger>
             <TabsTrigger 
               value="learn-bookkeeping" 
               className="flex items-center gap-2 py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-indigo-600 dark:data-[state=active]:text-indigo-400"
             >
               <GraduationCap className="w-4 h-4" />
-              <span className="hidden sm:inline">Learn Bookkeeping</span>
-              <span className="sm:hidden">Learn</span>
+              <span className="hidden sm:inline">{t('help.learnBookkeeping')}</span>
+              <span className="sm:hidden">{t('help.learn')}</span>
             </TabsTrigger>
             <TabsTrigger 
               value="from-admin" 
               className="flex items-center gap-2 py-3 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400"
             >
               <MessageSquare className="w-4 h-4" />
-              <span className="hidden sm:inline">From Admin to You</span>
-              <span className="sm:hidden">Admin</span>
+              <span className="hidden sm:inline">{t('help.fromAdmin')}</span>
+              <span className="sm:hidden">{t('help.admin')}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -509,10 +511,10 @@ const Help = () => {
           <CardHeader className="p-3 md:p-6">
             <CardTitle className="flex items-center gap-2 text-green-600 dark:text-green-400">
               <BookOpen className="w-6 h-6" />
-              User Manual
+              {t('help.userManual')}
             </CardTitle>
             <p className="text-gray-600 dark:text-gray-400">
-              Complete guide to using SheBalance features and functionality
+              {t('help.userManualDescription')}
             </p>
           </CardHeader>
           <CardContent className="space-y-4 p-3 md:p-6">
@@ -580,7 +582,7 @@ const Help = () => {
                                     )}
                                   </div>
                                 </div>
-                                <p className="text-xs text-gray-500 mt-2">Video {idx + 1}</p>
+                                <p className="text-xs text-gray-500 mt-2">{t('help.video')} {idx + 1}</p>
                               </div>
                             ))}
                           </div>
@@ -620,12 +622,12 @@ const Help = () => {
                                 )}
                               </div>
                             </div>
-                            <p className="text-xs text-gray-500 mt-2">Video</p>
+                            <p className="text-xs text-gray-500 mt-2">{t('help.video')}</p>
                           </div>
                         )}
                         
                         <div className="space-y-2">
-                          <h5 className="font-medium text-gray-900 dark:text-white">Steps:</h5>
+                          <h5 className="font-medium text-gray-900 dark:text-white">{t('help.steps')}</h5>
                           <ol className="list-decimal list-inside space-y-1 text-gray-600 dark:text-gray-400">
                             {item.steps.map((step, stepIndex) => (
                               <li key={stepIndex}>{step}</li>
@@ -652,9 +654,9 @@ const Help = () => {
                 <Headphones className="w-6 h-6" />
               </div>
               <div>
-                <h2 className="text-xl font-bold">Audio Learning Center</h2>
+                <h2 className="text-xl font-bold">{t('help.audioLearningCenter')}</h2>
                 <p className="text-sm font-normal text-gray-600 dark:text-gray-400 mt-1">
-                  Listen and learn bookkeeping in your preferred language
+                  {t('help.audioLearningDescription')}
                 </p>
               </div>
             </CardTitle>
@@ -676,9 +678,9 @@ const Help = () => {
                       <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                         <Volume2 className="w-3 h-3 mr-1" />
                         {tutorial.available ? (
-                          audioDurations[tutorial.id] ? formatTime(audioDurations[tutorial.id]) : 'Loading...'
+                          audioDurations[tutorial.id] ? formatTime(audioDurations[tutorial.id]) : t('help.loading')
                         ) : (
-                          'Coming Soon'
+                          t('help.comingSoon')
                         )}
                       </Badge>
                     </div>
@@ -777,11 +779,11 @@ const Help = () => {
                             <div className="flex items-center gap-2">
                               <div className={`w-2 h-2 rounded-full ${currentPlayingAudio === tutorial.id ? 'bg-green-500 animate-pulse' : 'bg-gray-300 dark:bg-gray-600'}`}></div>
                               <span className="text-xs text-gray-500 dark:text-gray-400">
-                                {currentPlayingAudio === tutorial.id ? 'Playing' : 'Ready to play'}
+                                {currentPlayingAudio === tutorial.id ? t('help.playing') : t('help.readyToPlay')}
                               </span>
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                              Audio Tutorial
+                              {t('help.audioTutorial')}
                             </div>
                           </div>
                         </>
@@ -841,11 +843,11 @@ const Help = () => {
                           <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-700">
                             <div className="flex items-center gap-2">
                               <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                                Coming Soon
+                                {t('help.comingSoon')}
                               </Badge>
                             </div>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                              In Progress
+                              {t('help.inProgress')}
                             </div>
                           </div>
                         </>
@@ -864,24 +866,23 @@ const Help = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">
-                    Learn Bookkeeping in Your Language
+                    {t('help.learnInYourLanguage')}
                   </h4>
                   <p className="text-sm text-green-700 dark:text-green-300 mb-3">
-                    Our audio tutorials are designed to help you understand bookkeeping concepts in your preferred language. 
-                    Each tutorial covers essential topics like recording transactions, managing accounts, and maintaining accurate financial records.
+                    {t('help.audioTutorialsDescription')}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="outline" className="text-green-600 border-green-200 dark:text-green-400 dark:border-green-600">
                       <Headphones className="w-3 h-3 mr-1" />
-                      High Quality Audio
+                      {t('help.highQualityAudio')}
                     </Badge>
                     <Badge variant="outline" className="text-green-600 border-green-200 dark:text-green-400 dark:border-green-600">
                       <Languages className="w-3 h-3 mr-1" />
-                      Multiple Languages
+                      {t('help.multipleLanguages')}
                     </Badge>
                     <Badge variant="outline" className="text-green-600 border-green-200 dark:text-green-400 dark:border-green-600">
                       <Download className="w-3 h-3 mr-1" />
-                      Download Available
+                      {t('help.downloadAvailable')}
                     </Badge>
                   </div>
                 </div>
@@ -906,7 +907,7 @@ const Help = () => {
                   <div className="text-center text-white">
                     <FileText className="w-16 h-16 mx-auto mb-2 opacity-90" />
                     <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
-                      Bookkeeping For You - PDF Document
+                      {t('help.pdfDocumentTitle')}
                     </Badge>
                   </div>
                 </div>
@@ -925,7 +926,7 @@ const Help = () => {
                       className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
                     >
                       <Eye className="w-4 h-4 mr-2" />
-                      View Guide
+                      {t('help.viewGuide')}
                     </Button>
                   </a>
                   <a 
@@ -938,7 +939,7 @@ const Help = () => {
                       className="w-full border-green-500 text-green-600 hover:bg-green-50 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      Download
+                      {t('help.download')}
                     </Button>
                   </a>
                 </div>
@@ -947,44 +948,44 @@ const Help = () => {
                 <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                     <Star className="w-4 h-4 text-yellow-500" />
-                    What's Inside
+                    {t('help.whatsInside')}
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Introduction to Bookkeeping</span>
+                      <span>{t('help.pdfContent.introToBookkeeping')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>How to Separate Business and Personal Money</span>
+                      <span>{t('help.pdfContent.separateMoney')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Income and Expenditure</span>
+                      <span>{t('help.pdfContent.incomeExpenditure')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Understanding Money In and Money Out</span>
+                      <span>{t('help.pdfContent.moneyInOut')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Contribution As a Strategy to Raise Money</span>
+                      <span>{t('help.pdfContent.contributionStrategy')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Daily Record Keeping</span>
+                      <span>{t('help.pdfContent.dailyRecordKeeping')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Accessing Small Loans and Managing Debt Wisely</span>
+                      <span>{t('help.pdfContent.loansDebt')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>Growing Your Business with Good Bookkeeping</span>
+                      <span>{t('help.pdfContent.growingBusiness')}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                      <span>And many more practical topics...</span>
+                      <span>{t('help.moreTopics')}</span>
                     </div>
                   </div>
                 </div>
@@ -1004,7 +1005,7 @@ const Help = () => {
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
-                    placeholder="Search help articles..."
+                    placeholder={t('help.searchHelpArticles')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10"
@@ -1015,10 +1016,10 @@ const Help = () => {
                 <div className="flex-1">
                   <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Category" />
+                      <SelectValue placeholder={t('help.category')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
+                      <SelectItem value="all">{t('help.allCategories')}</SelectItem>
                       {categories?.map((category) => (
                         <SelectItem key={category.id} value={category.id}>
                           {category.name}
@@ -1030,7 +1031,7 @@ const Help = () => {
                 <div className="flex-1">
                   <Select value={languageFilter} onValueChange={setLanguageFilter}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Language" />
+                      <SelectValue placeholder={t('help.language')} />
                     </SelectTrigger>
                     <SelectContent>
                       {languages.map((lang) => (
@@ -1051,7 +1052,7 @@ const Help = () => {
           <div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <Star className="w-5 h-5 text-yellow-500" />
-              Featured Articles
+              {t('help.popularArticles')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {featuredArticles.map((article) => (
@@ -1063,7 +1064,7 @@ const Help = () => {
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-3">
                       <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                        {article.category?.name || 'Uncategorized'}
+                        {article.category?.name || t('help.uncategorized')}
                       </Badge>
                       <Star className="w-4 h-4 text-yellow-500" />
                     </div>
@@ -1094,15 +1095,15 @@ const Help = () => {
         <div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <BookOpen className="w-5 h-5" />
-            All Help Articles
+            {t('help.allHelpArticles')}
           </h2>
           
           {regularArticles.length === 0 ? (
             <div className="text-center py-12">
               <HelpCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No help articles found</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('help.noHelpArticlesFound')}</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Try adjusting your search or filters
+                {t('help.adjustSearchFilters')}
               </p>
             </div>
           ) : (
@@ -1116,7 +1117,7 @@ const Help = () => {
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-3">
                       <Badge variant="outline">
-                        {article.category?.name || 'Uncategorized'}
+                        {article.category?.name || t('help.uncategorized')}
                       </Badge>
                       <Badge variant="secondary" className="capitalize">
                         {article.language}
@@ -1162,7 +1163,7 @@ const Help = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Badge variant="outline">
-                      {selectedArticle.category?.name || 'Uncategorized'}
+                      {selectedArticle.category?.name || t('help.uncategorized')}
                     </Badge>
                     <Badge variant="secondary" className="capitalize">
                       {selectedArticle.language}
@@ -1170,7 +1171,7 @@ const Help = () => {
                     {selectedArticle.featured && (
                       <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
                         <Star className="w-3 h-3 mr-1" />
-                        Featured
+                        {t('help.featured')}
                       </Badge>
                     )}
                   </div>
@@ -1181,7 +1182,7 @@ const Help = () => {
                     </div>
                     <div className="flex items-center gap-1">
                       <Eye className="w-4 h-4" />
-                      <span>{selectedArticle.views_count} views</span>
+                      <span>{selectedArticle.views_count} {t('help.viewsCount')}</span>
                     </div>
                   </div>
                 </div>

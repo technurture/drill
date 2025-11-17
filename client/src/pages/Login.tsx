@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { supabase } from "../integrations/supabase/supabase";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -45,6 +46,7 @@ const Login = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useTranslation('auth');
 
 
 
@@ -106,10 +108,10 @@ const Login = () => {
                 <img src="/Shebanlace_favicon.png" alt="SheBalance" className="w-8 h-8" />
               </div>
               <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-                Welcome Back
+                {t('login.title')}
               </CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">
-                Sign in to your SheBalance account
+                {t('login.subtitle')}
               </CardDescription>
             </CardHeader>
 
@@ -118,13 +120,13 @@ const Login = () => {
                 {/* Email Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Email Address
+                    {t('login.emailLabel')}
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       id="email"
-                      placeholder="Enter your email"
+                      placeholder={t('login.emailPlaceholder')}
                       type="email"
                       required
                       value={email}
@@ -137,13 +139,13 @@ const Login = () => {
                 {/* Password Field */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Password
+                    {t('login.passwordLabel')}
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       id="password"
-                      placeholder="Enter your password"
+                      placeholder={t('login.passwordPlaceholder')}
                       type={showPassword ? "text" : "password"}
                       required
                       value={password}
@@ -178,7 +180,7 @@ const Login = () => {
                     {isLoading.passwordReset && (
                       <Loader2 className="mr-2 h-3 w-3 animate-spin" />
                     )}
-                    Forgot password?
+                    {t('login.forgotPassword')}
                   </Button>
                 </div>
               </CardContent>
@@ -193,11 +195,11 @@ const Login = () => {
                   {isLoading.normal ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Signing in...
+                      {t('login.signingIn')}
                     </>
                   ) : (
                     <>
-                      Sign In
+                      {t('login.signInButton')}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </>
                   )}
@@ -213,12 +215,12 @@ const Login = () => {
           {/* Bottom Links */}
           <div className="mt-8 text-center space-y-4">
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Don't have an account?{" "}
+              {t('login.noAccount')}{" "}
               <button
                 onClick={() => navigate("/signup")}
                 className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
               >
-                Sign up for free
+                {t('login.signUpLink')}
               </button>
             </p>
             
