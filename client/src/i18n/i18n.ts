@@ -29,6 +29,20 @@ import haNotifications from './resources/ha/notifications.json';
 import pidginNavigation from './resources/pidgin/navigation.json';
 import pidginNotifications from './resources/pidgin/notifications.json';
 
+// Import Hausa translations
+import haCommon from './resources/ha/common.json';
+import haAuth from './resources/ha/auth.json';
+import haModals from './resources/ha/modals.json';
+import haPages from './resources/ha/pages.json';
+import haAdmin from './resources/ha/admin.json';
+
+// Import Pidgin translations
+import pidginCommon from './resources/pidgin/common.json';
+import pidginAuth from './resources/pidgin/auth.json';
+import pidginModals from './resources/pidgin/modals.json';
+import pidginPages from './resources/pidgin/pages.json';
+import pidginAdmin from './resources/pidgin/admin.json';
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -66,21 +80,21 @@ i18n
       },
       ha: { 
         subheadings: haSubheadings,
-        common: enCommon,
-        auth: enAuth,
-        modals: enModals,
-        pages: enPages,
-        admin: enAdmin,
+        common: haCommon,
+        auth: haAuth,
+        modals: haModals,
+        pages: haPages,
+        admin: haAdmin,
         navigation: haNavigation,
         notifications: haNotifications
       },
       pidgin: { 
         subheadings: pidginSubheadings,
-        common: enCommon,
-        auth: enAuth,
-        modals: enModals,
-        pages: enPages,
-        admin: enAdmin,
+        common: pidginCommon,
+        auth: pidginAuth,
+        modals: pidginModals,
+        pages: pidginPages,
+        admin: pidginAdmin,
         navigation: pidginNavigation,
         notifications: pidginNotifications
       },

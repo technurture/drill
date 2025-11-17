@@ -1,0 +1,85 @@
+{
+  "deleteNote": {
+    "title": "You sure?",
+    "message": "Dis action no fit reverse. E go delete the note forever.",
+    "cancel": "Cancel",
+    "delete": "Delete Note"
+  },
+  "deleteSalesRep": {
+    "title": "You sure?",
+    "message": "Dis action no fit reverse. E go remove dis sales rep forever.",
+    "cancel": "Cancel",
+    "delete": "Delete Sales Rep"
+  },
+  "logout": {
+    "title": "Sign Out",
+    "message": "You sure say you wan sign out from your account?",
+    "cancel": "Cancel",
+    "signOut": "Sign Out"
+  },
+  "deleteProduct": {
+    "title": "Delete Product",
+    "message": "You sure say you wan delete dis product? Dis action no fit reverse.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "deleteSale": {
+    "title": "Delete Sale",
+    "message": "You sure say you wan delete dis sale? Dis action no fit reverse.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "deleteStore": {
+    "title": "Delete Shop",
+    "message": "You sure say you wan delete dis shop? E go delete all products and sales wey connect to dis shop.",
+    "cancel": "Cancel",
+    "delete": "Delete Shop"
+  },
+  "withdrawal": {
+    "title": "Withdraw Your Earnings",
+    "description": "Put your withdrawal details for down",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "Put amount",
+    "accountLabel": "Account Number",
+    "accountPlaceholder": "Put account number",
+    "bankLabel": "Bank Name",
+    "bankPlaceholder": "Choose bank",
+    "pleaseNote": "Abeg Take Note",
+    "processingNote": "Dem dey process withdrawals within 24-48 hours. Make sure say your account details correct.",
+    "cancel": "Cancel",
+    "withdraw": "Withdraw"
+  },
+  "addProduct": {
+    "title": "Add Product",
+    "editTitle": "Edit Product",
+    "productName": "Product Name",
+    "productNamePlaceholder": "Put product name",
+    "unitPrice": "Unit Price",
+    "unitPricePlaceholder": "Put unit price",
+    "quantity": "Quantity",
+    "quantityPlaceholder": "Put quantity",
+    "lowStockThreshold": "Low Stock Threshold",
+    "lowStockPlaceholder": "Put threshold",
+    "expiryDate": "Expiry Date",
+    "expiryDatePlaceholder": "Choose expiry date",
+    "cancel": "Cancel",
+    "save": "Save Product",
+    "add": "Add Product"
+  },
+  "addSale": {
+    "title": "Add Sale",
+    "selectProducts": "Choose Products",
+    "paymentMethod": "Payment Method",
+    "cash": "Cash",
+    "credit": "Credit",
+    "bankTransfer": "Bank Transfer",
+    "pos": "POS",
+    "salesRep": "Sales Representative",
+    "selectSalesRep": "Choose sales rep",
+    "note": "Note (Optional)",
+    "notePlaceholder": "Add note",
+    "total": "Total",
+    "cancel": "Cancel",
+    "completeSale": "Complete Sale"
+  }
+}

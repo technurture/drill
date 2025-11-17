@@ -1,0 +1,85 @@
+{
+  "deleteNote": {
+    "title": "Kuna tabbata?",
+    "message": "Ba za a iya soke wannan aikin ba. Wannan zai share bayanin kula har abada.",
+    "cancel": "Soke",
+    "delete": "Share Bayanin Kula"
+  },
+  "deleteSalesRep": {
+    "title": "Kuna tabbata?",
+    "message": "Ba za a iya soke wannan aikin ba. Wannan zai cire wannan wakilin tallace-tallace har abada.",
+    "cancel": "Soke",
+    "delete": "Share Wakilin Tallace-tallace"
+  },
+  "logout": {
+    "title": "Fita",
+    "message": "Kuna tabbatar kuna son fita daga asusun ku?",
+    "cancel": "Soke",
+    "signOut": "Fita"
+  },
+  "deleteProduct": {
+    "title": "Share Kaya",
+    "message": "Kuna tabbatar kuna son share wannan kaya? Ba za a iya soke wannan aikin ba.",
+    "cancel": "Soke",
+    "delete": "Share"
+  },
+  "deleteSale": {
+    "title": "Share Tallace-tallace",
+    "message": "Kuna tabbatar kuna son share wannan tallace-tallace? Ba za a iya soke wannan aikin ba.",
+    "cancel": "Soke",
+    "delete": "Share"
+  },
+  "deleteStore": {
+    "title": "Share Shago",
+    "message": "Kuna tabbatar kuna son share wannan shago? Wannan zai share duk kayayyaki da tallace-tallace da ke da alaƙa da wannan shago.",
+    "cancel": "Soke",
+    "delete": "Share Shago"
+  },
+  "withdrawal": {
+    "title": "Cire Kudaden Da Kuka Samu",
+    "description": "Shigar da bayanan cirewa a ƙasa",
+    "amountLabel": "Adadi",
+    "amountPlaceholder": "Shigar da adadi",
+    "accountLabel": "Lambar Asusu",
+    "accountPlaceholder": "Shigar da lambar asusu",
+    "bankLabel": "Sunan Banki",
+    "bankPlaceholder": "Zaɓi banki",
+    "pleaseNote": "Don Allah Lura",
+    "processingNote": "Ana aiwatar da cirewa a cikin sa'o'i 24-48. Tabbatar cewa bayanan asusun ku daidai ne.",
+    "cancel": "Soke",
+    "withdraw": "Cire"
+  },
+  "addProduct": {
+    "title": "Ƙara Kaya",
+    "editTitle": "Gyara Kaya",
+    "productName": "Sunan Kaya",
+    "productNamePlaceholder": "Shigar da sunan kaya",
+    "unitPrice": "Farashin Ɗaya",
+    "unitPricePlaceholder": "Shigar da farashin ɗaya",
+    "quantity": "Yawa",
+    "quantityPlaceholder": "Shigar da yawa",
+    "lowStockThreshold": "Iyakar Kayan da ya Ragu",
+    "lowStockPlaceholder": "Shigar da iyaka",
+    "expiryDate": "Ranar Ƙarewa",
+    "expiryDatePlaceholder": "Zaɓi ranar ƙarewa",
+    "cancel": "Soke",
+    "save": "Ajiye Kaya",
+    "add": "Ƙara Kaya"
+  },
+  "addSale": {
+    "title": "Ƙara Tallace-tallace",
+    "selectProducts": "Zaɓi Kayayyaki",
+    "paymentMethod": "Hanyar Biya",
+    "cash": "Kuɗi",
+    "credit": "Bashi",
+    "bankTransfer": "Canja Wurin Banki",
+    "pos": "POS",
+    "salesRep": "Wakilin Tallace-tallace",
+    "selectSalesRep": "Zaɓi wakilin tallace-tallace",
+    "note": "Bayanin Kula (Na Zaɓi)",
+    "notePlaceholder": "Ƙara bayanin kula",
+    "total": "Jimillar",
+    "cancel": "Soke",
+    "completeSale": "Kammala Tallace-tallace"
+  }
+}
