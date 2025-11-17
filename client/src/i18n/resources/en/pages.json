@@ -23,6 +23,7 @@
   "inventory": {
     "title": "Inventory / List of Stocks",
     "subtitle": "Manage your product inventory",
+    "inventoryManagement": "Inventory Management",
     "filters": "Filters",
     "filterInventory": "Filter Inventory",
     "searchProducts": "Search Products",
@@ -51,6 +52,7 @@
   "sales": {
     "title": "Sales",
     "subtitle": "Track and manage your sales",
+    "salesOverview": "Sales Overview",
     "addSale": "Add Sale",
     "totalSales": "Total Sales",
     "todaySales": "Today's Sales",
@@ -70,6 +72,7 @@
   "finance": {
     "title": "Finance",
     "subtitle": "Manage your income and expenses",
+    "financeManagement": "Finance Management",
     "overview": "Financial Overview",
     "totalIncome": "Total Income",
     "totalExpenses": "Total Expenses",
@@ -309,5 +312,7 @@
     "updatePassword": "Update Password",
     "deleteAccount": "Delete Account",
     "deleteAccountWarning": "This action cannot be undone"
-  }
+  },
+  "notesAlerts": "Notes & Alerts",
+  "pointOfSale": "Point of Sale"
 }

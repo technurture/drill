@@ -12,12 +12,14 @@ import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useTheme } from "@/contexts/ThemeContext";
 import { ThemeSelector } from "./ThemeSelector";
 import { useCurrentUser } from "@/integrations/supabase/hooks/users";
+import { useTranslation } from "react-i18next";
 
 interface TopBarProps {
   onMenuClick?: () => void;
 }
 
 const TopBar = ({ onMenuClick }: TopBarProps) => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const { user } = useAuth();
   const { data: currentUser } = useCurrentUser(user?.id || "");
@@ -95,13 +97,13 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
 
   const getPageTitle = () => {
     const path = route.pathname;
-    if (path.includes('/dashboard/inventory')) return 'Inventory Management';
-    if (path.includes('/dashboard/sales')) return 'Sales Overview';
-    if (path.includes('/dashboard/finance')) return 'Finance Management';
-    if (path.includes('/dashboard/notes')) return 'Notes & Alerts';
-    if (path.includes('/dashboard/settings')) return 'Settings';
-    if (path.includes('/add-sales')) return 'Point of Sale';
-    if (path === '/dashboard') return 'Dashboard';
+    if (path.includes('/dashboard/inventory')) return t('pages:inventory.inventoryManagement');
+    if (path.includes('/dashboard/sales')) return t('pages:sales.salesOverview');
+    if (path.includes('/dashboard/finance')) return t('pages:finance.financeManagement');
+    if (path.includes('/dashboard/notes')) return t('pages:notesAlerts');
+    if (path.includes('/dashboard/settings')) return t('pages:settings.title');
+    if (path.includes('/add-sales')) return t('pages:pointOfSale');
+    if (path === '/dashboard') return t('pages:dashboard.title');
     return 'SheBalance';
   };
 
@@ -159,7 +161,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
           {currentUser?.is_agent && (
             <div className="flex items-center space-x-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
               <UserPlus className="h-3 w-3" />
-              <span>Agent</span>
+              <span>{t('common:agent')}</span>
             </div>
           )}
 
