@@ -24,6 +24,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const updateLanguageMutation = useUpdateUserLanguage();
   const [isLoading, setIsLoading] = useState(false);
 
+  const getUserStorageKey = (userId?: string) => {
+    return userId ? `${LANGUAGE_STORAGE_KEY}-${userId}` : LANGUAGE_STORAGE_KEY;
+  };
+
   const [language, setLanguageState] = useState<LanguageCode>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -41,10 +45,32 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [language, i18n]);
 
   useEffect(() => {
-    if (user?.user_metadata?.language) {
-      const userLang = user.user_metadata.language as LanguageCode;
-      if (userLang in SUPPORTED_LANGUAGES && userLang !== language) {
-        setLanguageState(userLang);
+    if (user?.id) {
+      const userStorageKey = getUserStorageKey(user.id);
+      
+      if (user.user_metadata?.language) {
+        const userLang = user.user_metadata.language as LanguageCode;
+        if (userLang in SUPPORTED_LANGUAGES) {
+          setLanguageState(userLang);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(userStorageKey, userLang);
+          }
+          return;
+        }
+      }
+      
+      if (typeof window !== 'undefined') {
+        const userStored = localStorage.getItem(userStorageKey);
+        if (userStored && userStored in SUPPORTED_LANGUAGES && userStored !== language) {
+          setLanguageState(userStored as LanguageCode);
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined') {
+        const guestStored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+        if (guestStored && guestStored in SUPPORTED_LANGUAGES && guestStored !== language) {
+          setLanguageState(guestStored as LanguageCode);
+        }
       }
     }
   }, [user]);
@@ -55,7 +81,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       
       setLanguageState(newLang);
       if (typeof window !== 'undefined') {
-        localStorage.setItem(LANGUAGE_STORAGE_KEY, newLang);
+        const storageKey = getUserStorageKey(user?.id);
+        localStorage.setItem(storageKey, newLang);
       }
       await i18n.changeLanguage(newLang);
 
