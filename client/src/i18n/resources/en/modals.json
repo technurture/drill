@@ -1,0 +1,85 @@
+{
+  "deleteNote": {
+    "title": "Are you sure?",
+    "message": "This action cannot be undone. This will permanently delete the note.",
+    "cancel": "Cancel",
+    "delete": "Delete Note"
+  },
+  "deleteSalesRep": {
+    "title": "Are you sure?",
+    "message": "This action cannot be undone. This will permanently remove this sales representative.",
+    "cancel": "Cancel",
+    "delete": "Delete Sales Rep"
+  },
+  "logout": {
+    "title": "Sign Out",
+    "message": "Are you sure you want to sign out from your account?",
+    "cancel": "Cancel",
+    "signOut": "Sign Out"
+  },
+  "deleteProduct": {
+    "title": "Delete Product",
+    "message": "Are you sure you want to delete this product? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "deleteSale": {
+    "title": "Delete Sale",
+    "message": "Are you sure you want to delete this sale? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "deleteStore": {
+    "title": "Delete Store",
+    "message": "Are you sure you want to delete this store? This will delete all products and sales associated with this store.",
+    "cancel": "Cancel",
+    "delete": "Delete Store"
+  },
+  "withdrawal": {
+    "title": "Withdraw Your Earnings",
+    "description": "Enter your withdrawal details below",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "Enter amount",
+    "accountLabel": "Account Number",
+    "accountPlaceholder": "Enter account number",
+    "bankLabel": "Bank Name",
+    "bankPlaceholder": "Select bank",
+    "pleaseNote": "Please Note",
+    "processingNote": "Withdrawals are processed within 24-48 hours. Ensure your account details are correct.",
+    "cancel": "Cancel",
+    "withdraw": "Withdraw"
+  },
+  "addProduct": {
+    "title": "Add Product",
+    "editTitle": "Edit Product",
+    "productName": "Product Name",
+    "productNamePlaceholder": "Enter product name",
+    "unitPrice": "Unit Price",
+    "unitPricePlaceholder": "Enter unit price",
+    "quantity": "Quantity",
+    "quantityPlaceholder": "Enter quantity",
+    "lowStockThreshold": "Low Stock Threshold",
+    "lowStockPlaceholder": "Enter threshold",
+    "expiryDate": "Expiry Date",
+    "expiryDatePlaceholder": "Select expiry date",
+    "cancel": "Cancel",
+    "save": "Save Product",
+    "add": "Add Product"
+  },
+  "addSale": {
+    "title": "Add Sale",
+    "selectProducts": "Select Products",
+    "paymentMethod": "Payment Method",
+    "cash": "Cash",
+    "credit": "Credit",
+    "bankTransfer": "Bank Transfer",
+    "pos": "POS",
+    "salesRep": "Sales Representative",
+    "selectSalesRep": "Select sales rep",
+    "note": "Note (Optional)",
+    "notePlaceholder": "Add a note",
+    "total": "Total",
+    "cancel": "Cancel",
+    "completeSale": "Complete Sale"
+  }
+}
