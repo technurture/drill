@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -13,7 +14,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { SUPPORTED_LANGUAGES, LANGUAGE_OPTIONS } from '@/i18n/constants';
 
 const LanguageSelector = () => {
-  const { language, setLanguage, tSubheading, isLoading } = useLanguage();
+  const { t } = useTranslation('pages');
+  const { language, setLanguage, isLoading } = useLanguage();
 
   const handleLanguageChange = async (value: string) => {
     await setLanguage(value as any);
@@ -24,22 +26,22 @@ const LanguageSelector = () => {
       <CardHeader>
         <div className="flex items-center gap-2">
           <Globe className="w-5 h-5 text-green-600" />
-          <CardTitle>{tSubheading('settings.language')}</CardTitle>
+          <CardTitle>{t('settings.language')}</CardTitle>
         </div>
         <CardDescription>
-          Choose your preferred language for subheadings and section titles
+          {t('settings.languageDescription')}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="language-select">Language</Label>
+          <Label htmlFor="language-select">{t('settings.language')}</Label>
           <Select
             value={language}
             onValueChange={handleLanguageChange}
             disabled={isLoading}
           >
             <SelectTrigger id="language-select" className="w-full">
-              <SelectValue placeholder="Select language" />
+              <SelectValue placeholder={t('settings.selectLanguage')} />
             </SelectTrigger>
             <SelectContent>
               {LANGUAGE_OPTIONS.map((option) => (
@@ -52,7 +54,7 @@ const LanguageSelector = () => {
         </div>
 
         <div className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
-          <p>Available languages:</p>
+          <p>{t('settings.availableLanguages')}</p>
           <ul className="list-disc list-inside">
             {Object.values(SUPPORTED_LANGUAGES).map((lang) => (
               <li key={lang.code}>{lang.nativeName} ({lang.name})</li>

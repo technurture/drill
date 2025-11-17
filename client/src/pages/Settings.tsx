@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -45,6 +46,7 @@ import {
 import { format } from "date-fns";
 
 const Settings = () => {
+  const { t } = useTranslation('pages');
   const theStore = useContext(StoreContext);
   const { toast } = useToast();
 
@@ -105,13 +107,13 @@ const Settings = () => {
       setIsEditingName(false);
       setNewStoreName("");
       toast({
-        title: "Store name updated successfully",
-        description: "Store name updated successfully",
+        title: t('settings.storeNameUpdated'),
+        description: t('settings.storeNameUpdated'),
       });
     } catch (error) {
       toast({
-        title: "Failed to update store name",
-        description: "Failed to update store name",
+        title: t('settings.storeNameUpdateFailed'),
+        description: t('settings.storeNameUpdateFailed'),
         variant: "destructive",
       });
     }
@@ -130,13 +132,13 @@ const Settings = () => {
       setIsEditingLocation(false);
       setSelectedMarket("");
       toast({
-        title: "Store location updated successfully",
-        description: "Store location updated successfully",
+        title: t('settings.storeLocationUpdated'),
+        description: t('settings.storeLocationUpdated'),
       });
     } catch (error) {
       toast({
-        title: "Failed to update store location",
-        description: "Failed to update store location",
+        title: t('settings.storeLocationUpdateFailed'),
+        description: t('settings.storeLocationUpdateFailed'),
         variant: "destructive",
       });
     }
@@ -161,13 +163,13 @@ const Settings = () => {
 
       setIsEditingMarket(false);
       toast({
-        title: "Store market updated successfully",
-        description: "Store market updated successfully",
+        title: t('settings.storeMarketUpdated'),
+        description: t('settings.storeMarketUpdated'),
       });
     } catch (error) {
       toast({
-        title: "Failed to update store market",
-        description: "Failed to update store market",
+        title: t('settings.storeMarketUpdateFailed'),
+        description: t('settings.storeMarketUpdateFailed'),
         variant: "destructive",
       });
     }
@@ -180,14 +182,14 @@ const Settings = () => {
         <Card className="p-8 text-center max-w-md">
           <CardContent>
             <StoreIcon className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No Store Selected</h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">You don't have a store yet. Create your first store to get started.</p>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{t('settings.noStoreSelected')}</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">{t('settings.noStoreMessage')}</p>
             <Button 
               onClick={() => navigate('/create-store')} 
               className="bg-green-600 hover:bg-green-700 text-white"
             >
               <StoreIcon className="w-4 h-4 mr-2" />
-              Create Your First Store
+              {t('settings.createFirstStore')}
             </Button>
           </CardContent>
         </Card>
@@ -205,7 +207,7 @@ const Settings = () => {
               <SettingsIcon className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Settings</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('settings.title')}</h1>
             </div>
           </div>
 
@@ -215,7 +217,7 @@ const Settings = () => {
               <div className="flex items-center space-x-3">
                 <StoreIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
                 <div>
-                  <p className="text-sm font-medium text-green-700 dark:text-green-300">Active Store</p>
+                  <p className="text-sm font-medium text-green-700 dark:text-green-300">{t('settings.activeStore')}</p>
                   <p className="text-lg font-bold text-green-900 dark:text-green-100">{theStore.store_name}</p>
                 </div>
               </div>
@@ -225,9 +227,9 @@ const Settings = () => {
               <div className="flex items-center space-x-3">
                 <Shield className="w-5 h-5 text-green-600 dark:text-green-400" />
                 <div>
-                  <p className="text-sm font-medium text-green-700 dark:text-green-300">Privacy</p>
+                  <p className="text-sm font-medium text-green-700 dark:text-green-300">{t('settings.privacy')}</p>
                   <p className="text-lg font-bold text-green-900 dark:text-green-100">
-                    {admin?.hide_balance ? "Protected" : "Visible"}
+                    {admin?.hide_balance ? t('settings.protected') : t('settings.visible')}
                   </p>
                 </div>
               </div>
@@ -240,7 +242,7 @@ const Settings = () => {
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <StoreIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <span>Store Information</span>
+              <span>{t('settings.storeInformation')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -248,7 +250,7 @@ const Settings = () => {
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Store Name</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('settings.storeName')}</p>
                   <p className="text-lg font-semibold text-gray-900 dark:text-white">{store?.store_name}</p>
                 </div>
                 {!isEditingName && (
@@ -257,7 +259,7 @@ const Settings = () => {
                     setIsEditingName(true);
                   }} className="w-full sm:w-auto">
                     <Edit2 className="w-4 h-4 mr-2" />
-                    Edit
+                    {t('settings.edit')}
                   </Button>
                 )}
               </div>
@@ -267,11 +269,11 @@ const Settings = () => {
                     value={newStoreName}
                     onChange={e => setNewStoreName(e.target.value)}
                     className="flex-1"
-                    placeholder="Enter store name"
+                    placeholder={t('settings.enterStoreName')}
                   />
                   <div className="flex gap-2">
-                    <Button size="sm" onClick={handleUpdateStoreName} className="flex-1 sm:flex-none">Save</Button>
-                    <Button size="sm" variant="outline" onClick={() => setIsEditingName(false)} className="flex-1 sm:flex-none">Cancel</Button>
+                    <Button size="sm" onClick={handleUpdateStoreName} className="flex-1 sm:flex-none">{t('settings.save')}</Button>
+                    <Button size="sm" variant="outline" onClick={() => setIsEditingName(false)} className="flex-1 sm:flex-none">{t('settings.cancel')}</Button>
                   </div>
                 </div>
               )}
@@ -281,9 +283,9 @@ const Settings = () => {
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Store Location</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('settings.storeLocation')}</p>
                   <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {locations?.find(l => l.id === store?.location_id)?.name || "Not set"}
+                    {locations?.find(l => l.id === store?.location_id)?.name || t('settings.notSet')}
                   </p>
                 </div>
                 {!isEditingLocation && (
@@ -292,17 +294,17 @@ const Settings = () => {
                     setIsEditingLocation(true);
                   }} className="w-full sm:w-auto">
                     <Edit2 className="w-4 h-4 mr-2" />
-                    Edit
+                    {t('settings.edit')}
                   </Button>
                 )}
               </div>
               {isEditingLocation && (
                 <div className="space-y-3">
                   <div>
-                    <Label className="text-sm font-medium text-gray-600 dark:text-gray-400">Location</Label>
+                    <Label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('settings.locationLabel')}</Label>
                     <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select location" />
+                        <SelectValue placeholder={t('settings.selectLocation')} />
                       </SelectTrigger>
                       <SelectContent>
                         {locations?.map((location) => (
@@ -314,8 +316,8 @@ const Settings = () => {
                     </Select>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" onClick={handleUpdateStoreLocation} className="flex-1 sm:flex-none">Save</Button>
-                    <Button size="sm" variant="outline" onClick={() => setIsEditingLocation(false)} className="flex-1 sm:flex-none">Cancel</Button>
+                    <Button size="sm" onClick={handleUpdateStoreLocation} className="flex-1 sm:flex-none">{t('settings.save')}</Button>
+                    <Button size="sm" variant="outline" onClick={() => setIsEditingLocation(false)} className="flex-1 sm:flex-none">{t('settings.cancel')}</Button>
                   </div>
                 </div>
               )}
@@ -325,9 +327,9 @@ const Settings = () => {
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Store Market</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('settings.storeMarket')}</p>
                   <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {currentLocationMarkets?.find(m => m.id === store?.market_id)?.name || "Not set"}
+                    {currentLocationMarkets?.find(m => m.id === store?.market_id)?.name || t('settings.notSet')}
                   </p>
                 </div>
                 {!isEditingMarket && (
@@ -336,17 +338,17 @@ const Settings = () => {
                     setIsEditingMarket(true);
                   }} className="w-full sm:w-auto">
                     <Edit2 className="w-4 h-4 mr-2" />
-                    Edit
+                    {t('settings.edit')}
                   </Button>
                 )}
               </div>
               {isEditingMarket && (
                 <div className="space-y-3">
                   <div>
-                    <Label className="text-sm font-medium text-gray-600 dark:text-gray-400">Market</Label>
+                    <Label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('settings.marketLabel')}</Label>
                     <Select value={selectedMarket} onValueChange={setSelectedMarket}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select market" />
+                        <SelectValue placeholder={t('settings.selectMarket')} />
                       </SelectTrigger>
                       <SelectContent>
                         {currentLocationMarkets?.map((market) => (
@@ -358,8 +360,8 @@ const Settings = () => {
                     </Select>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" onClick={handleUpdateStoreMarket} className="flex-1 sm:flex-none">Save</Button>
-                    <Button size="sm" variant="outline" onClick={() => setIsEditingMarket(false)} className="flex-1 sm:flex-none">Cancel</Button>
+                    <Button size="sm" onClick={handleUpdateStoreMarket} className="flex-1 sm:flex-none">{t('settings.save')}</Button>
+                    <Button size="sm" variant="outline" onClick={() => setIsEditingMarket(false)} className="flex-1 sm:flex-none">{t('settings.cancel')}</Button>
                   </div>
                 </div>
               )}
@@ -374,13 +376,13 @@ const Settings = () => {
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <Eye className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <span>Privacy Settings</span>
+              <span>{t('settings.privacySettings')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Hide Balance Information</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">When enabled, financial information will be hidden from the dashboard</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('settings.hideBalanceInfo')}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">{t('settings.hideBalanceDesc')}</p>
             </div>
             <Switch
               checked={admin?.hide_balance}
@@ -400,7 +402,7 @@ const Settings = () => {
                 <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
                   <Smartphone className="w-5 h-5 text-green-600 dark:text-green-400" />
                 </div>
-                <span className="text-green-900 dark:text-green-100">Mobile App Installation</span>
+                <span className="text-green-900 dark:text-green-100">{t('settings.mobileAppInstallation')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -412,24 +414,24 @@ const Settings = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">
-                    Install SheBalance Mobile App
+                    {t('settings.installSheBalanceApp')}
                   </h3>
                   <p className="text-sm text-green-700 dark:text-green-300 mb-4">
-                    Get the best experience with our mobile app - works offline, faster loading, and push notifications!
+                    {t('settings.installDescription')}
                   </p>
                   
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2 text-sm text-green-600 dark:text-green-400">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>Works offline</span>
+                      <span>{t('settings.worksOffline')}</span>
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-green-600 dark:text-green-400">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>Faster loading</span>
+                      <span>{t('settings.fasterLoading')}</span>
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-green-600 dark:text-green-400">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>Push notifications</span>
+                      <span>{t('settings.pushNotifications')}</span>
                     </div>
                   </div>
                 </div>
@@ -442,13 +444,13 @@ const Settings = () => {
                       const result = await installPWA();
                       if (result.success) {
                         toast({
-                          title: "Installation started!",
-                          description: "Follow your browser's prompts to complete the installation.",
+                          title: t('settings.installationStarted'),
+                          description: t('settings.installationStartedDesc'),
                         });
                       } else {
                         toast({
-                          title: "Installation failed",
-                          description: "Please try again or use your browser's 'Add to Home Screen' option.",
+                          title: t('settings.installationFailed'),
+                          description: t('settings.installationFailedDesc'),
                           variant: "destructive",
                         });
                       }
@@ -456,7 +458,7 @@ const Settings = () => {
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3"
                   >
                     <Download className="w-5 h-5 mr-2" />
-                    Install SheBalance App
+                    {t('settings.installApp')}
                   </Button>
                 ) : (
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-green-200 dark:border-green-700">
@@ -464,10 +466,10 @@ const Settings = () => {
                       <Smartphone className="w-5 h-5 text-green-600 dark:text-green-400" />
                       <div>
                         <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                          Manual Installation
+                          {t('settings.manualInstallation')}
                         </p>
                         <p className="text-xs text-gray-600 dark:text-gray-400">
-                          Use your browser's "Add to Home Screen" option to install the app
+                          {t('settings.manualInstallDesc')}
                         </p>
                       </div>
                     </div>
@@ -481,8 +483,8 @@ const Settings = () => {
                     onClick={() => {
                       localStorage.removeItem('pwa-install-dismissed');
                       toast({
-                        title: "Install SheBalance App",
-                        description: "Get the best experience with our mobile app - works offline, faster loading, and push notifications!",
+                        title: t('settings.installToastTitle'),
+                        description: t('settings.installToastDesc'),
                         action: (
                           <div className="flex gap-2">
                             {canInstall ? (
@@ -492,13 +494,13 @@ const Settings = () => {
                                   const result = await installPWA();
                                   if (result.success) {
                                     toast({
-                                      title: "Installation started!",
-                                      description: "Follow your browser's prompts to complete the installation.",
+                                      title: t('settings.installationStarted'),
+                                      description: t('settings.installationStartedDesc'),
                                     });
                                   } else {
                                     toast({
-                                      title: "Installation failed",
-                                      description: "Please try again or use your browser's 'Add to Home Screen' option.",
+                                      title: t('settings.installationFailed'),
+                                      description: t('settings.installationFailedDesc'),
                                       variant: "destructive",
                                     });
                                   }
@@ -506,7 +508,7 @@ const Settings = () => {
                                 className="bg-green-600 hover:bg-green-700"
                               >
                                 <Download className="w-4 h-4 mr-1" />
-                                Install
+                                {t('settings.install')}
                               </Button>
                             ) : null}
                             <Button
@@ -515,21 +517,21 @@ const Settings = () => {
                               onClick={() => {
                                 localStorage.setItem('pwa-install-dismissed', 'true');
                                 toast({
-                                  title: "Installation dismissed",
-                                  description: "You can always install the app later from Settings.",
+                                  title: t('settings.installDismissed'),
+                                  description: t('settings.installDismissedDesc'),
                                 });
                               }}
                             >
-                              Dismiss
+                              {t('settings.dismiss')}
                             </Button>
                           </div>
                         ),
-                        duration: 10000, // 10 seconds
+                        duration: 10000,
                       });
                     }}
                     className="text-xs text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
                   >
-                    Show installation reminder again
+                    {t('settings.showReminderAgain')}
                   </Button>
                 </div>
               </div>
@@ -545,7 +547,7 @@ const Settings = () => {
                 <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
                   <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
                 </div>
-                <span className="text-green-900 dark:text-green-100">Mobile App</span>
+                <span className="text-green-900 dark:text-green-100">{t('settings.mobileApp')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -559,11 +561,11 @@ const Settings = () => {
                   <div className="flex items-center space-x-2 mb-2">
                     <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
                     <h3 className="text-lg font-semibold text-green-900 dark:text-green-100">
-                      App Installed
+                      {t('settings.appInstalled')}
                     </h3>
                   </div>
                   <p className="text-sm text-green-700 dark:text-green-300">
-                    You're using the SheBalance mobile app. Enjoy the enhanced experience!
+                    {t('settings.appInstalledDesc')}
                   </p>
                 </div>
               </div>
