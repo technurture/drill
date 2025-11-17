@@ -53,16 +53,30 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       
       if (typeof window !== 'undefined') {
         const userStored = localStorage.getItem(userStorageKey);
-        if (userStored && userStored in SUPPORTED_LANGUAGES && userStored !== language) {
-          setLanguageState(userStored as LanguageCode);
+        if (userStored && userStored in SUPPORTED_LANGUAGES) {
+          if (userStored !== language) {
+            setLanguageState(userStored as LanguageCode);
+          }
+          return;
         }
+      }
+      
+      if (language !== DEFAULT_LANGUAGE) {
+        setLanguageState(DEFAULT_LANGUAGE);
       }
     } else {
       if (typeof window !== 'undefined') {
         const guestStored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
-        if (guestStored && guestStored in SUPPORTED_LANGUAGES && guestStored !== language) {
-          setLanguageState(guestStored as LanguageCode);
+        if (guestStored && guestStored in SUPPORTED_LANGUAGES) {
+          if (guestStored !== language) {
+            setLanguageState(guestStored as LanguageCode);
+          }
+          return;
         }
+      }
+      
+      if (language !== DEFAULT_LANGUAGE) {
+        setLanguageState(DEFAULT_LANGUAGE);
       }
     }
   }, [user]);
