@@ -12,6 +12,14 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+### Multi-Language Bug Fixes (November 17, 2025)
+- **Translation Key Conflict Resolution**: Fixed duplicate "settings" key error that caused i18n to return objects instead of strings. Updated Sidebar.tsx to use "settings.title" and removed duplicate standalone "settings" keys from all 5 language files (en, yo, ig, ha, pidgin).
+- **Language Preference Isolation**: Fixed critical bug where language preferences were shared across users. LanguageContext now properly isolates preferences per user by:
+  - Initializing with DEFAULT_LANGUAGE instead of reading from shared localStorage
+  - Explicitly resetting to DEFAULT_LANGUAGE when a user has no stored preference (preventing state leakage from previous users)
+  - Applying isolation logic to both authenticated and guest user flows
+- **User-Specific Storage**: Language preferences are now properly stored using user-specific localStorage keys (`shebalance-language-{userId}`) and Supabase user metadata, ensuring each user maintains their own language selection across sessions.
+
 ### Environment Variables Configuration (November 15, 2025)
 - **Universal Environment Loading**: Configured Vite to load environment variables from root directory using `envDir` option.
 - **Cross-Directory Access**: Environment variables are now accessible from anywhere in the codebase (root or client directories).
