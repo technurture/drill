@@ -96,7 +96,7 @@ const Sidebar = ({ onClose, isSideBar }) => {
     { 
       path: "/dashboard/settings", 
       icon: Settings, 
-      label: tSubheading("settings"),
+      label: tSubheading("settings.title"),
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
       activeColor: "bg-green-500 text-white"
     },

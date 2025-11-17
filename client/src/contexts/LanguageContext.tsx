@@ -28,15 +28,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     return userId ? `${LANGUAGE_STORAGE_KEY}-${userId}` : LANGUAGE_STORAGE_KEY;
   };
 
-  const [language, setLanguageState] = useState<LanguageCode>(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
-      if (stored && stored in SUPPORTED_LANGUAGES) {
-        return stored as LanguageCode;
-      }
-    }
-    return DEFAULT_LANGUAGE;
-  });
+  const [language, setLanguageState] = useState<LanguageCode>(DEFAULT_LANGUAGE);
 
   useEffect(() => {
     if (language !== i18n.language) {
