@@ -197,8 +197,16 @@
   "choosePaymentMethod": "Choose payment method",
   "sortBy": "Sort by",
   "sortOrder": "Sort Order",
-  "loanCreated": "Loan created",
-  "failedToCreateLoan": "Failed to create loan",
-  "repaymentAdded": "Repayment added",
-  "loanDeleted": "Loan deleted"
+  "loanCreated": "An ƙirƙiri rancen kuɗi",
+  "failedToCreateLoan": "An kasa ƙirƙirar rancen kuɗi",
+  "repaymentAdded": "An ƙara biyan bashi",
+  "loanDeleted": "An share rancen kuɗi",
+  "notAvailable": "Babu",
+  "favoriteLimitError": "Yi hakuri, ba za ku iya ƙara fiye da samfurori 10 zuwa abubuwan da ake so ba",
+  "favoriteLimitMessage": "Kuna iya samun samfurori 10 kawai a cikin abubuwan da ake so.",
+  "nameRequired": "Ana buƙatar suna",
+  "purchasedPriceNonNegative": "Farashin saye dole ya zama mara ƙasa da sifili",
+  "unitPriceNonNegative": "Farashin ɗaya dole ya zama mara ƙasa da sifili",
+  "quantityNonNegative": "Adadi dole ya zama mara ƙasa da sifili",
+  "thresholdNonNegative": "Iyaka dole ta zama mara ƙasa da sifili"
 }

@@ -200,5 +200,13 @@
   "loanCreated": "Loan created",
   "failedToCreateLoan": "Failed to create loan",
   "repaymentAdded": "Repayment added",
-  "loanDeleted": "Loan deleted"
+  "loanDeleted": "Loan deleted",
+  "notAvailable": "N/A",
+  "favoriteLimitError": "Sorry, you cannot add more than 10 product to favourite",
+  "favoriteLimitMessage": "You can only have 10 favourite products.",
+  "nameRequired": "Name is required",
+  "purchasedPriceNonNegative": "Purchased price must be non-negative",
+  "unitPriceNonNegative": "Unit price must be non-negative",
+  "quantityNonNegative": "Quantity must be non-negative",
+  "thresholdNonNegative": "Threshold must be non-negative"
 }
