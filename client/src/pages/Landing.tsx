@@ -33,35 +33,35 @@ const Landing = () => {
   const faqs = [
     {
       question: tSubheading('landing.faq.q1'),
-      answer: "SheBalance is a mobile platform designed specifically for women entrepreneurs to track their business finances, manage inventory, join savings groups, and build financial confidence. It's built with local languages and simple interfaces to make financial management accessible to every woman."
+      answer: tSubheading('landing.faq.a1')
     },
     {
       question: tSubheading('landing.faq.q2'),
-      answer: "Yes! SheBalance offers a free tier with essential features to help you get started. We also offer premium features for advanced business needs. You can start with the free version and upgrade when you're ready."
+      answer: tSubheading('landing.faq.a2')
     },
     {
       question: tSubheading('landing.faq.q3'),
-      answer: "Absolutely! SheBalance works offline, so you can track your sales and expenses even without internet connection. Your data will sync when you're back online."
+      answer: tSubheading('landing.faq.a3')
     },
     {
       question: tSubheading('landing.faq.q4'),
-      answer: "SheBalance supports multiple local languages to ensure every woman can use the app comfortably. We're constantly adding more languages based on user needs."
+      answer: tSubheading('landing.faq.a4')
     },
     {
       question: tSubheading('landing.faq.q5'),
-      answer: "Your data security is our top priority. We use industry-standard encryption and security measures to protect your financial information. Your data is private and secure."
+      answer: tSubheading('landing.faq.a5')
     },
     {
       question: tSubheading('landing.faq.q6'),
-      answer: "Yes! You can download and share your financial reports. This is especially useful for loan applications, business planning, or sharing with family members."
+      answer: tSubheading('landing.faq.a6')
     },
     {
       question: tSubheading('landing.faq.q7'),
-      answer: "Don't worry! SheBalance is designed to be simple and intuitive. We use familiar icons, voice instructions, and step-by-step guidance to make it easy for everyone to use."
+      answer: tSubheading('landing.faq.a7')
     },
     {
       question: tSubheading('landing.faq.q8'),
-      answer: "You can join existing savings groups or create your own. The app helps you track contributions, set goals, and manage group savings transparently and securely."
+      answer: tSubheading('landing.faq.a8')
     }
   ];
 
@@ -69,32 +69,32 @@ const Landing = () => {
     {
       icon: TrendingUp,
       title: tSubheading('landing.features.trackBusiness'),
-      description: "Whether you sell in the market, run a small shop, or hustle from home, SheBalance helps you keep track of every naira. No need for fancy accounting — just a few taps, and you're in charge."
+      description: tSubheading('landing.features.trackBusinessDesc')
     },
     {
       icon: Smartphone,
       title: tSubheading('landing.features.builtForYou'),
-      description: "Designed with women like you in mind, SheBalance speaks your language — literally. With local language options, simple icons, and voice instructions, it's easy for every woman to feel confident using it."
+      description: tSubheading('landing.features.builtForYouDesc')
     },
     {
       icon: BarChart3,
       title: tSubheading('landing.features.knowNumbers'),
-      description: "No more guessing where your money went. See what's coming in, what's going out, and what's left to save. SheBalance shows you the full picture — so you can make smarter choices."
+      description: tSubheading('landing.features.knowNumbersDesc')
     },
     {
       icon: BookOpen,
       title: tSubheading('landing.features.learnEarn'),
-      description: "You don't need a classroom to grow. SheBalance shares small, powerful lessons on saving, planning, and business tips — right inside the app, as you use it. Every day, you grow stronger."
+      description: tSubheading('landing.features.learnEarnDesc')
     }
   ];
 
   const appFeatures = [
-    { icon: TrendingUp, text: "Track your income and expenses" },
-    { icon: Package, text: "Manage your goods and inventory" },
-    { icon: Users, text: "Join or create Esusu (savings) groups" },
-    { icon: FileText, text: "Get reports you can download and share" },
-    { icon: WifiOff, text: "Use the app offline — anytime, anywhere" },
-    { icon: Globe, text: "Enjoy support in your local language" }
+    { icon: TrendingUp, text: tSubheading('landing.appFeatures.trackIncome') },
+    { icon: Package, text: tSubheading('landing.appFeatures.manageInventory') },
+    { icon: Users, text: tSubheading('landing.appFeatures.joinSavings') },
+    { icon: FileText, text: tSubheading('landing.appFeatures.getReports') },
+    { icon: WifiOff, text: tSubheading('landing.appFeatures.useOffline') },
+    { icon: Globe, text: tSubheading('landing.appFeatures.localLanguage') }
   ];
 
   const toggleFaq = (index: number) => {
@@ -124,7 +124,7 @@ const Landing = () => {
                   className="bg-green-600 hover:bg-green-700 text-white"
                 >
                   <LayoutDashboard className="w-4 h-4 mr-2" />
-                  Dashboard
+                  {tSubheading('landing.navigation.dashboard')}
                 </Button>
               ) : (
                 <>
@@ -133,13 +133,13 @@ const Landing = () => {
                     onClick={() => navigate('/login')}
                     className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400"
                   >
-                    Login
+                    {tSubheading('landing.navigation.login')}
                   </Button>
                   <Button 
                     onClick={() => navigate('/signup')}
                     className="bg-green-600 hover:bg-green-700 text-white"
                   >
-                    Get Started
+                    {tSubheading('landing.navigation.getStarted')}
                   </Button>
                 </>
               )}
@@ -192,9 +192,7 @@ const Landing = () => {
               {tSubheading('landing.hero.subtitle')}
             </p>
             <p className="text-base sm:text-lg text-gray-200 mb-10 sm:mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
-              You work hard. You provide. You plan for tomorrow with what little you have today. 
-              At SheBalance, we see you. That's why we created a platform just for you — to help 
-              you take charge of your money, grow your business, and build the future you've always dreamed of.
+              {tSubheading('landing.hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               {user ? (
@@ -204,7 +202,7 @@ const Landing = () => {
                   className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg"
                 >
                   <LayoutDashboard className="w-5 h-5 mr-2" />
-                  Go to Dashboard
+                  {tSubheading('landing.navigation.goToDashboard')}
                 </Button>
               ) : (
                 <>
@@ -238,8 +236,7 @@ const Landing = () => {
               {tSubheading('landing.about.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              It's your financial companion. Your silent business partner. Your daily reminder 
-              that you deserve more — more knowledge, more control, more confidence.
+              {tSubheading('landing.about.description')}
             </p>
           </div>
 
@@ -273,16 +270,16 @@ const Landing = () => {
               {tSubheading('landing.whoFor.title')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              SheBalance is for you, the woman who:
+              {tSubheading('landing.whoFor.subtitle')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              "Runs her business with heart and hustle",
-              "Wants to prepare for bigger opportunities like loans and investments",
-              "Dreams of being organized, informed, and independent",
-              "Believes she can grow — with the right tools by her side"
+              tSubheading('landing.whoFor.item1'),
+              tSubheading('landing.whoFor.item2'),
+              tSubheading('landing.whoFor.item3'),
+              tSubheading('landing.whoFor.item4')
             ].map((item, index) => (
               <Card key={index} className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300 bg-white dark:bg-gray-700">
                 <CardContent className="p-6 text-center">
@@ -385,11 +382,10 @@ const Landing = () => {
                 {tSubheading('landing.cta.title')}
               </h2>
               <p className="text-xl text-green-100 mb-6 leading-relaxed">
-                At SheBalance, we believe that when a woman understands her money, she multiplies 
-                her power — in her business, her family, and her community.
+                {tSubheading('landing.cta.description1')}
               </p>
               <p className="text-lg text-green-100 mb-10 leading-relaxed">
-                So whether you're buying, selling, saving, or just starting out — let SheBalance walk with you.
+                {tSubheading('landing.cta.description2')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:justify-start justify-center">
                 {user ? (
@@ -399,7 +395,7 @@ const Landing = () => {
                     className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 text-lg font-semibold"
                   >
                     <LayoutDashboard className="w-5 h-5 mr-2" />
-                    Go to Dashboard
+                    {tSubheading('landing.navigation.goToDashboard')}
                   </Button>
                 ) : (
                   <>
@@ -438,37 +434,36 @@ const Landing = () => {
                 <span className="text-xl font-semibold text-white">SheBalance</span>
               </div>
               <p className="text-sm leading-6 text-gray-400">
-                Empowering women entrepreneurs with simple tools to track money, grow businesses,
-                and build financial confidence.
+                {tSubheading('landing.footer.description')}
               </p>
             </div>
 
             {/* Company */}
             <div>
-              <h4 className="text-sm font-semibold text-white tracking-wider mb-4">Company</h4>
+              <h4 className="text-sm font-semibold text-white tracking-wider mb-4">{tSubheading('landing.footer.company')}</h4>
               <ul className="space-y-3 text-sm">
-                <li><a className="hover:text-white" href="/help">Help Center</a></li>
-                <li><a className="hover:text-white" href="/termsandprivacy">Terms & Privacy</a></li>
-                <li><a className="hover:text-white" href="#">About</a></li>
-                <li><a className="hover:text-white" href="#">Contact</a></li>
+                <li><a className="hover:text-white" href="/help">{tSubheading('landing.footer.helpCenter')}</a></li>
+                <li><a className="hover:text-white" href="/termsandprivacy">{tSubheading('landing.footer.termsPrivacy')}</a></li>
+                <li><a className="hover:text-white" href="#">{tSubheading('landing.footer.about')}</a></li>
+                <li><a className="hover:text-white" href="#">{tSubheading('landing.footer.contact')}</a></li>
               </ul>
             </div>
 
             {/* Newsletter */}
             <div>
-              <h4 className="text-sm font-semibold text-white tracking-wider mb-4">Stay up to date</h4>
-              <p className="text-sm text-gray-400 mb-3">Get tips and updates delivered to your inbox.</p>
+              <h4 className="text-sm font-semibold text-white tracking-wider mb-4">{tSubheading('landing.footer.newsletter.title')}</h4>
+              <p className="text-sm text-gray-400 mb-3">{tSubheading('landing.footer.newsletter.description')}</p>
               <form className="flex gap-2">
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={tSubheading('landing.footer.newsletter.placeholder')}
                   className="w-full rounded-md bg-white/10 border border-white/10 px-3 py-2 text-sm placeholder:text-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <button
                   type="submit"
                   className="rounded-md bg-green-600 hover:bg-green-700 px-4 py-2 text-sm font-medium text-white"
                 >
-                  Subscribe
+                  {tSubheading('landing.footer.newsletter.subscribe')}
                 </button>
               </form>
               <div className="flex items-center gap-4 mt-4 text-gray-400">
@@ -481,13 +476,13 @@ const Landing = () => {
 
           {/* Bottom bar */}
           <div className="py-6 text-sm flex flex-col md:flex-row items-center justify-between gap-3">
-            <p className="text-gray-400">© {new Date().getFullYear()} SheBalance. All rights reserved.</p>
+            <p className="text-gray-400">© {new Date().getFullYear()} {tSubheading('landing.footer.copyright')}</p>
             <div className="flex items-center gap-4">
-              <a href="/and-privacy" className="hover:text-white">Privacy</a>
+              <a href="/and-privacy" className="hover:text-white">{tSubheading('landing.footer.privacy')}</a>
               <span className="text-gray-600">•</span>
-              <a href="/termsandprivacy" className="hover:text-white">Terms</a>
+              <a href="/termsandprivacy" className="hover:text-white">{tSubheading('landing.footer.terms')}</a>
               <span className="text-gray-600">•</span>
-              <a href="/help" className="hover:text-white">Support</a>
+              <a href="/help" className="hover:text-white">{tSubheading('landing.footer.support')}</a>
             </div>
           </div>
         </div>
