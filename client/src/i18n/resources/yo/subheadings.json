@@ -4,91 +4,91 @@
       "badge": "Fún Àwọn Obìnrin Oníṣòwò",
       "title": "Fún Iṣẹ́ Rẹ Ní Agbára",
       "subtitle": "Àwọn irinṣẹ́ tó rọrùn tó sì lágbára fún àwọn obìnrin tó ń ṣiṣẹ́ takuntakun. Tọ́jú owó, mú títà pọ̀ sí, kọ́ ọjọ́ ìwájú owó rẹ.",
-      "description": "You work hard. You provide. You plan for tomorrow with what little you have today. At SheBalance, we see you. That's why we created a platform just for you — to help you take charge of your money, grow your business, and build the future you've always dreamed of.",
+      "description": "O ń ṣiṣẹ́ takuntakun. O ń pèsè. O ń gbèrò fún ọ̀la pẹ̀lú ohun díẹ̀ tó wà lọ́wọ́ rẹ lónìí. Ní SheBalance, a rí ọ. Ìdí nìyí tí a fi ṣẹ̀dá ilé-iṣẹ́ yìí fún ọ nìkan — láti ràn ọ́ lọ́wọ́ láti ṣàkóso owó rẹ, mú iṣẹ́ rẹ dàgbà, kí o sì kọ́ ọjọ́ ìwájú tó o ti ń lá.",
       "ctaPrimary": "Bẹ̀rẹ̀ Lọ́fẹ̀ẹ́ Lónìí",
       "ctaSecondary": "Kọ́ Síi"
     },
     "navigation": {
-      "login": "Login",
-      "getStarted": "Get Started",
-      "dashboard": "Dashboard",
-      "goToDashboard": "Go to Dashboard"
+      "login": "Wọlé",
+      "getStarted": "Bẹ̀rẹ̀",
+      "dashboard": "Pátákó",
+      "goToDashboard": "Lọ Sí Pátákó"
     },
     "about": {
       "title": "Kí Ni SheBalance?",
-      "description": "It's your financial companion. Your silent business partner. Your daily reminder that you deserve more — more knowledge, more control, more confidence."
+      "description": "Ó jẹ́ alábàṣepọ̀ owó rẹ. Alábàṣiṣẹ́pọ̀ iṣẹ́ rẹ tó jẹ́ẹ́jẹ́. Ìrántí ojoojúmọ́ rẹ pé o tọ́ síi — ìmọ̀ síi, ìṣàkóso síi, ìgboyà síi."
     },
     "features": {
       "trackBusiness": "Tọ́jú Iṣẹ́ Rẹ, Ní Ọ̀nà Rẹ",
-      "trackBusinessDesc": "Whether you sell in the market, run a small shop, or hustle from home, SheBalance helps you keep track of every naira. No need for fancy accounting — just a few taps, and you're in charge.",
+      "trackBusinessDesc": "Yálà o ń tà ní ọjà, o ń ṣe ilé ìtajà kékeré, tàbí o ń ṣiṣẹ́ láti ilé, SheBalance ń ràn ọ́ lọ́wọ́ láti tọ́jú gbogbo naira. Kò sí ìnílò fún ìṣirò tó pọ̀kùrọ̀kọ̀ — àfọ̀wọ́kàn díẹ̀, o sì ti ṣàkóso rẹ̀.",
       "builtForYou": "A Kọ́ Ọ Fún Ẹ, Látọ̀dọ̀ Àwọn Obìnrin Tó Mọ̀",
-      "builtForYouDesc": "Designed with women like you in mind, SheBalance speaks your language — literally. With local language options, simple icons, and voice instructions, it's easy for every woman to feel confident using it.",
+      "builtForYouDesc": "A ṣe àpẹẹrẹ rẹ̀ pẹ̀lú àwọn obìnrin bí ìwọ ní inú ọkàn, SheBalance ń sọ èdè rẹ — gangan ni. Pẹ̀lú àṣàyàn èdè àdúgbò, àwọn àmì tó rọrùn, àti ìtọ́sọ́nà ohùn, ó rọrùn fún gbogbo obìnrin láti ní ìgboyà láti lò ó.",
       "knowNumbers": "Mọ Iye Owó Rẹ — Lọ́nà Tó Yé",
-      "knowNumbersDesc": "No more guessing where your money went. See what's coming in, what's going out, and what's left to save. SheBalance shows you the full picture — so you can make smarter choices.",
+      "knowNumbersDesc": "Kò sí ìfura mọ́ nípa ibi tí owó rẹ lọ. Wo ohun tó ń wọlé, ohun tó ń jáde, àti ohun tó kù láti fipamọ́. SheBalance ń fi àwòrán pípé hàn ọ́ — kí o lè ṣe àwọn ìpinnu tó dára jù.",
       "learnEarn": "Kọ́ẹkọ́ Bí O Ṣe Ń Jèrè",
-      "learnEarnDesc": "You don't need a classroom to grow. SheBalance shares small, powerful lessons on saving, planning, and business tips — right inside the app, as you use it. Every day, you grow stronger."
+      "learnEarnDesc": "O kò nílò yàrá ìkàwé láti dàgbà. SheBalance ń pín àwọn ẹ̀kọ́ kékeré tó lágbára lórí ìfowópamọ́, ètò, àti ìmọ̀ràn iṣẹ́ — nínú app náà gan-an, bí o ṣe ń lò ó. Lójoojúmọ́, o ń di alágbára síi."
     },
     "whoFor": {
       "title": "Ta Ni SheBalance Wà Fún?",
-      "subtitle": "SheBalance is for you, the woman who:",
-      "item1": "Runs her business with heart and hustle",
-      "item2": "Wants to prepare for bigger opportunities like loans and investments",
-      "item3": "Dreams of being organized, informed, and independent",
-      "item4": "Believes she can grow — with the right tools by her side"
+      "subtitle": "SheBalance wà fún ẹ, obìnrin tó:",
+      "item1": "Ń ṣe iṣẹ́ rẹ̀ pẹ̀lú ọkàn àti ìfarabalẹ̀",
+      "item2": "Fẹ́ múra sílẹ̀ fún àwọn ànfààní tó tóbi bí àwín àti owó ìdókòwò",
+      "item3": "Ń lá àlá láti ṣètò, láti mọ̀, àti láti lómìnira",
+      "item4": "Gbàgbọ́ pé ó lè dàgbà — pẹ̀lú àwọn irinṣẹ́ tó tọ́ ní ẹ̀gbẹ́ rẹ̀"
     },
     "appFeatures": {
       "title": "Ohun Tó Lè Ṣe Pẹ̀lú SheBalance",
-      "trackIncome": "Track your income and expenses",
-      "manageInventory": "Manage your goods and inventory",
-      "joinSavings": "Join or create Esusu (savings) groups",
-      "getReports": "Get reports you can download and share",
-      "useOffline": "Use the app offline — anytime, anywhere",
-      "localLanguage": "Enjoy support in your local language"
+      "trackIncome": "Tọ́jú owó wọlé àti ìnáwó rẹ",
+      "manageInventory": "Ṣàkóso àwọn ọjà àti ìkójọpọ̀ rẹ",
+      "joinSavings": "Darapọ̀ mọ́ tàbí ṣẹ̀dá àwọn ẹgbẹ́ Esusu (ìfowópamọ́)",
+      "getReports": "Gba àwọn ìròyìn tó o lè ṣàgbéjáde àti pín",
+      "useOffline": "Lo app náà láìsí intánẹ́ẹ̀tì — nígbà gbogbo, níbikíbi",
+      "localLanguage": "Gbádùn àtìlẹyìn ní èdè àdúgbò rẹ"
     },
     "faq": {
       "title": "Àwọn Ìbéèrè Tó Wọ́pọ̀",
       "subtitle": "Gbogbo ohun tó yẹ kó mọ̀ nípa SheBalance",
       "q1": "Kí ni SheBalance?",
-      "a1": "SheBalance is a mobile platform designed specifically for women entrepreneurs to track their business finances, manage inventory, join savings groups, and build financial confidence. It's built with local languages and simple interfaces to make financial management accessible to every woman.",
+      "a1": "SheBalance jẹ́ ilé-iṣẹ́ alagbeka tí a ṣe pàtó fún àwọn obìnrin oníṣòwò láti tọ́jú owó iṣẹ́ wọn, ṣàkóso ìkójọpọ̀, darapọ̀ mọ́ àwọn ẹgbẹ́ ìfowópamọ́, kí wọ́n sì kọ́ ìgboyà owó. A kọ́ ọ pẹ̀lú àwọn èdè àdúgbò àti ojú tó rọrùn láti jẹ́ kí ìṣàkóso owó wà ní ìṣeéṣe fún gbogbo obìnrin.",
       "q2": "Ṣé SheBalance jẹ́ ọ̀fẹ́?",
-      "a2": "Yes! SheBalance offers a free tier with essential features to help you get started. We also offer premium features for advanced business needs. You can start with the free version and upgrade when you're ready.",
+      "a2": "Bẹ́ẹ̀ni! SheBalance ń fúnni ní ipele ọ̀fẹ́ pẹ̀lú àwọn ẹ̀yà pàtàkì láti ràn ọ́ lọ́wọ́ láti bẹ̀rẹ̀. A tún ń fúnni ní àwọn ẹ̀yà premium fún àwọn ìnílò iṣẹ́ tó lágbára. O lè bẹ̀rẹ̀ pẹ̀lú ẹ̀yà ọ̀fẹ́ náà kí o sì ṣe ìgbéga nígbà tó o bá ti ṣetán.",
       "q3": "Ṣé mo lè lo SheBalance láìsí intánẹ́ẹ̀tì?",
-      "a3": "Absolutely! SheBalance works offline, so you can track your sales and expenses even without internet connection. Your data will sync when you're back online.",
+      "a3": "Dájúdájú! SheBalance ń ṣiṣẹ́ láìsí intánẹ́ẹ̀tì, nítorí náà o lè tọ́jú títà àti ìnáwó rẹ kódà láìsí ìsopọ̀ intánẹ́ẹ̀tì. Data rẹ yóò ṣàmúṣiṣẹ́ nígbà tó o bá padà wá orí ààyè.",
       "q4": "Irú èdè wo ni SheBalance ń ṣàtìlẹyìn?",
-      "a4": "SheBalance supports multiple local languages to ensure every woman can use the app comfortably. We're constantly adding more languages based on user needs.",
+      "a4": "SheBalance ń ṣàtìlẹyìn àwọn èdè àdúgbò púpọ̀ láti ríi dájú pé gbogbo obìnrin lè lo app náà ní ìrọ̀rùn. A ń fi àwọn èdè síi nígbà gbogbo ní ìbámu pẹ̀lú àwọn ìnílò olùlò.",
       "q5": "Ṣé data owó mi wà ní àbò?",
-      "a5": "Your data security is our top priority. We use industry-standard encryption and security measures to protect your financial information. Your data is private and secure.",
+      "a5": "Àbò data rẹ jẹ́ ohun àkọ́kọ́ wa. A ń lo ìpààrí àti àwọn ìlànà ààbò ilé-iṣẹ́ láti dáàbò bo ìsọfúnni owó rẹ. Data rẹ jẹ́ àdání ó sì wà ní àbò.",
       "q6": "Ṣé mo lè ṣàgbéjáde àwọn ìròyìn mi?",
-      "a6": "Yes! You can download and share your financial reports. This is especially useful for loan applications, business planning, or sharing with family members.",
+      "a6": "Bẹ́ẹ̀ni! O lè ṣàgbéjáde àti pín àwọn ìròyìn owó rẹ. Èyí ṣe pàtàkì púpọ̀ fún àwọn ìbéèrè àwín, ètò iṣẹ́, tàbí pínpín pẹ̀lú àwọn ará ilé.",
       "q7": "Mi ò mọ̀ẹ̀rọ ayárabíàṣá dáadáa. Ṣé mo lè lò ó?",
-      "a7": "Don't worry! SheBalance is designed to be simple and intuitive. We use familiar icons, voice instructions, and step-by-step guidance to make it easy for everyone to use.",
+      "a7": "Má ṣe yọ ara rẹ lẹ́nu! A ṣe àpẹẹrẹ SheBalance láti jẹ́ ìrọ̀rùn àti olóye. A ń lo àwọn àmì tó ṣe déédé, ìtọ́sọ́nà ohùn, àti ìtọ́sọ́nà lẹ́sẹ̀sẹ̀ láti jẹ́ kó rọrùn fún gbogbo ènìyàn láti lò.",
       "q8": "Báwo ni n ṣe lè darapọ̀ mọ́ ẹgbẹ́ ìfowópamọ́?",
-      "a8": "You can join existing savings groups or create your own. The app helps you track contributions, set goals, and manage group savings transparently and securely."
+      "a8": "O lè darapọ̀ mọ́ àwọn ẹgbẹ́ ìfowópamọ́ tó wà tàbí ṣẹ̀dá tirẹ. App náà ń ràn ọ́ lọ́wọ́ láti tọ́jú àwọn ìdásílẹ̀, ṣètò àwọn ibi-afẹ́dé, àti ṣàkóso ìfowópamọ́ ẹgbẹ́ ní ìṣedéédé àti ní àbò."
     },
     "cta": {
       "title": "Owó Rẹ. Agbára Rẹ. Ọjọ́ Ìwájú Rẹ.",
-      "description1": "At SheBalance, we believe that when a woman understands her money, she multiplies her power — in her business, her family, and her community.",
-      "description2": "So whether you're buying, selling, saving, or just starting out — let SheBalance walk with you.",
+      "description1": "Ní SheBalance, a gbàgbọ́ pé nígbà tí obìnrin bá mọ̀ nípa owó rẹ̀, ó ń pọ̀ agbára rẹ̀ síi — nínú iṣẹ́ rẹ̀, ẹbí rẹ̀, àti àwùjọ rẹ̀.",
+      "description2": "Nítorí náà yálà o ń ra, o ń tà, o ń fipamọ́, tàbí o kàn bẹ̀rẹ̀ — jẹ́ kí SheBalance rìn pẹ̀lú rẹ.",
       "primaryButton": "Bẹ̀rẹ̀ Ìrìnàjò Rẹ",
       "secondaryButton": "Wọlé"
     },
     "footer": {
-      "description": "Empowering women entrepreneurs with simple tools to track money, grow businesses, and build financial confidence.",
-      "company": "Company",
-      "helpCenter": "Help Center",
-      "termsPrivacy": "Terms & Privacy",
-      "about": "About",
-      "contact": "Contact",
+      "description": "Ń fún àwọn obìnrin oníṣòwò ní agbára pẹ̀lú àwọn irinṣẹ́ tó rọrùn láti tọ́jú owó, mú iṣẹ́ dàgbà, kí wọ́n sì kọ́ ìgboyà owó.",
+      "company": "Ilé-iṣẹ́",
+      "helpCenter": "Ilé Ìrànlọ́wọ́",
+      "termsPrivacy": "Òfin & Ìdáníkú",
+      "about": "Nípa Wa",
+      "contact": "Kàn Sí Wa",
       "newsletter": {
-        "title": "Stay up to date",
-        "description": "Get tips and updates delivered to your inbox.",
-        "placeholder": "Enter your email",
-        "subscribe": "Subscribe"
+        "title": "Wà ní ìmúdájú",
+        "description": "Gba àwọn ìmọ̀ràn àti àwọn ìmúdájú tí a fi ránṣẹ́ sí apòòkì rẹ.",
+        "placeholder": "Tẹ imeeli rẹ",
+        "subscribe": "Forúkọsílẹ̀"
       },
-      "copyright": "SheBalance. All rights reserved.",
-      "privacy": "Privacy",
-      "terms": "Terms",
-      "support": "Support"
+      "copyright": "SheBalance. Gbogbo ẹ̀tọ́ wà ní ìpamọ́.",
+      "privacy": "Ìdáníkú",
+      "terms": "Òfin",
+      "support": "Àtìlẹyìn"
     }
   },
   "dashboard": "Pátákó",

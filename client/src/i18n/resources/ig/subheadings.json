@@ -4,91 +4,91 @@
       "badge": "Maka Ụmụ Nwanyị Na-azụ Ahịa",
       "title": "Mee ka Azụmaahịa Gị Dịkwuo Ike",
       "subtitle": "Ngwa dị mfe na ike maka ụmụ nwanyị na-arụsị ọrụ ike. Chekwaa ego, mee ka ahịa too, wuo ọdịnihu ego gị.",
-      "description": "You work hard. You provide. You plan for tomorrow with what little you have today. At SheBalance, we see you. That's why we created a platform just for you — to help you take charge of your money, grow your business, and build the future you've always dreamed of.",
+      "description": "Ị na-arụsị ọrụ ike. Ị na-enye. Ị na-eme atụmatụ maka echi na obere ihe i nwere taa. Na SheBalance, anyị na-ahụ gị. Nke a bụ ihe mere anyị ji mepụta ikpo okwu naanị maka gị — iji nyere gị aka ijikwa ego gị, mee ka azụmaahịa gị too, ma wuo ọdịnihu ị na-arọ nrọ ya mgbe niile.",
       "ctaPrimary": "Malite Ugbu A N'efu",
       "ctaSecondary": "Mụtakwuo"
     },
     "navigation": {
-      "login": "Login",
-      "getStarted": "Get Started",
-      "dashboard": "Dashboard",
-      "goToDashboard": "Go to Dashboard"
+      "login": "Bata",
+      "getStarted": "Malite",
+      "dashboard": "Dashbọọdụ",
+      "goToDashboard": "Gaa na Dashbọọdụ"
     },
     "about": {
       "title": "Gịnị Bụ SheBalance?",
-      "description": "It's your financial companion. Your silent business partner. Your daily reminder that you deserve more — more knowledge, more control, more confidence."
+      "description": "Ọ bụ onye enyemaka ego gị. Onye ọrụ azụmaahịa gị na-adịghị eme mkpọtụ. Ihe ncheta kwa ụbọchị gị na ị kwesịrị karịa — ihe ọmụma karịa, njikwa karịa, ntụkwasị obi karịa."
     },
     "features": {
       "trackBusiness": "Chekwaa Azụmaahịa Gị N'ụzọ Gị",
-      "trackBusinessDesc": "Whether you sell in the market, run a small shop, or hustle from home, SheBalance helps you keep track of every naira. No need for fancy accounting — just a few taps, and you're in charge.",
+      "trackBusinessDesc": "Ma ị na-ere ahịa n'ahịa, na-arụ obere ụlọ ahịa, ma ọ bụ na-arụ ọrụ n'ụlọ, SheBalance na-enyere gị aka ichekwa naịra ọ bụla. Enweghị mkpa maka ngụkọta ego dị mgbagwoju anya — naanị ntụtụaka ole na ole, ma ị na-achịkwa ya.",
       "builtForYou": "Emere Gị, Site N'aka Ụmụ Nwanyị Na-aghọta",
-      "builtForYouDesc": "Designed with women like you in mind, SheBalance speaks your language — literally. With local language options, simple icons, and voice instructions, it's easy for every woman to feel confident using it.",
+      "builtForYouDesc": "Emebere ya na ụmụ nwanyị dị ka gị n'obi, SheBalance na-asụ asụsụ gị — n'ezie. Site na nhọrọ asụsụ obodo, akara dị mfe, na ntuziaka olu, ọ dị mfe maka nwanyị ọ bụla inwe ntụkwasị obi iji ya.",
       "knowNumbers": "Mara Ọnụọgụgụ Gị — N'ụzọ Doro Anya",
-      "knowNumbersDesc": "No more guessing where your money went. See what's coming in, what's going out, and what's left to save. SheBalance shows you the full picture — so you can make smarter choices.",
+      "knowNumbersDesc": "Enweghịkwa ịkọ nkọ ebe ego gị gara. Hụ ihe na-abata, ihe na-apụ, na ihe fọdụrụ ichekwa. SheBalance na-egosi gị foto zuru ezu — ka i wee nwee ike ime nhọrọ nwere ọgụgụ isi karịa.",
       "learnEarn": "Mụta Ka Ị Na-akpata Ego",
-      "learnEarnDesc": "You don't need a classroom to grow. SheBalance shares small, powerful lessons on saving, planning, and business tips — right inside the app, as you use it. Every day, you grow stronger."
+      "learnEarnDesc": "Achọghị gị klaasị ka ị too. SheBalance na-ekerịta nkuzi ndị dị obere ma dị ike gbasara nchekwa, ime atụmatụ, na ndụmọdụ azụmaahịa — n'ime ngwa ahụ n'onwe ya, ka ị na-eji ya. Kwa ụbọchị, ị na-esikwu ike."
     },
     "whoFor": {
       "title": "Ònyé Bụ SheBalance Bụ Ya?",
-      "subtitle": "SheBalance is for you, the woman who:",
-      "item1": "Runs her business with heart and hustle",
-      "item2": "Wants to prepare for bigger opportunities like loans and investments",
-      "item3": "Dreams of being organized, informed, and independent",
-      "item4": "Believes she can grow — with the right tools by her side"
+      "subtitle": "SheBalance bụ maka gị, nwanyị nke:",
+      "item1": "Na-eji obi na ọrụ ike eme azụmaahịa ya",
+      "item2": "Chọrọ ijikere maka ohere ndị buru ibu dị ka mbinye ego na itinye ego",
+      "item3": "Na-arọ nrọ ịhazi ahịa, ịma ihe, na ịnọọrọ onwe ya",
+      "item4": "Kwere na ọ nwere ike ịmụba — site na ngwa ziri ezi dị n'akụkụ ya"
     },
     "appFeatures": {
       "title": "Ihe Ị Nwere Ike Ime Na SheBalance",
-      "trackIncome": "Track your income and expenses",
-      "manageInventory": "Manage your goods and inventory",
-      "joinSavings": "Join or create Esusu (savings) groups",
-      "getReports": "Get reports you can download and share",
-      "useOffline": "Use the app offline — anytime, anywhere",
-      "localLanguage": "Enjoy support in your local language"
+      "trackIncome": "Chekwaa ego abata na mmefu ego gị",
+      "manageInventory": "Jikwaa ngwa ahịa na ngwa ahịa gị",
+      "joinSavings": "Sonye ma ọ bụ mepụta otu Esusu (nchekwa)",
+      "getReports": "Nweta akụkọ ị nwere ike ibudata ma kesaa",
+      "useOffline": "Jiri ngwa ahụ na-enweghị intanetị — oge ọ bụla, ebe ọ bụla",
+      "localLanguage": "Nụ ụtọ nkwado n'asụsụ obodo gị"
     },
     "faq": {
       "title": "Ajụjụ A Na-ajụkarị",
       "subtitle": "Ihe niile ị kwesịrị ịma gbasara SheBalance",
       "q1": "Gịnị bụ SheBalance?",
-      "a1": "SheBalance is a mobile platform designed specifically for women entrepreneurs to track their business finances, manage inventory, join savings groups, and build financial confidence. It's built with local languages and simple interfaces to make financial management accessible to every woman.",
+      "a1": "SheBalance bụ ikpo okwu ekwe nkwado emebere kpọmkwem maka ụmụ nwanyị na-azụ ahịa ka ha chekwaa ego azụmaahịa ha, jikwaa ngwa ahịa, sonye n'otu nchekwa, ma wuo ntụkwasị obi ego. E mebere ya na asụsụ obodo na oghere dị mfe iji mee ka njikwa ego nwee ike ịnweta nwanyị ọ bụla.",
       "q2": "Ọ bụ n'efu ka a na-eji SheBalance?",
-      "a2": "Yes! SheBalance offers a free tier with essential features to help you get started. We also offer premium features for advanced business needs. You can start with the free version and upgrade when you're ready.",
+      "a2": "Ee! SheBalance na-enye ọkwa efu nwere njirimara dị mkpa iji nyere gị aka ịmalite. Anyị na-enyekwa njirimara premium maka mkpa azụmaahịa dị elu. Ị nwere ike ịmalite na ụdị efu wee kwalite mgbe ị dị njikere.",
       "q3": "Enwere m ike iji SheBalance mgbe m na-enweghị intanetị?",
-      "a3": "Absolutely! SheBalance works offline, so you can track your sales and expenses even without internet connection. Your data will sync when you're back online.",
+      "a3": "N'ezie! SheBalance na-arụ ọrụ na-enweghị intanetị, yabụ ị nwere ike ịchekwa ahịa na mmefu ego gị ọbụlagodi na-enweghị njikọ intanetị. Data gị ga-emekọrịta mgbe ị laghachiri na intanetị.",
       "q4": "Kedụ asụsụ ndị SheBalance na-akwado?",
-      "a4": "SheBalance supports multiple local languages to ensure every woman can use the app comfortably. We're constantly adding more languages based on user needs.",
+      "a4": "SheBalance na-akwado ọtụtụ asụsụ obodo iji hụ na nwanyị ọ bụla nwere ike iji ngwa ahụ nke ọma. Anyị na-agbakwụnyekwa asụsụ ndị ọzọ mgbe niile dabere na mkpa ndị ọrụ.",
       "q5": "Ọ bụ data ego m echekwabara nke ọma?",
-      "a5": "Your data security is our top priority. We use industry-standard encryption and security measures to protect your financial information. Your data is private and secure.",
+      "a5": "Nchekwa data gị bụ ihe kacha anyị mkpa. Anyị na-eji nzobe ọkọlọtọ ụlọ ọrụ na usoro nchekwa iji chebe ozi ego gị. Data gị bụ nke nzuzo ma nọrọ na nchekwa.",
       "q6": "Enwere m ike ibudata akụkọ m?",
-      "a6": "Yes! You can download and share your financial reports. This is especially useful for loan applications, business planning, or sharing with family members.",
+      "a6": "Ee! Ị nwere ike ibudata ma kesaa akụkọ ego gị. Nke a bara uru karịsịa maka arịrịọ mbinye ego, ime atụmatụ azụmaahịa, ma ọ bụ ịkekọrịta ndị ezinụlọ.",
       "q7": "Anaghị m amara teknụzụ nke ọma. Enwere m ike iji nke a?",
-      "a7": "Don't worry! SheBalance is designed to be simple and intuitive. We use familiar icons, voice instructions, and step-by-step guidance to make it easy for everyone to use.",
+      "a7": "Echegbula onwe gị! E mere SheBalance ka ọ dị mfe na nghọta. Anyị na-eji akara ndị a maara nke ọma, ntuziaka olu, na nduzi nzọụkwụ site na nzọụkwụ iji mee ka ọ dịrị onye ọ bụla mfe iji.",
       "q8": "Kedu ka m ga-esi sonye na otu nchekwa?",
-      "a8": "You can join existing savings groups or create your own. The app helps you track contributions, set goals, and manage group savings transparently and securely."
+      "a8": "Ị nwere ike ịbanye n'otu nchekwa dị adị ma ọ bụ mepụta nke gị. Ngwa ahụ na-enyere gị aka ịchekwa ntinye, tọọ ebumnuche, ma jikwaa nchekwa otu n'ụzọ doro anya na nchekwa."
     },
     "cta": {
       "title": "Ego Gị. Ike Gị. Ọdịnihu Gị.",
-      "description1": "At SheBalance, we believe that when a woman understands her money, she multiplies her power — in her business, her family, and her community.",
-      "description2": "So whether you're buying, selling, saving, or just starting out — let SheBalance walk with you.",
+      "description1": "Na SheBalance, anyị kwere na mgbe nwanyị ghọtara ego ya, ọ na-amụba ike ya — n'azụmaahịa ya, ezinụlọ ya, na obodo ya.",
+      "description2": "Ya mere ma ị na-azụ ahịa, na-ere ahịa, na-echekwa, ma ọ bụ na-amalite — ka SheBalance soro gị gaa.",
       "primaryButton": "Malite Njem Gị",
       "secondaryButton": "Bata"
     },
     "footer": {
-      "description": "Empowering women entrepreneurs with simple tools to track money, grow businesses, and build financial confidence.",
-      "company": "Company",
-      "helpCenter": "Help Center",
-      "termsPrivacy": "Terms & Privacy",
-      "about": "About",
-      "contact": "Contact",
+      "description": "Inye ụmụ nwanyị na-azụ ahịa ume site na ngwa dị mfe iji chekwaa ego, mee ka azụmaahịa too, ma wuo ntụkwasị obi ego.",
+      "company": "Ụlọ Ọrụ",
+      "helpCenter": "Ebe Enyemaka",
+      "termsPrivacy": "Usoro & Nzuzo",
+      "about": "Banyere",
+      "contact": "Kpọtụrụ Anyị",
       "newsletter": {
-        "title": "Stay up to date",
-        "description": "Get tips and updates delivered to your inbox.",
-        "placeholder": "Enter your email",
-        "subscribe": "Subscribe"
+        "title": "Nọrọ na-esonye",
+        "description": "Nweta ndụmọdụ na mmelite ezigara na igbe ozi gị.",
+        "placeholder": "Tinye ozi-e gị",
+        "subscribe": "Debanye aha"
       },
-      "copyright": "SheBalance. All rights reserved.",
-      "privacy": "Privacy",
-      "terms": "Terms",
-      "support": "Support"
+      "copyright": "SheBalance. Echekwara ikike niile.",
+      "privacy": "Nzuzo",
+      "terms": "Usoro",
+      "support": "Nkwado"
     }
   },
   "dashboard": "Dashbọọdụ",

@@ -6,9 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Shield, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('auth');
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -55,10 +57,10 @@ const AdminLogin = () => {
               </div>
             </div>
             <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-              Admin Login
+              {t('adminLogin.title')}
             </CardTitle>
             <p className="text-gray-600 dark:text-gray-400 mt-2">
-              Access the admin dashboard
+              {t('adminLogin.subtitle')}
             </p>
           </CardHeader>
           
@@ -66,14 +68,14 @@ const AdminLogin = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Admin Email
+                  {t('adminLogin.emailLabel')}
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  placeholder="Enter admin email"
+                  placeholder={t('adminLogin.emailPlaceholder')}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                   required
                 />
@@ -81,7 +83,7 @@ const AdminLogin = () => {
               
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Admin Password
+                  {t('adminLogin.passwordLabel')}
                 </Label>
                 <div className="relative">
                   <Input
@@ -89,7 +91,7 @@ const AdminLogin = () => {
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
-                    placeholder="Enter admin password"
+                    placeholder={t('adminLogin.passwordPlaceholder')}
                     className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     required
                   />
@@ -108,7 +110,7 @@ const AdminLogin = () => {
                 disabled={isLoading}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50"
               >
-                {isLoading ? 'Signing in...' : 'Sign In'}
+                {isLoading ? t('adminLogin.signingIn') : t('adminLogin.signInButton')}
               </Button>
             </form>
             
@@ -117,7 +119,7 @@ const AdminLogin = () => {
                 onClick={() => navigate('/')}
                 className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
               >
-                ← Back to User Login
+                {t('adminLogin.backToUserLogin')}
               </button>
             </div>
           </CardContent>
