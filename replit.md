@@ -12,6 +12,18 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+### Offline Sync Data Integrity Fix (November 18, 2025)
+- **Problem Resolved**: Fixed critical bug where data added offline (products, sales, etc.) would sync to Supabase but display as "N/A" or show incomplete information in the UI.
+- **Root Cause**: React Query cache wasn't being invalidated after offline data synced to Supabase, causing the UI to display stale optimistic data instead of fetching the real data from the database.
+- **Implementation**: 
+  - Added QueryClient integration to `syncOfflineData()` function in `offlineSync.ts`
+  - Initialize QueryClient synchronously at module level to ensure availability before any component can trigger sync
+  - After successful sync, invalidate all relevant React Query cache keys (products, sales, financial_records, savings, loans, dashboard)
+  - UI now automatically refreshes with complete data from Supabase after sync completes
+- **Files Modified**: `client/src/services/offlineSync.ts`, `client/src/App.tsx`
+- **Testing**: Verified that products added offline now display correct names, prices, and all other fields after sync. All offline operations (sales, financial records, savings, loans) now preserve complete data through the offline queue and sync process.
+- **Architect Validated**: Implementation reviewed and approved - synchronous QueryClient initialization prevents race conditions, ensuring cache invalidation occurs reliably for all manual and automatic sync operations.
+
 ### i18n Translation Hardening (November 18, 2025)
 - **Comprehensive Translation Coverage**: Added 32 new translation keys to eliminate all remaining hardcoded text in Sales, Loans, and Finance components. All UI text now supports multi-language switching.
 - **New Translation Keys**: Added time filters (allTime, today, thisWeek, thisMonth, thisYear), payment methods (cash, credit, bankTransfer, POS), sorting options (newestFirst, oldestFirst), search placeholders, date range inputs, and loan-related messages to common.json.
