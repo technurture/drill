@@ -219,7 +219,7 @@ const Sales = () => {
 
   const handleSaleComplete = () => {
     setIsAddingSale(false);
-    toast.success("Sale completed successfully");
+    toast.success(t('notifications:sale.completed'));
   };
 
   const handleDelete = (sale) => {

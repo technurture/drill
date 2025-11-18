@@ -92,12 +92,42 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async updateProduct(payload: any): Promise<void> {
-    const { id, ...updateData } = payload;
-    const { error } = await supabase
-      .from('products')
-      .update(updateData)
-      .eq('id', id);
-    if (error) throw error;
+    const { id, quantity, storeId, store_id, ...updateData } = payload;
+    
+    // If this is a restock operation (has quantity and storeId/store_id)
+    if (quantity !== undefined && (storeId || store_id)) {
+      const actualStoreId = storeId || store_id;
+      
+      // Fetch current product to calculate new quantity
+      const { data: product, error: fetchError } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', id)
+        .eq('store_id', actualStoreId)
+        .single();
+
+      if (fetchError) throw fetchError;
+      if (!product) throw new Error('Product not found');
+
+      // Calculate new quantity (add the restock amount to current quantity)
+      const newQuantity = product.quantity + quantity;
+
+      // Update with the new total quantity
+      const { error } = await supabase
+        .from('products')
+        .update({ quantity: newQuantity, ...updateData })
+        .eq('id', id)
+        .eq('store_id', actualStoreId);
+
+      if (error) throw error;
+    } else {
+      // Regular update without restock logic
+      const { error } = await supabase
+        .from('products')
+        .update(updateData)
+        .eq('id', id);
+      if (error) throw error;
+    }
   }
 
   private async deleteProduct(payload: any): Promise<void> {
@@ -109,8 +139,29 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createSale(payload: any): Promise<void> {
-    const { error } = await supabase.from('sales').insert([payload]);
-    if (error) throw error;
+    const { items, ...saleData } = payload;
+
+    // Insert sale into 'sales' table
+    const { data: sale, error: saleError } = await supabase
+      .from('sales')
+      .insert([saleData])
+      .select()
+      .single();
+
+    if (saleError) throw saleError;
+    if (!sale) throw new Error('Failed to create sale');
+
+    // Insert sale items into 'sale_items' table if items exist
+    if (items && items.length > 0) {
+      const { error: itemsError } = await supabase.from('sale_items').insert(
+        items.map((item: any) => ({
+          ...item,
+          sale_id: sale.id,
+        }))
+      );
+
+      if (itemsError) throw itemsError;
+    }
   }
 
   private async updateSale(payload: any): Promise<void> {
