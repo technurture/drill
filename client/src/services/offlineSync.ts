@@ -1,8 +1,15 @@
 import { getOfflineQueue, markQueueItemSynced, removeQueueItem } from '@/utils/indexedDB';
 import { supabase } from '@/integrations/supabase';
+import { QueryClient } from '@tanstack/react-query';
 
 const MAX_RETRY_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 2000;
+
+let queryClient: QueryClient | null = null;
+
+export function setQueryClient(client: QueryClient) {
+  queryClient = client;
+}
 
 async function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -221,12 +228,29 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
   }
 
   console.log(`Offline sync complete - Success: ${success}, Failed: ${failed}`);
+  
+  if (success > 0 && queryClient) {
+    console.log('🔄 Invalidating React Query cache after successful sync...');
+    queryClient.invalidateQueries({ queryKey: ['products'] });
+    queryClient.invalidateQueries({ queryKey: ['sales'] });
+    queryClient.invalidateQueries({ queryKey: ['financial_records'] });
+    queryClient.invalidateQueries({ queryKey: ['savings_plans'] });
+    queryClient.invalidateQueries({ queryKey: ['savings_contributions'] });
+    queryClient.invalidateQueries({ queryKey: ['loans'] });
+    queryClient.invalidateQueries({ queryKey: ['loan_repayments'] });
+    queryClient.invalidateQueries({ queryKey: ['dashboard'] });
+    console.log('✅ React Query cache invalidated - UI will refresh with synced data');
+  }
+  
   return { success, failed };
 }
 
 let syncListenerRegistered = false;
 
 export async function registerBackgroundSync(): Promise<void> {
+  // Note: Background sync registration is attempted but there's no service worker
+  // handler for it yet. Actual syncing happens via the 'online' event listener below,
+  // which runs in the window context where QueryClient is available for cache invalidation.
   if ('serviceWorker' in navigator && 'sync' in ServiceWorkerRegistration.prototype) {
     try {
       const registration = await navigator.serviceWorker.ready;

@@ -12,7 +12,7 @@ import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import DashboardLayout from "./components/DashboardLayout";
 import PWAInstallPopup from "./components/PWAInstallPopup";
 import { OfflineIndicator } from "./components/OfflineIndicator";
-import { setupAutoSync } from "./services/offlineSync";
+import { setupAutoSync, setQueryClient } from "./services/offlineSync";
 import LandingPageWrapper from "./components/LandingPageWrapper";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
@@ -49,6 +49,10 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+// Initialize offline sync with QueryClient synchronously
+// This ensures the client is available before any component can trigger sync
+setQueryClient(queryClient);
 
 function ScrollToTop() {
   const { pathname } = useLocation();
