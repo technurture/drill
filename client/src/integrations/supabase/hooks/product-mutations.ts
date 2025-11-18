@@ -74,7 +74,9 @@ export const useGetProduct = (product_id: string) =>
 
 export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "products",
+    action: "update",
     mutationFn: async ({
       id,
       ...updateData
@@ -96,12 +98,18 @@ export const useUpdateProduct = () => {
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
+    getOptimisticData: (variables) => ({
+      ...variables,
+      updated_at: new Date().toISOString(),
+    } as Product),
   });
 };
 
 export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "products",
+    action: "delete",
     mutationFn: async ({ id, storeId }: { id: string; storeId: string }) => {
       const { error } = await supabase
         .from("products")
@@ -110,6 +118,7 @@ export const useDeleteProduct = () => {
         .eq("store_id", storeId);
 
       if (error) throw error;
+      return { id, store_id: storeId } as any;
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -117,6 +126,10 @@ export const useDeleteProduct = () => {
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.id,
+      store_id: variables.storeId,
+    } as any),
   });
 };
 
@@ -196,7 +209,9 @@ export const useReturnProduct = () => {
 
 export const useRestockProduct = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "products",
+    action: "update",
     mutationFn: async ({
       id,
       quantity,
@@ -237,6 +252,12 @@ export const useRestockProduct = () => {
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.id,
+      store_id: variables.storeId,
+      quantity: variables.quantity,
+      updated_at: new Date().toISOString(),
+    } as any),
   });
 };
 

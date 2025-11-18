@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient, UseMutationOptions } from "@tanstack/react-query";
 import { useOfflineStatus } from "./useOfflineStatus";
-import { addToOfflineQueue } from "@/utils/indexedDB";
+import { actionQueueRepository } from "@/offline/queue/ActionQueueRepository";
+import { ActionType } from "@/offline/types";
 import { toast } from "sonner";
 
 interface OfflineMutationConfig<TData, TVariables> {
@@ -10,6 +11,40 @@ interface OfflineMutationConfig<TData, TVariables> {
   onSuccess?: (data: TData, variables: TVariables) => void;
   onError?: (error: Error, variables: TVariables) => void;
   getOptimisticData?: (variables: TVariables) => TData;
+}
+
+// Map table name and action to ActionType
+function getActionType(tableName: string, action: string): ActionType {
+  const mapping: Record<string, ActionType> = {
+    'products-create': 'CREATE_PRODUCT',
+    'products-update': 'UPDATE_PRODUCT',
+    'products-delete': 'DELETE_PRODUCT',
+    'sales-create': 'CREATE_SALE',
+    'sales-update': 'UPDATE_SALE',
+    'sales-delete': 'DELETE_SALE',
+    'stores-create': 'CREATE_STORE',
+    'stores-update': 'UPDATE_STORE',
+    'financial_records-create': 'ADD_FINANCIAL_RECORD',
+    'financial_records-update': 'UPDATE_FINANCIAL_RECORD',
+    'financial_records-delete': 'DELETE_FINANCIAL_RECORD',
+    'loans-create': 'CREATE_LOAN',
+    'loans-update': 'UPDATE_LOAN',
+    'loans-delete': 'DELETE_LOAN',
+    'loan_repayments-create': 'ADD_LOAN_REPAYMENT',
+    'savings_plans-create': 'CREATE_SAVINGS_PLAN',
+    'savings_plans-delete': 'DELETE_SAVINGS_PLAN',
+    'savings_contributions-create': 'ADD_SAVINGS_CONTRIBUTION',
+    'savings_contributions-delete': 'DELETE_SAVINGS_CONTRIBUTION',
+  };
+  
+  const key = `${tableName}-${action}`;
+  const actionType = mapping[key];
+  
+  if (!actionType) {
+    throw new Error(`Unknown action type for ${key}`);
+  }
+  
+  return actionType;
 }
 
 /**
@@ -44,13 +79,17 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
           }));
         }
         
-        // CRITICAL: Queue the complete payload including nested data (items, etc.)
-        // The sync service will use this full payload when replaying the mutation
-        await addToOfflineQueue(config.action, config.tableName, queueData);
+        // Queue using the new ActionQueue system
+        const actionType = getActionType(config.tableName, config.action);
+        await actionQueueRepository.enqueue(actionType, queueData, {
+          userId: (queueData as any).user_id,
+          storeId: (queueData as any).store_id,
+          maxRetries: 3,
+        });
         
         // Log queued data for verification (truncate for readability)
         const dataPreview = JSON.stringify(queueData, null, 2).substring(0, 300);
-        console.log(`✅ Queued for sync: ${config.action} on ${config.tableName}`, dataPreview);
+        console.log(`✅ Queued for sync: ${config.action} on ${config.tableName} (${actionType})`, dataPreview);
         
         // Show user-friendly toast notification
         const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';
