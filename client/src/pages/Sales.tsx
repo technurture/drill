@@ -239,11 +239,11 @@ const Sales = () => {
           quantity: sale?.quantity
          })
       })
-      toast.success("Sale deleted successfully");
+      toast.success(t('notifications:sale.deleted'));
       setIsDeleteModalOpen(false);
     } catch (error) {
       console.error(error)
-      toast.error("Failed to delete sale");
+      toast.error(t('notifications:sale.failedToDelete'));
     }
   };
 
@@ -263,11 +263,11 @@ const Sales = () => {
       });
       pushNotification(
         `"${newNote}" added by Admin`,
-        "New Note",
+        t('common:newNote'),
       );
-      toast.success("Note updated successfully");
+      toast.success(t('notifications:sale.noteUpdated'));
     } catch (error) {
-      toast.error("Failed to update note");
+      toast.error(t('notifications:sale.failedToUpdateNote'));
     }
   };
 
@@ -279,7 +279,7 @@ const Sales = () => {
           <div className="flex flex-row items-center justify-between gap-4">
             <div className="space-y-1">
               <h1 className="text-xl lg:text-3xl font-bold text-gray-900 dark:text-white">
-                Sales 
+                {t('sales.title')}
               </h1>
             </div>
             
@@ -289,7 +289,7 @@ const Sales = () => {
                 <DialogTrigger asChild>
                   <Button variant="outline" className="flex items-center gap-2">
                     <Filter className="h-4 w-4" />
-                    <span className="hidden md:inline">Filters</span>
+                    <span className="hidden md:inline">{t('common:filters')}</span>
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
@@ -324,7 +324,7 @@ const Sales = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="date">Date</Label>
+                      <Label htmlFor="date">{t('sales.date')}</Label>
                       <Input
                         id="date"
                         type="date"
@@ -383,13 +383,13 @@ const Sales = () => {
                         }}
                         className="flex-1"
                       >
-                        Clear Filters
+                        {t('common:clearFilters')}
                       </Button>
                       <Button 
                         onClick={() => setIsFilterModalOpen(false)}
                         className="flex-1"
                       >
-                        Apply Filters
+                        {t('common:applyFilters')}
                       </Button>
                     </div>
                   </div>

@@ -34,6 +34,7 @@ import { SubscriptionContext } from "@/contexts/SubscriptionContext";
 import LogoutModal from "./ui/modals/LogoutModal";
 import { requestNotificationPermission } from "@/integrations/firebase/firebase";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = ({ onClose, isSideBar }) => {
   const { user } = useAuth();
@@ -43,6 +44,7 @@ const Sidebar = ({ onClose, isSideBar }) => {
   const [isLogoutModal, setLogoutModal] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const { tSubheading } = useLanguage();
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (user?.id) {
@@ -252,14 +254,14 @@ const Sidebar = ({ onClose, isSideBar }) => {
               onClick={() => setLogoutModal(true)}
               variant="ghost"
               className={`w-full ${collapsed ? 'justify-center p-3' : 'justify-start space-x-3 p-3'} rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 group`}
-              title={collapsed ? tSubheading("signOut") : undefined}
+              title={collapsed ? t('signOut') : undefined}
             >
               <div className="w-8 h-8 bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 rounded-lg flex items-center justify-center">
                 <LogOut size={16} />
               </div>
               {!collapsed && (
                 <span className="font-medium text-sm text-gray-600 dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400">
-                  {tSubheading("signOut")}
+                  {t('signOut')}
                 </span>
               )}
             </Button>
