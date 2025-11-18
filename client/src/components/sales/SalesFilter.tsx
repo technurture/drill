@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Search, Filter, X, Calendar, CreditCard, Clock, SortAsc } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const SalesFilter = ({
   dateRange,
@@ -20,11 +21,13 @@ const SalesFilter = ({
   sortOrder,
   setSortOrder,
 }) => {
+  const { t } = useTranslation('common');
+  
   const filters = [
-    { key: "date", label: "Date", icon: Calendar },
-    { key: "duration", label: "Duration", icon: Clock },
-    { key: "payment", label: "Payment Mode", icon: CreditCard },
-    { key: "sort", label: "Sort By", icon: SortAsc },
+    { key: "date", label: t('date'), icon: Calendar },
+    { key: "duration", label: t('duration'), icon: Clock },
+    { key: "payment", label: t('paymentMethod'), icon: CreditCard },
+    { key: "sort", label: t('sortBy'), icon: SortAsc },
   ];
   const [isFilter, setFilter] = useState<string>();
   const handleFilter = (key: string) => setFilter(key);
@@ -40,26 +43,26 @@ const SalesFilter = ({
 
   // Options for react-select
   const durationOptions = [
-    { value: "all", label: "All Time" },
-    { value: "daily", label: "Today" },
-    { value: "weekly", label: "This Week" },
-    { value: "monthly", label: "This Month" },
-    { value: "yearly", label: "This Year" },
+    { value: "all", label: t('allTime') },
+    { value: "daily", label: t('today') },
+    { value: "weekly", label: t('thisWeek') },
+    { value: "monthly", label: t('thisMonth') },
+    { value: "yearly", label: t('thisYear') },
   ];
   const paymentOptions = [
-    { value: "all", label: "All Methods" },
-    { value: "cash", label: "Cash" },
-    { value: "credit", label: "Credit" },
-    { value: "bank_transfer", label: "Bank Transfer" },
-    { value: "POS", label: "POS" },
+    { value: "all", label: t('allMethods') },
+    { value: "cash", label: t('cash') },
+    { value: "credit", label: t('credit') },
+    { value: "bank_transfer", label: t('bankTransfer') },
+    { value: "POS", label: t('pos') },
   ];
   const sortOptions = [
-    { value: "newest", label: "Newest First" },
-    { value: "oldest", label: "Oldest First" },
+    { value: "newest", label: t('newestFirst') },
+    { value: "oldest", label: t('oldestFirst') },
   ];
   const filterOptions = [
     ...filters.map(f => ({ value: f.key, label: f.label, icon: f.icon })),
-    { value: "clear", label: "Clear All", icon: X },
+    { value: "clear", label: t('clearAll'), icon: X },
   ];
 
   // Separate date pickers for 'From' and 'To'
@@ -168,16 +171,16 @@ const SalesFilter = ({
             <div className="space-y-3">
               <div className="flex gap-2 items-center">
                 <Calendar className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Date Range</span>
+                <span className="text-sm font-medium">{t('dateRange')}</span>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs mb-2 text-muted-foreground font-medium">From</label>
+                  <label className="block text-xs mb-2 text-muted-foreground font-medium">{t('from')}</label>
                   <DatePicker
                     selected={fromDate}
                     onChange={handleFromDateChange}
                     className={`w-full border rounded-lg px-3 py-2.5 text-sm transition-all ${datePickerClass} ${inputThemeClass}`}
-                    placeholderText="Start date"
+                    placeholderText={t('startDatePlaceholder')}
                     calendarClassName={effectiveTheme === "dark" ? "dark-datepicker-calendar" : ""}
                     dateFormat="MMM dd, yyyy"
                     isClearable
@@ -185,12 +188,12 @@ const SalesFilter = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-2 text-muted-foreground font-medium">To</label>
+                  <label className="block text-xs mb-2 text-muted-foreground font-medium">{t('to')}</label>
                   <DatePicker
                     selected={toDate}
                     onChange={handleToDateChange}
                     className={`w-full border rounded-lg px-3 py-2.5 text-sm transition-all ${datePickerClass} ${inputThemeClass}`}
-                    placeholderText="End date"
+                    placeholderText={t('endDatePlaceholder')}
                     calendarClassName={effectiveTheme === "dark" ? "dark-datepicker-calendar" : ""}
                     dateFormat="MMM dd, yyyy"
                     isClearable
@@ -208,14 +211,14 @@ const SalesFilter = ({
             <div className="space-y-3">
               <div className="flex gap-2 items-center">
                 <Clock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Duration</span>
+                <span className="text-sm font-medium">{t('duration')}</span>
               </div>
               <Select
                 options={durationOptions}
                 value={durationOptions.find(opt => opt.value === salesView)}
                 onChange={opt => setSalesView(opt.value)}
                 className="w-full"
-                placeholder="Select duration"
+                placeholder={t('selectDuration')}
                 styles={selectStyles}
               />
             </div>
@@ -228,14 +231,14 @@ const SalesFilter = ({
             <div className="space-y-3">
               <div className="flex gap-2 items-center">
                 <CreditCard className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Payment Method</span>
+                <span className="text-sm font-medium">{t('paymentMethod')}</span>
               </div>
               <Select
                 options={paymentOptions}
                 value={paymentOptions.find(opt => opt.value === paymentModeFilter)}
                 onChange={opt => setPaymentModeFilter(opt.value)}
                 className="w-full"
-                placeholder="Choose payment method"
+                placeholder={t('choosePaymentMethod')}
                 styles={selectStyles}
               />
             </div>
@@ -248,14 +251,14 @@ const SalesFilter = ({
             <div className="space-y-3">
               <div className="flex gap-2 items-center">
                 <SortAsc className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Sort Order</span>
+                <span className="text-sm font-medium">{t('sortOrder')}</span>
               </div>
               <Select
                 options={sortOptions}
                 value={sortOptions.find(opt => opt.value === sortOrder)}
                 onChange={opt => setSortOrder(opt.value)}
                 className="w-full"
-                placeholder="Sort by"
+                placeholder={t('sortBy')}
                 styles={selectStyles}
               />
             </div>
@@ -274,7 +277,7 @@ const SalesFilter = ({
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search by product name, sales rep, or transaction ID..."
+              placeholder={t('searchByProductNameOrRep')}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 h-12 text-base border-2 bg-white dark:bg-transparent transition-all"
             />
@@ -286,14 +289,14 @@ const SalesFilter = ({
             <div className="space-y-2">
               <label className="flex gap-2 items-center text-sm font-medium text-muted-foreground">
                 <Calendar className="w-4 h-4" />
-                Date Range
+                {t('dateRange')}
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <DatePicker
                   selected={fromDate}
                   onChange={handleFromDateChange}
                   className={`w-full border-2 rounded-lg px-3 py-2.5 text-sm transition-all ${datePickerClass} ${inputThemeClass}`}
-                  placeholderText="From"
+                  placeholderText={t('from')}
                   calendarClassName={effectiveTheme === "dark" ? "dark-datepicker-calendar" : ""}
                   dateFormat="MMM dd"
                   isClearable
@@ -303,7 +306,7 @@ const SalesFilter = ({
                   selected={toDate}
                   onChange={handleToDateChange}
                   className={`w-full border-2 rounded-lg px-3 py-2.5 text-sm transition-all ${datePickerClass} ${inputThemeClass}`}
-                  placeholderText="To"
+                  placeholderText={t('to')}
                   calendarClassName={effectiveTheme === "dark" ? "dark-datepicker-calendar" : ""}
                   dateFormat="MMM dd"
                   isClearable
@@ -316,13 +319,13 @@ const SalesFilter = ({
             <div className="space-y-2">
               <label className="flex gap-2 items-center text-sm font-medium text-muted-foreground">
                 <Clock className="w-4 h-4" />
-                Duration
+                {t('duration')}
               </label>
               <Select
                 options={durationOptions}
                 value={durationOptions.find(opt => opt.value === salesView)}
                 onChange={opt => setSalesView(opt.value)}
-                placeholder="Select duration"
+                placeholder={t('selectDuration')}
                 styles={selectStyles}
               />
             </div>
@@ -331,13 +334,13 @@ const SalesFilter = ({
             <div className="space-y-2">
               <label className="flex gap-2 items-center text-sm font-medium text-muted-foreground">
                 <CreditCard className="w-4 h-4" />
-                Payment Method
+                {t('paymentMethod')}
               </label>
               <Select
                 options={paymentOptions}
                 value={paymentOptions.find(opt => opt.value === paymentModeFilter)}
                 onChange={opt => setPaymentModeFilter(opt.value)}
-                placeholder="Choose method"
+                placeholder={t('chooseMethod')}
                 styles={selectStyles}
               />
             </div>
@@ -346,13 +349,13 @@ const SalesFilter = ({
             <div className="space-y-2">
               <label className="flex gap-2 items-center text-sm font-medium text-muted-foreground">
                 <SortAsc className="w-4 h-4" />
-                Sort Order
+                {t('sortOrder')}
               </label>
               <Select
                 options={sortOptions}
                 value={sortOptions.find(opt => opt.value === sortOrder)}
                 onChange={opt => setSortOrder(opt.value)}
-                placeholder="Sort by"
+                placeholder={t('sortBy')}
                 styles={selectStyles}
               />
             </div>
@@ -363,7 +366,7 @@ const SalesFilter = ({
             <div className="flex gap-2">
               {(dateRange.from || dateRange.to || salesView !== "all" || paymentModeFilter !== "all" || sortOrder !== "newest") && (
                 <Badge variant="secondary" className="text-xs">
-                  Filters Active
+                  {t('filtersActive')}
                 </Badge>
               )}
             </div>
@@ -375,7 +378,7 @@ const SalesFilter = ({
                 className="flex gap-1 items-center text-xs text-muted-foreground hover:text-foreground"
               >
                 <X className="w-3 h-3" />
-                Clear
+                {t('clear')}
               </Button>
             )}
           </div>
@@ -392,7 +395,7 @@ const SalesFilter = ({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Search sales..."
+            placeholder={t('searchSales')}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10 h-11 border-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
           />
@@ -411,7 +414,7 @@ const SalesFilter = ({
           placeholder={
             <div className="flex gap-2 items-center">
               <Filter className="w-4 h-4" />
-              <span>Filter</span>
+              <span>{t('filter')}</span>
             </div>
           }
           styles={selectStyles}

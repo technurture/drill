@@ -15,21 +15,23 @@ import DeleteConfirmationModal from "@/components/inventory/DeleteConfirmationMo
 import { AlertTriangle, CheckCircle, DollarSign, History, Plus, TrendingDown } from "lucide-react";
 import { formatNumber } from "@/utils/formatNumber";
 import { toast } from "sonner";
-
-const frequencyOptions: { value: RepaymentFrequency; label: string }[] = [
-  { value: "everyday", label: "Everyday" },
-  { value: "every_2_days", label: "Every 2 days" },
-  { value: "every_3_days", label: "Every 3 days" },
-  { value: "every_week", label: "Every week" },
-  { value: "every_2_weeks", label: "Every two weeks" },
-  { value: "monthly", label: "Monthly" },
-  { value: "every_2_months", label: "Every 2 months" },
-  { value: "every_3_months", label: "Every 3 months" },
-  { value: "yearly", label: "Yearly" },
-];
+import { useTranslation } from "react-i18next";
 
 const Loans = () => {
+  const { t } = useTranslation('common');
   const store = useContext(StoreContext);
+
+  const frequencyOptions: { value: RepaymentFrequency; label: string }[] = [
+    { value: "everyday", label: t('everyday') },
+    { value: "every_2_days", label: t('every2Days') },
+    { value: "every_3_days", label: t('every3Days') },
+    { value: "every_week", label: t('everyWeek') },
+    { value: "every_2_weeks", label: t('every2Weeks') },
+    { value: "monthly", label: t('monthly') },
+    { value: "every_2_months", label: t('every2Months') },
+    { value: "every_3_months", label: t('every3Months') },
+    { value: "yearly", label: t('yearly') },
+  ];
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isRepayOpen, setIsRepayOpen] = useState(false);
@@ -117,9 +119,9 @@ const Loans = () => {
         repayment_frequency: "every_week",
         purpose: "",
       });
-      toast.success("Loan created");
+      toast.success(t('loanCreated'));
     } catch (err: any) {
-      toast.error(err?.message || "Failed to create loan");
+      toast.error(err?.message || t('failedToCreateLoan'));
     }
   };
 
@@ -135,9 +137,9 @@ const Loans = () => {
       });
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      toast.success("Repayment added");
+      toast.success(t('repaymentAdded'));
     } catch (err: any) {
-      toast.error(err?.message || "Failed to add repayment");
+      toast.error(err?.message || t('failedToCreateLoan'));
     }
   };
 
@@ -167,26 +169,26 @@ const Loans = () => {
               </DialogHeader>
               <form onSubmit={handleCreateLoan} className="space-y-4">
                 <div>
-                  <Label>Borrower / Lender</Label>
+                  <Label>{t('borrowerLender')}</Label>
                   <Input value={createForm.borrower_name} onChange={e => setCreateForm(f => ({ ...f, borrower_name: e.target.value }))} placeholder="e.g. Access Bank" />
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <Label>Principal (₦)</Label>
+                    <Label>{t('principalAmount')}</Label>
                     <Input type="number" inputMode="decimal" value={createForm.principal} onChange={e => setCreateForm(f => ({ ...f, principal: e.target.value }))} placeholder="0" />
                   </div>
                   <div>
                     <div className="flex items-center justify-between">
-                      <Label>Interest</Label>
+                      <Label>{t('interest')}</Label>
                       <div className="flex items-center gap-2 text-xs text-gray-500">
-                        <span>Enter by</span>
+                        <span>{t('enterBy')}</span>
                         <Select value={createForm.interest_mode} onValueChange={(v: any) => setCreateForm(f => ({ ...f, interest_mode: v }))}>
                           <SelectTrigger className="h-7 w-[120px]">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="percent">Percent %</SelectItem>
-                            <SelectItem value="amount">Amount ₦</SelectItem>
+                            <SelectItem value="percent">{t('percentLabel')}</SelectItem>
+                            <SelectItem value="amount">{t('amountLabel')}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -197,7 +199,7 @@ const Loans = () => {
                           <Input type="number" inputMode="decimal" step="0.1" value={createForm.interest_percent} onChange={e => setCreateForm(f => ({ ...f, interest_percent: e.target.value }))} placeholder="0" />
                           <span className="absolute inset-y-0 right-3 flex items-center text-gray-500">%</span>
                         </div>
-                        <EquivalentFromPercent principal={createForm.principal} percent={createForm.interest_percent} />
+                        <EquivalentFromPercent principal={createForm.principal} percent={createForm.interest_percent} t={t} />
                       </div>
                     ) : (
                       <div className="mt-1">
@@ -205,23 +207,23 @@ const Loans = () => {
                           <Input type="number" inputMode="decimal" value={createForm.interest_amount} onChange={e => setCreateForm(f => ({ ...f, interest_amount: e.target.value }))} placeholder="0" />
                           <span className="absolute inset-y-0 right-3 flex items-center text-gray-500">₦</span>
                         </div>
-                        <EquivalentFromAmount principal={createForm.principal} amount={createForm.interest_amount} />
+                        <EquivalentFromAmount principal={createForm.principal} amount={createForm.interest_amount} t={t} />
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <Label>Start Date</Label>
+                    <Label>{t('startDate')}</Label>
                     <Input type="date" value={createForm.start_date} onChange={e => setCreateForm(f => ({ ...f, start_date: e.target.value }))} />
                   </div>
                   <div>
-                    <Label>Due Date</Label>
+                    <Label>{t('endDate').replace('End Date', 'Due Date')}</Label>
                     <Input type="date" value={createForm.due_date} onChange={e => setCreateForm(f => ({ ...f, due_date: e.target.value }))} />
                   </div>
                 </div>
                 <div>
-                  <Label>Repayment Frequency</Label>
+                  <Label>{t('repaymentFrequency')}</Label>
                   <Select value={createForm.repayment_frequency} onValueChange={(v: RepaymentFrequency) => setCreateForm(f => ({ ...f, repayment_frequency: v }))}>
                     <SelectTrigger>
                       <SelectValue />
@@ -234,12 +236,12 @@ const Loans = () => {
                   </Select>
                 </div>
                 <div>
-                  <Label>Purpose (optional)</Label>
-                  <Input value={createForm.purpose} onChange={e => setCreateForm(f => ({ ...f, purpose: e.target.value }))} placeholder="What is the loan for?" />
+                  <Label>{t('purposeOptional')}</Label>
+                  <Input value={createForm.purpose} onChange={e => setCreateForm(f => ({ ...f, purpose: e.target.value }))} placeholder={t('whatLoanFor')} />
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">Create</Button>
-                  <Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>Cancel</Button>
+                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{t('create')}</Button>
+                  <Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>{t('cancel')}</Button>
                 </div>
               </form>
             </DialogContent>
@@ -257,7 +259,7 @@ const Loans = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">₦{new Intl.NumberFormat().format(totals.totalPrincipal)}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Principal + interest due</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('principalPlusInterest')}</p>
             </CardContent>
           </Card>
 
@@ -270,7 +272,7 @@ const Loans = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-600">₦{new Intl.NumberFormat().format(totals.totalRepaid)}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Across all loans</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('acrossAllLoans')}</p>
             </CardContent>
           </Card>
 
@@ -283,14 +285,14 @@ const Loans = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-red-600">₦{new Intl.NumberFormat().format(totals.outstanding)}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Amount left to repay</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('amountLeftToRepay')}</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Section heading */}
         <div className="mb-3 md:mb-4">
-          <h2 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white">All Loans</h2>
+          <h2 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white">{t('allLoans')}</h2>
         </div>
 
         {/* Loans list */}
@@ -311,39 +313,39 @@ const Loans = () => {
                       <span className="font-semibold">{loan.borrower_name}</span>
                       <Badge className={statusColor}>{loan.status}</Badge>
                     </div>
-                    <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Due: {format(new Date(loan.due_date), 'dd MMM yyyy')}</div>
+                    <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{t('due')}: {format(new Date(loan.due_date), 'dd MMM yyyy')}</div>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-6 gap-3 text-sm">
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">Principal</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('principalAmount').replace(' (₦)', '')}</div>
                       <div className="font-semibold">₦{new Intl.NumberFormat().format(Number(loan.principal || 0))}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">Interest</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('interest')}</div>
                       <div className="font-semibold">{new Intl.NumberFormat().format(Number(loan.interest_rate || 0) * 100)}%</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">Total Repayment</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('totalRepayment')}</div>
                       <div className="font-semibold">₦{new Intl.NumberFormat().format(totalPayable)}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">Repaid</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('repaid')}</div>
                       <div className="font-semibold text-green-600">₦{new Intl.NumberFormat().format(totalRepaid)}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">Outstanding</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('outstanding')}</div>
                       <div className="font-semibold text-red-600">₦{new Intl.NumberFormat().format(outstanding)}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">Frequency</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('frequency')}</div>
                       <div className="font-semibold capitalize">{(loan.repayment_frequency || '').replace('_', ' ')}</div>
                     </div>
                   </div>
                   <div className="mt-4">
                     <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-                      <span>Progress</span>
+                      <span>{t('progress')}</span>
                       <span>{progress}%</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden">
@@ -351,9 +353,9 @@ const Loans = () => {
                     </div>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    <Button variant="outline" onClick={() => { setActiveLoan(loan); setIsRepayOpen(true); }}>Add Repayment</Button>
+                    <Button variant="outline" onClick={() => { setActiveLoan(loan); setIsRepayOpen(true); }}>{t('addRepayment')}</Button>
                     <Button variant="outline" onClick={() => { setActiveLoan(loan); setIsHistoryOpen(true); }}>
-                      <History className="h-4 w-4 mr-2" /> History
+                      <History className="h-4 w-4 mr-2" /> {t('history')}
                     </Button>
                     <Button
                       variant="destructive"
@@ -375,26 +377,26 @@ const Loans = () => {
         <Dialog open={isRepayOpen} onOpenChange={setIsRepayOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Add Repayment</DialogTitle>
+              <DialogTitle>{t('addRepayment')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleAddRepayment} className="space-y-4">
               <div>
-                <Label>Amount (₦)</Label>
+                <Label>{t('amountNaira')}</Label>
                 <Input type="number" inputMode="decimal" value={repaymentForm.amount} onChange={e => setRepaymentForm(f => ({ ...f, amount: e.target.value }))} placeholder="0" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label>Paid At</Label>
+                  <Label>{t('paidAt')}</Label>
                   <Input type="date" value={repaymentForm.paid_at} onChange={e => setRepaymentForm(f => ({ ...f, paid_at: e.target.value }))} />
                 </div>
                 <div>
-                  <Label>Note (optional)</Label>
+                  <Label>{t('noteOptional')}</Label>
                   <Input value={repaymentForm.note} onChange={e => setRepaymentForm(f => ({ ...f, note: e.target.value }))} placeholder="e.g. Cash transfer" />
                 </div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">Save</Button>
-                <Button type="button" variant="outline" onClick={() => setIsRepayOpen(false)}>Cancel</Button>
+                <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{t('save')}</Button>
+                <Button type="button" variant="outline" onClick={() => setIsRepayOpen(false)}>{t('cancel')}</Button>
               </div>
             </form>
           </DialogContent>
@@ -408,9 +410,9 @@ const Loans = () => {
             if (!activeLoan) return;
             try {
               await deleteLoan.mutateAsync({ loanId: activeLoan.id });
-              toast.success("Loan deleted");
+              toast.success(t('loanDeleted'));
             } catch (err: any) {
-              toast.error(err?.message || "Failed to delete loan");
+              toast.error(err?.message || t('failedToCreateLoan'));
             } finally {
               setIsDeleteOpen(false);
               setActiveLoan(null);
@@ -423,13 +425,13 @@ const Loans = () => {
         <Dialog open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Repayment History</DialogTitle>
+              <DialogTitle>{t('repaymentHistory')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-3">
               {activeLoan ? (
-                <LoanHistory loanId={activeLoan.id} />
+                <LoanHistory loanId={activeLoan.id} t={t} />
               ) : (
-                <div className="text-sm text-gray-500">No loan selected.</div>
+                <div className="text-sm text-gray-500">{t('noLoanSelected')}</div>
               )}
             </div>
           </DialogContent>
@@ -439,25 +441,25 @@ const Loans = () => {
   );
 };
 
-const EquivalentFromPercent = ({ principal, percent }: { principal: string; percent: string }) => {
+const EquivalentFromPercent = ({ principal, percent, t }: { principal: string; percent: string; t: any }) => {
   const p = Number(principal || 0);
   const pct = Number(percent || 0);
   const amount = p > 0 && pct > 0 ? (p * pct) / 100 : 0;
   return (
-    <div className="mt-1 text-xs text-gray-500">Equivalent interest amount: ₦{amount.toLocaleString()}</div>
+    <div className="mt-1 text-xs text-gray-500">{t('equivalentInterestAmount')}: ₦{amount.toLocaleString()}</div>
   );
 };
 
-const EquivalentFromAmount = ({ principal, amount }: { principal: string; amount: string }) => {
+const EquivalentFromAmount = ({ principal, amount, t }: { principal: string; amount: string; t: any }) => {
   const p = Number(principal || 0);
   const a = Number(amount || 0);
   const pct = p > 0 && a > 0 ? (a / p) * 100 : 0;
   return (
-    <div className="mt-1 text-xs text-gray-500">Equivalent interest percent: {pct.toFixed(2)}%</div>
+    <div className="mt-1 text-xs text-gray-500">{t('equivalentInterestPercent')}: {pct.toFixed(2)}%</div>
   );
 };
 
-const LoanHistory = ({ loanId }: { loanId: string }) => {
+const LoanHistory = ({ loanId, t }: { loanId: string; t: any }) => {
   const { data: repayments } = useRepayments(loanId);
   const totalRepaid = (repayments || []).reduce((sum: number, r: any) => sum + Number(r.amount || 0), 0);
   if (!repayments?.length) {
@@ -466,15 +468,15 @@ const LoanHistory = ({ loanId }: { loanId: string }) => {
         <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
           <History className="h-6 w-6 text-gray-400" />
         </div>
-        <div className="text-sm text-gray-600 dark:text-gray-300">No repayments yet</div>
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Repayments will appear here as you add them</div>
+        <div className="text-sm text-gray-600 dark:text-gray-300">{t('noRepaymentsYet')}</div>
+        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('repaymentsWillAppear')}</div>
       </div>
     );
   }
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between rounded-lg border border-gray-200 dark:border-gray-800 p-3 bg-white dark:bg-[#18191A]">
-        <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Total Repaid</div>
+        <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{t('totalRepaid')}</div>
         <div className="text-base md:text-lg font-semibold text-green-600">₦{new Intl.NumberFormat().format(totalRepaid)}</div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-800 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
