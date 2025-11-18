@@ -350,7 +350,148 @@
     "noHelpArticlesFound": "We no see any help articles",
     "adjustSearchFilters": "Try adjust your search or filters",
     "uncategorized": "Uncategorized",
-    "viewsCount": "views"
+    "viewsCount": "views",
+    "languages": {
+      "english": "English",
+      "yoruba": "Yoruba",
+      "hausa": "Hausa",
+      "igbo": "Igbo",
+      "pidgin": "Pidgin",
+      "pidginEnglish": "Pidgin English"
+    },
+    "audioTutorials": {
+      "englishTitle": "Understanding Bookkeeping Basics",
+      "englishDescription": "Learn the fundamentals of bookkeeping, including recording transactions, managing accounts, and maintaining financial records.",
+      "yorubaTitle": "Ìmọ̀ Ìwé Ìṣirò - Àwọn Ìpilẹ̀",
+      "yorubaDescription": "Kọ́ àwọn ìpilẹ̀ ìṣirò owó, títẹ̀ àwọn ìṣòwò, àti ìṣàkóso àwọn àkọsílẹ̀ owó.",
+      "pidginTitle": "How to Do Bookkeeping for Beginners",
+      "pidginDescription": "Learn how to write down your money matter, keep record of your business, and manage your accounts well well.",
+      "hausaTitle": "Koyon Rubutun Kudade na Farko",
+      "hausaDescription": "Koyi tushen rubutun kudade, da yadda ake rubuta kasuwanci, da kula da bayanan kudi.",
+      "igboTitle": "Ịmụta Ndekọ Ego - Isi Ihe",
+      "igboDescription": "Mụta ụzọ isi edekọ ego, ịdepụta azụmahịa, na ijikwa ndekọ ego niile."
+    },
+    "manual": {
+      "introduction": {
+        "title": "Introduction",
+        "subtitle": "Welcome to SheBalance",
+        "description": "SheBalance na financial management app wey dem design to help people and businesses track sales, manage expenses, monitor inventory, save money, and keep proper financial records. This manual dey provide simple step-by-step guide on how to use the app well well.",
+        "step1": "Track sales and revenue with ease",
+        "step2": "Record and categorize expenses",
+        "step3": "Manage inventory",
+        "step4": "Create savings plans and monitor progress",
+        "step5": "Maintain clean financial records for one place"
+      },
+      "gettingStarted": {
+        "title": "Create Account & Login",
+        "subtitle": "Account Creation & Login",
+        "description": "Create your SheBalance account and sign in to access your dashboard.",
+        "step1": "To download the SheBalance app for Android, visit www.shebalance.org and click the install prompt when e show",
+        "step2": "To download the SheBalance app for iOS, visit www.shebalance.org for safari, click the share button, then the 'Add to Home Screen' button",
+        "step3": "Open the app and tap 'Create Account'.",
+        "step4": "Fill your details like name, phone number, and password.",
+        "step5": "Confirm your account (you fit receive code through email).",
+        "step6": "To Login, Enter your phone number/email and password to log in.",
+        "step7": "After you don login, dem go direct you to the Dashboard."
+      },
+      "dashboard": {
+        "title": "Dashboard Overview",
+        "subtitle": "Understanding the Dashboard",
+        "description": "Your dashboard dey provide snapshot of your financial activities.",
+        "step1": "Total Revenue: Amount wey dem generate from sales",
+        "step2": "Total Sales: Number of sales transactions wey don complete",
+        "step3": "Total Savings: Amount wey you don save for savings plans",
+        "step4": "Low Stock Alert: Products wey dey run low for stock",
+        "step5": "Total Income: All income wey dem record",
+        "step6": "Total Expenses: All expenses wey dem record"
+      },
+      "inventory": {
+        "title": "Inventory Management",
+        "subtitle1": "Inventory At A Glance",
+        "description1": "Manage products and stock levels effectively.",
+        "step1_1": "Total Products: Number of products wey dey available",
+        "step1_2": "Inventory Value: Total value of all items for stock",
+        "step1_3": "Top-Selling Product: The product wey dem sell pass",
+        "step1_4": "Low Stock Alert: Alerts when product don dey below e threshold",
+        "subtitle2": "Add Product",
+        "description2": "Quick quick add products to your inventory.",
+        "step2_1": "Tap the '+' button",
+        "step2_2": "Enter product name, purchase price, unit price, and quantity",
+        "step2_3": "Tap 'Add Product' to save"
+      },
+      "productDetails": {
+        "title": "Product Details",
+        "subtitle": "Managing Product",
+        "description": "View product details and do quick actions.",
+        "step1": "See product name, unit price, quantity, and stock status",
+        "step2": "Edit, Restock, Delete, or Add to Favourites",
+        "step3": "Monitor availability and update stock easy easy"
+      },
+      "sales": {
+        "title": "Sales Management",
+        "subtitle1": "Sales Overview",
+        "description1": "Track your sales performance and profit.",
+        "step1_1": "Total Sales: Total revenue wey dem generate",
+        "step1_2": "Transactions: Number of sales wey don complete",
+        "step1_3": "Total Profit: Based on purchase and selling price",
+        "subtitle2": "Add Sale",
+        "description2": "Record sales transaction.",
+        "step2_1": "Tap 'Add Sales'",
+        "step2_2": "Select the product from inventory",
+        "step2_3": "Enter quantity and confirm",
+        "step2_4": "Choose payment mode: Cash, Transfer, or Credit",
+        "subtitle3": "Sale Record Details",
+        "description3": "Each sale get important details for reference.",
+        "step3_1": "Transaction ID, date/time",
+        "step3_2": "Product, amount, and payment mode",
+        "step3_3": "Who record the sale"
+      },
+      "finance": {
+        "title": "Finance Management",
+        "subtitle1": "Income & Expenses",
+        "description1": "Track all money wey dey enter and comot for your business.",
+        "step1_1": "Total Income: All money wey dem receive",
+        "step1_2": "Total Expenses: All money wey dem spend",
+        "step1_3": "Net Income: Income minus expenses",
+        "subtitle2": "Add Financial Record",
+        "description2": "Create income or expense record.",
+        "step2_1": "Tap '+'",
+        "step2_2": "Select type: Income or Expense",
+        "step2_3": "Enter amount, description, and date",
+        "step2_4": "Tap 'Add Record'",
+        "step2_5": "Filter records by type or date as you need am"
+      },
+      "savings": {
+        "title": "Savings Management",
+        "subtitle1": "Create Savings Plan",
+        "description1": "Set up and track savings towards your goals.",
+        "step1_1": "Tap '+'",
+        "step1_2": "Enter Title, Start/End Date, Purpose",
+        "step1_3": "Choose Duration (Daily/Weekly/Monthly) and Target Amount",
+        "step1_4": "Tap 'Create Plan'",
+        "subtitle2": "Manage Savings",
+        "description2": "Track progress, contribute, withdraw, or delete plan.",
+        "step2_1": "Make contributions and monitor progress",
+        "step2_2": "Withdraw funds when you need am",
+        "step2_3": "Filter plans: Just Started, In Progress, Completed, Withdrawn"
+      },
+      "settings": {
+        "title": "Settings",
+        "subtitle": "Manage Your Shop & Privacy",
+        "description": "Update shop information, privacy, and account controls.",
+        "step1": "Shop Information: Edit shop name, location, and market",
+        "step2": "Privacy Settings: Choose to make shop details visible or hide am",
+        "step3": "Danger Zone: Delete shop or delete account permanently (you no fit undo am)"
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "subtitle": "You don ready to go!",
+        "description": "SheBalance make am simple to manage your sales, expenses, savings, and inventory all for one place. Use this manual as guide to start and maximize the app for better financial management.",
+        "step1": "Keep your records up to date",
+        "step2": "Use the dashboard to make informed decisions",
+        "step3": "Leverage savings plans to reach your goals"
+      }
+    }
   },
   "profile": {
     "title": "Profile",

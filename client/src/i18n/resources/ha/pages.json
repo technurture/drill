@@ -293,7 +293,148 @@
     "noHelpArticlesFound": "Ba a sami labaran taimako ba",
     "adjustSearchFilters": "Gwada daidaita binciken ku ko zaɓe",
     "uncategorized": "Ba a Rarraba Ba",
-    "viewsCount": "kallo"
+    "viewsCount": "kallo",
+    "languages": {
+      "english": "English",
+      "yoruba": "Yoruba",
+      "hausa": "Hausa",
+      "igbo": "Igbo",
+      "pidgin": "Pidgin",
+      "pidginEnglish": "Pidgin English"
+    },
+    "audioTutorials": {
+      "englishTitle": "Fahimtar Asalin Rubuta Littattafai",
+      "englishDescription": "Koyi asalin rubuta littattafai, haɗe da rubuta ma'amaloli, kula da asusai, da kiyaye bayanan kuɗi.",
+      "yorubaTitle": "Ìmọ̀ Ìwé Ìṣirò - Àwọn Ìpilẹ̀",
+      "yorubaDescription": "Kọ́ àwọn ìpilẹ̀ ìṣirò owó, títẹ̀ àwọn ìṣòwò, àti ìṣàkóso àwọn àkọsílẹ̀ owó.",
+      "pidginTitle": "Yadda Ake Rubuta Littattafai don Masu Farawa",
+      "pidginDescription": "Koyi yadda ake rubuta al'amuran kuɗin ku, ajiye bayanan kasuwancin ku, da kula da asusunku da kyau.",
+      "hausaTitle": "Koyon Rubutun Kudade na Farko",
+      "hausaDescription": "Koyi tushen rubutun kudade, da yadda ake rubuta kasuwanci, da kula da bayanan kudi.",
+      "igboTitle": "Koyon Rubuta Littattafai - Tushe",
+      "igboDescription": "Koyi yadda ake rubuta kuɗi, rubuta ma'amaloli, da kula da dukkan bayanan kuɗi."
+    },
+    "manual": {
+      "introduction": {
+        "title": "Gabatarwa",
+        "subtitle": "Barka da Zuwa SheBalance",
+        "description": "SheBalance wata manhaja ce ta sarrafa kuɗi da aka tsara don taimaka wa mutane da kasuwanci su bi tallace-tallace, kula da kashe kuɗi, lura da kaya, ajiye kuɗi, da kiyaye ingantattun bayanan kuɗi. Wannan littafi yana ba da jagora mai sauƙi mataki-mataki kan yadda ake amfani da manhaja yadda ya kamata.",
+        "step1": "Bi tallace-tallace da kudaden shiga da sauƙi",
+        "step2": "Rubuta da rarraba kashe kuɗi",
+        "step3": "Kula da kaya",
+        "step4": "Ƙirƙiri shirye-shiryen ajiyar kuɗi da lura da ci gaba",
+        "step5": "Kiyaye bayanan kuɗi masu tsabta a wuri ɗaya"
+      },
+      "gettingStarted": {
+        "title": "Ƙirƙiri Asusu & Shiga",
+        "subtitle": "Ƙirƙirar Asusu & Shiga",
+        "description": "Ƙirƙiri asusun ku na SheBalance ku shiga don samun damar dashboard ɗinku.",
+        "step1": "Don saukar da manhaja ta SheBalance akan Android, ziyarci www.shebalance.org ku danna faɗakarwar shigarwa lokacin da ta bayyana",
+        "step2": "Don saukar da manhaja ta SheBalance akan iOS, ziyarci www.shebalance.org a safari, danna maɓallin rabawa, sannan danna maɓallin 'Ƙara zuwa Allo na Gida'",
+        "step3": "Buɗe manhaja ku danna 'Ƙirƙiri Asusu'.",
+        "step4": "Cika bayanan ku kamar suna, lambar waya, da kalmar sirri.",
+        "step5": "Tabbatar da asusun ku (kuna iya karɓar lamba ta imel).",
+        "step6": "Don Shiga, Shigar da lambar waya/imel ɗinku da kalmar sirri don shiga.",
+        "step7": "Bayan shiga, za a kai ku zuwa Dashboard."
+      },
+      "dashboard": {
+        "title": "Bayanan Dashboard",
+        "subtitle": "Fahimtar Dashboard",
+        "description": "Dashboard ɗinku yana ba ku cikakken bayanin ayyukan kuɗin ku.",
+        "step1": "Jimillar Kudaden Shiga: Adadin da aka samu daga tallace-tallace",
+        "step2": "Jimillar Tallace-tallace: Adadin ma'amalolin tallace-tallace da aka kammala",
+        "step3": "Jimillar Ajiyar Kuɗi: Adadin da aka ajiye a shirye-shiryen ajiyar kuɗi",
+        "step4": "Faɗakarwar Kayan da ya Ragu: Kayayyaki da suka yi raguwa",
+        "step5": "Jimillar Kudaden Shiga: Dukkan kudaden shiga da aka rubuta",
+        "step6": "Jimillar Kashe Kuɗi: Dukkan kashe kuɗin da aka rubuta"
+      },
+      "inventory": {
+        "title": "Gudanar da Kaya",
+        "subtitle1": "Kaya a Kallo",
+        "description1": "Kula da kayayyaki da matakan kaya yadda ya kamata.",
+        "step1_1": "Jimillar Kayayyaki: Adadin kayayyakin da ake da su",
+        "step1_2": "Darajar Kaya: Jimillar darajar dukkan kayayyaki a hannun jari",
+        "step1_3": "Kayan da ya Fi Sayarwa: Kayan da aka fi sayarwa",
+        "step1_4": "Faɗakarwar Kayan da ya Ragu: Faɗakarwa lokacin da kayan ya ƙasa da iyakarsa",
+        "subtitle2": "Ƙara Kaya",
+        "description2": "Ƙara kayayyaki zuwa hannun jarin ku da sauri.",
+        "step2_1": "Danna maɓallin '+'",
+        "step2_2": "Shigar da sunan kaya, farashin sayan, farashin ɗaya, da yawa",
+        "step2_3": "Danna 'Ƙara Kaya' don ajiyewa"
+      },
+      "productDetails": {
+        "title": "Bayanan Kaya",
+        "subtitle": "Kula da Kaya",
+        "description": "Duba bayanan kaya ku yi ayyuka da sauri.",
+        "step1": "Duba sunan kaya, farashin ɗaya, yawa, da matsayin hannun jari",
+        "step2": "Gyara, Ƙara Kaya, Share, ko Ƙara zuwa Zaɓaɓɓu",
+        "step3": "Lura da samuwa da sabunta hannun jari cikin sauƙi"
+      },
+      "sales": {
+        "title": "Gudanar da Tallace-tallace",
+        "subtitle1": "Bayanan Tallace-tallace",
+        "description1": "Bi aikin tallace-tallacen ku da riba.",
+        "step1_1": "Jimillar Tallace-tallace: Jimillar kudaden shiga da aka samu",
+        "step1_2": "Ma'amaloli: Adadin tallace-tallacen da aka kammala",
+        "step1_3": "Jimillar Riba: Dangane da farashin sayan da farashin sayarwa",
+        "subtitle2": "Ƙara Tallace-tallace",
+        "description2": "Rubuta ma'amalar tallace-tallace.",
+        "step2_1": "Danna 'Ƙara Tallace-tallace'",
+        "step2_2": "Zaɓi kayan daga hannun jari",
+        "step2_3": "Shigar da yawa ku tabbatar",
+        "step2_4": "Zaɓi hanyar biya: Kuɗi, Canja Wuri, ko Bashi",
+        "subtitle3": "Bayanan Rikodin Tallace-tallace",
+        "description3": "Kowane tallace-tallace yana ƙunshe da mahimman bayanai don tunani.",
+        "step3_1": "ID ma'amala, kwanan wata/lokaci",
+        "step3_2": "Kaya, adadi, da hanyar biya",
+        "step3_3": "Wanda ya rubuta tallace-tallacen"
+      },
+      "finance": {
+        "title": "Gudanar da Kuɗi",
+        "subtitle1": "Kudaden Shiga & Kashe Kuɗi",
+        "description1": "Bi dukkan kuɗi da ke shiga da fita don kasuwancin ku.",
+        "step1_1": "Jimillar Kudaden Shiga: Dukkan kuɗin da aka karɓa",
+        "step1_2": "Jimillar Kashe Kuɗi: Dukkan kuɗin da aka kashe",
+        "step1_3": "Kudaden Shiga Na Asali: Kudaden shiga ban da kashe kuɗi",
+        "subtitle2": "Ƙara Rikodin Kuɗi",
+        "description2": "Ƙirƙiri rikodin kudaden shiga ko kashe kuɗi.",
+        "step2_1": "Danna '+'",
+        "step2_2": "Zaɓi nau'i: Kudaden Shiga ko Kashe Kuɗi",
+        "step2_3": "Shigar da adadi, bayani, da kwanan wata",
+        "step2_4": "Danna 'Ƙara Rikodi'",
+        "step2_5": "Zaɓa bayanai ta nau'i ko kwanan wata kamar yadda ake buƙata"
+      },
+      "savings": {
+        "title": "Gudanar da Ajiyar Kuɗi",
+        "subtitle1": "Ƙirƙiri Shirin Ajiyar Kuɗi",
+        "description1": "Saita da bi ajiyar kuɗi zuwa ga manufofin ku.",
+        "step1_1": "Danna '+'",
+        "step1_2": "Shigar da Suna, Kwanan Wata na Farawa/Ƙarewa, Manufa",
+        "step1_3": "Zaɓi Lokaci (Kowace Rana/Mako/Wata) da Adadin Manufa",
+        "step1_4": "Danna 'Ƙirƙiri Shiri'",
+        "subtitle2": "Kula da Ajiyar Kuɗi",
+        "description2": "Bi ci gaba, ƙara gudummawa, cire, ko share shiri.",
+        "step2_1": "Yi gudummawa ku bi ci gaba",
+        "step2_2": "Cire kuɗi lokacin da ake buƙata",
+        "step2_3": "Zaɓa shirye-shirye: Sabon Farawa, Yana Ci Gaba, An Kammala, An Cire"
+      },
+      "settings": {
+        "title": "Saitunan",
+        "subtitle": "Kula da Shagon Ku & Keɓantawa",
+        "description": "Sabunta bayanan shago, keɓantawa, da kula da asusu.",
+        "step1": "Bayanan Shago: Gyara sunan shago, wuri, da kasuwa",
+        "step2": "Saitunan Keɓantawa: Zaɓi don sanya bayanan shago su bayyana ko a ɓoye",
+        "step3": "Yankin Haɗari: Share shago ko share asusu har abada (ba za a iya sokewa ba)"
+      },
+      "conclusion": {
+        "title": "Ƙarshe",
+        "subtitle": "Kun shirya don tafiya!",
+        "description": "SheBalance yana sauƙaƙa sarrafa tallace-tallacen ku, kashe kuɗi, ajiyar kuɗi, da kaya a wuri ɗaya. Yi amfani da wannan littafi a matsayin jagora don farawa da haɓaka manhaja don ingantaccen sarrafa kuɗi.",
+        "step1": "Kiyaye bayananku a sabunta",
+        "step2": "Yi amfani da dashboard don yanke shawara mai hankali",
+        "step3": "Yi amfani da shirye-shiryen ajiyar kuɗi don cim ma manufofin ku"
+      }
+    }
   },
   "profile": {
     "title": "Bayanan Mai Amfani",

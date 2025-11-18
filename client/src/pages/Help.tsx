@@ -68,11 +68,11 @@ const Help = () => {
 
   const languages = [
     { value: 'all', label: t('help.allLanguages') },
-    { value: 'english', label: 'English' },
-    { value: 'yoruba', label: 'Yoruba' },
-    { value: 'hausa', label: 'Hausa' },
-    { value: 'igbo', label: 'Igbo' },
-    { value: 'pidgin', label: 'Pidgin' }
+    { value: 'english', label: t('help.languages.english') },
+    { value: 'yoruba', label: t('help.languages.yoruba') },
+    { value: 'hausa', label: t('help.languages.hausa') },
+    { value: 'igbo', label: t('help.languages.igbo') },
+    { value: 'pidgin', label: t('help.languages.pidgin') }
   ];
 
   const filteredArticles = articles;
@@ -181,9 +181,9 @@ const Help = () => {
   const audioTutorials = [
     {
       id: 'english-bookkeeping',
-      title: 'Understanding Bookkeeping Basics',
-      language: 'English',
-      description: 'Learn the fundamentals of bookkeeping, including recording transactions, managing accounts, and maintaining financial records.',
+      title: t('help.audioTutorials.englishTitle'),
+      language: t('help.languages.english'),
+      description: t('help.audioTutorials.englishDescription'),
       audioFile: '/English-2.mp3',
       color: 'from-blue-500 to-blue-600',
       flag: '🇺🇸',
@@ -191,9 +191,9 @@ const Help = () => {
     },
     {
       id: 'yoruba-bookkeeping',
-      title: 'Ìmọ̀ Ìwé Ìṣirò - Àwọn Ìpilẹ̀',
-      language: 'Yoruba',
-      description: 'Kọ́ àwọn ìpilẹ̀ ìṣirò owó, títẹ̀ àwọn ìṣòwò, àti ìṣàkóso àwọn àkọsílẹ̀ owó.',
+      title: t('help.audioTutorials.yorubaTitle'),
+      language: t('help.languages.yoruba'),
+      description: t('help.audioTutorials.yorubaDescription'),
       audioFile: '/yoruba-2.mp3',
       color: 'from-green-500 to-green-600',
       flag: '🇳🇬',
@@ -201,9 +201,9 @@ const Help = () => {
     },
     {
       id: 'pidgin-bookkeeping',
-      title: 'How to Do Bookkeeping for Beginners',
-      language: 'Pidgin English',
-      description: 'Learn how to write down your money matter, keep record of your business, and manage your accounts well well.',
+      title: t('help.audioTutorials.pidginTitle'),
+      language: t('help.languages.pidginEnglish'),
+      description: t('help.audioTutorials.pidginDescription'),
       audioFile: '/Pidgin.mp3',
       color: 'from-teal-500 to-teal-600',
       flag: '🇳🇬',
@@ -211,9 +211,9 @@ const Help = () => {
     },
     {
       id: 'hausa-bookkeeping',
-      title: 'Koyon Rubutun Kudade na Farko',
-      language: 'Hausa',
-      description: 'Koyi tushen rubutun kudade, da yadda ake rubuta kasuwanci, da kula da bayanan kudi.',
+      title: t('help.audioTutorials.hausaTitle'),
+      language: t('help.languages.hausa'),
+      description: t('help.audioTutorials.hausaDescription'),
       audioFile: '',
       color: 'from-orange-500 to-orange-600',
       flag: '🇳🇬',
@@ -221,9 +221,9 @@ const Help = () => {
     },
     {
       id: 'igbo-bookkeeping',
-      title: 'Ịmụta Ndekọ Ego - Isi Ihe',
-      language: 'Igbo',
-      description: 'Mụta ụzọ isi edekọ ego, ịdepụta azụmahịa, na ijikwa ndekọ ego niile.',
+      title: t('help.audioTutorials.igboTitle'),
+      language: t('help.languages.igbo'),
+      description: t('help.audioTutorials.igboDescription'),
       audioFile: '',
       color: 'from-purple-500 to-purple-600',
       flag: '🇳🇬',
@@ -234,18 +234,18 @@ const Help = () => {
   const userManualSections = [
     {
       id: 'introduction',
-      title: 'Introduction',
+      title: t('help.manual.introduction.title'),
       icon: BookOpen,
       content: [
         {
-          subtitle: 'Welcome to SheBalance',
-          description: 'SheBalance is a financial management app designed to help individuals and businesses track sales, manage expenses, monitor inventory, save money, and keep proper financial records. This manual provides a simple step-by-step guide on how to use the app effectively.',
+          subtitle: t('help.manual.introduction.subtitle'),
+          description: t('help.manual.introduction.description'),
           steps: [
-            'Track sales and revenue with ease',
-            'Record and categorize expenses',
-            'Manage inventory',
-            'Create savings plans and monitor progress',
-            'Maintain clean financial records in one place'
+            t('help.manual.introduction.step1'),
+            t('help.manual.introduction.step2'),
+            t('help.manual.introduction.step3'),
+            t('help.manual.introduction.step4'),
+            t('help.manual.introduction.step5')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/kHBwdtq4Cck'
         }
@@ -253,20 +253,20 @@ const Help = () => {
     },
     {
       id: 'getting-started',
-      title: 'Create an Account & Login',
+      title: t('help.manual.gettingStarted.title'),
       icon: Play,
       content: [
         {
-          subtitle: 'Account Creation & Login',
-          description: 'Create your SheBalance account and sign in to access your dashboard.',
+          subtitle: t('help.manual.gettingStarted.subtitle'),
+          description: t('help.manual.gettingStarted.description'),
           steps: [
-            "To download the SheBalance app on Android, visit www.shebalance.org and click on the install prompt when it appears",
-            "To download the SheBalance app on iOS, visit www.shebalance.org on safari, click the share button, then the 'Add to Home Screen' button",
-            "Open the app and tap on 'Create Account'.",
-            "Fill in your details such as name, phone number, and password.",
-            "Confirm your account (you may receive a code via email).",
-            "To Login, Enter your phone number/email and password to log in.",
-            "After logging in, you will be directed to the Dashboard."
+            t('help.manual.gettingStarted.step1'),
+            t('help.manual.gettingStarted.step2'),
+            t('help.manual.gettingStarted.step3'),
+            t('help.manual.gettingStarted.step4'),
+            t('help.manual.gettingStarted.step5'),
+            t('help.manual.gettingStarted.step6'),
+            t('help.manual.gettingStarted.step7')
           ],
           imagePlaceholders: ['https://youtube.com/embed/Ecl93iiIzpw','https://www.youtube.com/embed/KmTVzdYDnMQ','https://www.youtube.com/embed/0PzEO8j6nyk']
         }
@@ -274,19 +274,19 @@ const Help = () => {
     },
     {
       id: 'dashboard',
-      title: 'Dashboard Overview',
+      title: t('help.manual.dashboard.title'),
       icon: Eye,
       content: [
         {
-          subtitle: 'Understanding the Dashboard',
-          description: 'Your dashboard provides a snapshot of your financial activities.',
+          subtitle: t('help.manual.dashboard.subtitle'),
+          description: t('help.manual.dashboard.description'),
           steps: [
-            'Total Revenue: Amount generated from sales',
-            'Total Sales: Number of completed sales transactions',
-            'Total Savings: Amount saved in savings plans',
-            'Low Stock Alert: Products running low on stock',
-            'Total Income: All income recorded',
-            'Total Expenses: All expenses recorded'
+            t('help.manual.dashboard.step1'),
+            t('help.manual.dashboard.step2'),
+            t('help.manual.dashboard.step3'),
+            t('help.manual.dashboard.step4'),
+            t('help.manual.dashboard.step5'),
+            t('help.manual.dashboard.step6')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/iPrN9r9YlFE'
         }
@@ -294,133 +294,133 @@ const Help = () => {
     },
     {
       id: 'inventory',
-      title: 'Inventory Management',
+      title: t('help.manual.inventory.title'),
       icon: BookOpen,
       content: [
         {
-          subtitle: 'Inventory At A Glance',
-          description: 'Manage products and stock levels effectively.',
+          subtitle: t('help.manual.inventory.subtitle1'),
+          description: t('help.manual.inventory.description1'),
           steps: [
-            'Total Products: Number of products available',
-            'Inventory Value: Total value of all items in stock',
-            'Top-Selling Product: The most sold product',
-            'Low Stock Alert: Alerts when a product is below its threshold'
+            t('help.manual.inventory.step1_1'),
+            t('help.manual.inventory.step1_2'),
+            t('help.manual.inventory.step1_3'),
+            t('help.manual.inventory.step1_4')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/I1mZK3Maqkg'
         },
         {
-          subtitle: 'Add a Product',
-          description: 'Quickly add products to your inventory.',
+          subtitle: t('help.manual.inventory.subtitle2'),
+          description: t('help.manual.inventory.description2'),
           steps: [
-            "Tap the '+' button",
-            'Enter product name, purchase price, unit price, and quantity',
-            "Tap 'Add Product' to save"
+            t('help.manual.inventory.step2_1'),
+            t('help.manual.inventory.step2_2'),
+            t('help.manual.inventory.step2_3')
           ]
         }
       ]
     },
     {
       id: 'product-details',
-      title: 'Product Details',
+      title: t('help.manual.productDetails.title'),
       icon: FileText,
       content: [
         {
-          subtitle: 'Managing a Product',
-          description: 'View product details and perform quick actions.',
+          subtitle: t('help.manual.productDetails.subtitle'),
+          description: t('help.manual.productDetails.description'),
           steps: [
-            'See product name, unit price, quantity, and stock status',
-            'Edit, Restock, Delete, or Add to Favourites',
-            'Monitor availability and update stock easily'
+            t('help.manual.productDetails.step1'),
+            t('help.manual.productDetails.step2'),
+            t('help.manual.productDetails.step3')
           ]
         }
       ]
     },
     {
       id: 'sales',
-      title: 'Sales Management',
+      title: t('help.manual.sales.title'),
       icon: FileText,
       content: [
         {
-          subtitle: 'Sales Overview',
-          description: 'Track your sales performance and profit.',
+          subtitle: t('help.manual.sales.subtitle1'),
+          description: t('help.manual.sales.description1'),
           steps: [
-            'Total Sales: Total revenue generated',
-            'Transactions: Number of completed sales',
-            'Total Profit: Based on purchase and selling price'
+            t('help.manual.sales.step1_1'),
+            t('help.manual.sales.step1_2'),
+            t('help.manual.sales.step1_3')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/iipYNad-4cQ'
         },
         {
-          subtitle: 'Add a Sale',
-          description: 'Record a sales transaction.',
+          subtitle: t('help.manual.sales.subtitle2'),
+          description: t('help.manual.sales.description2'),
           steps: [
-            "Tap 'Add Sales'",
-            'Select the product from inventory',
-            'Enter quantity and confirm',
-            'Choose payment mode: Cash, Transfer, or Credit'
+            t('help.manual.sales.step2_1'),
+            t('help.manual.sales.step2_2'),
+            t('help.manual.sales.step2_3'),
+            t('help.manual.sales.step2_4')
           ]
         },
         {
-          subtitle: 'Sale Record Details',
-          description: 'Each sale includes important details for reference.',
+          subtitle: t('help.manual.sales.subtitle3'),
+          description: t('help.manual.sales.description3'),
           steps: [
-            'Transaction ID, date/time',
-            'Product, amount, and payment mode',
-            'Who recorded the sale'
+            t('help.manual.sales.step3_1'),
+            t('help.manual.sales.step3_2'),
+            t('help.manual.sales.step3_3')
           ]
         }
       ]
     },
     {
       id: 'finance',
-      title: 'Finance Management',
+      title: t('help.manual.finance.title'),
       icon: Calendar,
       content: [
         {
-          subtitle: 'Income & Expenses',
-          description: 'Track all money in and out for your business.',
+          subtitle: t('help.manual.finance.subtitle1'),
+          description: t('help.manual.finance.description1'),
           steps: [
-            'Total Income: All money received',
-            'Total Expenses: All money spent',
-            'Net Income: Income minus expenses'
+            t('help.manual.finance.step1_1'),
+            t('help.manual.finance.step1_2'),
+            t('help.manual.finance.step1_3')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/WsBCpyb48jA'
         },
         {
-          subtitle: 'Add a Financial Record',
-          description: 'Create an income or expense record.',
+          subtitle: t('help.manual.finance.subtitle2'),
+          description: t('help.manual.finance.description2'),
           steps: [
-            "Tap '+'",
-            'Select type: Income or Expense',
-            'Enter amount, description, and date',
-            "Tap 'Add Record'",
-            'Filter records by type or date as needed'
+            t('help.manual.finance.step2_1'),
+            t('help.manual.finance.step2_2'),
+            t('help.manual.finance.step2_3'),
+            t('help.manual.finance.step2_4'),
+            t('help.manual.finance.step2_5')
           ]
         }
       ]
     },
     {
       id: 'savings',
-      title: 'Savings Management',
+      title: t('help.manual.savings.title'),
       icon: Star,
       content: [
         {
-          subtitle: 'Create a Savings Plan',
-          description: 'Set up and track savings towards your goals.',
+          subtitle: t('help.manual.savings.subtitle1'),
+          description: t('help.manual.savings.description1'),
           steps: [
-            "Tap '+'",
-            'Enter Title, Start/End Date, Purpose',
-            'Choose Duration (Daily/Weekly/Monthly) and Target Amount',
-            "Tap 'Create Plan'"
+            t('help.manual.savings.step1_1'),
+            t('help.manual.savings.step1_2'),
+            t('help.manual.savings.step1_3'),
+            t('help.manual.savings.step1_4')
           ]
         },
         {
-          subtitle: 'Manage Savings',
-          description: 'Track progress, contribute, withdraw, or delete a plan.',
+          subtitle: t('help.manual.savings.subtitle2'),
+          description: t('help.manual.savings.description2'),
           steps: [
-            'Make contributions and monitor progress',
-            'Withdraw funds when needed',
-            'Filter plans: Just Started, In Progress, Completed, Withdrawn'
+            t('help.manual.savings.step2_1'),
+            t('help.manual.savings.step2_2'),
+            t('help.manual.savings.step2_3')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/E-XOsT_M8Gg'
         }
@@ -428,16 +428,16 @@ const Help = () => {
     },
     {
       id: 'settings',
-      title: 'Settings',
+      title: t('help.manual.settings.title'),
       icon: Shield,
       content: [
         {
-          subtitle: 'Manage Your Store & Privacy',
-          description: 'Update store information, privacy, and account controls.',
+          subtitle: t('help.manual.settings.subtitle'),
+          description: t('help.manual.settings.description'),
           steps: [
-            'Store Information: Edit store name, location, and market',
-            'Privacy Settings: Choose to make store details visible or hidden',
-            'Danger Zone: Delete store or delete account permanently (cannot be undone)'
+            t('help.manual.settings.step1'),
+            t('help.manual.settings.step2'),
+            t('help.manual.settings.step3')
           ],
           imagePlaceholder: 'https://www.youtube.com/embed/_HL74eJhcD8'
         }
@@ -445,16 +445,16 @@ const Help = () => {
     },
     {
       id: 'conclusion',
-      title: 'Conclusion',
+      title: t('help.manual.conclusion.title'),
       icon: BookOpen,
       content: [
         {
-          subtitle: 'You are ready to go!',
-          description: 'SheBalance makes it simple to manage your sales, expenses, savings, and inventory all in one place. Use this manual as a guide to get started and maximize the app for better financial management.',
+          subtitle: t('help.manual.conclusion.subtitle'),
+          description: t('help.manual.conclusion.description'),
           steps: [
-            'Keep your records up to date',
-            'Use the dashboard to make informed decisions',
-            'Leverage savings plans to reach your goals'
+            t('help.manual.conclusion.step1'),
+            t('help.manual.conclusion.step2'),
+            t('help.manual.conclusion.step3')
           ]
         }
       ]
