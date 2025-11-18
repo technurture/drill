@@ -4,40 +4,91 @@
       "badge": "Fún Àwọn Obìnrin Oníṣòwò",
       "title": "Fún Iṣẹ́ Rẹ Ní Agbára",
       "subtitle": "Àwọn irinṣẹ́ tó rọrùn tó sì lágbára fún àwọn obìnrin tó ń ṣiṣẹ́ takuntakun. Tọ́jú owó, mú títà pọ̀ sí, kọ́ ọjọ́ ìwájú owó rẹ.",
+      "description": "You work hard. You provide. You plan for tomorrow with what little you have today. At SheBalance, we see you. That's why we created a platform just for you — to help you take charge of your money, grow your business, and build the future you've always dreamed of.",
       "ctaPrimary": "Bẹ̀rẹ̀ Lọ́fẹ̀ẹ́ Lónìí",
       "ctaSecondary": "Kọ́ Síi"
     },
+    "navigation": {
+      "login": "Login",
+      "getStarted": "Get Started",
+      "dashboard": "Dashboard",
+      "goToDashboard": "Go to Dashboard"
+    },
     "about": {
-      "title": "Kí Ni SheBalance?"
+      "title": "Kí Ni SheBalance?",
+      "description": "It's your financial companion. Your silent business partner. Your daily reminder that you deserve more — more knowledge, more control, more confidence."
     },
     "features": {
       "trackBusiness": "Tọ́jú Iṣẹ́ Rẹ, Ní Ọ̀nà Rẹ",
+      "trackBusinessDesc": "Whether you sell in the market, run a small shop, or hustle from home, SheBalance helps you keep track of every naira. No need for fancy accounting — just a few taps, and you're in charge.",
       "builtForYou": "A Kọ́ Ọ Fún Ẹ, Látọ̀dọ̀ Àwọn Obìnrin Tó Mọ̀",
+      "builtForYouDesc": "Designed with women like you in mind, SheBalance speaks your language — literally. With local language options, simple icons, and voice instructions, it's easy for every woman to feel confident using it.",
       "knowNumbers": "Mọ Iye Owó Rẹ — Lọ́nà Tó Yé",
-      "learnEarn": "Kọ́ẹkọ́ Bí O Ṣe Ń Jèrè"
+      "knowNumbersDesc": "No more guessing where your money went. See what's coming in, what's going out, and what's left to save. SheBalance shows you the full picture — so you can make smarter choices.",
+      "learnEarn": "Kọ́ẹkọ́ Bí O Ṣe Ń Jèrè",
+      "learnEarnDesc": "You don't need a classroom to grow. SheBalance shares small, powerful lessons on saving, planning, and business tips — right inside the app, as you use it. Every day, you grow stronger."
     },
     "whoFor": {
-      "title": "Ta Ni SheBalance Wà Fún?"
+      "title": "Ta Ni SheBalance Wà Fún?",
+      "subtitle": "SheBalance is for you, the woman who:",
+      "item1": "Runs her business with heart and hustle",
+      "item2": "Wants to prepare for bigger opportunities like loans and investments",
+      "item3": "Dreams of being organized, informed, and independent",
+      "item4": "Believes she can grow — with the right tools by her side"
     },
     "appFeatures": {
-      "title": "Ohun Tó Lè Ṣe Pẹ̀lú SheBalance"
+      "title": "Ohun Tó Lè Ṣe Pẹ̀lú SheBalance",
+      "trackIncome": "Track your income and expenses",
+      "manageInventory": "Manage your goods and inventory",
+      "joinSavings": "Join or create Esusu (savings) groups",
+      "getReports": "Get reports you can download and share",
+      "useOffline": "Use the app offline — anytime, anywhere",
+      "localLanguage": "Enjoy support in your local language"
     },
     "faq": {
       "title": "Àwọn Ìbéèrè Tó Wọ́pọ̀",
       "subtitle": "Gbogbo ohun tó yẹ kó mọ̀ nípa SheBalance",
       "q1": "Kí ni SheBalance?",
+      "a1": "SheBalance is a mobile platform designed specifically for women entrepreneurs to track their business finances, manage inventory, join savings groups, and build financial confidence. It's built with local languages and simple interfaces to make financial management accessible to every woman.",
       "q2": "Ṣé SheBalance jẹ́ ọ̀fẹ́?",
+      "a2": "Yes! SheBalance offers a free tier with essential features to help you get started. We also offer premium features for advanced business needs. You can start with the free version and upgrade when you're ready.",
       "q3": "Ṣé mo lè lo SheBalance láìsí intánẹ́ẹ̀tì?",
+      "a3": "Absolutely! SheBalance works offline, so you can track your sales and expenses even without internet connection. Your data will sync when you're back online.",
       "q4": "Irú èdè wo ni SheBalance ń ṣàtìlẹyìn?",
+      "a4": "SheBalance supports multiple local languages to ensure every woman can use the app comfortably. We're constantly adding more languages based on user needs.",
       "q5": "Ṣé data owó mi wà ní àbò?",
+      "a5": "Your data security is our top priority. We use industry-standard encryption and security measures to protect your financial information. Your data is private and secure.",
       "q6": "Ṣé mo lè ṣàgbéjáde àwọn ìròyìn mi?",
+      "a6": "Yes! You can download and share your financial reports. This is especially useful for loan applications, business planning, or sharing with family members.",
       "q7": "Mi ò mọ̀ẹ̀rọ ayárabíàṣá dáadáa. Ṣé mo lè lò ó?",
-      "q8": "Báwo ni n ṣe lè darapọ̀ mọ́ ẹgbẹ́ ìfowópamọ́?"
+      "a7": "Don't worry! SheBalance is designed to be simple and intuitive. We use familiar icons, voice instructions, and step-by-step guidance to make it easy for everyone to use.",
+      "q8": "Báwo ni n ṣe lè darapọ̀ mọ́ ẹgbẹ́ ìfowópamọ́?",
+      "a8": "You can join existing savings groups or create your own. The app helps you track contributions, set goals, and manage group savings transparently and securely."
     },
     "cta": {
       "title": "Owó Rẹ. Agbára Rẹ. Ọjọ́ Ìwájú Rẹ.",
+      "description1": "At SheBalance, we believe that when a woman understands her money, she multiplies her power — in her business, her family, and her community.",
+      "description2": "So whether you're buying, selling, saving, or just starting out — let SheBalance walk with you.",
       "primaryButton": "Bẹ̀rẹ̀ Ìrìnàjò Rẹ",
       "secondaryButton": "Wọlé"
+    },
+    "footer": {
+      "description": "Empowering women entrepreneurs with simple tools to track money, grow businesses, and build financial confidence.",
+      "company": "Company",
+      "helpCenter": "Help Center",
+      "termsPrivacy": "Terms & Privacy",
+      "about": "About",
+      "contact": "Contact",
+      "newsletter": {
+        "title": "Stay up to date",
+        "description": "Get tips and updates delivered to your inbox.",
+        "placeholder": "Enter your email",
+        "subscribe": "Subscribe"
+      },
+      "copyright": "SheBalance. All rights reserved.",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "support": "Support"
     }
   },
   "dashboard": "Pátákó",
