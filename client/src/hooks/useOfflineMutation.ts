@@ -91,15 +91,62 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
         const dataPreview = JSON.stringify(queueData, null, 2).substring(0, 300);
         console.log(`✅ Queued for sync: ${config.action} on ${config.tableName} (${actionType})`, dataPreview);
         
+        // Generate optimistic data for UI responsiveness
+        const optimisticData = config.getOptimisticData?.(variables) ?? queueData;
+        
+        // CRITICAL: Apply optimistic update to React Query cache immediately
+        // Use setQueriesData with predicate to update all matching queries safely
+        const storeId = (variables as any).store_id || (variables as any).storeId;
+        if (storeId) {
+          if (config.action === 'create') {
+            // Add new item to all matching query caches
+            queryClient.setQueriesData(
+              { queryKey: [config.tableName, storeId] },
+              (oldData: any) => {
+                if (!oldData) return [optimisticData];
+                return Array.isArray(oldData) ? [...oldData, optimisticData] : [optimisticData];
+              }
+            );
+          } else if (config.action === 'update') {
+            // Update existing item in all matching query caches
+            queryClient.setQueriesData(
+              { queryKey: [config.tableName, storeId] },
+              (oldData: any) => {
+                if (!oldData) return [optimisticData];
+                if (Array.isArray(oldData)) {
+                  return oldData.map((item: any) => 
+                    item.id === (optimisticData as any).id ? { ...item, ...optimisticData } : item
+                  );
+                }
+                return optimisticData;
+              }
+            );
+          } else if (config.action === 'delete') {
+            // Remove item from all matching query caches
+            queryClient.setQueriesData(
+              { queryKey: [config.tableName, storeId] },
+              (oldData: any) => {
+                if (!oldData) return [];
+                if (Array.isArray(oldData)) {
+                  return oldData.filter((item: any) => item.id !== (optimisticData as any).id);
+                }
+                return [];
+              }
+            );
+          }
+          
+          // Invalidate dashboard and all related queries to refresh dependent data
+          queryClient.invalidateQueries({ queryKey: ['dashboard'], refetchType: 'none' });
+          
+          console.log(`🎯 Applied optimistic update to cache for ${config.tableName}`);
+        }
+        
         // Show user-friendly toast notification
         const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';
         toast.success(`Action ${actionText} and saved locally!`, {
           description: 'Your data will sync automatically when you come back online.',
           duration: 5000,
         });
-        
-        // Return optimistic data for UI responsiveness
-        const optimisticData = config.getOptimisticData?.(variables) ?? queueData;
         
         return optimisticData as TData;
       }

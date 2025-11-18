@@ -23,6 +23,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
   const updateLanguageMutation = useUpdateUserLanguage();
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const getUserStorageKey = (userId?: string) => {
     return userId ? `${LANGUAGE_STORAGE_KEY}-${userId}` : LANGUAGE_STORAGE_KEY;
@@ -32,7 +33,12 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (language !== i18n.language) {
-      i18n.changeLanguage(language);
+      i18n.changeLanguage(language).then(() => {
+        setIsInitialized(true);
+      });
+    } else {
+      // Language already matches - mark as initialized
+      setIsInitialized(true);
     }
   }, [language, i18n]);
 
@@ -63,6 +69,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       
       if (language !== DEFAULT_LANGUAGE) {
         setLanguageState(DEFAULT_LANGUAGE);
+      } else {
+        setIsInitialized(true);
       }
     } else {
       if (typeof window !== 'undefined') {
@@ -77,6 +85,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       
       if (language !== DEFAULT_LANGUAGE) {
         setLanguageState(DEFAULT_LANGUAGE);
+      } else {
+        setIsInitialized(true);
       }
     }
   }, [user]);
@@ -115,6 +125,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     tSubheading,
     isLoading,
   };
+
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <LanguageContext.Provider value={value}>

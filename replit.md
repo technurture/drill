@@ -12,6 +12,19 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+### Language Switching and Offline UX Fixes (November 18, 2025)
+- **Problem Resolved**: Fixed two critical UX issues: (1) Multi-language switching not working - UI remained in English despite language preference set to Yoruba/other languages, (2) Offline operations getting stuck in "processing" state requiring cancel/retry.
+- **Root Causes**: 
+  - Language switching: Components were rendering before i18n finished loading the selected language, causing them to mount with default English
+  - Offline processing: UI showed loading states while waiting for mutations to complete, even though optimistic data was returned immediately
+- **Implementation**:
+  - **LanguageContext.tsx**: Added initialization gate that defers rendering children until `i18n.changeLanguage()` completes and sets `isInitialized` flag. Ensures language is properly set before any components mount and consume translations.
+  - **useOfflineMutation.ts**: Enhanced offline mutation flow to immediately update React Query cache with optimistic data using `setQueriesData()` for safe partial key matching. When offline, creates/updates/deletes data in cache instantly so UI updates without waiting for network.
+  - Added `refetchType: 'none'` to dashboard invalidation to prevent refetch attempts while offline
+- **Files Modified**: `client/src/contexts/LanguageContext.tsx`, `client/src/hooks/useOfflineMutation.ts`
+- **User Experience**: Language now switches instantly across all UI text when changed in settings. Offline operations (add product, add sale, restock) complete in one click without stuck processing states - users see immediate UI feedback and toast confirmation.
+- **Architect Validated**: Both fixes reviewed and approved - initialization gate prevents blank screen edge cases, cache updates use safe query matching to avoid stale data issues.
+
 ### Offline Sync Data Integrity Fix (November 18, 2025)
 - **Problem Resolved**: Fixed critical bug where data added offline (products, sales, etc.) would sync to Supabase but display as "N/A" or show incomplete information in the UI.
 - **Root Cause**: React Query cache wasn't being invalidated after offline data synced to Supabase, causing the UI to display stale optimistic data instead of fetching the real data from the database.
