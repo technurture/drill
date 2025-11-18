@@ -434,9 +434,9 @@ const Sales = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Sales Transactions</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('sales.salesTransactions')}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {filteredSales.length} {filteredSales.length === 1 ? 'transaction' : 'transactions'} found
+                    {filteredSales.length} {filteredSales.length === 1 ? t('sales.transactionFound') : t('sales.transactionsFound')}
                   </p>
                 </div>
               </div>
@@ -467,7 +467,7 @@ const Sales = () => {
                     className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium"
                   >
                     <AddSaleIcon />
-                    <span className="ml-2">Add Your First Sale</span>
+                    <span className="ml-2">{t('sales.addFirstSale')}</span>
                   </Button>
                 )}
               </div>
