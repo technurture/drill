@@ -17,36 +17,81 @@
     "error": "Failed to perform store operation"
   },
   "product": {
-    "added": "Product added successfully!",
-    "updated": "Product updated successfully!",
-    "deleted": "Product deleted successfully!",
-    "restocked": "Product restocked successfully!",
-    "error": "Failed to perform product operation",
-    "lowStock": "Low stock alert for {{productName}}"
+    "added": "Etinyere ngwaahịa nke ọma!",
+    "updated": "Emelitere ngwaahịa nke ọma!",
+    "deleted": "Ehichapụrụ ngwaahịa nke ọma!",
+    "restocked": "Ejughiri ngwaahịa nke ọma!",
+    "error": "Emeghị ka ọrụ ngwaahịa mee",
+    "lowStock": "Ọkwa ngwaahịa dị ala maka {{productName}}",
+    "fetchFailed": "Emeghị ka iweta ngwaahịa mee. Biko gbalịa ọzọ.",
+    "noStoreSelected": "Ahọpụtaghị ụlọ ahịa",
+    "failedToSave": "Emeghị ka ichekwa ngwaahịa mee",
+    "failedToRestock": "Emeghị ka ijugharị ngwaahịa mee",
+    "failedToDelete": "Emeghị ka ihichapụ ngwaahịa mee"
   },
   "sale": {
-    "added": "Sale recorded successfully!",
-    "deleted": "Sale deleted successfully!",
-    "error": "Failed to record sale"
+    "added": "Edekọtara ire ahịa nke ọma!",
+    "deleted": "Ehichapụrụ ire ahịa nke ọma!",
+    "error": "Emeghị ka edekọ ire ahịa mee",
+    "completed": "Emechara ire ahịa nke ọma",
+    "failedToDelete": "Emeghị ka ihichapụ ire ahịa mee",
+    "noteUpdated": "Emelitere ndetu nke ọma",
+    "failedToUpdateNote": "Emeghị ka imelite ndetu mee"
   },
   "expense": {
-    "added": "Expense added successfully!",
-    "updated": "Expense updated successfully!",
-    "deleted": "Expense deleted successfully!",
-    "error": "Failed to perform expense operation"
+    "added": "Etinyere mmefu ego nke ọma!",
+    "updated": "Emelitere mmefu ego nke ọma!",
+    "deleted": "Ehichapụrụ mmefu ego nke ọma!",
+    "error": "Emeghị ka ọrụ mmefu ego mee"
+  },
+  "finance": {
+    "noStoreSelected": "Ahọpụtaghị ụlọ ahịa",
+    "userNotLoggedIn": "Onye ọrụ abanyebeghị",
+    "fillAllFields": "Biko dejupụta oghere niile",
+    "amountInvalid": "Ego kwesịrị ịkarị 0",
+    "recordDeleted": "Ehichapụrụ ndekọ ego nke ọma",
+    "failedToDelete": "Emeghị ka ihichapụ ndekọ ego mee",
+    "incomeAdded": "Etinyere ego na-abata nke ọma",
+    "expenseAdded": "Etinyere mmefu ego nke ọma",
+    "failedToAdd": "Emeghị ka itinye ndekọ ego mee",
+    "recordDeletedShort": "Ehichapụrụ ndekọ nke ọma",
+    "failedToDeleteRecord": "Emeghị ka ihichapụ ndekọ mee"
   },
   "savings": {
-    "added": "Savings record added successfully!",
-    "updated": "Savings updated successfully!",
-    "withdrawn": "Withdrawal successful!",
-    "error": "Failed to perform savings operation"
+    "added": "Etinyere ndekọ nchekwa ego nke ọma!",
+    "updated": "Emelitere nchekwa ego nke ọma!",
+    "withdrawn": "Ịwepụ ego gara nke ọma!",
+    "error": "Emeghị ka ọrụ nchekwa ego mee",
+    "noStoreSelected": "Ahọpụtaghị ụlọ ahịa ma ọ bụ onye ọrụ abanyebeghị",
+    "fillAllFields": "Biko dejupụta oghere niile nke ọma",
+    "endDateInvalid": "Ụbọchị njedebe ga-abụrịrị mgbe ụbọchị mmalite gasịrị",
+    "planCreated": "Emepụtara atụmatụ nchekwa ego nke ọma!",
+    "failedToCreate": "Emeghị ka imepụta atụmatụ nchekwa ego mee",
+    "amountInvalid": "Ego kwesịrị ịkarị 0",
+    "planNotFound": "Achọtaghị atụmatụ nchekwa ego ahọpụtara",
+    "cannotContributeWithdrawn": "Ị gaghị enwe ike itinye aka na atụmatụ nchekwa ego ewepụlarị",
+    "amountExceedsTarget": "Ego gafere ebumnuche. Ị nwere ike itinye aka naanị ₦{{remaining}} ọzọ iji rute ebumnuche gị nke ₦{{target}}",
+    "contributionAdded": "Etinyere ntinye aka nke ọma!",
+    "failedToAddContribution": "Emeghị ka itinye ntinye aka mee",
+    "planDeleted": "Ehichapụrụ atụmatụ nchekwa ego nke ọma!",
+    "failedToDelete": "Emeghị ka ihichapụ atụmatụ nchekwa ego mee",
+    "invalidWithdrawalAmount": "Ego ịwepụ adịghị mma",
+    "withdrawalRecorded": "Edekọtara ịwepụ ego nke ọma",
+    "failedToWithdraw": "Emeghị ka iwepụ ego mee",
+    "savingsWithdrawn": "Ewepụrụ nchekwa ego nke ọma!",
+    "failedToWithdrawSavings": "Emeghị ka iwepụ nchekwa ego mee"
   },
   "loan": {
-    "added": "Loan recorded successfully!",
-    "updated": "Loan updated successfully!",
-    "deleted": "Loan deleted successfully!",
-    "paymentRecorded": "Loan payment recorded successfully!",
-    "error": "Failed to perform loan operation"
+    "added": "Edekọtara mbinye ego nke ọma!",
+    "updated": "Emelitere mbinye ego nke ọma!",
+    "deleted": "Ehichapụrụ mbinye ego nke ọma!",
+    "paymentRecorded": "Edekọtara ịkwụ ụgwọ mbinye ego nke ọma!",
+    "error": "Emeghị ka ọrụ mbinye ego mee",
+    "created": "Emepụtara mbinye ego",
+    "failedToCreate": "Emeghị ka imepụta mbinye ego mee",
+    "repaymentAdded": "Etinyere nkwụghachi ụgwọ",
+    "failedToAddRepayment": "Emeghị ka itinye nkwụghachi ụgwọ mee",
+    "failedToDelete": "Emeghị ka ihichapụ mbinye ego mee"
   },
   "customer": {
     "added": "Customer added successfully!",

@@ -24,7 +24,9 @@
     "addSavings": "Add Savings",
     "addNewSale": "Add New Sale",
     "welcomeToSheBalance": "Welcome to SheBalance!",
-    "createFirstStoreDesc": "Create your first store to start managing your business and track your sales, inventory, and finances."
+    "createFirstStoreDesc": "Create your first store to start managing your business and track your sales, inventory, and finances.",
+    "incomeBreakdown": "Income Breakdown",
+    "paymentMethods": "Payment Methods"
   },
   "inventory": {
     "title": "Inventory / List of Stocks",
@@ -160,7 +162,16 @@
     "completed": "Completed",
     "defaulted": "Defaulted",
     "repayments": "Repayments",
-    "addRepayment": "Add Repayment"
+    "addRepayment": "Add Repayment",
+    "loansManagement": "Loans Management",
+    "loansManagementDesc": "Create your first store to start tracking loans and repayments.",
+    "newLoan": "New Loan",
+    "accessBankPlaceholder": "e.g. Access Bank",
+    "loanDetails": "Loan Details",
+    "principal": "Principal",
+    "totalPayable": "Total Payable",
+    "interestLabel": "Interest",
+    "cashTransferPlaceholder": "e.g. Cash transfer"
   },
   "savings": {
     "title": "Savings",

@@ -17,36 +17,81 @@
     "error": "Failed to perform store operation"
   },
   "product": {
-    "added": "Product added successfully!",
-    "updated": "Product updated successfully!",
-    "deleted": "Product deleted successfully!",
-    "restocked": "Product restocked successfully!",
-    "error": "Failed to perform product operation",
-    "lowStock": "Low stock alert for {{productName}}"
+    "added": "An ƙara samfur cikin nasara!",
+    "updated": "An sabunta samfur cikin nasara!",
+    "deleted": "An share samfur cikin nasara!",
+    "restocked": "An sake cika samfur cikin nasara!",
+    "error": "An kasa yin aikin samfur",
+    "lowStock": "Sanarwar ƙarancin kaya don {{productName}}",
+    "fetchFailed": "An kasa samun samfurori. Da fatan za a sake gwadawa.",
+    "noStoreSelected": "Ba a zaɓi shago ba",
+    "failedToSave": "An kasa adana samfur",
+    "failedToRestock": "An kasa sake cika samfur",
+    "failedToDelete": "An kasa share samfur"
   },
   "sale": {
-    "added": "Sale recorded successfully!",
-    "deleted": "Sale deleted successfully!",
-    "error": "Failed to record sale"
+    "added": "An yi rikodin tallace-tallace cikin nasara!",
+    "deleted": "An share tallace-tallace cikin nasara!",
+    "error": "An kasa rikodin tallace-tallace",
+    "completed": "An kammala tallace-tallace cikin nasara",
+    "failedToDelete": "An kasa share tallace-tallace",
+    "noteUpdated": "An sabunta bayanin kula cikin nasara",
+    "failedToUpdateNote": "An kasa sabunta bayanin kula"
   },
   "expense": {
-    "added": "Expense added successfully!",
-    "updated": "Expense updated successfully!",
-    "deleted": "Expense deleted successfully!",
-    "error": "Failed to perform expense operation"
+    "added": "An ƙara kashe kuɗi cikin nasara!",
+    "updated": "An sabunta kashe kuɗi cikin nasara!",
+    "deleted": "An share kashe kuɗi cikin nasara!",
+    "error": "An kasa yin aikin kashe kuɗi"
+  },
+  "finance": {
+    "noStoreSelected": "Ba a zaɓi shago ba",
+    "userNotLoggedIn": "Mai amfani bai shiga ba",
+    "fillAllFields": "Da fatan za a cika duk filayen",
+    "amountInvalid": "Adadin dole ya fi 0",
+    "recordDeleted": "An share rikodin kuɗi cikin nasara",
+    "failedToDelete": "An kasa share rikodin kuɗi",
+    "incomeAdded": "An ƙara kuɗin shiga cikin nasara",
+    "expenseAdded": "An ƙara kashe kuɗi cikin nasara",
+    "failedToAdd": "An kasa ƙara rikodin kuɗi",
+    "recordDeletedShort": "An share rikodin cikin nasara",
+    "failedToDeleteRecord": "An kasa share rikodin"
   },
   "savings": {
-    "added": "Savings record added successfully!",
-    "updated": "Savings updated successfully!",
-    "withdrawn": "Withdrawal successful!",
-    "error": "Failed to perform savings operation"
+    "added": "An ƙara rikodin ajiya cikin nasara!",
+    "updated": "An sabunta ajiya cikin nasara!",
+    "withdrawn": "An cire kuɗi cikin nasara!",
+    "error": "An kasa yin aikin ajiya",
+    "noStoreSelected": "Ba a zaɓi shago ba ko mai amfani bai shiga ba",
+    "fillAllFields": "Da fatan za a cika duk filayen da kyau",
+    "endDateInvalid": "Ranar ƙarshe dole ta kasance bayan ranar farawa",
+    "planCreated": "An ƙirƙiri shirin ajiya cikin nasara!",
+    "failedToCreate": "An kasa ƙirƙirar shirin ajiya",
+    "amountInvalid": "Adadin dole ya fi 0",
+    "planNotFound": "Ba a sami shirin ajiya da aka zaɓa ba",
+    "cannotContributeWithdrawn": "Ba za ku iya ba da gudummawa ga shirin ajiya da aka cire ba",
+    "amountExceedsTarget": "Adadin ya wuce manufa. Kuna iya ba da gudummawa ₦{{remaining}} kawai don isa manufar ku ta ₦{{target}}",
+    "contributionAdded": "An ƙara gudummawa cikin nasara!",
+    "failedToAddContribution": "An kasa ƙara gudummawa",
+    "planDeleted": "An share shirin ajiya cikin nasara!",
+    "failedToDelete": "An kasa share shirin ajiya",
+    "invalidWithdrawalAmount": "Adadin cirewa bai dace ba",
+    "withdrawalRecorded": "An yi rikodin cirewa cikin nasara",
+    "failedToWithdraw": "An kasa cirewa",
+    "savingsWithdrawn": "An cire ajiya cikin nasara!",
+    "failedToWithdrawSavings": "An kasa cire ajiya"
   },
   "loan": {
-    "added": "Loan recorded successfully!",
-    "updated": "Loan updated successfully!",
-    "deleted": "Loan deleted successfully!",
-    "paymentRecorded": "Loan payment recorded successfully!",
-    "error": "Failed to perform loan operation"
+    "added": "An yi rikodin bashi cikin nasara!",
+    "updated": "An sabunta bashi cikin nasara!",
+    "deleted": "An share bashi cikin nasara!",
+    "paymentRecorded": "An yi rikodin biyan bashi cikin nasara!",
+    "error": "An kasa yin aikin bashi",
+    "created": "An ƙirƙiri bashi",
+    "failedToCreate": "An kasa ƙirƙirar bashi",
+    "repaymentAdded": "An ƙara biyan bashi",
+    "failedToAddRepayment": "An kasa ƙara biyan bashi",
+    "failedToDelete": "An kasa share bashi"
   },
   "customer": {
     "added": "Customer added successfully!",

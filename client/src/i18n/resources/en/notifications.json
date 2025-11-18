@@ -46,12 +46,21 @@
     "deleted": "Product deleted successfully!",
     "restocked": "Product restocked successfully!",
     "error": "Failed to perform product operation",
-    "lowStock": "Low stock alert for {{productName}}"
+    "lowStock": "Low stock alert for {{productName}}",
+    "fetchFailed": "Failed to fetch products. Please try again.",
+    "noStoreSelected": "No store selected",
+    "failedToSave": "Failed to save product",
+    "failedToRestock": "Failed to restock product",
+    "failedToDelete": "Failed to delete product"
   },
   "sale": {
     "added": "Sale recorded successfully!",
     "deleted": "Sale deleted successfully!",
-    "error": "Failed to record sale"
+    "error": "Failed to record sale",
+    "completed": "Sale completed successfully",
+    "failedToDelete": "Failed to delete sale",
+    "noteUpdated": "Note updated successfully",
+    "failedToUpdateNote": "Failed to update note"
   },
   "expense": {
     "added": "Expense added successfully!",
@@ -59,18 +68,54 @@
     "deleted": "Expense deleted successfully!",
     "error": "Failed to perform expense operation"
   },
+  "finance": {
+    "noStoreSelected": "No store selected",
+    "userNotLoggedIn": "User not logged in",
+    "fillAllFields": "Please fill in all fields",
+    "amountInvalid": "Amount must be greater than 0",
+    "recordDeleted": "Financial record deleted successfully",
+    "failedToDelete": "Failed to delete financial record",
+    "incomeAdded": "Income added successfully",
+    "expenseAdded": "Expense added successfully",
+    "failedToAdd": "Failed to add financial record",
+    "recordDeletedShort": "Record deleted successfully",
+    "failedToDeleteRecord": "Failed to delete record"
+  },
   "savings": {
     "added": "Savings record added successfully!",
     "updated": "Savings updated successfully!",
     "withdrawn": "Withdrawal successful!",
-    "error": "Failed to perform savings operation"
+    "error": "Failed to perform savings operation",
+    "noStoreSelected": "No store selected or user not logged in",
+    "fillAllFields": "Please fill in all fields correctly",
+    "endDateInvalid": "End date must be after start date",
+    "planCreated": "Savings plan created successfully!",
+    "failedToCreate": "Failed to create savings plan",
+    "amountInvalid": "Amount must be greater than 0",
+    "planNotFound": "Selected savings plan not found",
+    "cannotContributeWithdrawn": "Cannot contribute to a withdrawn savings plan",
+    "amountExceedsTarget": "Amount exceeds target. You can only contribute ₦{{remaining}} more to reach your target of ₦{{target}}",
+    "contributionAdded": "Contribution added successfully!",
+    "failedToAddContribution": "Failed to add contribution",
+    "planDeleted": "Savings plan deleted successfully!",
+    "failedToDelete": "Failed to delete savings plan",
+    "invalidWithdrawalAmount": "Invalid withdrawal amount",
+    "withdrawalRecorded": "Withdrawal recorded successfully",
+    "failedToWithdraw": "Failed to withdraw",
+    "savingsWithdrawn": "Savings withdrawn successfully!",
+    "failedToWithdrawSavings": "Failed to withdraw savings"
   },
   "loan": {
     "added": "Loan recorded successfully!",
     "updated": "Loan updated successfully!",
     "deleted": "Loan deleted successfully!",
     "paymentRecorded": "Loan payment recorded successfully!",
-    "error": "Failed to perform loan operation"
+    "error": "Failed to perform loan operation",
+    "created": "Loan created",
+    "failedToCreate": "Failed to create loan",
+    "repaymentAdded": "Repayment added",
+    "failedToAddRepayment": "Failed to add repayment",
+    "failedToDelete": "Failed to delete loan"
   },
   "customer": {
     "added": "Customer added successfully!",

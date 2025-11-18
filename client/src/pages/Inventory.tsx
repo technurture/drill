@@ -34,7 +34,7 @@ import NoStoreMessage from "@/components/NoStoreMessage";
 import { useTranslation } from "react-i18next";
 
 const Inventory = () => {
-  const { t } = useTranslation('pages');
+  const { t } = useTranslation(['pages', 'common', 'notifications']);
   const theStore = useContext(StoreContext);
   const location = useLocation();
   const subscriptionData = useContext(SubscriptionContext);
@@ -66,17 +66,17 @@ const Inventory = () => {
 
   useEffect(() => {
     if (productsError) {
-      toast.error("Failed to fetch products. Please try again.");
+      toast.error(t('notifications:product.fetchFailed'));
       console.error("Products fetch error:", productsError);
     }
-  }, [productsError]);
+  }, [productsError, t]);
 
   // Show NoStoreMessage if no store is selected (after all hooks)
   if (!theStore) {
     return (
       <NoStoreMessage 
-        title="Inventory Management"
-        description="Create your first store to start managing your product inventory, track stock levels, and monitor sales performance."
+        title={t('pages:inventory.title')}
+        description={t('pages:inventory.createStoreDesc')}
       />
     );
   }
@@ -101,7 +101,7 @@ const Inventory = () => {
   ) => {
     try {
       if (!theStore?.id) {
-        toast.error("No store selected");
+        toast.error(t('common:selectStoreFirst'));
         return;
       }
 
@@ -116,14 +116,14 @@ const Inventory = () => {
           ...productData,
           store_id: theStore?.id,
         } as Omit<Product, "id">);
-        toast.success("Product added successfully");
+        toast.success(t('notifications:product.added'));
       // } else {
       //   toast.error("Upgrade your plan to add more products");
       // }
       setModals((prev: any) => ({ ...prev, addModal: false }));
     } catch (error) {
       console.log(error);
-      toast.error("Failed to save product");
+      toast.error(t('notifications:product.addFailed'));
     }
   };
 
@@ -137,10 +137,10 @@ const Inventory = () => {
         quantity,
         storeId: theStore?.id || "",
       });
-      toast.success("Product restocked successfully");
+      toast.success(t('notifications:product.restocked'));
       setModals((prev: any) => ({ ...prev, restockModal: false }));
     } catch (error) {
-      toast.error("Failed to restock product");
+      toast.error(t('notifications:product.restockFailed'));
     }
   };
 
@@ -151,10 +151,10 @@ const Inventory = () => {
         id: selectedProduct.id,
         storeId: theStore?.id || "",
       });
-      toast.success("Product deleted successfully");
+      toast.success(t('notifications:product.deleted'));
       setModals((prev: any) => ({ ...prev, deleteModal: false }));
     } catch (error) {
-      toast.error("Failed to delete product");
+      toast.error(t('notifications:product.deleteFailed'));
     }
   };
 

@@ -17,36 +17,81 @@
     "error": "Failed to perform store operation"
   },
   "product": {
-    "added": "Product added successfully!",
-    "updated": "Product updated successfully!",
-    "deleted": "Product deleted successfully!",
-    "restocked": "Product restocked successfully!",
-    "error": "Failed to perform product operation",
-    "lowStock": "Low stock alert for {{productName}}"
+    "added": "Dem don add product well well!",
+    "updated": "Dem don update product well well!",
+    "deleted": "Dem don delete product well well!",
+    "restocked": "Dem don restock product well well!",
+    "error": "E no work for product operation",
+    "lowStock": "Product don dey finish for {{productName}}",
+    "fetchFailed": "E no work to bring products. Abeg try again.",
+    "noStoreSelected": "You never choose store",
+    "failedToSave": "E no work to save product",
+    "failedToRestock": "E no work to restock product",
+    "failedToDelete": "E no work to delete product"
   },
   "sale": {
-    "added": "Sale recorded successfully!",
-    "deleted": "Sale deleted successfully!",
-    "error": "Failed to record sale"
+    "added": "Dem don record sale well well!",
+    "deleted": "Dem don delete sale well well!",
+    "error": "E no work to record sale",
+    "completed": "Sale don complete well well",
+    "failedToDelete": "E no work to delete sale",
+    "noteUpdated": "Dem don update note well well",
+    "failedToUpdateNote": "E no work to update note"
   },
   "expense": {
-    "added": "Expense added successfully!",
-    "updated": "Expense updated successfully!",
-    "deleted": "Expense deleted successfully!",
-    "error": "Failed to perform expense operation"
+    "added": "Dem don add expense well well!",
+    "updated": "Dem don update expense well well!",
+    "deleted": "Dem don delete expense well well!",
+    "error": "E no work for expense operation"
+  },
+  "finance": {
+    "noStoreSelected": "You never choose store",
+    "userNotLoggedIn": "User never login",
+    "fillAllFields": "Abeg fill all the spaces",
+    "amountInvalid": "Money must pass 0",
+    "recordDeleted": "Dem don delete finance record well well",
+    "failedToDelete": "E no work to delete finance record",
+    "incomeAdded": "Dem don add income well well",
+    "expenseAdded": "Dem don add expense well well",
+    "failedToAdd": "E no work to add finance record",
+    "recordDeletedShort": "Dem don delete record well well",
+    "failedToDeleteRecord": "E no work to delete record"
   },
   "savings": {
-    "added": "Savings record added successfully!",
-    "updated": "Savings updated successfully!",
-    "withdrawn": "Withdrawal successful!",
-    "error": "Failed to perform savings operation"
+    "added": "Dem don add savings record well well!",
+    "updated": "Dem don update savings well well!",
+    "withdrawn": "Dem don collect money well well!",
+    "error": "E no work for savings operation",
+    "noStoreSelected": "You never choose store or user never login",
+    "fillAllFields": "Abeg fill all the spaces correct",
+    "endDateInvalid": "End date must dey after start date",
+    "planCreated": "Dem don create savings plan well well!",
+    "failedToCreate": "E no work to create savings plan",
+    "amountInvalid": "Money must pass 0",
+    "planNotFound": "We no see the savings plan wey you choose",
+    "cannotContributeWithdrawn": "You no fit contribute to savings plan wey dem don withdraw",
+    "amountExceedsTarget": "Money don pass target. You fit only contribute ₦{{remaining}} more to reach your target of ₦{{target}}",
+    "contributionAdded": "Dem don add contribution well well!",
+    "failedToAddContribution": "E no work to add contribution",
+    "planDeleted": "Dem don delete savings plan well well!",
+    "failedToDelete": "E no work to delete savings plan",
+    "invalidWithdrawalAmount": "Money wey you wan collect no correct",
+    "withdrawalRecorded": "Dem don record withdrawal well well",
+    "failedToWithdraw": "E no work to collect money",
+    "savingsWithdrawn": "Dem don collect savings well well!",
+    "failedToWithdrawSavings": "E no work to collect savings"
   },
   "loan": {
-    "added": "Loan recorded successfully!",
-    "updated": "Loan updated successfully!",
-    "deleted": "Loan deleted successfully!",
-    "paymentRecorded": "Loan payment recorded successfully!",
-    "error": "Failed to perform loan operation"
+    "added": "Dem don record loan well well!",
+    "updated": "Dem don update loan well well!",
+    "deleted": "Dem don delete loan well well!",
+    "paymentRecorded": "Dem don record loan payment well well!",
+    "error": "E no work for loan operation",
+    "created": "Dem don create loan",
+    "failedToCreate": "E no work to create loan",
+    "repaymentAdded": "Dem don add repayment",
+    "failedToAddRepayment": "E no work to add repayment",
+    "failedToDelete": "E no work to delete loan"
   },
   "customer": {
     "added": "Customer added successfully!",

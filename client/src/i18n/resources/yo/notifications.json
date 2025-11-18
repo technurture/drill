@@ -17,36 +17,81 @@
     "error": "Failed to perform store operation"
   },
   "product": {
-    "added": "Product added successfully!",
-    "updated": "Product updated successfully!",
-    "deleted": "Product deleted successfully!",
-    "restocked": "Product restocked successfully!",
-    "error": "Failed to perform product operation",
-    "lowStock": "Low stock alert for {{productName}}"
+    "added": "A fi ọja kun ni aṣeyọri!",
+    "updated": "A ṣe imudojuiwọn ọja ni aṣeyọri!",
+    "deleted": "A pa ọja rẹ ni aṣeyọri!",
+    "restocked": "A tun fi ọja kun ni aṣeyọri!",
+    "error": "A kuna lati ṣe iṣẹ ọja",
+    "lowStock": "Ikilọ fun ọja ti o kere fun {{productName}}",
+    "fetchFailed": "A kuna lati gba awọn ọja. Jọwọ gbiyanju lẹẹkansi.",
+    "noStoreSelected": "Ko si ile itaja ti a yan",
+    "failedToSave": "A kuna lati fi ọja pamọ",
+    "failedToRestock": "A kuna lati tun fi ọja kun",
+    "failedToDelete": "A kuna lati pa ọja rẹ"
   },
   "sale": {
-    "added": "Sale recorded successfully!",
-    "deleted": "Sale deleted successfully!",
-    "error": "Failed to record sale"
+    "added": "A ṣe igbasilẹ tita ni aṣeyọri!",
+    "deleted": "A pa tita rẹ ni aṣeyọri!",
+    "error": "A kuna lati ṣe igbasilẹ tita",
+    "completed": "Tita ti pari ni aṣeyọri",
+    "failedToDelete": "A kuna lati pa tita rẹ",
+    "noteUpdated": "A ṣe imudojuiwọn akọsilẹ ni aṣeyọri",
+    "failedToUpdateNote": "A kuna lati ṣe imudojuiwọn akọsilẹ"
   },
   "expense": {
-    "added": "Expense added successfully!",
-    "updated": "Expense updated successfully!",
-    "deleted": "Expense deleted successfully!",
-    "error": "Failed to perform expense operation"
+    "added": "A fi inawo kun ni aṣeyọri!",
+    "updated": "A ṣe imudojuiwọn inawo ni aṣeyọri!",
+    "deleted": "A pa inawo rẹ ni aṣeyọri!",
+    "error": "A kuna lati ṣe iṣẹ inawo"
+  },
+  "finance": {
+    "noStoreSelected": "Ko si ile itaja ti a yan",
+    "userNotLoggedIn": "Olumulo ko ti wọle",
+    "fillAllFields": "Jọwọ fi gbogbo awọn aaye kun",
+    "amountInvalid": "Iye gbọdọ pọ ju 0 lọ",
+    "recordDeleted": "A pa igbasilẹ owo rẹ ni aṣeyọri",
+    "failedToDelete": "A kuna lati pa igbasilẹ owo rẹ",
+    "incomeAdded": "A fi owo wọle kun ni aṣeyọri",
+    "expenseAdded": "A fi inawo kun ni aṣeyọri",
+    "failedToAdd": "A kuna lati fi igbasilẹ owo kun",
+    "recordDeletedShort": "A pa igbasilẹ rẹ ni aṣeyọri",
+    "failedToDeleteRecord": "A kuna lati pa igbasilẹ rẹ"
   },
   "savings": {
-    "added": "Savings record added successfully!",
-    "updated": "Savings updated successfully!",
-    "withdrawn": "Withdrawal successful!",
-    "error": "Failed to perform savings operation"
+    "added": "A fi igbasilẹ ifowopamọ kun ni aṣeyọri!",
+    "updated": "A ṣe imudojuiwọn ifowopamọ ni aṣeyọri!",
+    "withdrawn": "Yiyọ kuro ṣaṣeyọri!",
+    "error": "A kuna lati ṣe iṣẹ ifowopamọ",
+    "noStoreSelected": "Ko si ile itaja ti a yan tabi olumulo ko ti wọle",
+    "fillAllFields": "Jọwọ fi gbogbo awọn aaye kun ni deede",
+    "endDateInvalid": "Ọjọ ipari gbọdọ wa lẹhin ọjọ ibẹrẹ",
+    "planCreated": "A ṣẹda eto ifowopamọ ni aṣeyọri!",
+    "failedToCreate": "A kuna lati ṣẹda eto ifowopamọ",
+    "amountInvalid": "Iye gbọdọ pọ ju 0 lọ",
+    "planNotFound": "A ko ri eto ifowopamọ ti a yan",
+    "cannotContributeWithdrawn": "O ko le ṣe idasi si eto ifowopamọ ti a ti yọ kuro",
+    "amountExceedsTarget": "Iye ju ibi-afẹde lọ. O le ṣe idasi ₦{{remaining}} siwaju sii lati de ibi-afẹde rẹ ti ₦{{target}}",
+    "contributionAdded": "A fi idasi kun ni aṣeyọri!",
+    "failedToAddContribution": "A kuna lati fi idasi kun",
+    "planDeleted": "A pa eto ifowopamọ rẹ ni aṣeyọri!",
+    "failedToDelete": "A kuna lati pa eto ifowopamọ rẹ",
+    "invalidWithdrawalAmount": "Iye yiyọ kuro ko tọ",
+    "withdrawalRecorded": "A ṣe igbasilẹ yiyọ kuro ni aṣeyọri",
+    "failedToWithdraw": "A kuna lati yọ kuro",
+    "savingsWithdrawn": "A yọ ifowopamọ kuro ni aṣeyọri!",
+    "failedToWithdrawSavings": "A kuna lati yọ ifowopamọ kuro"
   },
   "loan": {
-    "added": "Loan recorded successfully!",
-    "updated": "Loan updated successfully!",
-    "deleted": "Loan deleted successfully!",
-    "paymentRecorded": "Loan payment recorded successfully!",
-    "error": "Failed to perform loan operation"
+    "added": "A ṣe igbasilẹ awin ni aṣeyọri!",
+    "updated": "A ṣe imudojuiwọn awin ni aṣeyọri!",
+    "deleted": "A pa awin rẹ ni aṣeyọri!",
+    "paymentRecorded": "A ṣe igbasilẹ isanwo awin ni aṣeyọri!",
+    "error": "A kuna lati ṣe iṣẹ awin",
+    "created": "A ṣẹda awin",
+    "failedToCreate": "A kuna lati ṣẹda awin",
+    "repaymentAdded": "A fi isanpadapada kun",
+    "failedToAddRepayment": "A kuna lati fi isanpadapada kun",
+    "failedToDelete": "A kuna lati pa awin rẹ"
   },
   "customer": {
     "added": "Customer added successfully!",

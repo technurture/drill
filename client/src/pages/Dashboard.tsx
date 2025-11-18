@@ -43,7 +43,7 @@ import AddFinancialRecordModal from "@/components/ui/modals/AddFinancialRecordMo
 import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
-  const { t } = useTranslation('pages');
+  const { t } = useTranslation(['pages', 'common']);
   const location = useLocation();
   const initialTab = location.state?.activeTab || "overview";
   const theStore = useContext(StoreContext);
@@ -139,10 +139,10 @@ const Dashboard = () => {
 
     const data = [
       { 
-        name: 'Admin', 
+        name: t('common:admin'), 
         value: adminSales, 
         color: '#3b82f6', // Blue
-        description: 'Sales made directly by admin'
+        description: t('common:salesMadeByAdmin')
       }
     ].filter(item => item.value > 0);
 
@@ -154,7 +154,7 @@ const Dashboard = () => {
     if (!sales || sales.length === 0) return [];
 
     const paymentCounts = sales.reduce((acc, sale) => {
-      const mode = sale.payment_mode || 'Unknown';
+      const mode = sale.payment_mode || t('common:unknown');
       acc[mode] = (acc[mode] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
@@ -185,19 +185,19 @@ const Dashboard = () => {
     
     if (salesIncome > 0) {
       data.push({
-        name: 'Sales Income',
+        name: t('common:salesIncome'),
         value: salesIncome,
         color: '#22c55e', // Green
-        description: 'Income from product sales'
+        description: t('common:incomeFromSales')
       });
     }
     
     if (otherIncome > 0) {
       data.push({
-        name: 'Other Income',
+        name: t('common:otherIncome'),
         value: otherIncome,
         color: '#3b82f6', // Blue
-        description: 'Income from other sources'
+        description: t('common:incomeFromOtherSources')
       });
     }
 
@@ -528,7 +528,7 @@ const Dashboard = () => {
                           ₦{"*****"}
                         </div>
                       )}
-                      <p className="text-xs text-gray-500 dark:text-gray-400">Total expenses paid</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalExpensesDesc')}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -587,7 +587,7 @@ const Dashboard = () => {
                     <div className="text-2xl font-bold text-gray-900 dark:text-white">
                       {totalSales}
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Completed sales transactions</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.transactionsCompleted')}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -622,7 +622,7 @@ const Dashboard = () => {
                         ₦{"*****"}
                       </div>
                     )}
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Total saved amount</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalSavedAmount')}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -643,7 +643,7 @@ const Dashboard = () => {
                     <div className="text-2xl font-bold text-gray-900 dark:text-white">
                       {lowStockCount}
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Products below threshold</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.productsBelowThreshold')}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -681,7 +681,7 @@ const Dashboard = () => {
                         ₦{"*****"}
                       </div>
                     )}
-                    <p className="text-xs text-gray-500 dark:text-gray-400"> Income from Sales and other sources </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalIncomeDesc')}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -719,7 +719,7 @@ const Dashboard = () => {
                         ₦{"*****"}
                       </div>
                     )}
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Total expenses paid</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalExpensesDesc')}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -729,7 +729,7 @@ const Dashboard = () => {
 
             {/* Quick Actions Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Quick Actions</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('pages:dashboard.quickActions', { defaultValue: 'Quick Actions' })}</h3>
               
               {/* Desktop Quick Actions */}
               <div className="hidden md:grid grid-cols-4 gap-4">
@@ -748,7 +748,7 @@ const Dashboard = () => {
                   className="h-20 flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200"
                 >
                   <PiggyBank className="w-6 h-6" />
-                  <span className="font-medium">Create Savings</span>
+                  <span className="font-medium">{t('pages:dashboard.addSavings')}</span>
                 </Button>
 
                 <Button
@@ -758,7 +758,7 @@ const Dashboard = () => {
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
-                  <span className="font-medium">Add Income</span>
+                  <span className="font-medium">{t('pages:dashboard.addIncome')}</span>
                 </Button>
 
                 <Button
@@ -768,7 +768,7 @@ const Dashboard = () => {
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                   </svg>
-                  <span className="font-medium">Add Expenses</span>
+                  <span className="font-medium">{t('pages:dashboard.addExpense')}</span>
                 </Button>
               </div>
 
@@ -819,7 +819,7 @@ const Dashboard = () => {
               {/* Income Breakdown Chart */}
               {incomeBreakdownData.length > 0 && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('dashboard.incomeBreakdown', { defaultValue: 'Income Breakdown' })}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('pages:dashboard.incomeBreakdown')}</h3>
                   <Card className="p-6">
                     <div className="h-80 md:h-64">
                       <ResponsiveContainer width="100%" height="100%">
@@ -838,7 +838,7 @@ const Dashboard = () => {
                             ))}
                           </Pie>
                           <Tooltip 
-                            formatter={(value: any) => [`₦${formatNumber(value)}`, 'Amount']}
+                            formatter={(value: any) => [`₦${formatNumber(value)}`, t('common:amount')]}
                             labelFormatter={(label) => `${label}`}
                           />
                           <Legend />
