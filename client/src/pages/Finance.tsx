@@ -16,8 +16,11 @@ import { toast } from "sonner";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import { formatNumber } from "@/utils/formatNumber";
 import { FinancialRecord } from "@/integrations/supabase/hooks/finance";
+import { useTranslation } from "react-i18next";
 
 const Finance = () => {
+  const { t } = useTranslation('pages');
+  const { t: tc } = useTranslation('common');
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -44,8 +47,8 @@ const Finance = () => {
   if (!selectedStore) {
     return (
       <NoStoreMessage 
-        title="Financial Management"
-        description="Create your first store to start tracking income, expenses, and managing your business finances."
+        title={t('finance.financeManagement')}
+        description={t('finance.financeManagementDesc')}
       />
     );
   }
@@ -181,7 +184,7 @@ const Finance = () => {
           <div>
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">Finance Management</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Track your income and expenses for {selectedStore?.store_name || "your store"}
+              {t('finance.trackIncomeExpenses')} {selectedStore?.store_name || "your store"}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -194,7 +197,7 @@ const Finance = () => {
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle>Filter Financial Records</DialogTitle>
+                  <DialogTitle>{t('finance.filterFinancialRecords')}</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                   <div>
@@ -204,9 +207,9 @@ const Finance = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Records</SelectItem>
-                        <SelectItem value="income">Income Only</SelectItem>
-                        <SelectItem value="expense">Expenses Only</SelectItem>
+                        <SelectItem value="all">{tc('allRecords')}</SelectItem>
+                        <SelectItem value="income">{tc('incomeOnly')}</SelectItem>
+                        <SelectItem value="expense">{tc('expensesOnly')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -299,7 +302,7 @@ const Finance = () => {
         <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Add Financial Record</DialogTitle>
+              <DialogTitle>{t('finance.addFinancialRecord')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
@@ -372,7 +375,7 @@ const Finance = () => {
             {filteredRecords.length === 0 ? (
               <div className="text-center py-8">
                 <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No financial records found</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('finance.noFinancialRecordsFound')}</h3>
                 <p className="text-gray-500 dark:text-gray-400 mb-4">
                   {filterType !== "all" || dateRange.from || dateRange.to 
                     ? "Try adjusting your filters" 
@@ -511,7 +514,7 @@ const Finance = () => {
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Add Financial Record</DialogTitle>
+              <DialogTitle>{t('finance.addFinancialRecord')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">

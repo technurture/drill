@@ -31,8 +31,10 @@ import { Label } from "@/components/ui/label";
 import { SheetClient } from "@/utils/google_sheet";
 import { Plus } from "lucide-react";
 import NoStoreMessage from "@/components/NoStoreMessage";
+import { useTranslation } from "react-i18next";
 
 const Inventory = () => {
+  const { t } = useTranslation('pages');
   const theStore = useContext(StoreContext);
   const location = useLocation();
   const subscriptionData = useContext(SubscriptionContext);
@@ -192,7 +194,7 @@ const Inventory = () => {
           <div className="flex flex-row items-center justify-between gap-4">
             <div className="space-y-1">
               <h1 className="text-l lg:text-3xl font-bold text-gray-900 dark:text-white">
-                Inventory / List of Stocks
+                {t('inventory.title')}
               </h1>
             </div>
             
@@ -208,29 +210,29 @@ const Inventory = () => {
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-md">
                     <DialogHeader>
-                      <DialogTitle>Filter Inventory</DialogTitle>
+                      <DialogTitle>{t('inventory.filterInventory')}</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="search">Search Products</Label>
+                        <Label htmlFor="search">{t('inventory.searchProducts')}</Label>
                         <Input
                           id="search"
-                          placeholder="Search products..."
+                          placeholder={t('inventory.searchPlaceholder')}
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
                         />
                       </div>
                       
                       <div>
-                        <Label htmlFor="stock-filter">Stock Status</Label>
+                        <Label htmlFor="stock-filter">{t('inventory.stockStatus')}</Label>
                         <Select value={stockFilter} onValueChange={setStockFilter}>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="all">All Stock</SelectItem>
-                            <SelectItem value="low">Low Stock</SelectItem>
-                            <SelectItem value="out">Out of Stock</SelectItem>
+                            <SelectItem value="all">{t('inventory.allStock')}</SelectItem>
+                            <SelectItem value="low">{t('inventory.lowStock')}</SelectItem>
+                            <SelectItem value="out">{t('inventory.outOfStock')}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -262,7 +264,7 @@ const Inventory = () => {
                   className="hidden md:inline-flex bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium"
                 >
                   <Plus className="w-4 h-4 mr-2" />
-                  Add Product
+                  {t('inventory.addProduct')}
                 </Button>
               </div>
               
@@ -290,12 +292,12 @@ const Inventory = () => {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                {searchTerm ? 'No products found' : 'No products yet'}
+                {searchTerm ? t('inventory.noProductsFound') : t('inventory.noProductsYet')}
               </h3>
               <p className="text-gray-500 dark:text-gray-400 mb-6">
                 {searchTerm 
-                  ? 'Try adjusting your search filters to find what you\'re looking for.'
-                  : 'Get started by adding your first product to the inventory.'
+                  ? t('inventory.noProductsDesc')
+                  : t('inventory.noProductsGetStarted')
                 }
               </p>
               {!searchTerm && (
@@ -303,7 +305,7 @@ const Inventory = () => {
                   onClick={() => setModals((prev: any) => ({ ...prev, addModal: true }))}
                   className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium"
                 >
-                  Add Your First Product
+                  {t('inventory.addFirstProduct')}
                 </Button>
               )}
             </div>

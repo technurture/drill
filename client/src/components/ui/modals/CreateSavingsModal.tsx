@@ -10,6 +10,7 @@ import { useCreateSavingsPlan } from "@/integrations/supabase/hooks/savings";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { SAVINGS_DURATION_OPTIONS, type SavingsDuration } from "@/types/savings.types";
+import { useTranslation } from "react-i18next";
 
 interface CreateSavingsModalProps {
   open: boolean;
@@ -20,6 +21,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const createSavingsPlan = useCreateSavingsPlan();
+  const { t } = useTranslation('common');
 
   const [formData, setFormData] = useState<{
     title: string;
@@ -73,11 +75,11 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create New Savings Plan</DialogTitle>
+          <DialogTitle>{t('create')} {t('plan')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">{t('title')}</Label>
             <Input
               id="title"
               value={formData.title}
@@ -89,7 +91,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="start_date">Start Date</Label>
+              <Label htmlFor="start_date">{t('startDate')}</Label>
               <Input
                 id="start_date"
                 type="date"
@@ -100,7 +102,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="end_date">End Date</Label>
+              <Label htmlFor="end_date">{t('endDate')}</Label>
               <Input
                 id="end_date"
                 type="date"
@@ -112,7 +114,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="contributing_to">Contributing To</Label>
+            <Label htmlFor="contributing_to">{t('contributingTo')}</Label>
             <Input
               id="contributing_to"
               value={formData.contributing_to}
@@ -123,7 +125,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="savings_duration">Savings Duration</Label>
+            <Label htmlFor="savings_duration">{t('savingsDuration')}</Label>
             <Select value={formData.savings_duration} onValueChange={(value) => setFormData({...formData, savings_duration: value as SavingsDuration})}>
               <SelectTrigger>
                 <SelectValue />
@@ -139,7 +141,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="target_amount">Target Amount (₦)</Label>
+            <Label htmlFor="target_amount">{t('targetAmount')} (₦)</Label>
             <Input
               id="target_amount"
               type="number"
@@ -154,10 +156,10 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
           
           <div className="flex gap-2 pt-4">
             <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={createSavingsPlan.isPending}>
-              {createSavingsPlan.isPending ? "Creating..." : "Create Plan"}
+              {createSavingsPlan.isPending ? t('creating') : t('createPlan')}
             </Button>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-              Cancel
+              {t('cancel')}
             </Button>
           </div>
         </form>

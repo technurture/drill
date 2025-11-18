@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -60,7 +61,7 @@ import { format } from 'date-fns';
 import { toast } from 'sonner';
 
 // Simple Rich Text Editor Component
-const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
+const RichTextEditor = ({ value, onChange, placeholder }: { value: string; onChange: (value: string) => void; placeholder?: string }) => {
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
@@ -160,7 +161,7 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
         id="help-content"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Write your help content here... Use markdown formatting for rich text."
+        placeholder={placeholder || "Write your help content here..."}
         className="min-h-[300px] font-mono text-sm"
       />
     </div>
@@ -168,6 +169,7 @@ const RichTextEditor = ({ value, onChange }: { value: string; onChange: (value: 
 };
 
 const AdminHelp = () => {
+  const { t } = useTranslation('admin');
   const { data: categories } = useHelpCategories();
   const { data: articles, isLoading } = useHelpArticles();
   const createArticle = useCreateHelpArticle();
@@ -195,11 +197,11 @@ const AdminHelp = () => {
   });
 
   const languages = [
-    { value: 'english', label: 'English' },
-    { value: 'yoruba', label: 'Yoruba' },
-    { value: 'hausa', label: 'Hausa' },
-    { value: 'igbo', label: 'Igbo' },
-    { value: 'pidgin', label: 'Pidgin' }
+    { value: 'english', label: t('help.english') },
+    { value: 'yoruba', label: t('help.yoruba') },
+    { value: 'hausa', label: t('help.hausa') },
+    { value: 'igbo', label: t('help.igbo') },
+    { value: 'pidgin', label: t('help.pidgin') }
   ];
 
   const filteredArticles = articles?.filter(article => {
@@ -252,7 +254,7 @@ const AdminHelp = () => {
   };
 
   const handleDeleteArticle = async (articleId: string) => {
-    if (confirm('Are you sure you want to delete this help article?')) {
+    if (confirm(t('help.deleteConfirm'))) {
       try {
         await deleteArticle.mutateAsync(articleId);
       } catch (error) {
@@ -283,38 +285,38 @@ const AdminHelp = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Help Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('help.title')}</h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Create and manage help articles for users
+            {t('help.subtitle')}
           </p>
         </div>
         <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
           <DialogTrigger asChild>
             <Button className="flex items-center gap-2">
               <Plus className="w-4 h-4" />
-              Create Help Article
+              {t('help.createArticle')}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Create New Help Article</DialogTitle>
+              <DialogTitle>{t('help.createNewHelpArticle')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleCreateArticle} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium">Title</label>
+                  <label className="text-sm font-medium">{t('help.titleLabel')}</label>
                   <Input
                     value={formData.title}
                     onChange={(e) => setFormData({...formData, title: e.target.value})}
-                    placeholder="Enter article title"
+                    placeholder={t('help.enterArticleTitle')}
                     required
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium">Category</label>
+                  <label className="text-sm font-medium">{t('help.category')}</label>
                   <Select value={formData.category_id} onValueChange={(value) => setFormData({...formData, category_id: value})}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder={t('help.selectCategory')} />
                     </SelectTrigger>
                     <SelectContent>
                       {categories?.map((category) => (
@@ -328,18 +330,18 @@ const AdminHelp = () => {
               </div>
               
               <div>
-                <label className="text-sm font-medium">Description</label>
+                <label className="text-sm font-medium">{t('help.descriptionLabel')}</label>
                 <Textarea
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  placeholder="Brief description of the help article"
+                  placeholder={t('help.briefDescription')}
                   rows={3}
                 />
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="text-sm font-medium">Language</label>
+                  <label className="text-sm font-medium">{t('help.languageLabel')}</label>
                   <Select value={formData.language} onValueChange={(value: any) => setFormData({...formData, language: value})}>
                     <SelectTrigger>
                       <SelectValue />
@@ -354,15 +356,15 @@ const AdminHelp = () => {
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium">Status</label>
+                  <label className="text-sm font-medium">{t('help.statusLabel')}</label>
                   <Select value={formData.status} onValueChange={(value: any) => setFormData({...formData, status: value})}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="draft">Draft</SelectItem>
-                      <SelectItem value="published">Published</SelectItem>
-                      <SelectItem value="archived">Archived</SelectItem>
+                      <SelectItem value="draft">{t('help.draft')}</SelectItem>
+                      <SelectItem value="published">{t('help.published')}</SelectItem>
+                      <SelectItem value="archived">{t('help.archived')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -374,44 +376,45 @@ const AdminHelp = () => {
                     onChange={(e) => setFormData({...formData, featured: e.target.checked})}
                     className="rounded"
                   />
-                  <label htmlFor="featured" className="text-sm font-medium">Featured</label>
+                  <label htmlFor="featured" className="text-sm font-medium">{t('help.featured')}</label>
                 </div>
               </div>
               
               <div>
-                <label className="text-sm font-medium">Content</label>
+                <label className="text-sm font-medium">{t('help.content')}</label>
                 <RichTextEditor
                   value={formData.content}
                   onChange={(value) => setFormData({...formData, content: value})}
+                  placeholder={t('help.enterContent')}
                 />
               </div>
               
               <div>
-                <label className="text-sm font-medium">Media Links (one per line)</label>
+                <label className="text-sm font-medium">{t('help.mediaLinks')}</label>
                 <Textarea
                   value={formData.media_links.join('\n')}
                   onChange={(e) => setFormData({...formData, media_links: e.target.value.split('\n').filter(link => link.trim())})}
-                  placeholder="Enter image or video URLs, one per line"
+                  placeholder={t('help.enterMediaLinks')}
                   rows={3}
                 />
               </div>
               
               <div>
-                <label className="text-sm font-medium">Notes</label>
+                <label className="text-sm font-medium">{t('help.notes')}</label>
                 <Textarea
                   value={formData.notes}
                   onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                  placeholder="Additional notes or important information"
+                  placeholder={t('help.additionalNotes')}
                   rows={3}
                 />
               </div>
               
               <div className="flex gap-2">
                 <Button type="submit" disabled={createArticle.isPending}>
-                  {createArticle.isPending ? 'Creating...' : 'Create Article'}
+                  {createArticle.isPending ? t('help.creating') : t('help.createArticle')}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setIsCreateModalOpen(false)}>
-                  Cancel
+                  {t('common:cancel')}
                 </Button>
               </div>
             </form>
@@ -427,7 +430,7 @@ const AdminHelp = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <Input
-                  placeholder="Search articles..."
+                  placeholder={t('help.searchArticles')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -436,10 +439,10 @@ const AdminHelp = () => {
             </div>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Category" />
+                <SelectValue placeholder={t('help.category')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="all">{t('help.allCategories')}</SelectItem>
                 {categories?.map((category) => (
                   <SelectItem key={category.id} value={category.id}>
                     {category.name}
@@ -449,13 +452,13 @@ const AdminHelp = () => {
             </Select>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Status" />
+                <SelectValue placeholder={t('help.statusLabel')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="draft">Draft</SelectItem>
-                <SelectItem value="published">Published</SelectItem>
-                <SelectItem value="archived">Archived</SelectItem>
+                <SelectItem value="all">{t('help.allStatus')}</SelectItem>
+                <SelectItem value="draft">{t('help.draft')}</SelectItem>
+                <SelectItem value="published">{t('help.published')}</SelectItem>
+                <SelectItem value="archived">{t('help.archived')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -465,31 +468,31 @@ const AdminHelp = () => {
       {/* Articles Table */}
       <Card className="bg-white dark:bg-gray-800">
         <CardHeader>
-          <CardTitle>Help Articles</CardTitle>
+          <CardTitle>{t('help.helpArticles')}</CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
             <div className="text-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">Loading articles...</p>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">{t('help.loadingArticles')}</p>
             </div>
           ) : filteredArticles.length === 0 ? (
             <div className="text-center py-8">
               <HelpCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">No help articles found</p>
+              <p className="text-gray-600 dark:text-gray-400">{t('help.noArticlesFound')}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Language</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Views</TableHead>
-                    <TableHead>Created</TableHead>
-                    <TableHead>Actions</TableHead>
+                    <TableHead>{t('help.articleTitle')}</TableHead>
+                    <TableHead>{t('help.category')}</TableHead>
+                    <TableHead>{t('help.language')}</TableHead>
+                    <TableHead>{t('help.status')}</TableHead>
+                    <TableHead>{t('help.views')}</TableHead>
+                    <TableHead>{t('common:created')}</TableHead>
+                    <TableHead>{t('help.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -505,7 +508,7 @@ const AdminHelp = () => {
                       </TableCell>
                       <TableCell>
                         <Badge variant="outline">
-                          {article.category?.name || 'Uncategorized'}
+                          {article.category?.name || t('help.uncategorized')}
                         </Badge>
                       </TableCell>
                       <TableCell>
@@ -569,24 +572,24 @@ const AdminHelp = () => {
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Edit Help Article</DialogTitle>
+            <DialogTitle>{t('help.editHelpArticle')}</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleUpdateArticle} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium">Title</label>
+                <label className="text-sm font-medium">{t('help.titleLabel')}</label>
                 <Input
                   value={formData.title}
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
-                  placeholder="Enter article title"
+                  placeholder={t('help.enterArticleTitle')}
                   required
                 />
               </div>
               <div>
-                <label className="text-sm font-medium">Category</label>
+                <label className="text-sm font-medium">{t('help.category')}</label>
                 <Select value={formData.category_id} onValueChange={(value) => setFormData({...formData, category_id: value})}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder={t('help.selectCategory')} />
                   </SelectTrigger>
                   <SelectContent>
                     {categories?.map((category) => (
@@ -600,18 +603,18 @@ const AdminHelp = () => {
             </div>
             
             <div>
-              <label className="text-sm font-medium">Description</label>
+              <label className="text-sm font-medium">{t('help.descriptionLabel')}</label>
               <Textarea
                 value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
-                placeholder="Brief description of the help article"
+                placeholder={t('help.briefDescription')}
                 rows={3}
               />
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="text-sm font-medium">Language</label>
+                <label className="text-sm font-medium">{t('help.languageLabel')}</label>
                 <Select value={formData.language} onValueChange={(value: any) => setFormData({...formData, language: value})}>
                   <SelectTrigger>
                     <SelectValue />
@@ -626,15 +629,15 @@ const AdminHelp = () => {
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium">Status</label>
+                <label className="text-sm font-medium">{t('help.statusLabel')}</label>
                 <Select value={formData.status} onValueChange={(value: any) => setFormData({...formData, status: value})}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="draft">Draft</SelectItem>
-                    <SelectItem value="published">Published</SelectItem>
-                    <SelectItem value="archived">Archived</SelectItem>
+                    <SelectItem value="draft">{t('help.draft')}</SelectItem>
+                    <SelectItem value="published">{t('help.published')}</SelectItem>
+                    <SelectItem value="archived">{t('help.archived')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -646,44 +649,45 @@ const AdminHelp = () => {
                   onChange={(e) => setFormData({...formData, featured: e.target.checked})}
                   className="rounded"
                 />
-                <label htmlFor="edit-featured" className="text-sm font-medium">Featured</label>
+                <label htmlFor="edit-featured" className="text-sm font-medium">{t('help.featured')}</label>
               </div>
             </div>
             
             <div>
-              <label className="text-sm font-medium">Content</label>
+              <label className="text-sm font-medium">{t('help.content')}</label>
               <RichTextEditor
                 value={formData.content}
                 onChange={(value) => setFormData({...formData, content: value})}
+                placeholder={t('help.enterContent')}
               />
             </div>
             
             <div>
-              <label className="text-sm font-medium">Media Links (one per line)</label>
+              <label className="text-sm font-medium">{t('help.mediaLinks')}</label>
               <Textarea
                 value={formData.media_links.join('\n')}
                 onChange={(e) => setFormData({...formData, media_links: e.target.value.split('\n').filter(link => link.trim())})}
-                placeholder="Enter image or video URLs, one per line"
+                placeholder={t('help.enterMediaLinks')}
                 rows={3}
               />
             </div>
             
             <div>
-              <label className="text-sm font-medium">Notes</label>
+              <label className="text-sm font-medium">{t('help.notes')}</label>
               <Textarea
                 value={formData.notes}
                 onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                placeholder="Additional notes or important information"
+                placeholder={t('help.additionalNotes')}
                 rows={3}
               />
             </div>
             
             <div className="flex gap-2">
               <Button type="submit" disabled={updateArticle.isPending}>
-                {updateArticle.isPending ? 'Updating...' : 'Update Article'}
+                {updateArticle.isPending ? t('help.updating') : t('help.updateArticle')}
               </Button>
               <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)}>
-                Cancel
+                {t('common:cancel')}
               </Button>
             </div>
           </form>

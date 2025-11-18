@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -29,6 +30,7 @@ import AdminLoans from './admin/AdminLoans';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('admin');
   const [activeTab, setActiveTab] = useState('home');
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -39,14 +41,14 @@ const AdminDashboard = () => {
   };
 
   const navItems = [
-    { id: 'home', label: 'Dashboard', icon: Home, component: AdminHome },
-    { id: 'users', label: 'Users', icon: Users, component: AdminUsers },
-    { id: 'agents', label: 'Agents', icon: UserCheck, component: AdminAgents },
-    { id: 'stores', label: 'Stores', icon: Store, component: AdminStores },
-    { id: 'loans', label: 'Loans', icon: BarChart3, component: AdminLoans },
-    { id: 'locations', label: 'Locations', icon: MapPin, component: AdminLocations },
-    { id: 'help', label: 'Create Help', icon: HelpCircle, component: AdminHelp },
-    { id: 'settings', label: 'Settings', icon: Settings, component: AdminSettings },
+    { id: 'home', label: t('dashboard.home'), icon: Home, component: AdminHome },
+    { id: 'users', label: t('dashboard.users'), icon: Users, component: AdminUsers },
+    { id: 'agents', label: t('dashboard.agents'), icon: UserCheck, component: AdminAgents },
+    { id: 'stores', label: t('dashboard.stores'), icon: Store, component: AdminStores },
+    { id: 'loans', label: t('dashboard.loans'), icon: BarChart3, component: AdminLoans },
+    { id: 'locations', label: t('dashboard.locations'), icon: MapPin, component: AdminLocations },
+    { id: 'help', label: t('dashboard.createHelp'), icon: HelpCircle, component: AdminHelp },
+    { id: 'settings', label: t('dashboard.settings'), icon: Settings, component: AdminSettings },
   ];
 
   const ActiveComponent = navItems.find(item => item.id === activeTab)?.component || AdminHome;
@@ -67,7 +69,7 @@ const AdminDashboard = () => {
                 </div>
                 <div>
                   <h1 className="text-lg font-bold text-gray-900 dark:text-white">Admin</h1>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">Dashboard</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{t('dashboard.subtitle')}</p>
                 </div>
               </div>
             )}
@@ -112,7 +114,7 @@ const AdminDashboard = () => {
             onClick={handleLogout}
           >
             <LogOut className="w-4 h-4" />
-            {!isCollapsed && <span className="ml-2">Logout</span>}
+            {!isCollapsed && <span className="ml-2">{t('dashboard.logout')}</span>}
           </Button>
         </div>
       </div>
@@ -129,13 +131,13 @@ const AdminDashboard = () => {
                 {navItems.find(item => item.id === activeTab)?.label}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Admin Dashboard
+                {t('dashboard.subtitle')}
               </p>
             </div>
             
             <div className="flex items-center space-x-4">
               <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                Super Admin
+                {t('dashboard.superAdmin')}
               </Badge>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 admin@tacommunity.org

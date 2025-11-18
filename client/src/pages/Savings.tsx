@@ -44,8 +44,11 @@ import {
 import { toast } from "sonner";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import WithdrawSavingsModal from "@/components/ui/modals/WithdrawSavingsModal";
+import { useTranslation } from "react-i18next";
 
 const Savings = () => {
+  const { t } = useTranslation('pages');
+  const { t: tc } = useTranslation('common');
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);

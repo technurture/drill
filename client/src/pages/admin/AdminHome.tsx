@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -44,6 +45,7 @@ interface RecentActivity {
 }
 
 const AdminHome = () => {
+  const { t } = useTranslation('admin');
   const [stats, setStats] = useState<AdminStats>({
     total_users: 0,
     total_agents: 0,
@@ -195,9 +197,9 @@ const AdminHome = () => {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold mb-2">Welcome to Admin Dashboard</h2>
+              <h2 className="text-2xl font-bold mb-2">{t('home.welcome')}</h2>
               <p className="text-blue-100">
-                Manage users, stores, and help content from one central location
+                {t('home.subtitle')}
               </p>
             </div>
             <div className="hidden md:block">
@@ -211,56 +213,56 @@ const AdminHome = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('home.totalUsers')}</CardTitle>
             <Users className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.total_users}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Registered users
+              {t('home.registeredUsers')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Agents</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('home.agents')}</CardTitle>
             <UserCheck className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.total_agents}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Active agents
+              {t('home.activeAgents')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Stores</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('home.stores')}</CardTitle>
             <Store className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.total_stores}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Active stores
+              {t('home.activeStores')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Inventory Value (All Stores)</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('home.totalInventoryValue')}</CardTitle>
             <Package className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Purchase Price:</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('home.purchasePrice')}:</span>
                 <span className="text-lg font-semibold text-green-600">₦{stats.total_inventory_value_purchase.toLocaleString()}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Unit Price:</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('home.unitPrice')}:</span>
                 <span className="text-lg font-semibold text-blue-600">₦{stats.total_inventory_value_unit.toLocaleString()}</span>
               </div>
             </div>
@@ -275,12 +277,12 @@ const AdminHome = () => {
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <Activity className="w-5 h-5" />
-                Recent Activities
+                {t('home.recentActivities')}
               </CardTitle>
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-gray-600 dark:text-gray-400">Live</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('home.live')}</span>
                 </div>
                 <Button
                   size="sm"
@@ -297,7 +299,7 @@ const AdminHome = () => {
               {recentActivities.length === 0 ? (
                 <div className="text-center py-8">
                   <Activity className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 dark:text-gray-400">No recent activities</p>
+                  <p className="text-gray-600 dark:text-gray-400">{t('home.noRecentActivities')}</p>
                 </div>
               ) : (
                 recentActivities.map((activity) => (
@@ -333,27 +335,27 @@ const AdminHome = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
-              System Overview
+              {t('home.systemOverview')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Users</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('home.totalUsers')}</span>
                 <span className="font-medium">{stats.total_users}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Agents</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('home.totalAgents')}</span>
                 <span className="font-medium">{stats.total_agents}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Stores</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('home.totalStores')}</span>
                 <span className="font-medium">{stats.total_stores}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">System Status</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('home.systemStatus')}</span>
                 <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  Healthy
+                  {t('home.healthy')}
                 </Badge>
               </div>
             </div>

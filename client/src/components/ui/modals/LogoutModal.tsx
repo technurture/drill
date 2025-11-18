@@ -8,6 +8,7 @@ import {
   ModalFooter,
 } from "@nextui-org/modal";
 import { LogOut } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const LogoutModal = ({
   isOpen,
@@ -17,14 +18,15 @@ const LogoutModal = ({
   setOpen: (open: boolean) => void;
 }) => {
   const { signOut, user } = useAuth();
+  const { t } = useTranslation('common');
   
   const handleLogout = async () => {
     try {
       await signOut();
-      toast.success("Logged out successfully");
+      toast.success(t('loggedOutSuccess'));
       setOpen(false);
     } catch (error) {
-      toast.error("Error logging out");
+      toast.error(t('logoutError'));
     }
   };
 
@@ -49,7 +51,7 @@ const LogoutModal = ({
             </div>
             <div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Sign Out
+                {t('signOut')}
               </h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {user?.email}
@@ -60,7 +62,7 @@ const LogoutModal = ({
 
         <ModalBody className="px-6 pb-4">
           <p className="text-gray-600 dark:text-gray-300 text-sm">
-            Are you sure you want to sign out? You'll need to sign in again to access your account.
+            {t('signOutConfirmation')}
           </p>
         </ModalBody>
 
@@ -69,14 +71,14 @@ const LogoutModal = ({
             className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             onClick={() => setOpen(false)}
           >
-            Cancel
+            {t('cancel')}
           </button>
           <button
             className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
             onClick={handleLogout}
           >
             <LogOut className="w-4 h-4" />
-            Sign Out
+            {t('signOut')}
           </button>
         </ModalFooter>
       </ModalContent>

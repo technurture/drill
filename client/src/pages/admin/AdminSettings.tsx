@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -37,6 +38,7 @@ interface AdminSettings {
 }
 
 const AdminSettings = () => {
+  const { t } = useTranslation('admin');
   const [systemStats, setSystemStats] = useState<SystemStats>({
     totalUsers: 0,
     totalStores: 0,
@@ -150,9 +152,9 @@ const AdminSettings = () => {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold mb-2">System Settings</h2>
+              <h2 className="text-2xl font-bold mb-2">{t('settings.title')}</h2>
               <p className="text-blue-100">
-                Manage system configuration and monitor health
+                {t('settings.subtitle')}
               </p>
             </div>
             <div className="hidden md:block">
@@ -166,39 +168,39 @@ const AdminSettings = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('settings.totalUsers')}</CardTitle>
             <Users className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{systemStats.totalUsers}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Registered users
+              {t('settings.registeredUsers')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Stores</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('settings.totalStores')}</CardTitle>
             <Store className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{systemStats.totalStores}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Active stores
+              {t('settings.activeStores')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Agents</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('settings.totalAgents')}</CardTitle>
             <HelpCircle className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{systemStats.totalAgents}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Active agents
+              {t('settings.activeAgents')}
             </p>
           </CardContent>
         </Card>
@@ -209,22 +211,22 @@ const AdminSettings = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Database className="w-5 h-5" />
-            Database Info
+            {t('settings.databaseInfo')}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Database Size</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{t('settings.databaseSize')}</span>
             <span className="font-medium">{systemStats.databaseSize}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Last Backup</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{t('settings.lastBackup')}</span>
             <span className="font-medium">{systemStats.lastBackup}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-gray-400">System Status</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{t('settings.systemStatus')}</span>
             <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-              Operational
+              {t('settings.operational')}
             </Badge>
           </div>
         </CardContent>

@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useAddFinancialRecord } from "@/integrations/supabase/hooks/finance";
 import { format } from "date-fns";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 interface AddFinancialRecordModalProps {
   open: boolean;
@@ -24,6 +25,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const addFinancialRecord = useAddFinancialRecord();
+  const { t } = useTranslation('common');
 
   const [formData, setFormData] = useState({
     type: defaultType,
@@ -68,24 +70,24 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add {defaultType === 'income' ? 'Income' : 'Expense'}</DialogTitle>
+          <DialogTitle>{t('add')} {defaultType === 'income' ? t('income') : t('expense')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="type">Type</Label>
+            <Label htmlFor="type">{t('type')}</Label>
             <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value as 'income' | 'expense'})}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="income">Income</SelectItem>
-                <SelectItem value="expense">Expense</SelectItem>
+                <SelectItem value="income">{t('income')}</SelectItem>
+                <SelectItem value="expense">{t('expense')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="reason">Reason/Description</Label>
+            <Label htmlFor="reason">{t('reasonDescription')}</Label>
             <Input
               id="reason"
               value={formData.reason}
@@ -96,7 +98,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="amount">Amount (₦)</Label>
+            <Label htmlFor="amount">{t('amount')} (₦)</Label>
             <Input
               id="amount"
               type="number"
@@ -110,7 +112,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="date">Date</Label>
+            <Label htmlFor="date">{t('date')}</Label>
             <Input
               id="date"
               type="date"
@@ -122,10 +124,10 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
           
           <div className="flex gap-2 pt-4">
             <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addFinancialRecord.isPending}>
-              {addFinancialRecord.isPending ? "Adding..." : `Add ${formData.type === 'income' ? 'Income' : 'Expense'}`}
+              {addFinancialRecord.isPending ? t('adding') : `${t('add')} ${formData.type === 'income' ? t('income') : t('expense')}`}
             </Button>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-              Cancel
+              {t('cancel')}
             </Button>
           </div>
         </form>

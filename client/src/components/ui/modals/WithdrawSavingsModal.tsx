@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlertTriangle, PiggyBank } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useTranslation } from "react-i18next";
 
 interface WithdrawSavingsModalProps {
   open: boolean;
@@ -19,6 +20,8 @@ const WithdrawSavingsModal: React.FC<WithdrawSavingsModalProps> = ({
   onConfirm, 
   isLoading 
 }) => {
+  const { t } = useTranslation('common');
+  
   if (!plan) return null;
 
   const currentContributions = useMemo(() => {

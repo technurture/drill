@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -32,6 +33,7 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/supabase';
 
 const AdminLocations = () => {
+  const { t } = useTranslation('admin');
   const { data: locations, isLoading: locationsLoading } = useLocations();
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [newMarketName, setNewMarketName] = useState('');
@@ -97,15 +99,15 @@ const AdminLocations = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Location & Market Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('locations.title')}</h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Manage locations and their associated markets
+            {t('locations.subtitle')}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <MapPin className="w-5 h-5 text-blue-600" />
           <span className="text-sm text-gray-600 dark:text-gray-400">
-            {locations?.length || 0} locations
+            {locations?.length || 0} {t('locations.locations').toLowerCase()}
           </span>
         </div>
       </div>
@@ -116,7 +118,7 @@ const AdminLocations = () => {
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
-              placeholder="Search locations..."
+              placeholder={t('locations.searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -132,7 +134,7 @@ const AdminLocations = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MapPin className="w-5 h-5" />
-              Nigerian States
+              {t('locations.nigerianStates')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -160,7 +162,7 @@ const AdminLocations = () => {
                           {location.name}
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {allMarkets?.filter(market => market.location_id === location.id).length || 0} markets
+                          {allMarkets?.filter(market => market.location_id === location.id).length || 0} {t('locations.markets').toLowerCase()}
                         </p>
                       </div>
                       <Badge variant="outline">
@@ -180,7 +182,7 @@ const AdminLocations = () => {
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <Store className="w-5 h-5" />
-                Markets
+                {t('locations.markets')}
                 {selectedLocation && (
                   <Badge variant="secondary">
                     {locations?.find(l => l.id === selectedLocation)?.name}
@@ -192,20 +194,20 @@ const AdminLocations = () => {
                   <DialogTrigger asChild>
                     <Button size="sm" className="flex items-center gap-2">
                       <Plus className="w-4 h-4" />
-                      Add Market
+                      {t('locations.addMarket')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Add New Market</DialogTitle>
+                      <DialogTitle>{t('locations.addNewMarket')}</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
                         <label className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                          Market Name
+                          {t('locations.marketName')}
                         </label>
                         <Input
-                          placeholder="Enter market name..."
+                          placeholder={t('locations.enterMarketName')}
                           value={newMarketName}
                           onChange={(e) => setNewMarketName(e.target.value)}
                           className="mt-1"
@@ -216,13 +218,13 @@ const AdminLocations = () => {
                           variant="outline"
                           onClick={() => setIsAddMarketOpen(false)}
                         >
-                          Cancel
+                          {t('locations.cancel')}
                         </Button>
                         <Button
                           onClick={handleAddMarket}
                           disabled={createMarket.isPending || !newMarketName.trim()}
                         >
-                          {createMarket.isPending ? 'Creating...' : 'Create Market'}
+                          {createMarket.isPending ? t('locations.creating') : t('locations.createMarket')}
                         </Button>
                       </div>
                     </div>
@@ -236,7 +238,7 @@ const AdminLocations = () => {
               <div className="text-center py-8">
                 <Store className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <p className="text-gray-600 dark:text-gray-400">
-                  Select a location to view its markets
+                  {t('locations.selectLocation')}
                 </p>
               </div>
             ) : marketsLoading ? (
@@ -257,7 +259,7 @@ const AdminLocations = () => {
                         {market.name}
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Created {new Date(market.created_at).toLocaleDateString()}
+                        {t('locations.created')} {new Date(market.created_at).toLocaleDateString()}
                       </p>
                     </div>
                     <Button
@@ -275,7 +277,7 @@ const AdminLocations = () => {
               <div className="text-center py-8">
                 <Store className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <p className="text-gray-600 dark:text-gray-400">
-                  No markets found for this location
+                  {t('locations.noMarketsFound')}
                 </p>
                 <Button
                   size="sm"
@@ -283,7 +285,7 @@ const AdminLocations = () => {
                   onClick={() => setIsAddMarketOpen(true)}
                 >
                   <Plus className="w-4 h-4 mr-2" />
-                  Add First Market
+                  {t('locations.addFirstMarket')}
                 </Button>
               </div>
             )}

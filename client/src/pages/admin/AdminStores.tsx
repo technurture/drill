@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -49,6 +50,7 @@ import { downloadCSV, formatDateForCSV, formatCurrencyForCSV } from '@/utils/exp
 import { toast } from 'sonner';
 
 const AdminStores = () => {
+  const { t } = useTranslation('admin');
   const [searchTerm, setSearchTerm] = useState('');
   const [locationFilter, setLocationFilter] = useState('all');
   const [marketFilter, setMarketFilter] = useState('all');
@@ -333,9 +335,9 @@ const AdminStores = () => {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Store Management</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('stores.title')}</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Monitor and manage all stores with financial data
+              {t('stores.subtitle')}
             </p>
           </div>
         </div>
@@ -343,7 +345,7 @@ const AdminStores = () => {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading stores...</p>
+            <p className="text-gray-600 dark:text-gray-400">{t('stores.loading')}</p>
           </div>
         </div>
       </div>
@@ -433,9 +435,9 @@ const AdminStores = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Store Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('stores.title')}</h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Monitor and manage all stores with financial data
+            {t('stores.subtitle')}
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -445,12 +447,12 @@ const AdminStores = () => {
             disabled={sortedStores.length === 0}
           >
             <Download className="w-4 h-4 mr-2" />
-            Export CSV
+            {t('common:exportCsv')}
           </Button>
           <div className="flex items-center gap-2">
             <Store className="w-5 h-5 text-purple-600" />
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              {finalStores?.length || 0} stores
+              {finalStores?.length || 0} {t('stores.stores').toLowerCase()}
             </span>
           </div>
         </div>
@@ -460,52 +462,52 @@ const AdminStores = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('stores.totalRevenue')}</CardTitle>
             <DollarSign className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">₦{storeStats.totalRevenue.toLocaleString()}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Across all stores
+              {t('stores.acrossAllStores')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Profit</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('stores.totalProfit')}</CardTitle>
             <TrendingUp className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">₦{storeStats.totalProfit.toLocaleString()}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Net profit
+              {t('stores.netProfit')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('stores.totalSavings')}</CardTitle>
             <PiggyBank className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">₦{storeStats.totalSavings.toLocaleString()}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Completed savings
+              {t('stores.completedSavings')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Stores</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('stores.activeStores')}</CardTitle>
             <Store className="h-4 w-4 text-orange-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{storeStats.active}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              With sales activity
+              {t('stores.withSalesActivity')}
             </p>
           </CardContent>
         </Card>
@@ -519,7 +521,7 @@ const AdminStores = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <Input
-                  placeholder="Search stores by name, owner email, or owner name..."
+                  placeholder={t('stores.searchPlaceholder')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -529,10 +531,10 @@ const AdminStores = () => {
             
             <Select value={locationFilter} onValueChange={setLocationFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by location" />
+                <SelectValue placeholder={t('stores.filterByLocation')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Locations</SelectItem>
+                <SelectItem value="all">{t('stores.allLocations')}</SelectItem>
                 {locations?.map((location) => (
                   <SelectItem key={location.id} value={location.id}>
                     {location.name}
@@ -543,10 +545,10 @@ const AdminStores = () => {
 
             <Select value={marketFilter} onValueChange={setMarketFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by market" />
+                <SelectValue placeholder={t('stores.filterByMarket')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Markets</SelectItem>
+                <SelectItem value="all">{t('stores.allMarkets')}</SelectItem>
                 {markets?.map((market) => (
                   <SelectItem key={market.id} value={market.id}>
                     {market.name}
@@ -557,19 +559,19 @@ const AdminStores = () => {
 
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Sort by" />
+                <SelectValue placeholder={t('stores.sortBy')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="recent">Most Recent</SelectItem>
-                <SelectItem value="name">Store Name</SelectItem>
-                <SelectItem value="revenue">Highest Revenue</SelectItem>
-                <SelectItem value="profit">Highest Profit</SelectItem>
-                <SelectItem value="sales">Most Sales</SelectItem>
-                <SelectItem value="products">Most Products</SelectItem>
+                <SelectItem value="recent">{t('stores.mostRecent')}</SelectItem>
+                <SelectItem value="name">{t('stores.storeName')}</SelectItem>
+                <SelectItem value="revenue">{t('stores.highestRevenue')}</SelectItem>
+                <SelectItem value="profit">{t('stores.highestProfit')}</SelectItem>
+                <SelectItem value="sales">{t('stores.mostSales')}</SelectItem>
+                <SelectItem value="products">{t('stores.mostProducts')}</SelectItem>
               </SelectContent>
             </Select>
 
-            <Button onClick={clearFilters} className="w-32">Clear Filters</Button>
+            <Button onClick={clearFilters} className="w-32">{t('stores.clearFilters')}</Button>
           </div>
         </CardContent>
       </Card>
@@ -577,37 +579,37 @@ const AdminStores = () => {
       {/* Stores Table */}
       <Card className="bg-white dark:bg-gray-800">
         <CardHeader>
-          <CardTitle>Stores</CardTitle>
+          <CardTitle>{t('stores.stores')}</CardTitle>
         </CardHeader>
         <CardContent>
           {finalLoading ? (
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                <p className="text-gray-600 dark:text-gray-400">Loading stores...</p>
+                <p className="text-gray-600 dark:text-gray-400">{t('stores.loading')}</p>
               </div>
             </div>
           ) : sortedStores.length === 0 ? (
             <div className="text-center py-8">
               <Store className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">No stores found</p>
+              <p className="text-gray-600 dark:text-gray-400">{t('stores.noStoresFound')}</p>
             </div>
           ) : (
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Store</TableHead>
-                    <TableHead>Owner</TableHead>
-                  <TableHead>Location</TableHead>
-                  <TableHead>Market</TableHead>
-                    <TableHead>Revenue</TableHead>
-                  <TableHead>Profit</TableHead>
-                                      <TableHead>Savings</TableHead>
-                    <TableHead>Withdrawals</TableHead>
-                    <TableHead>Sales</TableHead>
-                    <TableHead>Products</TableHead>
-                    <TableHead>Created</TableHead>
-                    <TableHead>Actions</TableHead>
+                    <TableHead>{t('stores.store')}</TableHead>
+                    <TableHead>{t('stores.owner')}</TableHead>
+                  <TableHead>{t('stores.location')}</TableHead>
+                  <TableHead>{t('stores.market')}</TableHead>
+                    <TableHead>{t('stores.revenue')}</TableHead>
+                  <TableHead>{t('stores.profit')}</TableHead>
+                                      <TableHead>{t('stores.savings')}</TableHead>
+                    <TableHead>{t('stores.withdrawals')}</TableHead>
+                    <TableHead>{t('stores.sales')}</TableHead>
+                    <TableHead>{t('stores.products')}</TableHead>
+                    <TableHead>{t('stores.created')}</TableHead>
+                    <TableHead>{t('common:actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -622,7 +624,7 @@ const AdminStores = () => {
                           </div>
                           <div>
                             <p className="font-medium text-gray-900 dark:text-white">
-                            {store.store_name || 'Unnamed Store'}
+                            {store.store_name || t('stores.unnamedStore')}
                             </p>
                             <p className="text-sm text-gray-600 dark:text-gray-400">
                             ID: {(store.store_id || '').slice(0, 8)}...
@@ -633,27 +635,27 @@ const AdminStores = () => {
                       <TableCell>
                           <div>
                         <p className="font-medium text-gray-900 dark:text-white">
-                              {store.owner_name || 'No name'}
+                              {store.owner_name || t('stores.noName')}
                             </p>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {store.owner_email || 'No email'}
+                          {store.owner_email || t('stores.noEmail')}
                         </p>
                         <Badge 
                           variant={store.owner_is_agent ? "default" : "secondary"}
                           className={store.owner_is_agent ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}
                         >
-                          {store.owner_is_agent ? 'Agent' : 'User'}
+                          {store.owner_is_agent ? t('common:agent') : t('stores.user')}
                         </Badge>
                         </div>
                       </TableCell>
                       <TableCell>
                       <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {store.location_name || 'Not specified'}
+                        {store.location_name || t('stores.notSpecified')}
                       </span>
                     </TableCell>
                     <TableCell>
                       <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {store.market_name || 'Not specified'}
+                        {store.market_name || t('stores.notSpecified')}
                       </span>
                     </TableCell>
                     <TableCell>
@@ -720,11 +722,11 @@ const AdminStores = () => {
       {sortedStores.length > 0 && (
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            Page {currentPage} of {totalPages} • Showing {(pagedStores.length)} of {sortedStores.length} stores
+            {t('common:page')} {currentPage} {t('common:of')} {totalPages} • {t('common:showing')} {(pagedStores.length)} {t('common:of')} {sortedStores.length} {t('stores.stores').toLowerCase()}
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" disabled={currentPage <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>Previous</Button>
-            <Button variant="outline" disabled={currentPage >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next</Button>
+            <Button variant="outline" disabled={currentPage <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>{t('common:previous')}</Button>
+            <Button variant="outline" disabled={currentPage >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>{t('common:next')}</Button>
           </div>
         </div>
       )}
@@ -733,52 +735,52 @@ const AdminStores = () => {
       <Dialog open={isStoreDetailsOpen} onOpenChange={setIsStoreDetailsOpen}>
         <DialogContent className="max-w-4xl">
           <DialogHeader>
-            <DialogTitle>Store Details</DialogTitle>
+            <DialogTitle>{t('stores.storeDetails')}</DialogTitle>
           </DialogHeader>
           {selectedStore && (
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Store Name</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.storeName')}</label>
                   <p className="text-gray-900 dark:text-white">{selectedStore.store_name}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Owner</label>
-                  <p className="text-gray-900 dark:text-white">{selectedStore.owner_name || 'No name'}</p>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.owner')}</label>
+                  <p className="text-gray-900 dark:text-white">{selectedStore.owner_name || t('stores.noName')}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Owner Email</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.ownerEmail')}</label>
                   <p className="text-gray-900 dark:text-white">{selectedStore.owner_email}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Owner Type</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.ownerType')}</label>
                   <Badge variant={selectedStore.owner_is_agent ? "default" : "secondary"}>
-                    {selectedStore.owner_is_agent ? 'Agent' : 'User'}
+                    {selectedStore.owner_is_agent ? t('common:agent') : t('stores.user')}
                   </Badge>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Location</label>
-                  <p className="text-gray-900 dark:text-white">{selectedStore.location_name || 'Not specified'}</p>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.location')}</label>
+                  <p className="text-gray-900 dark:text-white">{selectedStore.location_name || t('stores.notSpecified')}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Market</label>
-                  <p className="text-gray-900 dark:text-white">{selectedStore.market_name || 'Not specified'}</p>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.market')}</label>
+                  <p className="text-gray-900 dark:text-white">{selectedStore.market_name || t('stores.notSpecified')}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Created</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.created')}</label>
                   <p className="text-gray-900 dark:text-white">
                     {selectedStore.created_at 
                       ? format(new Date(selectedStore.created_at), 'MMM dd, yyyy HH:mm')
-                      : 'Not available'
+                      : t('stores.notAvailable')
                     }
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Last Updated</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.lastUpdated')}</label>
                   <p className="text-gray-900 dark:text-white">
                     {selectedStore.updated_at 
                       ? format(new Date(selectedStore.updated_at), 'MMM dd, yyyy HH:mm')
-                      : 'Not available'
+                      : t('stores.notAvailable')
                     }
                   </p>
                 </div>
@@ -786,88 +788,88 @@ const AdminStores = () => {
               
               {selectedStore.description && (
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Description</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('stores.description')}</label>
                   <p className="text-gray-900 dark:text-white">{selectedStore.description}</p>
                 </div>
               )}
               
               <div className="border-t pt-4">
-                <h4 className="font-medium mb-4">Financial Summary</h4>
+                <h4 className="font-medium mb-4">{t('stores.financialSummary')}</h4>
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                   <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-green-600">₦{(selectedStore.total_income || 0).toLocaleString()}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Income</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.totalIncome')}</div>
                   </div>
                   <div className="text-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-red-600">₦{(selectedStore.total_expenditure || 0).toLocaleString()}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Expenditure</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.totalExpenditure')}</div>
                   </div>
                   <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                     <div className={`text-2xl font-bold ${(selectedStore.total_profit || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                       ₦{(selectedStore.total_profit || 0).toLocaleString()}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Profit</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.totalProfit')}</div>
                   </div>
                   <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-purple-600">₦{(selectedStore.total_savings || 0).toLocaleString()}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Savings</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.totalSavings')}</div>
                   </div>
                   <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-orange-600">₦{(selectedStore.total_withdrawals || 0).toLocaleString()}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Withdrawals</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.totalWithdrawals')}</div>
                   </div>
                 </div>
               </div>
 
               {/* Inventory Value Section */}
               <div className="border-t pt-4">
-                <h4 className="font-medium mb-4">Inventory Value</h4>
+                <h4 className="font-medium mb-4">{t('stores.inventoryValue')}</h4>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
                     <div className="flex items-center justify-center mb-2">
                       <Package className="w-5 h-5 text-emerald-600 mr-2" />
-                      <span className="text-sm font-medium text-emerald-600">Total Store Inventory Value</span>
+                      <span className="text-sm font-medium text-emerald-600">{t('stores.totalStoreInventoryValue')}</span>
                     </div>
                     <div className="text-2xl font-bold text-emerald-600">
                       {inventoryLoading ? (
-                        <div className="animate-pulse">Loading...</div>
+                        <div className="animate-pulse">{t('common:loading')}</div>
                       ) : (
                         `₦${(inventoryData?.purchaseValue || 0).toLocaleString()}`
                       )}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Based on purchase price</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.basedOnPurchasePrice')}</div>
                   </div>
                   <div className="text-center p-4 bg-teal-50 dark:bg-teal-900/20 rounded-lg">
                     <div className="flex items-center justify-center mb-2">
                       <Package className="w-5 h-5 text-teal-600 mr-2" />
-                      <span className="text-sm font-medium text-teal-600">Total Store Inventory Value</span>
+                      <span className="text-sm font-medium text-teal-600">{t('stores.totalStoreInventoryValue')}</span>
                     </div>
                     <div className="text-2xl font-bold text-teal-600">
                       {inventoryLoading ? (
-                        <div className="animate-pulse">Loading...</div>
+                        <div className="animate-pulse">{t('common:loading')}</div>
                       ) : (
                         `₦${(inventoryData?.unitValue || 0).toLocaleString()}`
                       )}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Based on selling price</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.basedOnSellingPrice')}</div>
                   </div>
                 </div>
               </div>
 
               <div className="border-t pt-4">
-                <h4 className="font-medium mb-4">Activity Summary</h4>
+                <h4 className="font-medium mb-4">{t('stores.activitySummary')}</h4>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-blue-600">{selectedStore.sales_count}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Sales</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.sales')}</div>
                   </div>
                   <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-orange-600">{selectedStore.products_count}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Products</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.products')}</div>
                   </div>
                   <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="text-2xl font-bold text-gray-600">{selectedStore.store_id.slice(0, 8)}...</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Store ID</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{t('stores.storeId')}</div>
                   </div>
                 </div>
               </div>

@@ -35,8 +35,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import NoStoreMessage from "@/components/NoStoreMessage";
+import { useTranslation } from "react-i18next";
 
 const Sales = () => {
+  const { t } = useTranslation('pages');
   const theStore = useContext(StoreContext);
   const navigate = useNavigate()
   const { data: token } = useGetDeviceToken(theStore?.owner_id);
@@ -169,8 +171,8 @@ const Sales = () => {
   if (!theStore) {
     return (
       <NoStoreMessage 
-        title="Sales Management"
-        description="Create your first store to start recording sales, tracking revenue, and managing your business transactions."
+        title={t('sales.salesManagement')}
+        description={t('sales.salesManagementDesc')}
       />
     );
   }
@@ -292,31 +294,31 @@ const Sales = () => {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Filter Sales</DialogTitle>
+                    <DialogTitle>{t('sales.filterSales')}</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="search">Search Products</Label>
+                      <Label htmlFor="search">{t('sales.searchProducts')}</Label>
                       <Input
                         id="search"
-                        placeholder="Search by product name..."
+                        placeholder={t('sales.searchByProductName')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                       />
                     </div>
                     
                     <div>
-                      <Label htmlFor="duration">Duration</Label>
+                      <Label htmlFor="duration">{t('sales.duration')}</Label>
                       <Select value={salesView} onValueChange={setSalesView}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All</SelectItem>
-                          <SelectItem value="daily">Daily</SelectItem>
-                          <SelectItem value="weekly">Weekly</SelectItem>
-                          <SelectItem value="monthly">Monthly</SelectItem>
-                          <SelectItem value="yearly">Yearly</SelectItem>
+                          <SelectItem value="all">{t('sales.all')}</SelectItem>
+                          <SelectItem value="daily">{t('sales.daily')}</SelectItem>
+                          <SelectItem value="weekly">{t('common.weekly')}</SelectItem>
+                          <SelectItem value="monthly">{t('common.monthly')}</SelectItem>
+                          <SelectItem value="yearly">{t('common.yearly')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -341,29 +343,29 @@ const Sales = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="payment-mode">Payment Mode</Label>
+                      <Label htmlFor="payment-mode">{t('sales.paymentMode')}</Label>
                       <Select value={paymentModeFilter} onValueChange={setPaymentModeFilter}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All Payment Modes</SelectItem>
-                          <SelectItem value="cash">Cash</SelectItem>
-                          <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
-                          <SelectItem value="credit">Credit</SelectItem>
+                          <SelectItem value="all">{t('sales.allPaymentModes')}</SelectItem>
+                          <SelectItem value="cash">{t('sales.cash')}</SelectItem>
+                          <SelectItem value="bank_transfer">{t('sales.bankTransfer')}</SelectItem>
+                          <SelectItem value="credit">{t('sales.credit')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     
                     <div>
-                      <Label htmlFor="sort-order">Sort Order</Label>
+                      <Label htmlFor="sort-order">{t('sales.sortOrder')}</Label>
                       <Select value={sortOrder} onValueChange={setSortOrder}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="newest">Newest First</SelectItem>
-                          <SelectItem value="oldest">Oldest First</SelectItem>
+                          <SelectItem value="newest">{t('sales.newestFirst')}</SelectItem>
+                          <SelectItem value="oldest">{t('sales.oldestFirst')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -400,7 +402,7 @@ const Sales = () => {
                   className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <AddSaleIcon />
-                  <span className="hidden md:inline">Add New Sale</span>
+                  <span className="hidden md:inline">{t('sales.addNewSale')}</span>
                   <span className="md:hidden"></span>
                 </Button>
               )}
@@ -411,7 +413,7 @@ const Sales = () => {
                 className="flex items-center gap-2 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-200"
               >
                 <Download className="h-4 w-4" />
-                <span className="hidden lg:inline">Export Report</span>
+                <span className="hidden lg:inline">{t('sales.exportReport')}</span>
                 <span className="lg:hidden"></span>
               </Button>
             </div>
@@ -455,9 +457,9 @@ const Sales = () => {
                 <div className="w-20 h-20 mx-auto mb-4 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
                   <BarChart2 className="w-10 h-10 text-gray-400" />
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No sales found</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('sales.noSalesFound')}</h3>
                 <p className="text-gray-500 dark:text-gray-400 mb-6">
-                  Try adjusting your filters or add your first sale to get started.
+                  {t('sales.adjustFilters')}
                 </p>
                 {canAddSales && (
                   <Button 

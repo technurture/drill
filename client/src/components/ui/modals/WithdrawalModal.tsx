@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { useUpdateEarnings } from "@/integrations/supabase/hooks/earning";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const WithdrawalModal = ({
   isOpen,
@@ -33,6 +34,7 @@ const WithdrawalModal = ({
   const { user } = useAuth();
   const updateEarning = useUpdateEarnings();
   const navigate = useNavigate();
+  const { t } = useTranslation('common');
   const updateEarn = async () => {
     await updateEarning.mutateAsync({
       user_id: user?.id,
@@ -53,12 +55,12 @@ const WithdrawalModal = ({
         bank_name: data?.bank_name,
       })
       .then(() => {
-        toast.success("Withdrawal request placed", { duration: 5000 });
+        toast.success(t('withdrawalRequestPlaced'), { duration: 5000 });
         updateEarn();
         navigate("/dashboard");
       })
       .catch(() => {
-        toast.error("Error placing withdrawal request");
+        toast.error(t('withdrawalRequestError'));
       })
       .finally(() => {
         setLoading(false);
@@ -79,9 +81,9 @@ const WithdrawalModal = ({
     >
       <ModalContent className="flex flex-col m-auto bg-white dark:bg-black rounded-lg border-none">
         <ModalHeader className="text-[16px] font-bold flex flex-col w-full justify-start">
-          Withdraw your Earnings
+          {t('withdrawYourEarnings')}
           <span className="text-[13px] font-normal">
-            To withdraw your earnings, please enter your bank details
+            {t('enterBankDetails')}
           </span>
         </ModalHeader>
         <ModalBody className="w-full">
@@ -92,7 +94,7 @@ const WithdrawalModal = ({
             <div className="flex items-center w-full gap-x-4">
               <div className="flex flex-col gap-y-4">
                 <Input
-                  placeholder="Account Number"
+                  placeholder={t('accountNumber')}
                   type="text"
                   className="w-full"
                   id="account_number"
@@ -101,7 +103,7 @@ const WithdrawalModal = ({
               </div>
               <div className="flex flex-col gap-y-4">
                 <Input
-                  placeholder="Account Name"
+                  placeholder={t('accountName')}
                   type="text"
                   className="w-full"
                   id="account_name"
@@ -110,7 +112,7 @@ const WithdrawalModal = ({
               </div>
               <div className="flex flex-col gap-y-4">
                 <Input
-                  placeholder="Bank Name"
+                  placeholder={t('bankName')}
                   type="text"
                   className="w-full"
                   id="bank_name"
@@ -119,13 +121,9 @@ const WithdrawalModal = ({
               </div>
             </div>
             <div className="flex flex-col">
-              <p className="text-red-400 text-[13px]">Please Note</p>
+              <p className="text-red-400 text-[13px]">{t('pleaseNote')}</p>
               <span className="text-[10px]">
-                Check the account details well, as we would not be liable for
-                sending your earnings to the wrong account it takes within 2 - 5
-                working days to process your earning, if after 5 days you've not
-                received your payment, please send a message to
-                support@storeer.ng
+                {t('withdrawalNote')}
               </span>
             </div>
             <Button
@@ -138,7 +136,7 @@ const WithdrawalModal = ({
               }
               className={`w-4/12 mb-0`}
             >
-              {isLoading ?  <Loader2 className="mr-2 h-4 w-4 animate-spin"/> : "Submit"}
+              {isLoading ?  <Loader2 className="mr-2 h-4 w-4 animate-spin"/> : t('submit')}
             </Button>
           </form>
         </ModalBody>

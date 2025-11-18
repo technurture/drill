@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -18,6 +19,7 @@ interface StoreRow {
 }
 
 const AdminLoans: React.FC = () => {
+  const { t } = useTranslation('admin');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const pageSize = 12;
@@ -66,7 +68,7 @@ const AdminLoans: React.FC = () => {
       // Aggregate per store
       const storeAgg = new Map<string, StoreRow>();
       (stores || []).forEach((s: any) => {
-        const storeName = s.name || s.store_name || 'Unnamed Store';
+        const storeName = s.name || s.store_name || '';
         storeAgg.set(s.id, {
           store_id: s.id,
           store_name: storeName,
@@ -148,7 +150,7 @@ const AdminLoans: React.FC = () => {
       ? await supabase.from('stores').select('*').in('id', storeIds)
       : { data: [] as any[] } as any;
     const storeNameMap = new Map<string, string>();
-    (stores || []).forEach((s: any) => storeNameMap.set(s.id, s.name || s.store_name || 'Unnamed Store'));
+    (stores || []).forEach((s: any) => storeNameMap.set(s.id, s.name || s.store_name || ''));
 
     const headers = ['Store Name', 'Loan ID', 'Principal', 'Interest (%)', 'Total Payable', 'Total Repaid', 'Outstanding', 'Start Date', 'Due Date'];
     const rowsData = (loans || []).map((l: any) => {
@@ -175,15 +177,18 @@ const AdminLoans: React.FC = () => {
   return (
     <div className="p-4">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold text-gray-900 dark:text-white">Loans Overview</h1>
+        <div>
+          <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('loans.title')}</h1>
+          <p className="text-gray-600 dark:text-gray-400">{t('loans.subtitle')}</p>
+        </div>
         <div className="flex gap-2">
           <input
             className="px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#18191A] text-sm"
-            placeholder="Search stores or owner email"
+            placeholder={t('loans.searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Button onClick={exportStoresSummaryCSV}>Export CSV</Button>
+          <Button onClick={exportStoresSummaryCSV}>{t('loans.exportCsv')}</Button>
         </div>
       </div>
 
@@ -191,7 +196,7 @@ const AdminLoans: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Loans (Payable)</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('loans.totalLoansPayable')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">₦{overview.totalPayable.toLocaleString()}</div>
@@ -199,7 +204,7 @@ const AdminLoans: React.FC = () => {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Repaid</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('loans.totalRepaid')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">₦{overview.totalRepaid.toLocaleString()}</div>
@@ -219,24 +224,24 @@ const AdminLoans: React.FC = () => {
             <CardContent>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Loans Count</div>
+                  <div className="text-gray-500 dark:text-gray-400">{t('loans.loansCount')}</div>
                   <div className="font-semibold">{s.total_loans_count}</div>
                 </div>
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Total Payable</div>
+                  <div className="text-gray-500 dark:text-gray-400">{t('loans.totalPayable')}</div>
                   <div className="font-semibold">₦{s.total_payable.toLocaleString()}</div>
                 </div>
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Total Repaid</div>
+                  <div className="text-gray-500 dark:text-gray-400">{t('loans.totalRepaid')}</div>
                   <div className="font-semibold">₦{s.total_repaid.toLocaleString()}</div>
                 </div>
                 <div>
-                  <div className="text-gray-500 dark:text-gray-400">Outstanding</div>
+                  <div className="text-gray-500 dark:text-gray-400">{t('loans.outstanding')}</div>
                   <div className="font-semibold">₦{s.outstanding.toLocaleString()}</div>
                 </div>
               </div>
               <div className="mt-4">
-                <Button variant="outline" onClick={() => { setHistoryStore(s); setHistoryOpen(true); }}>View History</Button>
+                <Button variant="outline" onClick={() => { setHistoryStore(s); setHistoryOpen(true); }}>{t('loans.viewHistory')}</Button>
               </div>
             </CardContent>
           </Card>
@@ -247,11 +252,11 @@ const AdminLoans: React.FC = () => {
       {totalItems > 0 && (
         <div className="mt-4 flex items-center justify-between">
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            Page {currentPage} of {totalPages} • Showing {pageRows.length} of {totalItems}
+            {t('loans.pagination', { current: currentPage, total: totalPages, showing: pageRows.length, items: totalItems })}
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" disabled={currentPage <= 1} onClick={() => setPage(p => Math.max(1, p - 1))}>Previous</Button>
-            <Button variant="outline" disabled={currentPage >= totalPages} onClick={() => setPage(p => Math.min(totalPages, p + 1))}>Next</Button>
+            <Button variant="outline" disabled={currentPage <= 1} onClick={() => setPage(p => Math.max(1, p - 1))}>{t('loans.previous')}</Button>
+            <Button variant="outline" disabled={currentPage >= totalPages} onClick={() => setPage(p => Math.min(totalPages, p + 1))}>{t('loans.next')}</Button>
           </div>
         </div>
       )}
@@ -305,18 +310,20 @@ const AdminLoanHistoryDialog = ({ open, onOpenChange, store }: { open: boolean; 
     return map;
   }, [repayments]);
 
+  const { t } = useTranslation('admin');
+  
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Loan History{store ? ` — ${store.store_name}` : ''}</DialogTitle>
+          <DialogTitle>{t('loans.loanHistory')}{store ? ` — ${store.store_name}` : ''}</DialogTitle>
         </DialogHeader>
         {!store ? (
-          <div className="text-sm text-gray-500">No store selected.</div>
+          <div className="text-sm text-gray-500">{t('loans.noStoreSelected')}</div>
         ) : (
           <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
             {(loans || []).length === 0 ? (
-              <div className="text-sm text-gray-500">No loans found for this store.</div>
+              <div className="text-sm text-gray-500">{t('loans.noLoansFound')}</div>
             ) : (
               (loans || []).map((l: any) => {
                 const principal = Number(l.principal || 0);
@@ -327,31 +334,31 @@ const AdminLoanHistoryDialog = ({ open, onOpenChange, store }: { open: boolean; 
                 return (
                   <Card key={l.id}>
                     <CardHeader className="pb-2">
-                      <CardTitle className="text-sm">Started {l.start_date ? format(new Date(l.start_date), 'dd MMM yyyy') : '-'} • Due {l.due_date ? format(new Date(l.due_date), 'dd MMM yyyy') : '-'}</CardTitle>
+                      <CardTitle className="text-sm">{t('loans.started')} {l.start_date ? format(new Date(l.start_date), 'dd MMM yyyy') : '-'} • {t('loans.due')} {l.due_date ? format(new Date(l.due_date), 'dd MMM yyyy') : '-'}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                         <div>
-                          <div className="text-gray-500">Principal</div>
+                          <div className="text-gray-500">{t('loans.principal')}</div>
                           <div className="font-semibold">₦{principal.toLocaleString()}</div>
                         </div>
                         <div>
-                          <div className="text-gray-500">Interest</div>
+                          <div className="text-gray-500">{t('loans.interest')}</div>
                           <div className="font-semibold">{(rate * 100)}%</div>
                         </div>
                         <div>
-                          <div className="text-gray-500">Total Payable</div>
+                          <div className="text-gray-500">{t('loans.totalPayable')}</div>
                           <div className="font-semibold">₦{totalPayable.toLocaleString()}</div>
                         </div>
                         <div>
-                          <div className="text-gray-500">Total Repaid</div>
+                          <div className="text-gray-500">{t('loans.totalRepaid')}</div>
                           <div className="font-semibold">₦{totalRepaid.toLocaleString()}</div>
                         </div>
                       </div>
                       <div className="mt-3">
-                        <div className="text-sm font-medium mb-2">Repayments</div>
+                        <div className="text-sm font-medium mb-2">{t('loans.repayments')}</div>
                         {loanRepayments.length === 0 ? (
-                          <div className="text-xs text-gray-500">No repayments yet.</div>
+                          <div className="text-xs text-gray-500">{t('loans.noRepaymentsYet')}</div>
                         ) : (
                           <div className="space-y-2">
                             {loanRepayments.map((r: any) => (

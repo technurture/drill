@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -57,6 +58,7 @@ interface User {
 }
 
 const AdminUsers = () => {
+  const { t } = useTranslation('admin');
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -192,7 +194,7 @@ const AdminUsers = () => {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading users...</p>
+            <p className="text-gray-600 dark:text-gray-400">{t('users.loading')}</p>
           </div>
         </div>
       </div>
@@ -204,9 +206,9 @@ const AdminUsers = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">User Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('users.title')}</h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Manage all users and their permissions
+            {t('users.subtitle')}
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -216,12 +218,12 @@ const AdminUsers = () => {
             disabled={filteredUsers.length === 0}
           >
             <Download className="w-4 h-4 mr-2" />
-            Export CSV
+            {t('users.exportCsv')}
           </Button>
           <div className="flex items-center gap-2">
             <Users className="w-5 h-5 text-blue-600" />
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              {filteredUsers.length} users
+              {filteredUsers.length} {t('users.user').toLowerCase()}s
             </span>
           </div>
         </div>
@@ -235,7 +237,7 @@ const AdminUsers = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <Input
-                  placeholder="Search users by email or name..."
+                  placeholder={t('users.searchPlaceholder')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -245,39 +247,39 @@ const AdminUsers = () => {
             
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by status" />
+                <SelectValue placeholder={t('users.filterByStatus')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Users</SelectItem>
-                <SelectItem value="users">Regular Users</SelectItem>
-                <SelectItem value="agents">Agents</SelectItem>
+                <SelectItem value="all">{t('users.allUsers')}</SelectItem>
+                <SelectItem value="users">{t('users.regularUsers')}</SelectItem>
+                <SelectItem value="agents">{t('users.agents')}</SelectItem>
               </SelectContent>
             </Select>
 
             <Select value={genderFilter} onValueChange={setGenderFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by gender" />
+                <SelectValue placeholder={t('users.filterByGender')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Genders</SelectItem>
-                <SelectItem value="male">Male</SelectItem>
-                <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
+                <SelectItem value="all">{t('users.allGenders')}</SelectItem>
+                <SelectItem value="male">{t('users.male')}</SelectItem>
+                <SelectItem value="female">{t('users.female')}</SelectItem>
+                <SelectItem value="other">{t('users.other')}</SelectItem>
               </SelectContent>
             </Select>
 
             <Select value={ageRangeFilter} onValueChange={setAgeRangeFilter}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by age" />
+                <SelectValue placeholder={t('users.filterByAge')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Ages</SelectItem>
-                <SelectItem value="18-35">18-35</SelectItem>
-                <SelectItem value="35-40">35-40</SelectItem>
-                <SelectItem value="40 above">40 above</SelectItem>
+                <SelectItem value="all">{t('users.allAges')}</SelectItem>
+                <SelectItem value="18-35">{t('users.age1835')}</SelectItem>
+                <SelectItem value="35-40">{t('users.age3540')}</SelectItem>
+                <SelectItem value="40 above">{t('users.age40Above')}</SelectItem>
               </SelectContent>
             </Select>
-            <Button onClick={clearFilters} className="w-32">Clear Filters</Button>
+            <Button onClick={clearFilters} className="w-32">{t('users.clearFilters')}</Button>
           </div>
         </CardContent>
       </Card>
@@ -285,26 +287,26 @@ const AdminUsers = () => {
       {/* Users Table */}
       <Card className="bg-white dark:bg-gray-800">
         <CardHeader>
-          <CardTitle>Users</CardTitle>
+          <CardTitle>{t('users.user')}s</CardTitle>
         </CardHeader>
         <CardContent>
           {filteredUsers.length === 0 ? (
             <div className="text-center py-8">
               <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">No users found</p>
+              <p className="text-gray-600 dark:text-gray-400">{t('users.noUsersFound')}</p>
             </div>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>User</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Gender</TableHead>
-                  <TableHead>Age Range</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Joined</TableHead>
-                  <TableHead>Last Sign In</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead>{t('users.user')}</TableHead>
+                  <TableHead>{t('users.email')}</TableHead>
+                  <TableHead>{t('users.gender')}</TableHead>
+                  <TableHead>{t('users.ageRange')}</TableHead>
+                  <TableHead>{t('users.status')}</TableHead>
+                  <TableHead>{t('users.joined')}</TableHead>
+                  <TableHead>{t('users.lastSignIn')}</TableHead>
+                  <TableHead>{t('users.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -319,7 +321,7 @@ const AdminUsers = () => {
                         </div>
                         <div>
                           <p className="font-medium text-gray-900 dark:text-white">
-                            {user.name || 'No name'}
+                            {user.name || t('users.noName')}
                           </p>
                           <p className="text-sm text-gray-600 dark:text-gray-400">
                             ID: {user.id.slice(0, 8)}...
@@ -334,12 +336,12 @@ const AdminUsers = () => {
                     </TableCell>
                     <TableCell>
                       <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {user.gender || 'Not specified'}
+                        {user.gender || t('users.notSpecified')}
                       </span>
                     </TableCell>
                     <TableCell>
                       <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {user.age_range || 'Not specified'}
+                        {user.age_range || t('users.notSpecified')}
                       </span>
                     </TableCell>
                     <TableCell>
@@ -347,7 +349,7 @@ const AdminUsers = () => {
                         variant={user.is_agent ? "default" : "secondary"}
                         className={user.is_agent ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}
                       >
-                        {user.is_agent ? 'Agent' : 'User'}
+                        {user.is_agent ? t('users.agent') : t('users.regularUser')}
                       </Badge>
                     </TableCell>
                     <TableCell>
@@ -359,7 +361,7 @@ const AdminUsers = () => {
                       <span className="text-sm text-gray-600 dark:text-gray-400">
                         {user.last_sign_in_at 
                           ? format(new Date(user.last_sign_in_at), 'MMM dd, yyyy HH:mm')
-                          : 'Never'
+                          : t('users.never')
                         }
                       </span>
                     </TableCell>
@@ -400,53 +402,53 @@ const AdminUsers = () => {
       <Dialog open={isUserDetailsOpen} onOpenChange={setIsUserDetailsOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>User Details</DialogTitle>
+            <DialogTitle>{t('users.userDetails')}</DialogTitle>
           </DialogHeader>
           {selectedUser && (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Name</label>
-                  <p className="text-sm text-gray-900 dark:text-white">{selectedUser.name || 'No name'}</p>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.name')}</label>
+                  <p className="text-sm text-gray-900 dark:text-white">{selectedUser.name || t('users.noName')}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Email</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.email')}</label>
                   <p className="text-sm text-gray-900 dark:text-white">{selectedUser.email}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Gender</label>
-                  <p className="text-sm text-gray-900 dark:text-white">{selectedUser.gender || 'Not specified'}</p>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.gender')}</label>
+                  <p className="text-sm text-gray-900 dark:text-white">{selectedUser.gender || t('users.notSpecified')}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Age Range</label>
-                  <p className="text-sm text-gray-900 dark:text-white">{selectedUser.age_range || 'Not specified'}</p>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.ageRange')}</label>
+                  <p className="text-sm text-gray-900 dark:text-white">{selectedUser.age_range || t('users.notSpecified')}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Status</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.status')}</label>
                   <Badge 
                     variant={selectedUser.is_agent ? "default" : "secondary"}
                     className={selectedUser.is_agent ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}
                   >
-                    {selectedUser.is_agent ? 'Agent' : 'User'}
+                    {selectedUser.is_agent ? t('users.agent') : t('users.regularUser')}
                   </Badge>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Joined</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.joined')}</label>
                   <p className="text-sm text-gray-900 dark:text-white">
                     {format(new Date(selectedUser.created_at), 'MMM dd, yyyy HH:mm')}
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Last Sign In</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.lastSignIn')}</label>
                   <p className="text-sm text-gray-900 dark:text-white">
                     {selectedUser.last_sign_in_at 
                       ? format(new Date(selectedUser.last_sign_in_at), 'MMM dd, yyyy HH:mm')
-                      : 'Never'
+                      : t('users.never')
                     }
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">User ID</label>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('users.userId')}</label>
                   <p className="text-sm text-gray-900 dark:text-white font-mono">{selectedUser.id}</p>
                 </div>
               </div>
