@@ -18,12 +18,14 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { format, isValid } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 const SalesMobileView = ({
   sale,
   onDelete,
   canEditSales,
 }) => {
+  const { t } = useTranslation('pages');
   const [isOpen, setIsOpen] = React.useState(false);
   const handleAction = (e, action) => {
     e.preventDefault();
@@ -71,7 +73,7 @@ const SalesMobileView = ({
           <div className="space-y-4">
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Transaction ID
+                {t('sales.transactionId')}
               </h4>
               <p className="mt-1">{sale.id}</p>
             </div>
@@ -79,19 +81,19 @@ const SalesMobileView = ({
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Date & Time
+                {t('sales.dateTime')}
               </h4>
               <p className="mt-1">
                 {isValid(new Date(sale.created_at))
                   ? format(new Date(sale.created_at), "dd MMM yyyy, HH:mm")
-                  : "Invalid Date"}
+                  : t('sales.invalidDate')}
               </p>
             </div>
             <Separator />
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Products
+                {t('sales.products')}
               </h4>
               <p className="mt-1">
                 {sale.items && sale.items.length > 0
@@ -106,7 +108,7 @@ const SalesMobileView = ({
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Total Amount
+                {t('sales.totalAmount')}
               </h4>
               <p className="mt-1">₦{sale.total_price?.toFixed(2) ?? "N/A"}</p>
             </div>
@@ -114,7 +116,7 @@ const SalesMobileView = ({
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Payment Mode
+                {t('sales.paymentMode')}
               </h4>
               <p className="mt-1">{sale.payment_mode}</p>
             </div>
@@ -122,7 +124,7 @@ const SalesMobileView = ({
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Sold by
+                {t('sales.soldBy')}
               </h4>
               <p className="mt-1">{sale?.sales_rep_name}</p>
             </div>

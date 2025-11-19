@@ -178,7 +178,8 @@
     "repayments": "Repayments",
     "addRepayment": "Add Repayment",
     "loansManagement": "Loans Management",
-    "loansManagementDesc": "Create your first shop to start to dey record loans and repayments."
+    "loansManagementDesc": "Create your first shop to start to dey record loans and repayments.",
+    "allLoans": "All Loans"
   },
   "savings": {
     "title": "Savings",
@@ -214,7 +215,8 @@
     "withdrawn": "Don Withdraw",
     "loadingSavingsPlans": "Dey load savings plans...",
     "savingsManagement": "Savings Management",
-    "savingsManagementDesc": "Create your first shop to start to dey create savings plans, track contributions, and build your financial goals."
+    "savingsManagementDesc": "Create your first shop to start to dey create savings plans, track contributions, and build your financial goals.",
+    "totalWithdrawn": "Total Money Wey You Don Withdraw"
   },
   "reports": {
     "title": "Reports",

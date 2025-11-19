@@ -144,7 +144,8 @@
     "repayments": "Ìsanpadà",
     "addRepayment": "Ṣàfikún Ìsanpadà",
     "loansManagement": "Ìṣàkóso Àwín",
-    "loansManagementDesc": "Ṣẹ̀dá ilé ìtàjà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣe àkọsílẹ̀ àwín àti ìsanpadà."
+    "loansManagementDesc": "Ṣẹ̀dá ilé ìtàjà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣe àkọsílẹ̀ àwín àti ìsanpadà.",
+    "allLoans": "Gbogbo Àwọn Àwín"
   },
   "savings": {
     "title": "Ìfowópamọ́",
@@ -173,7 +174,8 @@
     "mySavings": "Ìfowópamọ́ Mi",
     "manageSavingsPlans": "Ṣàkóso àwọn ètò ìfowópamọ́ rẹ kí o sì tọ́jú àwọn ìdásí",
     "savingsManagement": "Ìṣàkóso Ìfowópamọ́",
-    "savingsManagementDesc": "Ṣẹ̀dá ilé ìtàjà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣẹ̀dá àwọn ètò ìfowópamọ́, tọ́jú àwọn ìdásí, àti kíkọ́ àwọn ibi-afẹ́dé owó rẹ."
+    "savingsManagementDesc": "Ṣẹ̀dá ilé ìtàjà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣẹ̀dá àwọn ètò ìfowópamọ́, tọ́jú àwọn ìdásí, àti kíkọ́ àwọn ibi-afẹ́dé owó rẹ.",
+    "totalWithdrawn": "Àpapọ̀ Tí a Yọ̀"
   },
   "reports": {
     "title": "Ìròyìn",

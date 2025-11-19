@@ -144,7 +144,8 @@
     "repayments": "Nkwụghachi",
     "addRepayment": "Tinye Nkwụghachi",
     "loansManagement": "Njikwa Mgbazinye Ego",
-    "loansManagementDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ịdekọ mgbazinye ego na nkwụghachi."
+    "loansManagementDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ịdekọ mgbazinye ego na nkwụghachi.",
+    "allLoans": "Mgbazinye Ego Niile"
   },
   "savings": {
     "title": "Nchekwa Ego",
@@ -173,7 +174,8 @@
     "mySavings": "Nchekwa Ego M",
     "manageSavingsPlans": "Jikwaa atụmatụ nchekwa gị ma chekwaa ntinye gị",
     "savingsManagement": "Njikwa Nchekwa Ego",
-    "savingsManagementDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ịmepụta atụmatụ nchekwa, ịchekwa ntinye, na ịrụ ọrụ ebumnuche ego gị."
+    "savingsManagementDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ịmepụta atụmatụ nchekwa, ịchekwa ntinye, na ịrụ ọrụ ebumnuche ego gị.",
+    "totalWithdrawn": "Mkpokọta Ewepụtara"
   },
   "reports": {
     "title": "Akụkọ",

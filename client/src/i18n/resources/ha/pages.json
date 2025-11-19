@@ -206,7 +206,8 @@
     "repayments": "Biyan Kuɗi",
     "addRepayment": "Ƙara Biyan Kuɗi",
     "loansManagement": "Gudanar da Rancen Kuɗi",
-    "loansManagementDesc": "Ƙirƙiri shagon ku na farko don fara rubuta rancen kuɗi da biyan kuɗi."
+    "loansManagementDesc": "Ƙirƙiri shagon ku na farko don fara rubuta rancen kuɗi da biyan kuɗi.",
+    "allLoans": "Duk Rancen Kuɗi"
   },
   "savings": {
     "title": "Ajiyar Kuɗi",
@@ -235,7 +236,8 @@
     "mySavings": "Ajiyar Kuɗina",
     "manageSavingsPlans": "Sarrafa shirye-shiryen ajiyar kuɗin ku kuma bi gudummawar ku",
     "savingsManagement": "Gudanar da Ajiyar Kuɗi",
-    "savingsManagementDesc": "Ƙirƙiri shagon ku na farko don fara ƙirƙirar shirye-shiryen ajiyar kuɗi, bin gudummawa, da cimma manufofin ku na kuɗi."
+    "savingsManagementDesc": "Ƙirƙiri shagon ku na farko don fara ƙirƙirar shirye-shiryen ajiyar kuɗi, bin gudummawa, da cimma manufofin ku na kuɗi.",
+    "totalWithdrawn": "Jimillar da aka Cire"
   },
   "reports": {
     "title": "Rahotanni",
