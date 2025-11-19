@@ -40,6 +40,7 @@ import toast from "react-hot-toast";
 import { checkSalesRestriction } from "@/utils/subscriptionHelpers/salesRestriction";
 import { getProductAmount } from "@/utils/helpers";
 import { useNavigate } from "react-router-dom";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 type cartType = {
   result: Product[];
@@ -62,6 +63,7 @@ const Cart = ({ result, removeCart }: cartType) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const updateProductQuantity = useUpdateProductQuantity();
   const navigate = useNavigate();
+  const { isOnline } = useOfflineStatus();
 
   const [cartItem, setCartItem] = useState<Product[]>([]);
 
@@ -263,66 +265,89 @@ const Cart = ({ result, removeCart }: cartType) => {
       try {
         await addSale.mutateAsync(saleData);
         
-        if (theStore?.id) {
+        // Only execute these operations when online
+        if (theStore?.id && isOnline) {
           const productNames = cartItem.map((item) => item.name).join(", ");
-          await addNotification.mutateAsync({
-            user_id: user?.id || theStore?.owner_id,
-            message: `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
-            type: "sale",
-            read: false,
-            store_id: theStore.id,
-          });
           
-          pushNotification(
-            `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
-            "New Sale",
-          );
+          // Send notification (only when online)
+          try {
+            await addNotification.mutateAsync({
+              user_id: user?.id || theStore?.owner_id,
+              message: `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
+              type: "sale",
+              read: false,
+              store_id: theStore.id,
+            });
+          } catch (notifError) {
+            console.warn("Notification failed (non-critical):", notifError);
+          }
+          
+          // Push notification (only when online)
+          try {
+            pushNotification(
+              `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
+              "New Sale",
+            );
+          } catch (pushError) {
+            console.warn("Push notification failed (non-critical):", pushError);
+          }
 
-          // Update product quantities with proper error handling
-          await Promise.all(
-            cartItem.map((item) =>
-            updateProductQuantity.mutateAsync({
-              id: item.id,
-              quantity: item.amount,
-              storeId: theStore?.id,
-              })
-            )
-          );
+          // Update product quantities (only when online)
+          try {
+            await Promise.all(
+              cartItem.map((item) =>
+                updateProductQuantity.mutateAsync({
+                  id: item.id,
+                  quantity: item.amount,
+                  storeId: theStore?.id,
+                })
+              )
+            );
+          } catch (qtyError) {
+            console.warn("Product quantity update failed (non-critical):", qtyError);
+          }
 
-          // Check for low stock and send notifications
-          await Promise.all(
-            cartItem.map(async (item) => {
-              const product = products?.find((p) => p.id === item.id);
-              if (product) {
-                const updatedQuantity = product.quantity - item.amount;
-                const threshold = product.low_stock_threshold || 0;
-                
-            if (updatedQuantity <= threshold) {
-              await addNotification.mutateAsync({
-                user_id: user?.id,
-                message: `Low stock alert: ${item.name} has ${updatedQuantity} units remaining`,
-                type: "low_stock_threshold",
-                read: false,
-                store_id: theStore.id,
-              });
+          // Check for low stock and send notifications (only when online)
+          try {
+            await Promise.all(
+              cartItem.map(async (item) => {
+                const product = products?.find((p) => p.id === item.id);
+                if (product) {
+                  const updatedQuantity = product.quantity - item.amount;
+                  const threshold = product.low_stock_threshold || 0;
                   
-              pushNotification(
-                `${item.name} has ${updatedQuantity} units remaining`,
-                "Low stock Alert",
-              );
-            }
-              }
-            })
-          );
+                  if (updatedQuantity <= threshold) {
+                    await addNotification.mutateAsync({
+                      user_id: user?.id,
+                      message: `Low stock alert: ${item.name} has ${updatedQuantity} units remaining`,
+                      type: "low_stock_threshold",
+                      read: false,
+                      store_id: theStore.id,
+                    });
+                    
+                    pushNotification(
+                      `${item.name} has ${updatedQuantity} units remaining`,
+                      "Low stock Alert",
+                    );
+                  }
+                }
+              })
+            );
+          } catch (lowStockError) {
+            console.warn("Low stock notification failed (non-critical):", lowStockError);
+          }
         }
         
-        toast.success("Sale completed successfully");
+        const successMessage = isOnline 
+          ? "Sale completed successfully" 
+          : "Sale saved offline and will sync when you're back online";
+        toast.success(successMessage);
         navigate("/dashboard/sales");
       } catch (error) {
         console.error("Sale error:", error);
         toast.error("Failed to complete sale: " + (error.message || "Unknown error"));
       } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
       }
     // } else {
     //   toast.error("Upgrade your plan to add more sales per day");

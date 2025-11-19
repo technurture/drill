@@ -256,17 +256,31 @@ const Sales = () => {
         note: newNote,
         storeId: theStore?.id || "",
       });
-      await addNotification.mutateAsync({
-        user_id: user?.id || theStore?.owner_id,
-        message: `New note: "${newNote}" added by Admin`,
-        type: "note",
-        read: false,
-        store_id: theStore.id,
-      });
-      pushNotification(
-        `"${newNote}" added by Admin`,
-        t('common:newNote'),
-      );
+      
+      // Only send notifications when online
+      if (isOnline && theStore?.id) {
+        try {
+          await addNotification.mutateAsync({
+            user_id: user?.id || theStore?.owner_id,
+            message: `New note: "${newNote}" added by Admin`,
+            type: "note",
+            read: false,
+            store_id: theStore.id,
+          });
+        } catch (notifError) {
+          console.warn("Notification failed (non-critical):", notifError);
+        }
+        
+        try {
+          pushNotification(
+            `"${newNote}" added by Admin`,
+            t('common:newNote'),
+          );
+        } catch (pushError) {
+          console.warn("Push notification failed (non-critical):", pushError);
+        }
+      }
+      
       toast.success(isOnline ? t('notifications:sale.noteUpdated') : 'Saved locally. Will sync when online.');
     } catch (error) {
       toast.error(t('notifications:sale.failedToUpdateNote'));
