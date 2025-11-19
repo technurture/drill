@@ -103,6 +103,8 @@ export const useAddSale = () => {
     }) => {
       const { items, ...saleData } = newSale;
 
+      console.log('🔄 Creating sale:', saleData);
+
       // Insert sale into 'sales' table
       const { data: sale, error: saleError } = await supabase
         .from("sales")
@@ -110,24 +112,40 @@ export const useAddSale = () => {
         .select()
         .single();
 
-      if (saleError) throw saleError;
+      if (saleError) {
+        console.error('❌ Sale creation error:', saleError);
+        throw saleError;
+      }
       if (!sale) throw new Error("Failed to create sale");
+
+      console.log('✅ Sale created:', sale);
 
       const saleWithId = sale as unknown as Sale;
 
       // Insert sale items into 'sale_items' table
-      const { error: itemsError } = await supabase.from("sale_items").insert(
-        items.map((item) => ({
-          ...item,
-          sale_id: saleWithId.id,
-        })),
-      );
+      if (items && items.length > 0) {
+        console.log('🔄 Creating sale items:', items);
+        const { error: itemsError } = await supabase.from("sale_items").insert(
+          items.map((item) => ({
+            ...item,
+            sale_id: saleWithId.id,
+          })),
+        );
 
-      if (itemsError) throw itemsError;
+        if (itemsError) {
+          console.error('❌ Sale items error:', itemsError);
+          throw itemsError;
+        }
+        console.log('✅ Sale items created');
+      }
 
       return saleWithId;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: (data, variables) => {
+      console.log('✅ Sale onSuccess called, data:', data);
+      
+      // Invalidate to refetch and get the complete data with items
+      // Note: useOfflineMutation already handles optimistic updates when offline
       queryClient.invalidateQueries({
         queryKey: ["sales", variables.store_id],
       });
@@ -138,7 +156,11 @@ export const useAddSale = () => {
         id: crypto.randomUUID(),
         ...saleData,
         created_at: new Date().toISOString(),
-        items: [],
+        items: items?.map((item, index) => ({
+          id: crypto.randomUUID(),
+          sale_id: crypto.randomUUID(),
+          ...item,
+        })) || [],
       } as unknown as Sale;
     },
   });

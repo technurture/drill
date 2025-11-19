@@ -300,7 +300,6 @@ const AddSales = () => {
         total_price: totalAmount,
         payment_mode: paymentMode,
         store_id: theStore?.id || "",
-        user_id: user?.id || "", // CRITICAL: Include user_id for RLS and sync
         sales_rep_name: "Admin",
         created_date: format(new Date(), "yyyy-MM-dd"),
         sales_type: cartItems.map((item) => ({

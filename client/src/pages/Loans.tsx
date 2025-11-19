@@ -112,35 +112,10 @@ const Loans = () => {
       purpose: createForm.purpose?.trim() || undefined,
     };
 
-    if (!isOnline) {
-      console.log('📴 Offline: Queueing loan creation immediately without awaiting');
-      
-      createLoan.mutate(loanData, {
-        onSuccess: () => {
-          toast.success('Saved locally. Will sync when online.');
-          setIsCreateOpen(false);
-          setCreateForm({
-            borrower_name: "",
-            principal: "",
-            interest_percent: "",
-            interest_amount: "",
-            interest_mode: "percent",
-            start_date: format(new Date(), "yyyy-MM-dd"),
-            due_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
-            repayment_frequency: "every_week",
-            purpose: "",
-          });
-        },
-        onError: (error: any) => {
-          setIsCreateOpen(true);
-          toast.error('Failed to save offline: ' + (error?.message || 'Please try again'));
-        }
-      });
-      return;
-    }
-
     try {
       await createLoan.mutateAsync(loanData);
+      
+      // Close modal and reset form only after successful mutation
       setIsCreateOpen(false);
       setCreateForm({
         borrower_name: "",
@@ -153,7 +128,13 @@ const Loans = () => {
         repayment_frequency: "every_week",
         purpose: "",
       });
-      toast.success(tc('loanCreated'));
+      
+      // Show appropriate success message based on online status
+      if (!isOnline) {
+        toast.success('Saved offline! Will sync when you\'re back online.');
+      } else {
+        toast.success(tc('loanCreated'));
+      }
     } catch (err: any) {
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
@@ -170,28 +151,19 @@ const Loans = () => {
       note: repaymentForm.note?.trim() || undefined,
     };
 
-    if (!isOnline) {
-      console.log('📴 Offline: Queueing repayment immediately without awaiting');
-      
-      addRepayment.mutate(repaymentData, {
-        onSuccess: () => {
-          toast.success('Saved locally. Will sync when online.');
-          setIsRepayOpen(false);
-          setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-        },
-        onError: (error: any) => {
-          setIsRepayOpen(true);
-          toast.error('Failed to save offline: ' + (error?.message || 'Please try again'));
-        }
-      });
-      return;
-    }
-
     try {
       await addRepayment.mutateAsync(repaymentData);
+      
+      // Close modal and reset form only after successful mutation
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      toast.success(tc('repaymentAdded'));
+      
+      // Show appropriate success message based on online status
+      if (!isOnline) {
+        toast.success('Saved offline! Will sync when you\'re back online.');
+      } else {
+        toast.success(tc('repaymentAdded'));
+      }
     } catch (err: any) {
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
