@@ -93,43 +93,49 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
           
           const storeId = (variables as any).store_id || (variables as any).storeId;
           if (storeId) {
+            const exactQueryKey = [config.tableName, storeId];
+            
             if (config.action === 'create') {
-              queryClient.setQueriesData(
-                { queryKey: [config.tableName, storeId] },
-                (oldData: any) => {
-                  if (!oldData) return [optimisticData];
-                  return Array.isArray(oldData) ? [...oldData, optimisticData] : [optimisticData];
-                }
-              );
+              queryClient.setQueryData(exactQueryKey, (oldData: any) => {
+                if (!oldData) return [optimisticData];
+                if (Array.isArray(oldData)) return [optimisticData, ...oldData];
+                return [optimisticData];
+              });
             } else if (config.action === 'update') {
-              queryClient.setQueriesData(
-                { queryKey: [config.tableName, storeId] },
-                (oldData: any) => {
-                  if (!oldData) return [optimisticData];
-                  if (Array.isArray(oldData)) {
-                    return oldData.map((item: any) => 
-                      item.id === (optimisticData as any).id ? { ...item, ...optimisticData } : item
-                    );
-                  }
-                  return optimisticData;
+              queryClient.setQueryData(exactQueryKey, (oldData: any) => {
+                if (!oldData) return [optimisticData];
+                if (Array.isArray(oldData)) {
+                  return oldData.map((item: any) => 
+                    item.id === (optimisticData as any).id ? { ...item, ...optimisticData } : item
+                  );
                 }
-              );
+                return optimisticData;
+              });
             } else if (config.action === 'delete') {
-              queryClient.setQueriesData(
-                { queryKey: [config.tableName, storeId] },
-                (oldData: any) => {
-                  if (!oldData) return [];
-                  if (Array.isArray(oldData)) {
-                    return oldData.filter((item: any) => item.id !== (optimisticData as any).id);
-                  }
-                  return [];
+              queryClient.setQueryData(exactQueryKey, (oldData: any) => {
+                if (!oldData) return [];
+                if (Array.isArray(oldData)) {
+                  return oldData.filter((item: any) => item.id !== (optimisticData as any).id);
                 }
-              );
+                return [];
+              });
+            } else if (config.action === 'withdraw_full' || config.action === 'withdraw_partial') {
+              const planId = (variables as any).planId;
+              if (planId && config.tableName === 'savings_withdrawals') {
+                queryClient.setQueryData(['savings-plans', storeId], (oldData: any) => {
+                  if (!oldData || !Array.isArray(oldData)) return oldData;
+                  return oldData.map((plan: any) => 
+                    plan.id === planId 
+                      ? { ...plan, status: config.action === 'withdraw_full' ? 'withdrawn' : plan.status } 
+                      : plan
+                  );
+                });
+              }
             }
             
             queryClient.invalidateQueries({ queryKey: ['dashboard'], refetchType: 'none' });
             
-            console.log(`🎯 Applied optimistic update to cache for ${config.tableName}`);
+            console.log(`🎯 Optimistic update applied for ${config.action} on ${config.tableName}`);
           }
           
           const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';
