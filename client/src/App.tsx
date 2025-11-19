@@ -53,8 +53,9 @@ const queryClient = new QueryClient({
       },
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,  // Don't auto-refetch when coming back online
-      networkMode: 'offlineFirst', // Allow queries to work with cached data when offline
+      networkMode: 'offlineFirst', // Use cache when offline, fetch when online
       staleTime: 1000 * 60 * 5,    // 5 minutes - prevent excessive refetching
+      gcTime: 1000 * 60 * 30,      // Keep data in cache for 30 minutes
     },
     // NOTE: Mutations use default networkMode ('online') because useOfflineMutation 
     // handles offline queueing. Setting offlineFirst here would cause duplicate submissions.

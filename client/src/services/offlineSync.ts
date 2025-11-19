@@ -156,7 +156,12 @@ export function setupAutoSync() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'SYNC_COMPLETE') {
-        console.log('Background sync completed:', event.data.payload);
+        console.log('[App] Background sync completed:', event.data.payload);
+      }
+      
+      if (event.data && event.data.type === 'TRIGGER_OFFLINE_SYNC') {
+        console.log('[App] Service worker requested sync - triggering offline sync...');
+        syncOfflineData().catch(err => console.error('Service worker sync failed:', err));
       }
     });
   }

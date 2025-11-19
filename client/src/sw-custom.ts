@@ -12,21 +12,12 @@ cleanupOutdatedCaches();
 
 precacheAndRoute(self.__WB_MANIFEST);
 
+// Use NetworkOnly for Supabase REST API to prevent stale cached responses
+// from overwriting optimistic updates when offline.
+// The React Query cache will handle offline functionality.
 registerRoute(
   ({ url }) => url.origin.includes('supabase.co') && url.pathname.includes('/rest/v1/'),
-  new NetworkFirst({
-    cacheName: 'supabase-api-cache',
-    networkTimeoutSeconds: 10,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 200,
-        maxAgeSeconds: 60 * 60 * 24,
-      }),
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  })
+  new NetworkOnly()
 );
 
 registerRoute(
@@ -116,35 +107,25 @@ registerRoute(
   })
 );
 
-// Service Worker background sync is disabled in favor of the main app's offlineSync.ts
-// which has proper authentication and error handling.
-// The app automatically syncs when coming back online via window 'online' event listener.
-// 
-// self.addEventListener('sync', (event: SyncEvent) => {
-//   console.log('[SW] Sync event received:', event.tag);
-//   
-//   if (event.tag === 'offline-sync') {
-//     event.waitUntil(
-//       handleOfflineSync()
-//         .then(result => {
-//           console.log('[SW] Background sync completed:', result);
-//           
-//           return self.clients.matchAll().then(clients => {
-//             clients.forEach(client => {
-//               client.postMessage({
-//                 type: 'SYNC_COMPLETE',
-//                 payload: result
-//               });
-//             });
-//           });
-//         })
-//         .catch(error => {
-//           console.error('[SW] Background sync failed:', error);
-//           throw error;
-//         })
-//     );
-//   }
-// });
+// Background sync event handler
+// Notifies the app to sync when connection is restored
+self.addEventListener('sync', (event: any) => {
+  console.log('[SW] Sync event received:', event.tag);
+  
+  if (event.tag === 'offline-sync') {
+    event.waitUntil(
+      self.clients.matchAll().then(clients => {
+        console.log('[SW] Notifying clients to sync offline queue');
+        clients.forEach(client => {
+          client.postMessage({
+            type: 'TRIGGER_OFFLINE_SYNC',
+            timestamp: Date.now()
+          });
+        });
+      })
+    );
+  }
+});
 
 self.addEventListener('install', (event) => {
   console.log('[SW] Service worker installing...');
@@ -159,5 +140,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  }
+  
+  if (event.data && event.data.type === 'QUEUE_ACTION') {
+    console.log('[SW] Action queued for sync:', event.data.action);
   }
 });
