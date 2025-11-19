@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 interface OfflineMutationConfig<TData, TVariables> {
   tableName: string;
-  action: 'create' | 'update' | 'delete';
+  action: 'create' | 'update' | 'delete' | 'withdraw_full' | 'withdraw_partial';
   mutationFn: (variables: TVariables) => Promise<TData>;
   onSuccess?: (data: TData, variables: TVariables) => void;
   onError?: (error: Error, variables: TVariables) => void;
@@ -36,6 +36,7 @@ function getActionType(tableName: string, action: string): ActionType {
     'savings_contributions-create': 'ADD_SAVINGS_CONTRIBUTION',
     'savings_contributions-delete': 'DELETE_SAVINGS_CONTRIBUTION',
     'savings_withdrawals-create': 'WITHDRAW_SAVINGS',
+    'savings_withdrawals-withdraw_full': 'WITHDRAW_SAVINGS',
     'savings_withdrawals-withdraw_partial': 'WITHDRAW_PARTIAL_SAVINGS',
   };
   

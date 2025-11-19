@@ -81,8 +81,85 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
         const data = item.payload;
         let result;
 
-        // Handle special cases for tables with complex nested data
-        if (table === 'sales' && action === 'create') {
+        // Handle special cases for tables with complex nested data or multi-step operations
+        if (table === 'savings_withdrawals' && action === 'create') {
+          // Savings withdrawals involve updating the plan AND creating a withdrawal record
+          const withdrawalData = data as any;
+          const { planId, storeId, totalAmount, amount, store_id } = withdrawalData;
+          
+          // Determine if this is a full or partial withdrawal based on the data structure
+          const isFullWithdrawal = totalAmount !== undefined || withdrawalData.withdrawal?.amount_withdrawn !== undefined;
+          const isPartialWithdrawal = amount !== undefined;
+          
+          if (isFullWithdrawal) {
+            // Full withdrawal: mark plan as withdrawn
+            const withdrawAmount = totalAmount || withdrawalData.withdrawal?.amount_withdrawn || 0;
+            
+            // Update the savings plan status
+            const { error: planError } = await supabase
+              .from('savings_plans')
+              .update({
+                status: 'withdrawn',
+                end_date: new Date().toISOString().split('T')[0]
+              })
+              .eq('id', planId);
+            
+            if (planError) {
+              result = { error: planError };
+            } else {
+              // Create withdrawal record
+              const { error: withdrawalError } = await supabase
+                .from('savings_withdrawals')
+                .insert({
+                  savings_plan_id: planId,
+                  amount_withdrawn: withdrawAmount,
+                  withdrawal_date: new Date().toISOString().split('T')[0]
+                });
+              
+              result = withdrawalError ? { error: withdrawalError } : { data: withdrawalData };
+            }
+          } else if (isPartialWithdrawal) {
+            // Partial withdrawal: update current_amount
+            // First fetch current plan to calculate new amount
+            const { data: plan, error: fetchError } = await supabase
+              .from('savings_plans')
+              .select('current_amount,contributions:savings_contributions(amount)')
+              .eq('id', planId)
+              .single();
+            
+            if (fetchError) {
+              result = { error: fetchError };
+            } else {
+              const currentFromField = parseFloat(plan?.current_amount ?? 0);
+              const sumContrib = (plan?.contributions || []).reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0);
+              const effectiveSaved = currentFromField > 0 ? currentFromField : sumContrib;
+              const newAmount = Math.max(0, effectiveSaved - amount);
+              
+              // Update plan
+              const { error: planError } = await supabase
+                .from('savings_plans')
+                .update({ current_amount: newAmount })
+                .eq('id', planId);
+              
+              if (planError) {
+                result = { error: planError };
+              } else {
+                // Create withdrawal record
+                const { error: withdrawalError } = await supabase
+                  .from('savings_withdrawals')
+                  .insert({
+                    savings_plan_id: planId,
+                    amount_withdrawn: amount,
+                    withdrawal_date: new Date().toISOString().split('T')[0]
+                  });
+                
+                result = withdrawalError ? { error: withdrawalError } : { data: withdrawalData };
+              }
+            }
+          } else {
+            result = { error: new Error('Invalid withdrawal data: missing amount information') };
+          }
+        } else if (table === 'sales' && action === 'create') {
           // Sales have nested sale_items that need to be handled separately
           const salesData = data as any;
           const { items, financial_record_data, ...saleData } = salesData;
@@ -267,10 +344,21 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
     queryClient.invalidateQueries({ queryKey: ['products'] });
     queryClient.invalidateQueries({ queryKey: ['sales'] });
     queryClient.invalidateQueries({ queryKey: ['financial_records'] });
+    queryClient.invalidateQueries({ queryKey: ['financial-records'] });
+    queryClient.invalidateQueries({ queryKey: ['financial-summary'] });
     queryClient.invalidateQueries({ queryKey: ['savings_plans'] });
+    queryClient.invalidateQueries({ queryKey: ['savings-plans'] });
+    queryClient.invalidateQueries({ queryKey: ['savings-plan'] });
     queryClient.invalidateQueries({ queryKey: ['savings_contributions'] });
+    queryClient.invalidateQueries({ queryKey: ['savings-contributions'] });
+    queryClient.invalidateQueries({ queryKey: ['savings-withdrawals'] });
+    queryClient.invalidateQueries({ queryKey: ['savings-summary'] });
     queryClient.invalidateQueries({ queryKey: ['loans'] });
+    queryClient.invalidateQueries({ queryKey: ['loan'] });
     queryClient.invalidateQueries({ queryKey: ['loan_repayments'] });
+    queryClient.invalidateQueries({ queryKey: ['loan-repayments'] });
+    queryClient.invalidateQueries({ queryKey: ['loan-repayments-by-store'] });
+    queryClient.invalidateQueries({ queryKey: ['loans-summary'] });
     queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     console.log('✅ React Query cache invalidated - UI will refresh with synced data');
   }

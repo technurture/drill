@@ -202,62 +202,78 @@ export const useDeleteContribution = () => {
 export const useWithdrawSavings = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
-    mutationFn: async ({ planId, storeId }: { planId: string; storeId: string }) => {
-      // First, get the current amount to record in withdrawals
-      const { data: plan, error: fetchError } = await supabase
-        .from('savings_plans')
-        .select('id,current_amount,contributions:savings_contributions(amount)')
-        .eq('id', planId)
-        .single();
-      
-      if (fetchError) throw fetchError;
-      
-      // Calculate total amount to withdraw
-      const currentFromField = parseFloat(plan?.current_amount ?? 0);
-      const sumContrib = (plan?.contributions || []).reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0);
-      const totalAmount = currentFromField > 0 ? currentFromField : sumContrib;
+  return useOfflineMutation({
+    tableName: "savings_withdrawals",
+    action: "withdraw_full",
+    mutationFn: async ({ planId, storeId, totalAmount }: { planId: string; storeId: string; totalAmount?: number }) => {
+      // If totalAmount not provided, fetch it
+      let amountToWithdraw = totalAmount;
+      if (!amountToWithdraw) {
+        const { data: plan, error: fetchError } = await supabase
+          .from('savings_plans')
+          .select('id,current_amount,contributions:savings_contributions(amount)')
+          .eq('id', planId)
+          .single();
+        
+        if (fetchError) throw fetchError;
+        
+        // Calculate total amount to withdraw
+        const currentFromField = parseFloat(plan?.current_amount ?? 0);
+        const sumContrib = (plan?.contributions || []).reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0);
+        amountToWithdraw = currentFromField > 0 ? currentFromField : sumContrib;
+      }
 
       // Update the savings plan status to 'withdrawn' and set end_date to current date
       const { error } = await supabase
         .from("savings_plans")
         .update({ 
           status: 'withdrawn',
-          end_date: new Date().toISOString().split('T')[0] // Current date in YYYY-MM-DD format
+          end_date: new Date().toISOString().split('T')[0]
         })
         .eq("id", planId);
 
       if (error) throw error;
 
       // Record the withdrawal in savings_withdrawals table
-      const { error: withdrawalError } = await supabase
+      const { data: withdrawalData, error: withdrawalError } = await supabase
         .from('savings_withdrawals')
         .insert({
           savings_plan_id: planId,
-          amount_withdrawn: totalAmount,
+          amount_withdrawn: amountToWithdraw,
           withdrawal_date: new Date().toISOString().split('T')[0]
-        });
+        })
+        .select()
+        .single();
       
-      if (withdrawalError) {
-        console.error('Error recording withdrawal:', withdrawalError);
-        // Don't throw error here as the main withdrawal was successful
-      }
+      if (withdrawalError) throw withdrawalError;
 
-      return planId;
+      return { planId, storeId, withdrawal: withdrawalData };
     },
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["savings-plan", data] });
+      queryClient.invalidateQueries({ queryKey: ["savings-plan", data.planId] });
       queryClient.invalidateQueries({ queryKey: ["savings-plans", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["savings-summary", variables.storeId] });
-      queryClient.invalidateQueries({ queryKey: ["savings-withdrawals", data] });
+      queryClient.invalidateQueries({ queryKey: ["savings-withdrawals", data.planId] });
     },
+    getOptimisticData: (variables) => ({
+      planId: variables.planId,
+      storeId: variables.storeId,
+      withdrawal: {
+        id: crypto.randomUUID(),
+        savings_plan_id: variables.planId,
+        amount_withdrawn: variables.totalAmount || 0,
+        withdrawal_date: new Date().toISOString().split('T')[0],
+      },
+    }),
   });
 };
 
 // Withdraw a partial amount by updating current_amount (no negative contributions)
 export const useWithdrawPartialSavings = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "savings_withdrawals",
+    action: "withdraw_partial",
     mutationFn: async ({ planId, amount, store_id }: { planId: string; amount: number; store_id: string }) => {
       if (amount <= 0) {
         throw new Error('Withdrawal amount must be greater than 0');
@@ -284,27 +300,38 @@ export const useWithdrawPartialSavings = () => {
       if (error) throw error;
 
       // Record the withdrawal in savings_withdrawals table
-      const { error: withdrawalError } = await supabase
+      const { data: withdrawalData, error: withdrawalError } = await supabase
         .from('savings_withdrawals')
         .insert({
           savings_plan_id: planId,
           amount_withdrawn: amount,
           withdrawal_date: new Date().toISOString().split('T')[0]
-        });
+        })
+        .select()
+        .single();
       
-      if (withdrawalError) {
-        console.error('Error recording withdrawal:', withdrawalError);
-        // Don't throw error here as the main withdrawal was successful
-      }
+      if (withdrawalError) throw withdrawalError;
 
-      return data;
+      return { plan: data, withdrawal: withdrawalData };
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['savings-plan', variables.planId] });
       queryClient.invalidateQueries({ queryKey: ['savings-plans', variables.store_id] });
       queryClient.invalidateQueries({ queryKey: ['savings-summary', variables.store_id] });
       queryClient.invalidateQueries({ queryKey: ['savings-withdrawals', variables.planId] });
-    }
+    },
+    getOptimisticData: (variables) => ({
+      plan: {
+        id: variables.planId,
+        store_id: variables.store_id,
+      },
+      withdrawal: {
+        id: crypto.randomUUID(),
+        savings_plan_id: variables.planId,
+        amount_withdrawn: variables.amount,
+        withdrawal_date: new Date().toISOString().split('T')[0],
+      },
+    }),
   });
 };
 

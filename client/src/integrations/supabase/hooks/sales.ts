@@ -178,7 +178,9 @@ export const useUpdateSale = () => {
 
 export const useDeleteSale = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "sales",
+    action: "delete",
     mutationFn: async ({ id, storeId }: { id: string; storeId: string }) => {
       // First delete any linked finance income records
       const { error: financeError } = await supabase
@@ -190,13 +192,19 @@ export const useDeleteSale = () => {
       // Then delete the sale
       const { error } = await supabase.from("sales").delete().eq("id", id);
       if (error) throw error;
+      
+      return { id, store_id: storeId };
     },
-    onSuccess: async (_, variables) => {
+    onSuccess: (_, variables) => {
       // Invalidate sales and finance queries
       queryClient.invalidateQueries({ queryKey: ["sales", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["financial-records", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["financial-summary", variables.storeId] });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.id,
+      store_id: variables.storeId,
+    }),
   });
 };
 
