@@ -10,8 +10,10 @@ import {
   ObscurityContext,
   setObsurityContext,
 } from "@/contexts/ObscureContext";
+import { useTranslation } from "react-i18next";
 
 const SalesSummary = ({ sales, products }) => {
+  const { t } = useTranslation('pages');
   const { user } = useAuth();
   const obscureStatus = useContext(ObscurityContext);
   const setObscureStatus = useContext(setObsurityContext);
@@ -93,7 +95,7 @@ const SalesSummary = ({ sales, products }) => {
   return (
     <>
       {!hasSales && (
-        <div>No sales data available.</div>
+        <div>{t('sales.noSalesDataAvailable')}</div>
       )}
       {hasSales && (
       <div className="lg:grid md:grid hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
@@ -102,7 +104,7 @@ const SalesSummary = ({ sales, products }) => {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <span className="h-4 w-4 text-green-600 dark:text-green-400 font-semibold">₦</span>
-              <span>Total Sales</span>
+              <span>{t('sales.totalSales')}</span>
               {obscureStatus?.sales && (
                 <span
                   onClick={() => toggleBalance()}
@@ -133,7 +135,7 @@ const SalesSummary = ({ sales, products }) => {
                   ₦{"*****"}
                 </div>
               )}
-              <p className="text-xs text-gray-500 dark:text-gray-400">Revenue generated</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('sales.revenueGenerated')}</p>
             </div>
           </CardContent>
         </Card>
@@ -143,7 +145,7 @@ const SalesSummary = ({ sales, products }) => {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <ShoppingCart className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-              <span>Transactions</span>
+              <span>{t('sales.transactions')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -151,7 +153,7 @@ const SalesSummary = ({ sales, products }) => {
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {formatNumber(totalTransactions)}
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Completed sales</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('sales.completedSales')}</p>
             </div>
           </CardContent>
         </Card>
@@ -162,7 +164,7 @@ const SalesSummary = ({ sales, products }) => {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-              <span>Total Profit</span>
+              <span>{t('sales.totalProfit')}</span>
             </CardTitle>
             <div className="flex items-center gap-2">
               {obscureStatus?.sales && (
@@ -195,7 +197,7 @@ const SalesSummary = ({ sales, products }) => {
                   ₦{"*****"}
                 </div>
               )}
-              <p className="text-xs text-gray-500 dark:text-gray-400">Based on purchase prices</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('sales.basedOnPurchasePrices')}</p>
             </div>
           </CardContent>
         </Card>
@@ -209,7 +211,7 @@ const SalesSummary = ({ sales, products }) => {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <span className="h-4 w-4 text-green-600 dark:text-green-400 font-semibold">₦</span>
-              <span>Total Sales</span>
+              <span>{t('sales.totalSales')}</span>
               {obscureStatus?.sales && (
                 <span
                   onClick={() => toggleBalance()}
@@ -240,7 +242,7 @@ const SalesSummary = ({ sales, products }) => {
                   ₦{"*****"}
                 </div>
               )}
-              <p className="text-xs text-gray-500 dark:text-gray-400">Revenue generated</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('sales.revenueGenerated')}</p>
             </div>
           </CardContent>
         </Card>
@@ -250,7 +252,7 @@ const SalesSummary = ({ sales, products }) => {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <ShoppingCart className="h-4 w-4 text-blue-600 dark.text-blue-400" />
-              <span>Transactions</span>
+              <span>{t('sales.transactions')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -258,7 +260,7 @@ const SalesSummary = ({ sales, products }) => {
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {formatNumber(totalTransactions)}
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Completed sales</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('sales.completedSales')}</p>
             </div>
           </CardContent>
         </Card>
@@ -269,7 +271,7 @@ const SalesSummary = ({ sales, products }) => {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-              <span>Total Profit</span>
+              <span>{t('sales.totalProfit')}</span>
             </CardTitle>
             <div className="flex items-center gap-2">
               {obscureStatus?.sales && (
@@ -295,7 +297,7 @@ const SalesSummary = ({ sales, products }) => {
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 ₦{formatNumber(totalProfit)}
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Based on purchase prices</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('sales.basedOnPurchasePrices')}</p>
             </div>
           </CardContent>
         </Card>

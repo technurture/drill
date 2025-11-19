@@ -57,7 +57,15 @@
     "edit": "Edit",
     "delete": "Delete",
     "restock": "Restock",
-    "inventoryManagementDesc": "Create your first shop to start to dey manage your product inventory, track product levels, and monitor sales performance."
+    "inventoryManagementDesc": "Create your first shop to start to dey manage your product inventory, track product levels, and monitor sales performance.",
+    "totalProducts": "Total Products",
+    "productsInInventory": "Products for inventory",
+    "inventoryValue": "Inventory Value",
+    "totalValueOfInventory": "Total value of inventory",
+    "purchaseValue": "Purchase Value",
+    "basedOnPurchasePrice": "Based on purchase price",
+    "topSellingProduct": "Top Selling Product",
+    "unitsSold": "units wey dem sell"
   },
   "sales": {
     "title": "Sales",
@@ -102,7 +110,12 @@
     "noSalesFound": "We no see any sales",
     "adjustFilters": "Try adjust your filters or add your first sale to start.",
     "salesManagement": "Sales Management",
-    "salesManagementDesc": "Create your first shop to start to dey record sales, track money wey dey enter, and manage your business transactions."
+    "salesManagementDesc": "Create your first shop to start to dey record sales, track money wey dey enter, and manage your business transactions.",
+    "noSalesDataAvailable": "We no get sales data",
+    "revenueGenerated": "Money wey we generate",
+    "completedSales": "Sales wey don finish",
+    "totalProfit": "Total Profit",
+    "basedOnPurchasePrices": "Based on purchase prices"
   },
   "finance": {
     "title": "Finance",
@@ -163,7 +176,9 @@
     "completed": "Don Finish",
     "defaulted": "Defaulted",
     "repayments": "Repayments",
-    "addRepayment": "Add Repayment"
+    "addRepayment": "Add Repayment",
+    "loansManagement": "Loans Management",
+    "loansManagementDesc": "Create your first shop to start to dey record loans and repayments."
   },
   "savings": {
     "title": "Savings",

@@ -26,6 +26,7 @@ import { Switch } from "@/components/ui/switch";
 import { useProducts } from "@/integrations/supabase/hooks/products";
 import { StoreContext } from "@/contexts/StoreContext";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const ProductTable = ({
   products,
@@ -34,6 +35,7 @@ const ProductTable = ({
   onDelete,
   stockFilter,
 }) => {
+  const { t } = useTranslation('pages');
   const { canEditInventory } = usePermissions();
   const navigate = useNavigate();
   const mobileProductEdit = (product) => {
@@ -89,14 +91,14 @@ const ProductTable = ({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Product</TableHead>
-              <TableHead>Unit Price</TableHead>
-              <TableHead>Purchased Price</TableHead>
-              <TableHead>Quantity</TableHead>
-              <TableHead>Low Stock Threshold</TableHead>
-              <TableHead>Stock Status</TableHead>
-              <TableHead>Add to favourite</TableHead>
-              {canEditInventory && <TableHead>Actions</TableHead>}
+              <TableHead>{t('inventory.product')}</TableHead>
+              <TableHead>{t('inventory.unitPrice')}</TableHead>
+              <TableHead>{t('inventory.purchasedPrice')}</TableHead>
+              <TableHead>{t('inventory.quantity')}</TableHead>
+              <TableHead>{t('inventory.lowStockThreshold')}</TableHead>
+              <TableHead>{t('inventory.stockStatus')}</TableHead>
+              <TableHead>{t('inventory.addToFavourite')}</TableHead>
+              {canEditInventory && <TableHead>{t('inventory.actions')}</TableHead>}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -109,7 +111,7 @@ const ProductTable = ({
                         {product.name}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                        {product.category || "No category"}
+                        {product.category || t('inventory.noCategory')}
                       </p>
                     </div>
                   </div>
@@ -118,7 +120,7 @@ const ProductTable = ({
                 <TableCell>
                   {product.purchased_price !== undefined && product.purchased_price !== null
                     ? `₦${formatNumber(product.purchased_price)}`
-                    : <span className="text-gray-400">Not Set</span>}
+                    : <span className="text-gray-400">{t('inventory.notSet')}</span>}
                 </TableCell>
                 <TableCell>{product.quantity}</TableCell>
                 <TableCell>{product.low_stock_threshold}</TableCell>
@@ -126,16 +128,16 @@ const ProductTable = ({
                   <span
                     className={`px-2 py-1 rounded ${product.quantity <= product.low_stock_threshold ? "bg-red-200 text-red-800" : "bg-green-200 text-green-800"}`}
                   >
-                    {product.quantity <= product.low_stock_threshold && product.quantity !== 0 && "Low Stock"}
-                    {product.quantity > product.low_stock_threshold && "In Stock"}
-                    {product.quantity === 0 && "Finished"}
+                    {product.quantity <= product.low_stock_threshold && product.quantity !== 0 && t('inventory.lowStock')}
+                    {product.quantity > product.low_stock_threshold && t('inventory.inStock')}
+                    {product.quantity === 0 && t('inventory.finished')}
                   </span>
                 </TableCell>
                 <TableCell>
                   <Switch
                     checked={!!product.favourite}
                     onCheckedChange={(checked) => handleToggleFavourite(product, checked)}
-                    aria-label={product.favourite ? "Remove from Favourite" : "Set as Favourite"}
+                    aria-label={product.favourite ? t('inventory.removeFromFavourite') : t('inventory.setAsFavourite')}
                     className="mx-auto"
                     disabled={toggleFavouriteMutation.isPending}
                   />

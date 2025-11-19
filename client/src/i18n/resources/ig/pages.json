@@ -54,7 +54,15 @@
     "actions": "Omume",
     "edit": "Dezie",
     "delete": "Hichapụ",
-    "restock": "Tinye ngwaahịa ọzọ"
+    "restock": "Tinye ngwaahịa ọzọ",
+    "totalProducts": "Mkpokọta Ngwaahịa",
+    "productsInInventory": "Ngwaahịa dị na ngwaahịa",
+    "inventoryValue": "Uru Ngwaahịa",
+    "totalValueOfInventory": "Mkpokọta uru ngwaahịa",
+    "purchaseValue": "Uru Ịzụta",
+    "basedOnPurchasePrice": "Dabere na ọnụahịa ịzụta",
+    "topSellingProduct": "Ngwaahịa Na-ere Kacha Mma",
+    "unitsSold": "ngwaahịa e rere"
   },
   "sales": {
     "title": "Ahịa",
@@ -74,7 +82,17 @@
     "total": "Mkpokọta",
     "paymentMethod": "Usoro Ịkwụ Ụgwọ",
     "salesRep": "Onye Nnọchiteanya Ahịa",
-    "actions": "Omume"
+    "actions": "Omume",
+    "noSalesDataAvailable": "Enweghị data ahịa",
+    "salesTransactions": "Azụmaahịa Ahịa",
+    "transaction": "azụmaahịa",
+    "transactions": "azụmaahịa",
+    "transactionFound": "azụmaahịa achọtara",
+    "transactionsFound": "azụmaahịa achọtara",
+    "revenueGenerated": "Ego enwetara",
+    "completedSales": "Ahịa Emechara",
+    "totalProfit": "Mkpokọta Uru",
+    "basedOnPurchasePrices": "Dabere na ọnụahịa ịzụta"
   },
   "finance": {
     "title": "Ego",
@@ -95,7 +113,10 @@
     "amount": "Ego",
     "actions": "Omume",
     "noTransactions": "Enwebeghị mgbanwe ego",
-    "noTransactionsDesc": "Malite ịchekwa ego abata na mmefu gị"
+    "noTransactionsDesc": "Malite ịchekwa ego abata na mmefu gị",
+    "financialRecords": "Ndekọ Ego",
+    "itemsSold": "ihe e rere",
+    "trackIncomeExpenses": "Chekwaa ego abata na mmefu gị maka"
   },
   "loans": {
     "title": "Mgbazinye Ego",
@@ -121,7 +142,9 @@
     "completed": "Emechara",
     "defaulted": "Akwụghị Ugwo",
     "repayments": "Nkwụghachi",
-    "addRepayment": "Tinye Nkwụghachi"
+    "addRepayment": "Tinye Nkwụghachi",
+    "loansManagement": "Njikwa Mgbazinye Ego",
+    "loansManagementDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ịdekọ mgbazinye ego na nkwụghachi."
   },
   "savings": {
     "title": "Nchekwa Ego",
@@ -146,7 +169,11 @@
     "actions": "Omume",
     "addContribution": "Tinye Ego",
     "withdraw": "Wepụ Ego",
-    "contributions": "Ntinye Ego"
+    "contributions": "Ntinye Ego",
+    "mySavings": "Nchekwa Ego M",
+    "manageSavingsPlans": "Jikwaa atụmatụ nchekwa gị ma chekwaa ntinye gị",
+    "savingsManagement": "Njikwa Nchekwa Ego",
+    "savingsManagementDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ịmepụta atụmatụ nchekwa, ịchekwa ntinye, na ịrụ ọrụ ebumnuche ego gị."
   },
   "reports": {
     "title": "Akụkọ",

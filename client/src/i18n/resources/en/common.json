@@ -208,5 +208,22 @@
   "purchasedPriceNonNegative": "Purchased price must be non-negative",
   "unitPriceNonNegative": "Unit price must be non-negative",
   "quantityNonNegative": "Quantity must be non-negative",
-  "thresholdNonNegative": "Threshold must be non-negative"
+  "thresholdNonNegative": "Threshold must be non-negative",
+  "ofTarget": "of target",
+  "totalAmountWithdrawn": "Total amount withdrawn",
+  "userNotLoggedIn": "User not logged in",
+  "pleaseFillAllFields": "Please fill in all fields",
+  "amountMustBeGreaterThanZero": "Amount must be greater than 0",
+  "confirmDeleteRecord": "Are you sure you want to delete this record?",
+  "recordDeletedSuccessfully": "Record deleted successfully",
+  "failedToDeleteRecord": "Failed to delete record",
+  "incomeAddedSuccessfully": "Income added successfully",
+  "expenseAddedSuccessfully": "Expense added successfully",
+  "failedToAddRecord": "Failed to add financial record",
+  "financialRecordDeletedSuccessfully": "Financial record deleted successfully",
+  "failedToDeleteFinancialRecord": "Failed to delete financial record",
+  "amountNairaLabel": "Amount (₦)",
+  "placeholderAmount": "0.00",
+  "itemsSold": "Items sold:",
+  "total": "Total:"
 }

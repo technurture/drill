@@ -175,7 +175,10 @@
     "amount": "Adadi",
     "actions": "Ayyuka",
     "noTransactions": "Har yanzu babu ma'amaloli",
-    "noTransactionsDesc": "Fara bin kudaden shigan ku da kashe kuɗi"
+    "noTransactionsDesc": "Fara bin kudaden shigan ku da kashe kuɗi",
+    "financialRecords": "Bayanan Kuɗi",
+    "itemsSold": "kaya da aka sayar",
+    "trackIncomeExpenses": "Bi kudaden shiga da kashe kuɗi don"
   },
   "loans": {
     "title": "Rancen Kuɗi",
@@ -201,7 +204,9 @@
     "completed": "An Kammala",
     "defaulted": "Bai Biya Ba",
     "repayments": "Biyan Kuɗi",
-    "addRepayment": "Ƙara Biyan Kuɗi"
+    "addRepayment": "Ƙara Biyan Kuɗi",
+    "loansManagement": "Gudanar da Rancen Kuɗi",
+    "loansManagementDesc": "Ƙirƙiri shagon ku na farko don fara rubuta rancen kuɗi da biyan kuɗi."
   },
   "savings": {
     "title": "Ajiyar Kuɗi",
@@ -226,7 +231,11 @@
     "actions": "Ayyuka",
     "addContribution": "Ƙara Gudummawa",
     "withdraw": "Cire",
-    "contributions": "Gudummawa"
+    "contributions": "Gudummawa",
+    "mySavings": "Ajiyar Kuɗina",
+    "manageSavingsPlans": "Sarrafa shirye-shiryen ajiyar kuɗin ku kuma bi gudummawar ku",
+    "savingsManagement": "Gudanar da Ajiyar Kuɗi",
+    "savingsManagementDesc": "Ƙirƙiri shagon ku na farko don fara ƙirƙirar shirye-shiryen ajiyar kuɗi, bin gudummawa, da cimma manufofin ku na kuɗi."
   },
   "reports": {
     "title": "Rahotanni",

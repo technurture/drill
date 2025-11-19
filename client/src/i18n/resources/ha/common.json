@@ -208,5 +208,21 @@
   "purchasedPriceNonNegative": "Farashin saye dole ya zama mara ƙasa da sifili",
   "unitPriceNonNegative": "Farashin ɗaya dole ya zama mara ƙasa da sifili",
   "quantityNonNegative": "Adadi dole ya zama mara ƙasa da sifili",
-  "thresholdNonNegative": "Iyaka dole ta zama mara ƙasa da sifili"
+  "thresholdNonNegative": "Iyaka dole ta zama mara ƙasa da sifili",
+  "ofTarget": "na manufa",
+  "totalAmountWithdrawn": "Jimlar adadin da aka cire",
+  "userNotLoggedIn": "Mai amfani bai shiga ba",
+  "pleaseFillAllFields": "Da fatan za a cika dukkan filayen",
+  "amountMustBeGreaterThanZero": "Adadin dole ne ya fi 0",
+  "confirmDeleteRecord": "Shin kun tabbata kuna son share wannan rikodin?",
+  "recordDeletedSuccessfully": "An share rikodin cikin nasara",
+  "failedToDeleteRecord": "An kasa share rikodin",
+  "incomeAddedSuccessfully": "An ƙara kudin shiga cikin nasara",
+  "expenseAddedSuccessfully": "An ƙara kudin kashewa cikin nasara",
+  "failedToAddRecord": "An kasa ƙara rikodin kuɗi",
+  "financialRecordDeletedSuccessfully": "An share rikodin kuɗi cikin nasara",
+  "failedToDeleteFinancialRecord": "An kasa share rikodin kuɗi",
+  "amountNairaLabel": "Adadi (₦)",
+  "placeholderAmount": "0.00",
+  "itemsSold": "Abubuwan da aka sayar:"
 }

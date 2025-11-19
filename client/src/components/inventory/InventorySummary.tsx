@@ -10,6 +10,7 @@ import {
   ObscurityContext,
   setObsurityContext,
 } from "@/contexts/ObscureContext";
+import { useTranslation } from "react-i18next";
 
 interface InventorySummaryProps {
   products: Product[];
@@ -20,6 +21,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
   products,
   sales,
 }) => {
+  const { t } = useTranslation('pages');
   const totalProducts = products.length;
   const totalValue = products.reduce(
     (sum, product) => sum + product.unit_price * product.quantity,
@@ -69,7 +71,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <Package className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-            <span>Total Products</span>
+            <span>{t('inventory.totalProducts')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -77,7 +79,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {formatNumber(totalProducts)}
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Products in inventory</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('inventory.productsInInventory')}</p>
           </div>
         </CardContent>
       </Card>
@@ -88,7 +90,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <span className="text-green-600 dark:text-green-400 font-semibold">₦</span>
-              <span>Inventory Value</span>
+              <span>{t('inventory.inventoryValue')}</span>
             </CardTitle>
             <div className="flex items-center gap-2">
               {obscureStatus?.inventory && (
@@ -121,7 +123,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
                   ₦{"*****"}
                 </div>
               )}
-              <p className="text-xs text-gray-500 dark:text-gray-400">Total value of inventory</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('inventory.totalValueOfInventory')}</p>
             </div>
           </CardContent>
         </Card>
@@ -132,7 +134,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <DollarSign className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-            <span>Purchase Value</span>
+            <span>{t('inventory.purchaseValue')}</span>
           </CardTitle>
           <div className="flex items-center gap-2">
             {obscureStatus?.inventory && (
@@ -165,7 +167,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
                 ₦{"*****"}
               </div>
             )}
-            <p className="text-xs text-gray-500 dark:text-gray-400">Based on purchase price</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('inventory.basedOnPurchasePrice')}</p>
           </div>
         </CardContent>
       </Card>
@@ -175,7 +177,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-            <span>Top-Selling Product</span>
+            <span>{t('inventory.topSellingProduct')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -184,7 +186,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
               {highestSellingProduct?.name || "N/A"}
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              {(highestSellingProduct as any)?.totalSold || 0} units sold
+              {(highestSellingProduct as any)?.totalSold || 0} {t('inventory.unitsSold')}
             </p>
           </div>
         </CardContent>
@@ -195,7 +197,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
-            <span>Low Stock Alert</span>
+            <span>{t('dashboard.lowStockAlert')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -203,7 +205,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {lowStockProducts}
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Products below threshold</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.productsBelowThreshold')}</p>
           </div>
         </CardContent>
       </Card>
@@ -215,7 +217,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <Package className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-            <span>Total Products</span>
+            <span>{t('inventory.totalProducts')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -223,7 +225,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {formatNumber(totalProducts)}
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Products in inventory</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('inventory.productsInInventory')}</p>
           </div>
         </CardContent>
       </Card>
@@ -234,7 +236,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
               <span className="text-green-600 dark:text-green-400 font-semibold">₦</span>
-              <span>Inventory Value</span>
+              <span>{t('inventory.inventoryValue')}</span>
               {obscureStatus?.inventory && (
                 <span
                   onClick={() => toggleBalance()}
@@ -265,7 +267,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
                   ₦{"*****"}
                 </div>
               )}
-              <p className="text-xs text-gray-500 dark:text-gray-400">Total value of inventory</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('inventory.totalValueOfInventory')}</p>
             </div>
           </CardContent>
         </Card>
@@ -276,7 +278,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <DollarSign className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-            <span>Purchase Value</span>
+            <span>{t('inventory.purchaseValue')}</span>
             {obscureStatus?.inventory && (
               <span
                 onClick={() => toggleBalance()}
@@ -307,7 +309,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
                 ₦{"*****"}
               </div>
             )}
-            <p className="text-xs text-gray-500 dark:text-gray-400">Based on purchase price</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('inventory.basedOnPurchasePrice')}</p>
           </div>
         </CardContent>
       </Card>
@@ -317,7 +319,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-            <span>Top-Selling Product</span>
+            <span>{t('inventory.topSellingProduct')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -326,7 +328,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
               {highestSellingProduct?.name || "N/A"}
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              {(highestSellingProduct as any)?.totalSold || 0} units sold
+              {(highestSellingProduct as any)?.totalSold || 0} {t('inventory.unitsSold')}
             </p>
           </div>
         </CardContent>
@@ -337,7 +339,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
           <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
             <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
-            <span>Low Stock Alert</span>
+            <span>{t('dashboard.lowStockAlert')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -345,7 +347,7 @@ const InventorySummary: React.FC<InventorySummaryProps> = ({
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {lowStockProducts}
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Products below threshold</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.productsBelowThreshold')}</p>
           </div>
         </CardContent>
       </Card>

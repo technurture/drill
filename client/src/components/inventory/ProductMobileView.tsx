@@ -23,6 +23,7 @@ import { Switch } from "@/components/ui/switch";
 import { useProducts } from "@/integrations/supabase/hooks/products";
 import { StoreContext } from "@/contexts/StoreContext";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const ProductMobileView = ({
   product,
@@ -32,6 +33,7 @@ const ProductMobileView = ({
   canEditInventory,
   favouriteCount = 0,
 }) => {
+  const { t } = useTranslation('pages');
   const [isOpen, setIsOpen] = React.useState(false);
   const [favLimitAlert, setFavLimitAlert] = useState(false);
   const toggleFavouriteMutation = useToggleFavouriteProduct();
@@ -60,7 +62,7 @@ const ProductMobileView = ({
                 {product.name}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {product.category || "No category"}
+                {product.category || t('inventory.noCategory')}
               </p>
             </div>
           </div>
@@ -79,7 +81,7 @@ const ProductMobileView = ({
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
-            <DialogTitle className="text-lg font-semibold">Product Details</DialogTitle>
+            <DialogTitle className="text-lg font-semibold">{t('inventory.productDetails')}</DialogTitle>
           </div>
           <Button
             variant="ghost"
@@ -97,7 +99,7 @@ const ProductMobileView = ({
           {product.product_image && (
             <div className="space-y-3">
               <h4 className="text-sm font-medium text-muted-foreground">
-                Product Image
+                {t('inventory.productImage')}
               </h4>
               <div className="flex justify-center">
                 <img
@@ -113,7 +115,7 @@ const ProductMobileView = ({
           <div className="space-y-4">
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Product Name
+                {t('inventory.productName')}
               </h4>
               <p className="mt-1 text-lg font-medium">{product.name}</p>
             </div>
@@ -121,11 +123,11 @@ const ProductMobileView = ({
 
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Unit Price:</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('inventory.unitPriceLabel')}</span>
                 <span className="text-sm font-medium">₦{formatNumber(product.unit_price)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Quantity:</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t('inventory.quantityLabel')}</span>
                 <span className="text-sm font-medium">{product.quantity}</span>
               </div>
             </div>
@@ -133,7 +135,7 @@ const ProductMobileView = ({
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Low Stock Threshold
+                {t('inventory.lowStockThreshold')}
               </h4>
               <p className="mt-1">{product.low_stock_threshold}</p>
             </div>
@@ -141,7 +143,7 @@ const ProductMobileView = ({
 
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">
-                Stock Status
+                {t('inventory.stockStatus')}
               </h4>
               <div className="mt-2">
                 <span
@@ -152,8 +154,8 @@ const ProductMobileView = ({
                 }`}
               >
                 {product.quantity <= product.low_stock_threshold
-                  ? "Low Stock"
-                  : "In Stock"}
+                  ? t('inventory.lowStock')
+                  : t('inventory.inStock')}
                 </span>
               </div>
             </div>
@@ -163,10 +165,10 @@ const ProductMobileView = ({
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="text-sm font-medium text-muted-foreground">
-                  Add to Favourites
+                  {t('inventory.addToFavourites')}
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Mark as favourite for quick access
+                  {t('inventory.markAsFavourite')}
                 </p>
           </div>
             <Switch
@@ -184,7 +186,7 @@ const ProductMobileView = ({
                   onSettled: () => refetch()
                 });
               }}
-              aria-label={product.favourite ? "Remove from Favourite" : "Set as Favourite"}
+              aria-label={product.favourite ? t('inventory.removeFromFavourite') : t('inventory.setAsFavourite')}
               disabled={toggleFavouriteMutation.isPending}
             />
             </div>
@@ -209,7 +211,7 @@ const ProductMobileView = ({
                   className="h-12 w-full"
                 >
                 <Edit size={16} className="mr-2" />
-                  Edit Product
+                  {t('inventory.editProduct')}
               </Button>
             )}
               <Button 
@@ -221,7 +223,7 @@ const ProductMobileView = ({
                 className="h-12 w-full"
               >
               <RefreshCw size={16} className="mr-2" />
-                Restock Product
+                {t('inventory.restockProduct')}
             </Button>
             {canEditInventory && (
                 <Button 
@@ -233,7 +235,7 @@ const ProductMobileView = ({
                   className="h-12 w-full border-red-200 text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/20"
                 >
                 <Trash2 size={16} className="mr-2" />
-                  Delete Product
+                  {t('inventory.deleteProduct')}
               </Button>
             )}
             </div>

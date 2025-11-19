@@ -75,23 +75,23 @@ const Finance = () => {
     console.log("Finance - Form data:", formData);
     
     if (!selectedStore?.id) {
-      toast.error("No store selected");
+      toast.error(tc('selectStoreFirst'));
       return;
     }
 
     if (!user?.id) {
-      toast.error("User not logged in");
+      toast.error(tc('userNotLoggedIn'));
       return;
     }
 
     if (!formData.reason.trim() || !formData.amount || !formData.date) {
-      toast.error("Please fill in all fields");
+      toast.error(tc('pleaseFillAllFields'));
       return;
     }
 
     const amount = parseFloat(formData.amount);
     if (amount <= 0) {
-      toast.error("Amount must be greater than 0");
+      toast.error(tc('amountMustBeGreaterThanZero'));
       return;
     }
 
@@ -104,21 +104,6 @@ const Finance = () => {
       date: formData.date
     };
 
-  const handleDelete = async (recordId: string) => {
-    if (!selectedStore?.id) {
-      toast.error("No store selected");
-      return;
-    }
-
-    try {
-      await deleteFinancialRecord.mutateAsync(recordId);
-      toast.success("Financial record deleted successfully");
-      refetch();
-    } catch (error) {
-      console.error("Error deleting financial record:", error);
-      toast.error("Failed to delete financial record");
-    }
-  };
 
     console.log("Finance - Record data to insert:", recordData);
 
@@ -126,7 +111,7 @@ const Finance = () => {
       const result = await addFinancialRecord.mutateAsync(recordData);
       console.log("Finance - Record added successfully:", result);
 
-      toast.success(`${formData.type === 'income' ? 'Income' : 'Expense'} added successfully`);
+      toast.success(formData.type === 'income' ? tc('incomeAddedSuccessfully') : tc('expenseAddedSuccessfully'));
       setIsAddModalOpen(false);
       setFormData({
         type: "income",
@@ -137,18 +122,18 @@ const Finance = () => {
       refetch();
     } catch (error) {
       console.error("Finance - Error adding record:", error);
-      toast.error("Failed to add financial record");
+      toast.error(tc('failedToAddRecord'));
     }
   };
 
   const handleDelete = async (recordId: string) => {
-    if (confirm("Are you sure you want to delete this record?")) {
+    if (confirm(tc('confirmDeleteRecord'))) {
       try {
         await deleteFinancialRecord.mutateAsync(recordId);
-        toast.success("Record deleted successfully");
+        toast.success(tc('recordDeletedSuccessfully'));
         refetch();
       } catch (error) {
-        toast.error("Failed to delete record");
+        toast.error(tc('failedToDeleteRecord'));
         console.error(error);
       }
     }
@@ -159,7 +144,7 @@ const Finance = () => {
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading financial records...</p>
+          <p className="text-gray-600">{t('finance.loadingFinancialRecords')}</p>
         </div>
       </div>
     );
@@ -169,8 +154,8 @@ const Finance = () => {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <p className="text-red-600 mb-4">Error loading financial records</p>
-          <Button onClick={() => refetch()}>Retry</Button>
+          <p className="text-red-600 mb-4">{t('finance.errorLoadingRecords')}</p>
+          <Button onClick={() => refetch()}>{t('finance.retry')}</Button>
         </div>
       </div>
     );
@@ -182,9 +167,9 @@ const Finance = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">Finance Management</h1>
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('finance.financeManagement')}</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {t('finance.trackIncomeExpenses')} {selectedStore?.store_name || "your store"}
+              {t('finance.trackIncomeExpenses')} {selectedStore?.store_name || tc('inventory')}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -192,7 +177,7 @@ const Finance = () => {
               <DialogTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-2">
                   <Filter className="h-4 w-4" />
-                  <span className="hidden md:inline">Filters</span>
+                  <span className="hidden md:inline">{tc('filters')}</span>
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
@@ -201,7 +186,7 @@ const Finance = () => {
                 </DialogHeader>
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="type-filter">Type</Label>
+                    <Label htmlFor="type-filter">{tc('type')}</Label>
                     <Select value={filterType} onValueChange={setFilterType}>
                       <SelectTrigger>
                         <SelectValue />
@@ -215,7 +200,7 @@ const Finance = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="date-from">Date From</Label>
+                    <Label htmlFor="date-from">{tc('dateFrom')}</Label>
                     <Input
                       id="date-from"
                       type="date"
@@ -225,7 +210,7 @@ const Finance = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="date-to">Date To</Label>
+                    <Label htmlFor="date-to">{tc('dateTo')}</Label>
                     <Input
                       id="date-to"
                       type="date"
@@ -243,13 +228,13 @@ const Finance = () => {
                       }}
                       className="flex-1"
                     >
-                      Clear Filters
+                      {tc('clearFilters')}
                     </Button>
                     <Button 
                       onClick={() => setIsFilterModalOpen(false)}
                       className="flex-1"
                     >
-                      Apply Filters
+                      {tc('applyFilters')}
                     </Button>
                   </div>
                 </div>
@@ -257,7 +242,7 @@ const Finance = () => {
             </Dialog>
             <Button onClick={() => setIsAddModalOpen(true)} className="hidden md:inline-flex bg-green-600 hover:bg-green-700 text-white">
               <Plus className="w-4 h-4 mr-2" />
-              Add Record
+              {tc('addRecord')}
             </Button>
           </div>
         </div>
@@ -266,7 +251,7 @@ const Finance = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Income</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('finance.totalIncome')}</CardTitle>
               <TrendingUp className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
@@ -276,7 +261,7 @@ const Finance = () => {
           
           <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('finance.totalExpenses')}</CardTitle>
               <TrendingDown className="h-4 w-4 text-red-600" />
             </CardHeader>
             <CardContent>
@@ -287,7 +272,7 @@ const Finance = () => {
           <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <div className="flex items-center gap-2">
-                <span>Net Income</span>
+                <span>{t('finance.netIncome')}</span>
               </div>
             </CardHeader>
             <CardContent>
@@ -306,31 +291,31 @@ const Finance = () => {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="type">Type</Label>
+                <Label htmlFor="type">{tc('type')}</Label>
                 <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="income">Income</SelectItem>
-                    <SelectItem value="expense">Expense</SelectItem>
+                    <SelectItem value="income">{tc('income')}</SelectItem>
+                    <SelectItem value="expense">{tc('expense')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="reason">Reason/Description</Label>
+                <Label htmlFor="reason">{tc('reasonDescription')}</Label>
                 <Input
                   id="reason"
                   value={formData.reason}
                   onChange={(e) => setFormData({...formData, reason: e.target.value})}
-                  placeholder="e.g., Rent payment, Equipment purchase"
+                  placeholder={t('finance.reasonPlaceholder')}
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount (₦)</Label>
+                <Label htmlFor="amount">{tc('amountNairaLabel')}</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -338,13 +323,13 @@ const Finance = () => {
                   min="0"
                   value={formData.amount}
                   onChange={(e) => setFormData({...formData, amount: e.target.value})}
-                  placeholder="0.00"
+                  placeholder={tc('placeholderAmount')}
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="date">Date</Label>
+                <Label htmlFor="date">{tc('date')}</Label>
                 <Input
                   id="date"
                   type="date"
@@ -356,10 +341,10 @@ const Finance = () => {
               
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addFinancialRecord.isPending}>
-                  {addFinancialRecord.isPending ? "Adding..." : "Add Record"}
+                  {addFinancialRecord.isPending ? tc('adding') : tc('addRecord')}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setIsAddModalOpen(false)}>
-                  Cancel
+                  {tc('cancel')}
                 </Button>
               </div>
             </form>
@@ -369,7 +354,7 @@ const Finance = () => {
         {/* Financial Records Table */}
         <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Financial Records</CardTitle>
+            <CardTitle>{t('finance.financialRecords')}</CardTitle>
           </CardHeader>
           <CardContent>
             {filteredRecords.length === 0 ? (
@@ -378,13 +363,13 @@ const Finance = () => {
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('finance.noFinancialRecordsFound')}</h3>
                 <p className="text-gray-500 dark:text-gray-400 mb-4">
                   {filterType !== "all" || dateRange.from || dateRange.to 
-                    ? "Try adjusting your filters" 
-                    : "Add your first income or expense record to get started"}
+                    ? t('finance.tryAdjustingFilters') 
+                    : t('finance.addYourFirstRecord')}
                 </p>
                 {filterType === "all" && !dateRange.from && !dateRange.to && (
                   <Button onClick={() => setIsAddModalOpen(true)}>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add First Record
+                    {tc('addFirstRecord')}
                   </Button>
                 )}
               </div>
@@ -409,19 +394,19 @@ const Finance = () => {
                           </span>
                         </div>
                         <div className="font-medium text-gray-900 dark:text-white">
-                          {record.sale_id ? "Sales of products" : record.reason}
+                          {record.sale_id ? t('finance.salesOfProducts') : record.reason}
                         </div>
                         <div className="text-xs text-gray-500 mt-1">
                           {record.sale?.items && record.sale.items.length > 0 
-                            ? `${record.sale.items.length} item(s) sold`
+                            ? `${record.sale.items.length} ${t('finance.itemsSold')}`
                             : record.sale_id 
-                            ? "Auto-generated from sale"
+                            ? t('finance.autoGeneratedFromSale')
                             : ""}
                         </div>
                       </div>
                       <div className="text-right">
                         <Badge variant={record.type === 'income' ? 'default' : 'destructive'} className="mb-1">
-                          {record.type === 'income' ? 'Income' : 'Expense'}
+                          {record.type === 'income' ? tc('income') : tc('expense')}
                         </Badge>
                         <div className={`font-bold ${record.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
                           ₦{parseFloat(record.amount).toLocaleString()}
@@ -436,11 +421,11 @@ const Finance = () => {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Date</TableHead>
-                        <TableHead>Type</TableHead>
-                        <TableHead>Reason</TableHead>
-                        <TableHead>Amount</TableHead>
-                        <TableHead>Actions</TableHead>
+                        <TableHead>{t('finance.date')}</TableHead>
+                        <TableHead>{t('finance.type')}</TableHead>
+                        <TableHead>{t('finance.reason')}</TableHead>
+                        <TableHead>{t('finance.amount')}</TableHead>
+                        <TableHead>{t('finance.actions')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -454,25 +439,25 @@ const Finance = () => {
                           </TableCell>
                           <TableCell>
                             <Badge variant={record.type === 'income' ? 'default' : 'destructive'}>
-                              {record.type === 'income' ? 'Income' : 'Expense'}
+                              {record.type === 'income' ? tc('income') : tc('expense')}
                             </Badge>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
                             {record.sale_id ? (
                               <div>
-                                <span>Sales of products</span>
+                                <span>{t('finance.salesOfProducts')}</span>
                                 {record.sale?.items && record.sale.items.length > 0 ? (
                                   <div className="text-xs text-gray-500 block mt-1">
                                     {record.sale.items.map((item, index) => (
                                       <div key={item.id} className="flex justify-between">
-                                        <span>{item.product?.name || 'Unknown Product'}</span>
+                                        <span>{item.product?.name || tc('unknownProduct')}</span>
                                         <span className="ml-2">({item.quantity} × ₦{item.unit_price.toLocaleString()})</span>
                                       </div>
                                     ))}
                                   </div>
                                 ) : (
                                   <span className="text-xs text-gray-500 block">
-                                    (Auto-generated from sale)
+                                    ({t('finance.autoGeneratedFromSale')})
                                   </span>
                                 )}
                               </div>
@@ -490,7 +475,7 @@ const Finance = () => {
                               onClick={() => handleDelete(record.id)}
                               disabled={deleteFinancialRecord.isPending}
                             >
-                              Delete
+                              {tc('delete')}
                             </Button>
                           </TableCell>
                         </TableRow>
@@ -518,31 +503,31 @@ const Finance = () => {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="type">Type</Label>
+                <Label htmlFor="type">{tc('type')}</Label>
                 <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="income">Income</SelectItem>
-                    <SelectItem value="expense">Expense</SelectItem>
+                    <SelectItem value="income">{tc('income')}</SelectItem>
+                    <SelectItem value="expense">{tc('expense')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="reason">Reason/Description</Label>
+                <Label htmlFor="reason">{tc('reasonDescription')}</Label>
                 <Input
                   id="reason"
                   value={formData.reason}
                   onChange={(e) => setFormData({...formData, reason: e.target.value})}
-                  placeholder="e.g., Rent payment, Equipment purchase"
+                  placeholder={t('finance.reasonPlaceholder')}
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount (₦)</Label>
+                <Label htmlFor="amount">{tc('amountNairaLabel')}</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -550,13 +535,13 @@ const Finance = () => {
                   min="0"
                   value={formData.amount}
                   onChange={(e) => setFormData({...formData, amount: e.target.value})}
-                  placeholder="0.00"
+                  placeholder={tc('placeholderAmount')}
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="date">Date</Label>
+                <Label htmlFor="date">{tc('date')}</Label>
                 <Input
                   id="date"
                   type="date"
@@ -568,10 +553,10 @@ const Finance = () => {
               
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addFinancialRecord.isPending}>
-                  {addFinancialRecord.isPending ? "Adding..." : "Add Record"}
+                  {addFinancialRecord.isPending ? tc('adding') : tc('addRecord')}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setIsAddModalOpen(false)}>
-                  Cancel
+                  {tc('cancel')}
                 </Button>
               </div>
             </form>
@@ -584,7 +569,7 @@ const Finance = () => {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center justify-between">
-              <span>Financial Record Details</span>
+              <span>{t('finance.financialRecordDetails')}</span>
               <Button
                 variant="ghost"
                 size="sm"
@@ -601,7 +586,7 @@ const Finance = () => {
               {/* Record Type and Amount */}
               <div className="flex items-center justify-between">
                 <Badge variant={selectedRecord.type === 'income' ? 'default' : 'destructive'} className="text-sm">
-                  {selectedRecord.type === 'income' ? 'Income' : 'Expense'}
+                  {selectedRecord.type === 'income' ? tc('income') : tc('expense')}
                 </Badge>
                 <div className={`text-2xl font-bold ${selectedRecord.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
                   ₦{parseFloat(selectedRecord.amount).toLocaleString()}
@@ -610,7 +595,7 @@ const Finance = () => {
 
               {/* Date */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-500">Date</Label>
+                <Label className="text-sm font-medium text-gray-500">{t('finance.date')}</Label>
                 <div className="flex items-center gap-2 text-gray-900 dark:text-white">
                   <Calendar className="w-4 h-4 text-gray-400" />
                   {format(parseISO(selectedRecord.date), "EEEE, MMMM dd, yyyy")}
@@ -619,33 +604,33 @@ const Finance = () => {
 
               {/* Reason/Description */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-500">Description</Label>
+                <Label className="text-sm font-medium text-gray-500">{t('finance.description')}</Label>
                 <div className="text-gray-900 dark:text-white">
                   {selectedRecord.sale_id ? (
                     <div>
-                      <div className="font-medium">Sales of products</div>
+                      <div className="font-medium">{t('finance.salesOfProducts')}</div>
                       {selectedRecord.sale?.items && selectedRecord.sale.items.length > 0 ? (
                         <div className="mt-3 space-y-2">
-                          <div className="text-sm text-gray-500">Items sold:</div>
+                          <div className="text-sm text-gray-500">{tc('itemsSold')}</div>
                           {selectedRecord.sale.items.map((item) => (
                             <div key={item.id} className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-800 rounded">
                               <div>
-                                <div className="font-medium">{item.product?.name || 'Unknown Product'}</div>
-                                <div className="text-sm text-gray-500">Quantity: {item.quantity}</div>
+                                <div className="font-medium">{item.product?.name || tc('unknownProduct')}</div>
+                                <div className="text-sm text-gray-500">{t('finance.quantity', { quantity: item.quantity })}</div>
                               </div>
                               <div className="text-right">
                                 <div className="font-medium">₦{item.unit_price.toLocaleString()}</div>
-                                <div className="text-sm text-gray-500">per unit</div>
+                                <div className="text-sm text-gray-500">{t('finance.perUnit')}</div>
                               </div>
                             </div>
                           ))}
                           <div className="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-gray-700">
-                            <span className="font-medium">Total:</span>
+                            <span className="font-medium">{tc('total')}</span>
                             <span className="font-bold">₦{selectedRecord.sale.items.reduce((sum, item) => sum + (item.quantity * item.unit_price), 0).toLocaleString()}</span>
                           </div>
                         </div>
                       ) : (
-                        <div className="text-sm text-gray-500 mt-1">(Auto-generated from sale)</div>
+                        <div className="text-sm text-gray-500 mt-1">({t('finance.autoGeneratedFromSale')})</div>
                       )}
                     </div>
                   ) : (
@@ -669,7 +654,7 @@ const Finance = () => {
                   className="flex-1"
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
-                  {deleteFinancialRecord.isPending ? "Deleting..." : "Delete Record"}
+                  {deleteFinancialRecord.isPending ? tc('deleting') : t('finance.deleteRecord')}
                 </Button>
                 <Button
                   variant="outline"
@@ -677,7 +662,7 @@ const Finance = () => {
                   onClick={() => setIsDetailsModalOpen(false)}
                   className="flex-1"
                 >
-                  Close
+                  {tc('close')}
                 </Button>
               </div>
             </div>

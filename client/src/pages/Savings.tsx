@@ -115,8 +115,8 @@ const Savings = () => {
   if (!selectedStore) {
     return (
       <NoStoreMessage 
-        title="Savings Management"
-        description="Create your first store to start creating savings plans, tracking contributions, and building your financial goals."
+        title={t('savings.savingsManagement')}
+        description={t('savings.savingsManagementDesc')}
       />
     );
   }
@@ -413,9 +413,9 @@ const Savings = () => {
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">My Savings</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('savings.mySavings')}</h1>
               <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Manage your savings plans and track contributions
+                {t('savings.manageSavingsPlans')}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -630,7 +630,7 @@ const Savings = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Plans</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('savings.totalPlans')}</CardTitle>
                 <PiggyBank className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
@@ -640,7 +640,7 @@ const Savings = () => {
             
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Plans</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('savings.activePlans')}</CardTitle>
                 <TrendingUp className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
@@ -650,7 +650,7 @@ const Savings = () => {
             
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Completed Plans</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('savings.completedPlans')}</CardTitle>
                 <CheckCircle className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
@@ -660,24 +660,24 @@ const Savings = () => {
             
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Saved</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('savings.totalSaved')}</CardTitle>
                 <Target className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-green-600">₦{summary.total_saved.toLocaleString()}</div>
                 <Progress value={summary.progress_percentage} className="mt-2 bg-green-100 dark:bg-green-900/20" />
-                <p className="text-xs text-gray-500 mt-1">{summary.progress_percentage.toFixed(1)}% of target</p>
+                <p className="text-xs text-gray-500 mt-1">{summary.progress_percentage.toFixed(1)}% {t('common:ofTarget')}</p>
               </CardContent>
             </Card>
             
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Withdrawn</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('savings.totalWithdrawn')}</CardTitle>
                 <PiggyBank className="h-4 w-4 text-red-600" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-red-600">₦{totalWithdrawals.toLocaleString()}</div>
-                <p className="text-xs text-gray-500 mt-1">Total amount withdrawn</p>
+                <p className="text-xs text-gray-500 mt-1">{t('common:totalAmountWithdrawn')}</p>
               </CardContent>
             </Card>
           </div>
@@ -1037,7 +1037,7 @@ const Savings = () => {
                                   <p className="text-2xl font-bold text-red-600 dark:text-red-400">
                                     ₦{totalWithdrawn.toLocaleString()}
                                   </p>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">Total Withdrawn</p>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">{t('savings.totalWithdrawn')}</p>
                                 </div>
                               </div>
                               <Progress value={planProgress} className="w-full" />

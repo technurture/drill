@@ -19,12 +19,14 @@ import {
 import { format, isValid } from "date-fns";
 import { formatNumber } from "@/utils/formatNumber";
 import SalesMobileView from "./SalesMobileView";
+import { useTranslation } from "react-i18next";
 
 const SalesTable = ({ sales, onDelete }) => {
+  const { t } = useTranslation('pages');
   const { canEditSales } = usePermissions();
 
   if (!sales || sales.length === 0) {
-    return <div>No sales data available.</div>;
+    return <div>{t('sales.noSalesDataAvailable')}</div>;
   }
 
   return (
@@ -46,12 +48,12 @@ const SalesTable = ({ sales, onDelete }) => {
         <Table className="w-full table-fixed">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-2/12">Date & Time</TableHead>
-              <TableHead className="w-2/12 max-w-[120px] truncate">Product Sold</TableHead>
-              <TableHead className="w-1/12">Total Amount</TableHead>
-              <TableHead className="w-1/12">Payment Mode</TableHead>
-              <TableHead className="w-1/12">Sold by</TableHead>
-              <TableHead className="w-1/12">Actions</TableHead>
+              <TableHead className="w-2/12">{t('sales.dateTime')}</TableHead>
+              <TableHead className="w-2/12 max-w-[120px] truncate">{t('sales.productSold')}</TableHead>
+              <TableHead className="w-1/12">{t('sales.totalAmount')}</TableHead>
+              <TableHead className="w-1/12">{t('sales.paymentMode')}</TableHead>
+              <TableHead className="w-1/12">{t('sales.soldBy')}</TableHead>
+              <TableHead className="w-1/12">{t('sales.actions')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -60,7 +62,7 @@ const SalesTable = ({ sales, onDelete }) => {
                 <TableCell>
                   {isValid(new Date(sale.created_at))
                     ? format(new Date(sale.created_at), "dd MMM yyyy, HH:mm")
-                    : "Invalid Date"}
+                    : t('sales.invalidDate')}
                 </TableCell>
                 <TableCell className="w-2/12 max-w-[120px] truncate whitespace-nowrap overflow-hidden text-ellipsis">
                   {sale.items && sale.items.length > 0
@@ -75,11 +77,11 @@ const SalesTable = ({ sales, onDelete }) => {
                 </TableCell>
                 <TableCell className="w-1/12 whitespace-nowrap">
                   {sale.payment_mode === 'bank_transfer'
-                    ? 'Bank Transfer'
+                    ? t('sales.bankTransfer')
                     : sale.payment_mode === 'credit'
-                    ? 'Credit'
+                    ? t('sales.credit')
                     : sale.payment_mode === 'cash'
-                    ? 'Cash'
+                    ? t('sales.cash')
                     : sale.payment_mode}
                 </TableCell>
                 <TableCell>{sale?.sales_rep_name}</TableCell>
@@ -87,7 +89,7 @@ const SalesTable = ({ sales, onDelete }) => {
                   <div className="flex flex-row items-center gap-1">
                     <Button variant="ghost" onClick={() => onDelete(sale)} className="flex items-center gap-1">
                       <Trash2 size={16} className="text-red-600" />
-                      <span className="text-xs text-red-600">Delete</span>
+                      <span className="text-xs text-red-600">{t('inventory.delete')}</span>
                     </Button>
                   </div>
                 </TableCell>

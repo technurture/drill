@@ -54,7 +54,15 @@
     "actions": "Àwọn Ìgbésẹ̀",
     "edit": "Ṣàtúnṣe",
     "delete": "Pa Rẹ́",
-    "restock": "Ṣàfikún ọjà"
+    "restock": "Ṣàfikún ọjà",
+    "totalProducts": "Àpapọ̀ Ọjà",
+    "productsInInventory": "Ọjà tó wà nínú ìkójọpọ̀",
+    "inventoryValue": "Iye Ìkójọpọ̀",
+    "totalValueOfInventory": "Àpapọ̀ iye ìkójọpọ̀",
+    "purchaseValue": "Iye Ìrà",
+    "basedOnPurchasePrice": "Dá lórí owó ìrà",
+    "topSellingProduct": "Ọjà Tó Ń Tà Jùlọ",
+    "unitsSold": "àwọn ọjà tí a ta"
   },
   "sales": {
     "title": "Títà",
@@ -74,7 +82,17 @@
     "total": "Àpapọ̀",
     "paymentMethod": "Ọ̀nà Ìsanwó",
     "salesRep": "Aṣojú Títà",
-    "actions": "Àwọn Ìgbésẹ̀"
+    "actions": "Àwọn Ìgbésẹ̀",
+    "noSalesDataAvailable": "Kò sí dátà títà",
+    "salesTransactions": "Àwọn Ìṣòwò Títà",
+    "transaction": "ìṣòwò",
+    "transactions": "àwọn ìṣòwò",
+    "transactionFound": "ìṣòwò tí a rí",
+    "transactionsFound": "àwọn ìṣòwò tí a rí",
+    "revenueGenerated": "Owó tí a gbà",
+    "completedSales": "Títà tó ti parí",
+    "totalProfit": "Àpapọ̀ Èrè",
+    "basedOnPurchasePrices": "Dá lórí owó ìrà"
   },
   "finance": {
     "title": "Owó",
@@ -95,7 +113,10 @@
     "amount": "Iye Owó",
     "actions": "Àwọn Ìgbésẹ̀",
     "noTransactions": "Kò tíì sí ìṣòwò",
-    "noTransactionsDesc": "Bẹ̀rẹ̀ ṣíṣe àkọsílẹ̀ owó wọlé àti ìnáwó rẹ"
+    "noTransactionsDesc": "Bẹ̀rẹ̀ ṣíṣe àkọsílẹ̀ owó wọlé àti ìnáwó rẹ",
+    "financialRecords": "Àwọn Ìgbàsílẹ̀ Owó",
+    "itemsSold": "ohun tí a ta",
+    "trackIncomeExpenses": "Tọ́jú owó wọlé àti ìnáwó rẹ fún"
   },
   "loans": {
     "title": "Àwín",
@@ -121,7 +142,9 @@
     "completed": "Ti Parí",
     "defaulted": "Kò San",
     "repayments": "Ìsanpadà",
-    "addRepayment": "Ṣàfikún Ìsanpadà"
+    "addRepayment": "Ṣàfikún Ìsanpadà",
+    "loansManagement": "Ìṣàkóso Àwín",
+    "loansManagementDesc": "Ṣẹ̀dá ilé ìtàjà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣe àkọsílẹ̀ àwín àti ìsanpadà."
   },
   "savings": {
     "title": "Ìfowópamọ́",
@@ -146,7 +169,11 @@
     "actions": "Àwọn Ìgbésẹ̀",
     "addContribution": "Ṣàfikún Owó",
     "withdraw": "Yọ Owó",
-    "contributions": "Àwọn Ìdáhùn"
+    "contributions": "Àwọn Ìdáhùn",
+    "mySavings": "Ìfowópamọ́ Mi",
+    "manageSavingsPlans": "Ṣàkóso àwọn ètò ìfowópamọ́ rẹ kí o sì tọ́jú àwọn ìdásí",
+    "savingsManagement": "Ìṣàkóso Ìfowópamọ́",
+    "savingsManagementDesc": "Ṣẹ̀dá ilé ìtàjà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣẹ̀dá àwọn ètò ìfowópamọ́, tọ́jú àwọn ìdásí, àti kíkọ́ àwọn ibi-afẹ́dé owó rẹ."
   },
   "reports": {
     "title": "Ìròyìn",

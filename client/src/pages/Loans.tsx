@@ -18,19 +18,20 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
 const Loans = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('pages');
+  const { t: tc } = useTranslation('common');
   const store = useContext(StoreContext);
 
   const frequencyOptions: { value: RepaymentFrequency; label: string }[] = [
-    { value: "everyday", label: t('everyday') },
-    { value: "every_2_days", label: t('every2Days') },
-    { value: "every_3_days", label: t('every3Days') },
-    { value: "every_week", label: t('everyWeek') },
-    { value: "every_2_weeks", label: t('every2Weeks') },
-    { value: "monthly", label: t('monthly') },
-    { value: "every_2_months", label: t('every2Months') },
-    { value: "every_3_months", label: t('every3Months') },
-    { value: "yearly", label: t('yearly') },
+    { value: "everyday", label: tc('everyday') },
+    { value: "every_2_days", label: tc('every2Days') },
+    { value: "every_3_days", label: tc('every3Days') },
+    { value: "every_week", label: tc('everyWeek') },
+    { value: "every_2_weeks", label: tc('every2Weeks') },
+    { value: "monthly", label: tc('monthly') },
+    { value: "every_2_months", label: tc('every2Months') },
+    { value: "every_3_months", label: tc('every3Months') },
+    { value: "yearly", label: tc('yearly') },
   ];
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -119,9 +120,9 @@ const Loans = () => {
         repayment_frequency: "every_week",
         purpose: "",
       });
-      toast.success(t('loanCreated'));
+      toast.success(tc('loanCreated'));
     } catch (err: any) {
-      toast.error(err?.message || t('failedToCreateLoan'));
+      toast.error(err?.message || tc('failedToCreateLoan'));
     }
   };
 
@@ -137,17 +138,17 @@ const Loans = () => {
       });
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      toast.success(t('repaymentAdded'));
+      toast.success(tc('repaymentAdded'));
     } catch (err: any) {
-      toast.error(err?.message || t('failedToCreateLoan'));
+      toast.error(err?.message || tc('failedToCreateLoan'));
     }
   };
 
   if (!store) {
     return (
       <NoStoreMessage 
-        title="Loans Management"
-        description="Create your first store to start tracking loans and repayments."
+        title={t('loans.loansManagement')}
+        description={t('loans.loansManagementDesc')}
       />
     );
   }
@@ -156,7 +157,7 @@ const Loans = () => {
     <div className="min-h-screen bg-white dark:bg-[#18191A]">
       <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white">Loans</h1>
+          <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('loans.title')}</h1>
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
               <Button className="bg-green-600 hover:bg-green-700 text-white">
@@ -254,7 +255,7 @@ const Loans = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-500"></div>
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center justify-between gap-2 text-sm md:text-base">
-                <span className="flex items-center gap-2"><DollarSign className="h-4 w-4 text-blue-600" /> Total Payable</span>
+                <span className="flex items-center gap-2"><DollarSign className="h-4 w-4 text-blue-600" /> {t('loans.totalPayable')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -267,7 +268,7 @@ const Loans = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center justify-between gap-2 text-sm md:text-base">
-                <span className="flex items-center gap-2"><TrendingDown className="h-4 w-4 text-green-600" /> Total Repaid</span>
+                <span className="flex items-center gap-2"><TrendingDown className="h-4 w-4 text-green-600" /> {t('loans.totalRepaid')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -280,7 +281,7 @@ const Loans = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-pink-500"></div>
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center justify-between gap-2 text-sm md:text-base">
-                <span className="flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-red-600" /> Outstanding</span>
+                <span className="flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-red-600" /> {t('loans.outstanding')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -412,7 +413,7 @@ const Loans = () => {
               await deleteLoan.mutateAsync({ loanId: activeLoan.id });
               toast.success(t('loanDeleted'));
             } catch (err: any) {
-              toast.error(err?.message || t('failedToCreateLoan'));
+              toast.error(err?.message || tc('failedToCreateLoan'));
             } finally {
               setIsDeleteOpen(false);
               setActiveLoan(null);
