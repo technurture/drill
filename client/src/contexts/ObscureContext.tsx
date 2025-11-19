@@ -23,18 +23,22 @@ export const ObscurityProvider = ({ children }: { children: ReactNode }) => {
     main: boolean | null;
     inventory: boolean | null;
     sales: boolean | null;
-  } | null>(null);
+  } | null>({
+    main: false,
+    inventory: false,
+    sales: false,
+  });
   
   useEffect(() => {
     if (admin) {
       setObs((prev) => ({
         ...prev,
-        main: admin?.hide_balance,
-        inventory: admin?.hide_balance,
-        sales: admin?.hide_balance,
+        main: admin?.hide_balance ?? false,
+        inventory: admin?.hide_balance ?? false,
+        sales: admin?.hide_balance ?? false,
       }));
     }
-  }, [user, admin]);
+  }, [admin]);
   
   const setStatus = (section: string, value: any) => {
     if (section === "main") {
