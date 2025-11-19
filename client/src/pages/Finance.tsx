@@ -106,14 +106,35 @@ const Finance = () => {
       date: formData.date
     };
 
-
     console.log("Finance - Record data to insert:", recordData);
+
+    if (!isOnline) {
+      console.log('📴 Offline: Queueing financial record immediately without awaiting');
+      
+      addFinancialRecord.mutate(recordData, {
+        onError: (error: any) => {
+          setIsAddModalOpen(true);
+          toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
+        }
+      });
+      
+      // Close immediately after queueing starts
+      toast.success(tc('savedLocallyWillSync'));
+      setIsAddModalOpen(false);
+      setFormData({
+        type: "income",
+        reason: "",
+        amount: "",
+        date: format(new Date(), "yyyy-MM-dd")
+      });
+      return;
+    }
 
     try {
       const result = await addFinancialRecord.mutateAsync(recordData);
       console.log("Finance - Record added successfully:", result);
 
-      toast.success(isOnline ? (formData.type === 'income' ? tc('incomeAddedSuccessfully') : tc('expenseAddedSuccessfully')) : 'Saved locally. Will sync when online.');
+      toast.success(formData.type === 'income' ? tc('incomeAddedSuccessfully') : tc('expenseAddedSuccessfully'));
       setIsAddModalOpen(false);
       setFormData({
         type: "income",
@@ -132,7 +153,7 @@ const Finance = () => {
     if (confirm(tc('confirmDeleteRecord'))) {
       try {
         await deleteFinancialRecord.mutateAsync(recordId);
-        toast.success(isOnline ? tc('recordDeletedSuccessfully') : 'Saved locally. Will sync when online.');
+        toast.success(isOnline ? tc('recordDeletedSuccessfully') : tc('savedLocallyWillSync'));
         refetch();
       } catch (error) {
         toast.error(tc('failedToDeleteRecord'));

@@ -93,23 +93,54 @@ const Loans = () => {
   const handleCreateLoan = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!store?.id) return;
-    try {
-      const principalNum = Number(createForm.principal || 0);
-      const interestPct = Number(createForm.interest_percent || 0);
-      const interestAmt = Number(createForm.interest_amount || 0);
-      const rateDecimal = createForm.interest_mode === "percent"
-        ? (interestPct / 100)
-        : (principalNum > 0 ? (interestAmt / principalNum) : 0);
-      await createLoan.mutateAsync({
-        store_id: store.id,
-        borrower_name: createForm.borrower_name.trim(),
-        principal: principalNum,
-        interest_rate: rateDecimal,
-        start_date: createForm.start_date,
-        due_date: createForm.due_date,
-        repayment_frequency: createForm.repayment_frequency,
-        purpose: createForm.purpose?.trim() || undefined,
+    
+    const principalNum = Number(createForm.principal || 0);
+    const interestPct = Number(createForm.interest_percent || 0);
+    const interestAmt = Number(createForm.interest_amount || 0);
+    const rateDecimal = createForm.interest_mode === "percent"
+      ? (interestPct / 100)
+      : (principalNum > 0 ? (interestAmt / principalNum) : 0);
+    
+    const loanData = {
+      store_id: store.id,
+      borrower_name: createForm.borrower_name.trim(),
+      principal: principalNum,
+      interest_rate: rateDecimal,
+      start_date: createForm.start_date,
+      due_date: createForm.due_date,
+      repayment_frequency: createForm.repayment_frequency,
+      purpose: createForm.purpose?.trim() || undefined,
+    };
+
+    if (!isOnline) {
+      console.log('📴 Offline: Queueing loan creation immediately without awaiting');
+      
+      createLoan.mutate(loanData, {
+        onSuccess: () => {
+          toast.success('Saved locally. Will sync when online.');
+          setIsCreateOpen(false);
+          setCreateForm({
+            borrower_name: "",
+            principal: "",
+            interest_percent: "",
+            interest_amount: "",
+            interest_mode: "percent",
+            start_date: format(new Date(), "yyyy-MM-dd"),
+            due_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
+            repayment_frequency: "every_week",
+            purpose: "",
+          });
+        },
+        onError: (error: any) => {
+          setIsCreateOpen(true);
+          toast.error('Failed to save offline: ' + (error?.message || 'Please try again'));
+        }
       });
+      return;
+    }
+
+    try {
+      await createLoan.mutateAsync(loanData);
       setIsCreateOpen(false);
       setCreateForm({
         borrower_name: "",
@@ -122,7 +153,7 @@ const Loans = () => {
         repayment_frequency: "every_week",
         purpose: "",
       });
-      toast.success(isOnline ? tc('loanCreated') : 'Saved locally. Will sync when online.');
+      toast.success(tc('loanCreated'));
     } catch (err: any) {
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
@@ -131,16 +162,36 @@ const Loans = () => {
   const handleAddRepayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!activeLoan) return;
-    try {
-      await addRepayment.mutateAsync({
-        loan_id: activeLoan.id,
-        amount: Number(repaymentForm.amount || 0),
-        paid_at: repaymentForm.paid_at,
-        note: repaymentForm.note?.trim() || undefined,
+    
+    const repaymentData = {
+      loan_id: activeLoan.id,
+      amount: Number(repaymentForm.amount || 0),
+      paid_at: repaymentForm.paid_at,
+      note: repaymentForm.note?.trim() || undefined,
+    };
+
+    if (!isOnline) {
+      console.log('📴 Offline: Queueing repayment immediately without awaiting');
+      
+      addRepayment.mutate(repaymentData, {
+        onSuccess: () => {
+          toast.success('Saved locally. Will sync when online.');
+          setIsRepayOpen(false);
+          setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
+        },
+        onError: (error: any) => {
+          setIsRepayOpen(true);
+          toast.error('Failed to save offline: ' + (error?.message || 'Please try again'));
+        }
       });
+      return;
+    }
+
+    try {
+      await addRepayment.mutateAsync(repaymentData);
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      toast.success(isOnline ? tc('repaymentAdded') : 'Saved locally. Will sync when online.');
+      toast.success(tc('repaymentAdded'));
     } catch (err: any) {
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
@@ -163,28 +214,28 @@ const Loans = () => {
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
               <Button className="bg-green-600 hover:bg-green-700 text-white">
-                <Plus className="h-4 w-4 mr-2" /> New Loan
+                <Plus className="h-4 w-4 mr-2" /> {t('loans.newLoan')}
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle>Create Loan</DialogTitle>
+                <DialogTitle>{t('loans.createLoan')}</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleCreateLoan} className="space-y-4">
                 <div>
-                  <Label>{t('borrowerLender')}</Label>
+                  <Label>{t('loans.borrowerLender')}</Label>
                   <Input value={createForm.borrower_name} onChange={e => setCreateForm(f => ({ ...f, borrower_name: e.target.value }))} placeholder="e.g. Access Bank" />
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <Label>{t('principalAmount')}</Label>
+                    <Label>{t('loans.principal')}</Label>
                     <Input type="number" inputMode="decimal" value={createForm.principal} onChange={e => setCreateForm(f => ({ ...f, principal: e.target.value }))} placeholder="0" />
                   </div>
                   <div>
                     <div className="flex items-center justify-between">
-                      <Label>{t('interest')}</Label>
+                      <Label>{t('loans.interestLabel')}</Label>
                       <div className="flex items-center gap-2 text-xs text-gray-500">
-                        <span>{t('enterBy')}</span>
+                        <span>{t('loans.enterBy')}</span>
                         <Select value={createForm.interest_mode} onValueChange={(v: any) => setCreateForm(f => ({ ...f, interest_mode: v }))}>
                           <SelectTrigger className="h-7 w-[120px]">
                             <SelectValue />
@@ -221,12 +272,12 @@ const Loans = () => {
                     <Input type="date" value={createForm.start_date} onChange={e => setCreateForm(f => ({ ...f, start_date: e.target.value }))} />
                   </div>
                   <div>
-                    <Label>{t('endDate').replace('End Date', 'Due Date')}</Label>
+                    <Label>{t('loans.dueDate')}</Label>
                     <Input type="date" value={createForm.due_date} onChange={e => setCreateForm(f => ({ ...f, due_date: e.target.value }))} />
                   </div>
                 </div>
                 <div>
-                  <Label>{t('repaymentFrequency')}</Label>
+                  <Label>{t('loans.repaymentFrequency')}</Label>
                   <Select value={createForm.repayment_frequency} onValueChange={(v: RepaymentFrequency) => setCreateForm(f => ({ ...f, repayment_frequency: v }))}>
                     <SelectTrigger>
                       <SelectValue />
@@ -239,8 +290,8 @@ const Loans = () => {
                   </Select>
                 </div>
                 <div>
-                  <Label>{t('purposeOptional')}</Label>
-                  <Input value={createForm.purpose} onChange={e => setCreateForm(f => ({ ...f, purpose: e.target.value }))} placeholder={t('whatLoanFor')} />
+                  <Label>{t('loans.purpose')}</Label>
+                  <Input value={createForm.purpose} onChange={e => setCreateForm(f => ({ ...f, purpose: e.target.value }))} placeholder={t('loans.purposePlaceholder')} />
                 </div>
                 <div className="flex gap-2 pt-2">
                   <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{t('create')}</Button>
@@ -262,7 +313,7 @@ const Loans = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">₦{new Intl.NumberFormat().format(totals.totalPrincipal)}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('principalPlusInterest')}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('loans.principalPlusInterest')}</p>
             </CardContent>
           </Card>
 
@@ -275,7 +326,7 @@ const Loans = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-600">₦{new Intl.NumberFormat().format(totals.totalRepaid)}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('acrossAllLoans')}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('loans.acrossAllLoans')}</p>
             </CardContent>
           </Card>
 
@@ -288,14 +339,14 @@ const Loans = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-red-600">₦{new Intl.NumberFormat().format(totals.outstanding)}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('amountLeftToRepay')}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('loans.amountLeftToRepay')}</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Section heading */}
         <div className="mb-3 md:mb-4">
-          <h2 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white">{t('allLoans')}</h2>
+          <h2 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white">{t('loans.allLoans')}</h2>
         </div>
 
         {/* Loans list */}
@@ -316,39 +367,39 @@ const Loans = () => {
                       <span className="font-semibold">{loan.borrower_name}</span>
                       <Badge className={statusColor}>{loan.status}</Badge>
                     </div>
-                    <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{t('due')}: {format(new Date(loan.due_date), 'dd MMM yyyy')}</div>
+                    <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{t('loans.due')}: {format(new Date(loan.due_date), 'dd MMM yyyy')}</div>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-6 gap-3 text-sm">
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">{t('principalAmount').replace(' (₦)', '')}</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('loans.principal')}</div>
                       <div className="font-semibold">₦{new Intl.NumberFormat().format(Number(loan.principal || 0))}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">{t('interest')}</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('loans.interestLabel')}</div>
                       <div className="font-semibold">{new Intl.NumberFormat().format(Number(loan.interest_rate || 0) * 100)}%</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">{t('totalRepayment')}</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('loans.totalRepayment')}</div>
                       <div className="font-semibold">₦{new Intl.NumberFormat().format(totalPayable)}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">{t('repaid')}</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('loans.repaid')}</div>
                       <div className="font-semibold text-green-600">₦{new Intl.NumberFormat().format(totalRepaid)}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">{t('outstanding')}</div>
+                      <div className="text-gray-500 dark:text-gray-400">{t('loans.outstanding')}</div>
                       <div className="font-semibold text-red-600">₦{new Intl.NumberFormat().format(outstanding)}</div>
                     </div>
                     <div>
-                      <div className="text-gray-500 dark:text-gray-400">{t('frequency')}</div>
+                      <div className="text-gray-500 dark:text-gray-400">{tc('repaymentFrequency')}</div>
                       <div className="font-semibold capitalize">{(loan.repayment_frequency || '').replace('_', ' ')}</div>
                     </div>
                   </div>
                   <div className="mt-4">
                     <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-                      <span>{t('progress')}</span>
+                      <span>{tc('progress')}</span>
                       <span>{progress}%</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden">
@@ -356,9 +407,9 @@ const Loans = () => {
                     </div>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    <Button variant="outline" onClick={() => { setActiveLoan(loan); setIsRepayOpen(true); }}>{t('addRepayment')}</Button>
+                    <Button variant="outline" onClick={() => { setActiveLoan(loan); setIsRepayOpen(true); }}>{t('loans.addRepayment')}</Button>
                     <Button variant="outline" onClick={() => { setActiveLoan(loan); setIsHistoryOpen(true); }}>
-                      <History className="h-4 w-4 mr-2" /> {t('history')}
+                      <History className="h-4 w-4 mr-2" /> {t('loans.history')}
                     </Button>
                     <Button
                       variant="destructive"
@@ -367,7 +418,7 @@ const Loans = () => {
                         setIsDeleteOpen(true);
                       }}
                     >
-                      Delete
+                      {tc('delete')}
                     </Button>
                   </div>
                 </CardContent>
@@ -380,21 +431,21 @@ const Loans = () => {
         <Dialog open={isRepayOpen} onOpenChange={setIsRepayOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>{t('addRepayment')}</DialogTitle>
+              <DialogTitle>{t('loans.addRepayment')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleAddRepayment} className="space-y-4">
               <div>
-                <Label>{t('amountNaira')}</Label>
+                <Label>{tc('amountNaira')}</Label>
                 <Input type="number" inputMode="decimal" value={repaymentForm.amount} onChange={e => setRepaymentForm(f => ({ ...f, amount: e.target.value }))} placeholder="0" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label>{t('paidAt')}</Label>
+                  <Label>{t('loans.paidAt')}</Label>
                   <Input type="date" value={repaymentForm.paid_at} onChange={e => setRepaymentForm(f => ({ ...f, paid_at: e.target.value }))} />
                 </div>
                 <div>
-                  <Label>{t('noteOptional')}</Label>
-                  <Input value={repaymentForm.note} onChange={e => setRepaymentForm(f => ({ ...f, note: e.target.value }))} placeholder="e.g. Cash transfer" />
+                  <Label>{t('loans.noteOptional')}</Label>
+                  <Input value={repaymentForm.note} onChange={e => setRepaymentForm(f => ({ ...f, note: e.target.value }))} placeholder={t('loans.notePlaceholder')} />
                 </div>
               </div>
               <div className="flex gap-2 pt-2">
@@ -428,7 +479,7 @@ const Loans = () => {
         <Dialog open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>{t('repaymentHistory')}</DialogTitle>
+              <DialogTitle>{t('loans.repaymentHistory')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-3">
               {activeLoan ? (

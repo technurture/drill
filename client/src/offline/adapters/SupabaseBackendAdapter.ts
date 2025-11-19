@@ -150,7 +150,7 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createSale(payload: any): Promise<void> {
-    const { items, id, ...saleData } = payload;
+    const { items, id, financial_record_data, ...saleData } = payload;
 
     if (id) {
       const { data: existing } = await supabase
@@ -187,6 +187,40 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
       );
 
       if (itemsError) throw itemsError;
+    }
+
+    if (financial_record_data) {
+      const { store_id, user_id, type, amount } = financial_record_data;
+      
+      if (!store_id || !user_id || !type || amount === undefined || amount === null) {
+        console.error('Invalid financial_record_data: missing required fields', financial_record_data);
+        throw new Error('Financial record data is missing required fields: store_id, user_id, type, or amount');
+      }
+
+      const { data: existingRecord } = await supabase
+        .from('financial_records')
+        .select('id')
+        .eq('sale_id', sale.id)
+        .eq('store_id', store_id)
+        .maybeSingle();
+      
+      if (existingRecord) {
+        console.log(`Financial record for sale ${sale.id} already exists, skipping insert`);
+        return;
+      }
+
+      console.log('Creating financial record from sale data:', financial_record_data);
+      const { error: financialError } = await supabase
+        .from('financial_records')
+        .insert([{
+          ...financial_record_data,
+          sale_id: sale.id,
+        }]);
+
+      if (financialError) {
+        console.error('Failed to create financial record from sale:', financialError);
+        throw financialError;
+      }
     }
   }
 

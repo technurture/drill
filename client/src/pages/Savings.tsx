@@ -182,15 +182,41 @@ const Savings = () => {
       return;
     }
 
-    try {
-      await createSavingsPlan.mutateAsync({
-        ...createFormData,
-        target_amount: parseFloat(createFormData.target_amount),
-        store_id: selectedStore.id,
-        user_id: user.id
-      });
+    const planData = {
+      ...createFormData,
+      target_amount: parseFloat(createFormData.target_amount),
+      store_id: selectedStore.id,
+      user_id: user.id
+    };
 
-      toast.success(isOnline ? "Savings plan created successfully!" : 'Saved locally. Will sync when online.');
+    if (!isOnline) {
+      console.log('📴 Offline: Queueing savings plan creation immediately without awaiting');
+      
+      createSavingsPlan.mutate(planData, {
+        onError: (error: any) => {
+          setIsCreateModalOpen(true);
+          toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
+        }
+      });
+      
+      // Close immediately after queueing starts
+      toast.success(tc('savedLocallyWillSync'));
+      setIsCreateModalOpen(false);
+      setCreateFormData({
+        title: "",
+        start_date: format(new Date(), "yyyy-MM-dd"),
+        end_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
+        contributing_to: "",
+        savings_duration: "weekly",
+        target_amount: ""
+      });
+      return;
+    }
+
+    try {
+      await createSavingsPlan.mutateAsync(planData);
+
+      toast.success("Savings plan created successfully!");
       setIsCreateModalOpen(false);
       setCreateFormData({
         title: "",
@@ -252,17 +278,42 @@ const Savings = () => {
       return;
     }
 
-    try {
-      const result = await addContribution.mutateAsync({
-        ...contributionData,
-        amount: parseFloat(contributionData.amount),
-        store_id: selectedStore.id,
-        user_id: user.id
+    const contributionPayload = {
+      ...contributionData,
+      amount: parseFloat(contributionData.amount),
+      store_id: selectedStore.id,
+      user_id: user.id
+    };
+
+    if (!isOnline) {
+      console.log('📴 Offline: Queueing contribution immediately without awaiting');
+      
+      addContribution.mutate(contributionPayload, {
+        onError: (error: any) => {
+          setIsContributionModalOpen(true);
+          toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
+        }
       });
+      
+      // Close immediately after queueing starts
+      toast.success(tc('savedLocallyWillSync'));
+      setIsContributionModalOpen(false);
+      setContributionWarning(null);
+      setContributionData({
+        savings_plan_id: "",
+        amount: "",
+        contribution_date: format(new Date(), "yyyy-MM-dd")
+      });
+      setSelectedPlan(null);
+      return;
+    }
+
+    try {
+      const result = await addContribution.mutateAsync(contributionPayload);
 
       console.log("Contribution added successfully:", result);
 
-      toast.success(isOnline ? "Contribution added successfully!" : 'Saved locally. Will sync when online.');
+      toast.success("Contribution added successfully!");
       setIsContributionModalOpen(false);
       setContributionWarning(null);
       setContributionData({

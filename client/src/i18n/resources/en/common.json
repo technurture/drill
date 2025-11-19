@@ -225,5 +225,8 @@
   "amountNairaLabel": "Amount (₦)",
   "placeholderAmount": "0.00",
   "itemsSold": "Items sold:",
-  "total": "Total:"
+  "total": "Total:",
+  "savedLocallyWillSync": "Saved locally. Will sync when online.",
+  "failedToSaveOffline": "Failed to save offline",
+  "pleaseTryAgain": "Please try again"
 }
