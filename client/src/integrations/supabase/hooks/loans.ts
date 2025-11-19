@@ -87,7 +87,9 @@ export const useUpdateLoanStatus = () => {
 
 export const useDeleteLoan = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "loans",
+    action: "delete",
     mutationFn: async ({ loanId }: { loanId: string }) => {
       const { error } = await supabase.from("loans").delete().eq("id", loanId);
       if (error) throw error;
@@ -96,7 +98,8 @@ export const useDeleteLoan = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["loans"] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary"] });
-    }
+    },
+    getOptimisticData: ({ loanId }) => loanId,
   });
 };
 

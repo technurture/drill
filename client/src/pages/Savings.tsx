@@ -45,12 +45,14 @@ import { toast } from "sonner";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import WithdrawSavingsModal from "@/components/ui/modals/WithdrawSavingsModal";
 import { useTranslation } from "react-i18next";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 const Savings = () => {
   const { t } = useTranslation('pages');
   const { t: tc } = useTranslation('common');
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
+  const { isOnline } = useOfflineStatus();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isContributionModalOpen, setIsContributionModalOpen] = useState(false);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
@@ -188,7 +190,7 @@ const Savings = () => {
         user_id: user.id
       });
 
-      toast.success("Savings plan created successfully!");
+      toast.success(isOnline ? "Savings plan created successfully!" : 'Saved locally. Will sync when online.');
       setIsCreateModalOpen(false);
       setCreateFormData({
         title: "",
@@ -260,7 +262,7 @@ const Savings = () => {
 
       console.log("Contribution added successfully:", result);
 
-      toast.success("Contribution added successfully!");
+      toast.success(isOnline ? "Contribution added successfully!" : 'Saved locally. Will sync when online.');
       setIsContributionModalOpen(false);
       setContributionWarning(null);
       setContributionData({
@@ -318,7 +320,7 @@ const Savings = () => {
           store_id: selectedStore.id,
         });
         setLastWithdrawal({ planId: selectedPlanForWithdrawal.id, amount, at: new Date().toISOString() });
-        toast.success("Withdrawal recorded successfully");
+        toast.success(isOnline ? "Withdrawal recorded successfully" : 'Saved locally. Will sync when online.');
         setIsWithdrawModalOpen(false);
         setSelectedPlanForWithdrawal(null);
         refetch();
@@ -334,7 +336,7 @@ const Savings = () => {
         planId: selectedPlanForWithdrawal.id, 
         storeId: selectedStore!.id 
       });
-      toast.success("Savings withdrawn successfully!");
+      toast.success(isOnline ? "Savings withdrawn successfully!" : 'Saved locally. Will sync when online.');
       setIsWithdrawModalOpen(false);
       setSelectedPlanForWithdrawal(null);
       refetch();

@@ -16,11 +16,13 @@ import { AlertTriangle, CheckCircle, DollarSign, History, Plus, TrendingDown } f
 import { formatNumber } from "@/utils/formatNumber";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 const Loans = () => {
   const { t } = useTranslation('pages');
   const { t: tc } = useTranslation('common');
   const store = useContext(StoreContext);
+  const { isOnline } = useOfflineStatus();
 
   const frequencyOptions: { value: RepaymentFrequency; label: string }[] = [
     { value: "everyday", label: tc('everyday') },
@@ -120,7 +122,7 @@ const Loans = () => {
         repayment_frequency: "every_week",
         purpose: "",
       });
-      toast.success(tc('loanCreated'));
+      toast.success(isOnline ? tc('loanCreated') : 'Saved locally. Will sync when online.');
     } catch (err: any) {
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
@@ -138,7 +140,7 @@ const Loans = () => {
       });
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      toast.success(tc('repaymentAdded'));
+      toast.success(isOnline ? tc('repaymentAdded') : 'Saved locally. Will sync when online.');
     } catch (err: any) {
       toast.error(err?.message || tc('failedToCreateLoan'));
     }

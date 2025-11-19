@@ -8,6 +8,7 @@ import { StoreContext } from "@/contexts/StoreContext";
 import NotificationItem from "./NotificationItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 interface NotificationListProps {
   filter?: "all" | "read" | "unread";
@@ -16,6 +17,7 @@ interface NotificationListProps {
 const NotificationList = ({ filter = "all" }: NotificationListProps) => {
   const { user } = useAuth();
   const theStore = useContext(StoreContext);
+  const { isOnline } = useOfflineStatus();
   const {
     data: notifications,
     isLoading,
@@ -24,6 +26,12 @@ const NotificationList = ({ filter = "all" }: NotificationListProps) => {
   const updateNotification = useUpdateNotification();
   
   const handleMarkAsRead = async (id: number) => {
+    // Skip notification updates when offline (non-critical operation)
+    if (!isOnline) {
+      console.log("Skipping notification update while offline");
+      return;
+    }
+    
     try {
       await updateNotification.mutateAsync({ id, read: true });
     } catch (error) {

@@ -32,6 +32,7 @@ import { SheetClient } from "@/utils/google_sheet";
 import { Plus } from "lucide-react";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import { useTranslation } from "react-i18next";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 const Inventory = () => {
   const { t } = useTranslation(['pages', 'common', 'notifications']);
@@ -39,6 +40,7 @@ const Inventory = () => {
   const location = useLocation();
   const subscriptionData = useContext(SubscriptionContext);
   const { canViewInventory } = usePermissions();
+  const { isOnline } = useOfflineStatus();
   const {
     data: products,
     isLoading: productsLoading,
@@ -116,7 +118,7 @@ const Inventory = () => {
           ...productData,
           store_id: theStore?.id,
         } as Omit<Product, "id">);
-        toast.success(t('notifications:product.added'));
+        toast.success(isOnline ? t('notifications:product.added') : 'Product saved locally. Will sync when online.');
       // } else {
       //   toast.error("Upgrade your plan to add more products");
       // }
@@ -137,7 +139,7 @@ const Inventory = () => {
         quantity,
         storeId: theStore?.id || "",
       });
-      toast.success(t('notifications:product.restocked'));
+      toast.success(isOnline ? t('notifications:product.restocked') : 'Restock saved locally. Will sync when online.');
       setModals((prev: any) => ({ ...prev, restockModal: false }));
     } catch (error) {
       toast.error(t('notifications:product.restockFailed'));
@@ -151,7 +153,7 @@ const Inventory = () => {
         id: selectedProduct.id,
         storeId: theStore?.id || "",
       });
-      toast.success(t('notifications:product.deleted'));
+      toast.success(isOnline ? t('notifications:product.deleted') : 'Product deletion saved locally. Will sync when online.');
       setModals((prev: any) => ({ ...prev, deleteModal: false }));
     } catch (error) {
       toast.error(t('notifications:product.deleteFailed'));
