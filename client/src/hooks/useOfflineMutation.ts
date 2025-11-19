@@ -35,6 +35,8 @@ function getActionType(tableName: string, action: string): ActionType {
     'savings_plans-delete': 'DELETE_SAVINGS_PLAN',
     'savings_contributions-create': 'ADD_SAVINGS_CONTRIBUTION',
     'savings_contributions-delete': 'DELETE_SAVINGS_CONTRIBUTION',
+    'savings_withdrawals-create': 'WITHDRAW_SAVINGS',
+    'savings_withdrawals-withdraw_partial': 'WITHDRAW_PARTIAL_SAVINGS',
   };
   
   const key = `${tableName}-${action}`;

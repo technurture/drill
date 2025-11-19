@@ -293,10 +293,14 @@ const AddSales = () => {
       //   return;
       // }
 
+      // Calculate total as a number (not a memoized getter)
+      const totalAmount = getTotalAmount; // This IS the computed value from useMemo
+
       const saleData: any = {
-        total_price: getTotalAmount,
+        total_price: totalAmount,
         payment_mode: paymentMode,
         store_id: theStore?.id || "",
+        user_id: user?.id || "", // CRITICAL: Include user_id for RLS and sync
         sales_rep_name: "Admin",
         created_date: format(new Date(), "yyyy-MM-dd"),
         sales_type: cartItems.map((item) => ({
@@ -318,31 +322,54 @@ const AddSales = () => {
           user_id: user.id,
           type: 'income',
           reason: 'Sales of products',
-          amount: Number(getTotalAmount),
+          amount: totalAmount,
           date: saleData.created_date,
         };
       }
 
+      if (!isOnline) {
+        // OFFLINE MODE: Use fire-and-forget mutate (not mutateAsync)
+        // This prevents blocking and allows immediate UI feedback
+        console.log('📴 Offline: Queueing sale immediately without awaiting');
+        
+        // Queue the sale (returns immediately with optimistic data)
+        // Note: useOfflineMutation already handles optimistic updates in the cache
+        addSale.mutate(saleData);
+        
+        // Show success message
+        toast.success("Sale saved offline! It will sync when you're back online.");
+        
+        // Clear cart and close modals
+        setCartItems([]);
+        setCartModalOpen(false);
+        setCartSlideOpen(false);
+        setPaymentMode('cash');
+        setIsCheckingOut(false);
+        
+        // Navigate to sales page
+        navigate("/dashboard/sales");
+        return;
+      }
+
+      // ONLINE MODE: Use async/await for proper error handling
       // Add sale to database
       const createdSale = await addSale.mutateAsync(saleData);
 
       // Create linked finance income record ONLY when online
       // When offline, this will be created during sync by offlineSync.ts
-      if (isOnline && theStore?.id && user?.id && createdSale?.id) {
+      if (theStore?.id && user?.id && createdSale?.id) {
         await addFinancialRecord.mutateAsync({
           store_id: theStore.id,
           user_id: user.id,
           type: 'income',
           reason: 'Sales of products',
-          amount: Number(getTotalAmount),
+          amount: totalAmount,
           date: saleData.created_date,
           sale_id: createdSale.id,
         });
       }
 
-      // Update product quantities
-      // CRITICAL: Always call the mutation (it queues when offline via useOfflineMutation)
-      // Then optionally update cache for immediate UI feedback
+      // Update product quantities - ONLY when online
       for (const item of cartItems) {
         await updateProductQuantity.mutateAsync({
           id: item.id,
@@ -351,41 +378,19 @@ const AddSales = () => {
         });
       }
 
-      // Additionally update cache when offline for immediate UI feedback
-      // (The mutation already queues the operation for sync)
-      if (!isOnline && theStore?.id) {
-        queryClient.setQueryData(['products', theStore.id], (oldProducts: Product[] | undefined) => {
-          if (!oldProducts) return oldProducts;
-          
-          return oldProducts.map((product) => {
-            const cartItem = cartItems.find(item => item.id === product.id);
-            if (cartItem) {
-              return {
-                ...product,
-                quantity: product.quantity - cartItem.cartQuantity
-              };
-            }
-            return product;
-          });
-        });
-        
-        console.log('📴 Offline: Product quantities queued for sync + cache updated for UI');
-      }
-
-      // Add notifications - ONLY when online
-      // When offline, skip notifications as they're not critical
-      if (isOnline && theStore?.id) {
+      // Add notifications
+      if (theStore?.id) {
         const productNames = cartItems.map((item) => item.name).join(", ");
         await addNotification.mutateAsync({
           user_id: user?.id || theStore?.owner_id,
-          message: `New sale by Admin: ${productNames} for ₦${getTotalAmount.toFixed(2)}`,
+          message: `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
           type: "sale",
           read: false,
           store_id: theStore.id,
         });
 
         pushNotification(
-          `New sale by Admin: ${productNames} for ₦${getTotalAmount.toFixed(2)}`,
+          `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
           "New Sale",
         ).catch(err => console.log("Push notification error:", err));
 
@@ -411,10 +416,7 @@ const AddSales = () => {
         }
       }
 
-      const successMessage = isOnline 
-        ? "Sale completed successfully!" 
-        : "Sale saved offline! It will sync when you're back online.";
-      toast.success(successMessage);
+      toast.success("Sale completed successfully!");
       
       // Clear cart and close modals
       setCartItems([]);
@@ -427,10 +429,7 @@ const AddSales = () => {
 
     } catch (error) {
       console.error("Checkout error:", error);
-      const errorMessage = isOnline
-        ? "Failed to complete sale. Please try again."
-        : "Failed to save sale offline. Please try again.";
-      toast.error(errorMessage);
+      toast.error("Failed to complete sale. Please try again.");
     } finally {
       setIsCheckingOut(false);
     }

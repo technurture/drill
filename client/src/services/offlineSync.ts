@@ -1,6 +1,7 @@
-import { getOfflineQueue, markQueueItemSynced, removeQueueItem } from '@/utils/indexedDB';
+import { actionQueueRepository } from '@/offline/queue/ActionQueueRepository';
 import { supabase } from '@/integrations/supabase';
 import { QueryClient } from '@tanstack/react-query';
+import type { ActionEnvelope, ActionType } from '@/offline/types';
 
 const MAX_RETRY_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 2000;
@@ -15,6 +16,35 @@ async function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Map ActionType to table name and action
+function parseActionType(type: ActionType): { table: string; action: string } {
+  const mapping: Record<ActionType, { table: string; action: string }> = {
+    'CREATE_PRODUCT': { table: 'products', action: 'create' },
+    'UPDATE_PRODUCT': { table: 'products', action: 'update' },
+    'DELETE_PRODUCT': { table: 'products', action: 'delete' },
+    'CREATE_SALE': { table: 'sales', action: 'create' },
+    'UPDATE_SALE': { table: 'sales', action: 'update' },
+    'DELETE_SALE': { table: 'sales', action: 'delete' },
+    'CREATE_STORE': { table: 'stores', action: 'create' },
+    'UPDATE_STORE': { table: 'stores', action: 'update' },
+    'ADD_FINANCIAL_RECORD': { table: 'financial_records', action: 'create' },
+    'UPDATE_FINANCIAL_RECORD': { table: 'financial_records', action: 'update' },
+    'DELETE_FINANCIAL_RECORD': { table: 'financial_records', action: 'delete' },
+    'CREATE_LOAN': { table: 'loans', action: 'create' },
+    'UPDATE_LOAN': { table: 'loans', action: 'update' },
+    'DELETE_LOAN': { table: 'loans', action: 'delete' },
+    'ADD_LOAN_REPAYMENT': { table: 'loan_repayments', action: 'create' },
+    'CREATE_SAVINGS_PLAN': { table: 'savings_plans', action: 'create' },
+    'DELETE_SAVINGS_PLAN': { table: 'savings_plans', action: 'delete' },
+    'ADD_SAVINGS_CONTRIBUTION': { table: 'savings_contributions', action: 'create' },
+    'DELETE_SAVINGS_CONTRIBUTION': { table: 'savings_contributions', action: 'delete' },
+    'WITHDRAW_SAVINGS': { table: 'savings_withdrawals', action: 'create' },
+    'WITHDRAW_PARTIAL_SAVINGS': { table: 'savings_withdrawals', action: 'create' },
+  };
+  
+  return mapping[type] || { table: '', action: '' };
+}
+
 /**
  * Syncs all queued offline operations to Supabase.
  * 
@@ -25,7 +55,7 @@ async function delay(ms: number): Promise<void> {
  * - Savings Contributions (simple): Contribution records - standard insert
  */
 export async function syncOfflineData(): Promise<{ success: number; failed: number }> {
-  const queue = await getOfflineQueue();
+  const queue = await actionQueueRepository.getPending();
   let success = 0;
   let failed = 0;
 
@@ -34,7 +64,7 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
   // Log queue summary for debugging
   if (queue.length > 0) {
     const summary = queue.reduce((acc, item) => {
-      const key = `${item.table}-${item.action}`;
+      const key = item.type;
       acc[key] = (acc[key] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
@@ -47,13 +77,15 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
 
     while (attempts < MAX_RETRY_ATTEMPTS && !synced) {
       try {
-        const { action, table, data } = item;
+        const { table, action } = parseActionType(item.type);
+        const data = item.payload;
         let result;
 
         // Handle special cases for tables with complex nested data
         if (table === 'sales' && action === 'create') {
           // Sales have nested sale_items that need to be handled separately
-          const { items, financial_record_data, ...saleData } = data;
+          const salesData = data as any;
+          const { items, financial_record_data, ...saleData } = salesData;
 
           // Check if sale already exists (from previous partial sync attempt)
           let sale = null;
@@ -187,10 +219,10 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
               result = await supabase.from(table).insert(data);
               break;
             case 'update':
-              result = await supabase.from(table).update(data).eq('id', data.id);
+              result = await supabase.from(table).update(data).eq('id', (data as any).id);
               break;
             case 'delete':
-              result = await supabase.from(table).delete().eq('id', data.id);
+              result = await supabase.from(table).delete().eq('id', (data as any).id);
               break;
           }
           
@@ -207,10 +239,10 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
             await delay(RETRY_DELAY_MS * attempts);
           }
         } else {
-          await removeQueueItem(item.id);
+          await actionQueueRepository.delete(item.id);
           success++;
           synced = true;
-          console.log(`✓ Synced ${action} on ${table}${table === 'sales' && data.items ? ` with ${data.items.length} items` : ''}`);
+          console.log(`✓ Synced ${action} on ${table}${table === 'sales' && (data as any).items ? ` with ${(data as any).items.length} items` : ''}`);
         }
       } catch (error) {
         console.error(`Exception while syncing item ${item.id} (attempt ${attempts + 1}/${MAX_RETRY_ATTEMPTS}):`, error);
@@ -223,6 +255,7 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
 
     if (!synced) {
       failed++;
+      await actionQueueRepository.updateStatus(item.id, 'failed', 'Max retry attempts exceeded');
       console.error(`✗ Failed to sync item ${item.id} after ${MAX_RETRY_ATTEMPTS} attempts`);
     }
   }
