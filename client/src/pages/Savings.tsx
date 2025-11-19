@@ -356,22 +356,34 @@ const Savings = () => {
   const handleConfirmWithdrawal = async (amount?: number) => {
     if (!selectedPlanForWithdrawal || !selectedStore?.id || !user?.id) return;
 
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+
     if (typeof amount === 'number') {
-      // Prefer current_amount if present, else sum contributions
       const currentAmount = (typeof selectedPlanForWithdrawal.current_amount === 'number' ? selectedPlanForWithdrawal.current_amount : parseFloat(selectedPlanForWithdrawal.current_amount)) ||
         (selectedPlanForWithdrawal.contributions?.reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0) || 0);
       if (amount <= 0 || amount > currentAmount) {
         toast.error("Invalid withdrawal amount");
         return;
       }
-      try {
-        await withdrawPartial.mutateAsync({
-          planId: selectedPlanForWithdrawal.id,
-          amount,
-          store_id: selectedStore.id,
-        });
+
+      const withdrawalData = {
+        planId: selectedPlanForWithdrawal.id,
+        amount,
+        store_id: selectedStore.id,
+      };
+
+      if (!currentlyOnline) {
+        withdrawPartial.mutate(withdrawalData);
         setLastWithdrawal({ planId: selectedPlanForWithdrawal.id, amount, at: new Date().toISOString() });
-        toast.success(isOnline ? "Withdrawal recorded successfully" : 'Saved locally. Will sync when online.');
+        setIsWithdrawModalOpen(false);
+        setSelectedPlanForWithdrawal(null);
+        return;
+      }
+
+      try {
+        await withdrawPartial.mutateAsync(withdrawalData);
+        setLastWithdrawal({ planId: selectedPlanForWithdrawal.id, amount, at: new Date().toISOString() });
+        toast.success("Withdrawal recorded successfully");
         setIsWithdrawModalOpen(false);
         setSelectedPlanForWithdrawal(null);
         refetch();
@@ -382,12 +394,21 @@ const Savings = () => {
       return;
     }
 
+    const withdrawalData = { 
+      planId: selectedPlanForWithdrawal.id, 
+      storeId: selectedStore!.id 
+    };
+
+    if (!currentlyOnline) {
+      withdrawSavings.mutate(withdrawalData);
+      setIsWithdrawModalOpen(false);
+      setSelectedPlanForWithdrawal(null);
+      return;
+    }
+
     try {
-      await withdrawSavings.mutateAsync({ 
-        planId: selectedPlanForWithdrawal.id, 
-        storeId: selectedStore!.id 
-      });
-      toast.success(isOnline ? "Savings withdrawn successfully!" : 'Saved locally. Will sync when online.');
+      await withdrawSavings.mutateAsync(withdrawalData);
+      toast.success("Savings withdrawn successfully!");
       setIsWithdrawModalOpen(false);
       setSelectedPlanForWithdrawal(null);
       refetch();

@@ -112,10 +112,14 @@ const Loans = () => {
       purpose: createForm.purpose?.trim() || undefined,
     };
 
-    try {
-      await createLoan.mutateAsync(loanData);
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+    console.log("📋 Create Loan - navigator.onLine:", currentlyOnline);
+    
+    if (!currentlyOnline) {
+      console.log("📴 OFFLINE: Queueing loan immediately without awaiting");
+      createLoan.mutate(loanData);
       
-      // Close modal and reset form only after successful mutation
+      console.log("📴 OFFLINE: Closing modal and resetting form immediately");
       setIsCreateOpen(false);
       setCreateForm({
         borrower_name: "",
@@ -128,14 +132,30 @@ const Loans = () => {
         repayment_frequency: "every_week",
         purpose: "",
       });
+      console.log("✅ OFFLINE: Loan form reset and modal closed");
+      return;
+    }
+
+    console.log("🌐 ONLINE: Creating loan with await");
+    try {
+      await createLoan.mutateAsync(loanData);
       
-      // Show appropriate success message based on online status
-      if (!isOnline) {
-        toast.success('Saved offline! Will sync when you\'re back online.');
-      } else {
-        toast.success(tc('loanCreated'));
-      }
+      setIsCreateOpen(false);
+      setCreateForm({
+        borrower_name: "",
+        principal: "",
+        interest_percent: "",
+        interest_amount: "",
+        interest_mode: "percent",
+        start_date: format(new Date(), "yyyy-MM-dd"),
+        due_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
+        repayment_frequency: "every_week",
+        purpose: "",
+      });
+      toast.success(tc('loanCreated'));
+      console.log("✅ ONLINE: Loan created successfully");
     } catch (err: any) {
+      console.error("❌ Error creating loan:", err);
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
   };
@@ -151,20 +171,30 @@ const Loans = () => {
       note: repaymentForm.note?.trim() || undefined,
     };
 
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+    console.log("📋 Add Repayment - navigator.onLine:", currentlyOnline);
+    
+    if (!currentlyOnline) {
+      console.log("📴 OFFLINE: Queueing repayment immediately without awaiting");
+      addRepayment.mutate(repaymentData);
+      
+      console.log("📴 OFFLINE: Closing modal and resetting form immediately");
+      setIsRepayOpen(false);
+      setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
+      console.log("✅ OFFLINE: Repayment form reset and modal closed");
+      return;
+    }
+
+    console.log("🌐 ONLINE: Adding repayment with await");
     try {
       await addRepayment.mutateAsync(repaymentData);
       
-      // Close modal and reset form only after successful mutation
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      
-      // Show appropriate success message based on online status
-      if (!isOnline) {
-        toast.success('Saved offline! Will sync when you\'re back online.');
-      } else {
-        toast.success(tc('repaymentAdded'));
-      }
+      toast.success(tc('repaymentAdded'));
+      console.log("✅ ONLINE: Repayment added successfully");
     } catch (err: any) {
+      console.error("❌ Error adding repayment:", err);
       toast.error(err?.message || tc('failedToCreateLoan'));
     }
   };

@@ -42,15 +42,32 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
       return;
     }
 
-    try {
-      await addFinancialRecord.mutateAsync({
-        store_id: selectedStore.id,
-        user_id: user.id,
-        type: formData.type as 'income' | 'expense',
-        reason: formData.reason,
-        amount: parseFloat(formData.amount),
-        date: formData.date
+    const recordData = {
+      store_id: selectedStore.id,
+      user_id: user.id,
+      type: formData.type as 'income' | 'expense',
+      reason: formData.reason,
+      amount: parseFloat(formData.amount),
+      date: formData.date
+    };
+
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+    
+    if (!currentlyOnline) {
+      addFinancialRecord.mutate(recordData);
+      
+      setOpen(false);
+      setFormData({
+        type: defaultType,
+        reason: "",
+        amount: "",
+        date: format(new Date(), "yyyy-MM-dd")
       });
+      return;
+    }
+
+    try {
+      await addFinancialRecord.mutateAsync(recordData);
       
       toast.success(`${formData.type === 'income' ? 'Income' : 'Expense'} added successfully!`);
       setOpen(false);

@@ -47,13 +47,32 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
       return;
     }
 
-    try {
-      await createSavingsPlan.mutateAsync({
-        ...formData,
-        target_amount: parseFloat(formData.target_amount),
-        store_id: selectedStore.id,
-        user_id: user.id
+    const planData = {
+      ...formData,
+      target_amount: parseFloat(formData.target_amount),
+      store_id: selectedStore.id,
+      user_id: user.id
+    };
+
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+    
+    if (!currentlyOnline) {
+      createSavingsPlan.mutate(planData);
+      
+      setOpen(false);
+      setFormData({
+        title: "",
+        start_date: format(new Date(), "yyyy-MM-dd"),
+        end_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
+        contributing_to: "",
+        savings_duration: "weekly",
+        target_amount: ""
       });
+      return;
+    }
+
+    try {
+      await createSavingsPlan.mutateAsync(planData);
       
       toast.success("Savings plan created successfully!");
       setOpen(false);

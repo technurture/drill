@@ -106,15 +106,24 @@ const EditProductModal: React.FC<EditProductModalProps> = ({ open, setOpen, prod
       return;
     }
 
+    const updateData: any = {
+      id: product.id,
+      store_id: theStore.id,
+      ...data,
+    };
+
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+
+    if (!currentlyOnline) {
+      setIsLoading(true);
+      updateProductMutation.mutate(updateData);
+      setOpen(false);
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     try {
-      // Prepare update data with required store_id
-      const updateData: any = {
-        id: product.id,
-        store_id: theStore.id,
-        ...data,
-      };
-
       await updateProductMutation.mutateAsync(updateData);
 
       setOpen(false);
