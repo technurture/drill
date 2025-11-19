@@ -252,8 +252,8 @@ const Dashboard = () => {
   if (!theStore) {
     return (
       <NoStoreMessage 
-        title={t('dashboard.welcomeToSheBalance')}
-        description={t('dashboard.createFirstStoreDesc')}
+        title={t('pages:dashboard.welcomeToSheBalance')}
+        description={t('pages:dashboard.createFirstStoreDesc')}
         showBackButton={false}
       />
     );
@@ -305,7 +305,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                     </svg>
-                    <span>{t('dashboard.totalSalesRevenue')}</span>
+                    <span>{t('pages:dashboard.totalSalesRevenue')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus?.main && (
@@ -340,7 +340,7 @@ const Dashboard = () => {
                           ₦{"*****"}
                         </div>
                       )}
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.totalRevenueDesc')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalRevenueDesc')}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -353,7 +353,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    <span>{t('dashboard.totalSales')}</span>
+                    <span>{t('pages:dashboard.totalSales')}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -363,7 +363,7 @@ const Dashboard = () => {
                       <div className="text-2xl font-bold text-gray-900 dark:text-white">
                         {totalSales}
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.transactionsCompleted')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.transactionsCompleted')}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -374,7 +374,7 @@ const Dashboard = () => {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
                   <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
                     <PiggyBank className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                    <span>{t('dashboard.totalSavings')}</span>
+                    <span>{t('pages:dashboard.totalSavings')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus && obscureStatus?.main && (
@@ -408,7 +408,7 @@ const Dashboard = () => {
                           ₦{"*****"}
                         </div>
                       )}
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.totalSavedAmount')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalSavedAmount')}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -422,7 +422,7 @@ const Dashboard = () => {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
                   <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
                     <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
-                    <span>{t('dashboard.lowStockAlert')}</span>
+                    <span>{t('pages:dashboard.lowStockAlert')}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -432,7 +432,7 @@ const Dashboard = () => {
                       <div className="text-2xl font-bold text-gray-900 dark:text-white">
                         {lowStockCount}
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.productsBelowThreshold')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.productsBelowThreshold')}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -446,7 +446,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    <span>{t('dashboard.totalIncome')}</span>
+                    <span>{t('pages:dashboard.totalIncome')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus && obscureStatus?.main && (
@@ -480,7 +480,7 @@ const Dashboard = () => {
                           ₦{"*****"}
                         </div>
                       )}
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('dashboard.totalIncomeDesc')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalIncomeDesc')}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -494,7 +494,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                     </svg>
-                    <span>{t('dashboard.totalExpenses')}</span>
+                    <span>{t('pages:dashboard.totalExpenses')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus && obscureStatus?.main && (
@@ -579,7 +579,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    <span>{t('dashboard.totalSales')}</span>
+                    <span>{t('pages:dashboard.totalSales')}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -597,7 +597,7 @@ const Dashboard = () => {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
                   <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
                     <PiggyBank className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                    <span>{t('dashboard.totalSavings')}</span>
+                    <span>{t('pages:dashboard.totalSavings')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus?.main ? (
@@ -635,7 +635,7 @@ const Dashboard = () => {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
                   <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
                     <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
-                    <span>{t('dashboard.lowStockAlert')}</span>
+                    <span>{t('pages:dashboard.lowStockAlert')}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -656,7 +656,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    <span>{t('dashboard.totalIncome')}</span>
+                    <span>{t('pages:dashboard.totalIncome')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus?.main ? (
@@ -694,7 +694,7 @@ const Dashboard = () => {
                     <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                     </svg>
-                    <span>{t('dashboard.totalExpenses')}</span>
+                    <span>{t('pages:dashboard.totalExpenses')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus?.main ? (
@@ -740,7 +740,7 @@ const Dashboard = () => {
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  <span className="font-medium">{t('dashboard.addNewSale')}</span>
+                  <span className="font-medium">{t('pages:dashboard.addNewSale')}</span>
                 </Button>
 
                 <Button
@@ -781,7 +781,7 @@ const Dashboard = () => {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  <span className="font-medium">{t('dashboard.addNewSale')}</span>
+                  <span className="font-medium">{t('pages:dashboard.addNewSale')}</span>
                 </Button>
 
                 <Button
@@ -789,7 +789,7 @@ const Dashboard = () => {
                   className="h-16 flex flex-col items-center justify-center gap-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200 text-xs"
                 >
                   <PiggyBank className="w-5 h-5" />
-                  <span className="font-medium">{t('dashboard.addSavings')}</span>
+                  <span className="font-medium">{t('pages:dashboard.addSavings')}</span>
                 </Button>
 
                 <Button
@@ -799,7 +799,7 @@ const Dashboard = () => {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
-                  <span className="font-medium">{t('dashboard.addIncome')}</span>
+                  <span className="font-medium">{t('pages:dashboard.addIncome')}</span>
                 </Button>
 
                 <Button
@@ -809,7 +809,7 @@ const Dashboard = () => {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                   </svg>
-                  <span className="font-medium">{t('dashboard.addExpense')}</span>
+                  <span className="font-medium">{t('pages:dashboard.addExpense')}</span>
                 </Button>
               </div>
             </div>
@@ -852,7 +852,7 @@ const Dashboard = () => {
               {/* Payment Methods Chart */}
               {paymentModeData.length > 0 && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('dashboard.paymentMethods', { defaultValue: 'Payment Methods' })}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('pages:dashboard.paymentMethods')}</h3>
                   <Card className="p-6">
                     <div className="h-80 md:h-64">
                       <ResponsiveContainer width="100%" height="100%">

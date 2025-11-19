@@ -26,7 +26,8 @@
     "welcomeToSheBalance": "Welcome to SheBalance!",
     "createFirstStoreDesc": "Create your first store to start managing your business and track your sales, inventory, and finances.",
     "incomeBreakdown": "Income Breakdown",
-    "paymentMethods": "Payment Methods"
+    "paymentMethods": "Payment Methods",
+    "quickActions": "Quick Actions"
   },
   "inventory": {
     "title": "Inventory / List of Stocks",

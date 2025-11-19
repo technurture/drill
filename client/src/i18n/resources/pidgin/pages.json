@@ -24,7 +24,10 @@
     "addSavings": "Add Savings",
     "addNewSale": "Add New Sale",
     "welcomeToSheBalance": "Welcome to SheBalance!",
-    "createFirstStoreDesc": "Create your first shop make you start to dey manage your business and track your sales, products, and money."
+    "createFirstStoreDesc": "Create your first shop make you start to dey manage your business and track your sales, products, and money.",
+    "incomeBreakdown": "How Money Wey Enter Breakdown",
+    "paymentMethods": "How You Dey Collect Money",
+    "quickActions": "Quick Actions"
   },
   "inventory": {
     "title": "Inventory / List of Products",

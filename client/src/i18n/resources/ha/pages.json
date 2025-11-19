@@ -18,7 +18,14 @@
     "netIncomeDesc": "Kudaden shiga ban da kashe kuɗi",
     "recentSales": "Tallace-tallacen Baya-bayan nan",
     "topProducts": "Kayayyakin da Suka Fi Sayarwa",
-    "viewAll": "Duba Duka"
+    "viewAll": "Duba Duka",
+    "incomeBreakdown": "Rarraba Kudaden Shiga",
+    "paymentMethods": "Hanyoyin Biyan Kuɗi",
+    "quickActions": "Ayyuka Masu Sauri",
+    "addIncome": "Ƙara Kudaden Shiga",
+    "addExpense": "Ƙara Kashe Kuɗi",
+    "addSavings": "Ƙara Ajiyar Kuɗi",
+    "addNewSale": "Ƙara Sabon Tallace-tallace"
   },
   "inventory": {
     "title": "Kaya / Jerin Kayayyaki",

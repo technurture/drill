@@ -18,7 +18,14 @@
     "netIncomeDesc": "Ego abata na-ewepu mmefu",
     "recentSales": "Ahịa Na-adịbeghị Anya",
     "topProducts": "Ngwaahịa Na-ere Nke Ọma",
-    "viewAll": "Lee Niile"
+    "viewAll": "Lee Niile",
+    "incomeBreakdown": "Nkewa Ego Abata",
+    "paymentMethods": "Ụzọ Ịkwụ Ụgwọ",
+    "quickActions": "Ngwa Ngwa Omume",
+    "addIncome": "Tinye Ego Abata",
+    "addExpense": "Tinye Mmefu",
+    "addSavings": "Tinye Nchekwa",
+    "addNewSale": "Tinye Ahịa Ọhụrụ"
   },
   "inventory": {
     "title": "Ngwa Ahịa / Ndepụta Ngwaahịa",

@@ -18,7 +18,14 @@
     "netIncomeDesc": "Owó wọlé lẹ́yìn ìnáwó",
     "recentSales": "Àwọn Títà Tuntun",
     "topProducts": "Ọjà Tó Ń Tà Jùlọ",
-    "viewAll": "Wo Gbogbo"
+    "viewAll": "Wo Gbogbo",
+    "incomeBreakdown": "Pípin Owó Wọlé",
+    "paymentMethods": "Àwọn Ọ̀nà Ìsanwó",
+    "quickActions": "Àwọn Ìgbésẹ̀ Kíákíá",
+    "addIncome": "Ṣàfikún Owó Wọlé",
+    "addExpense": "Ṣàfikún Ìnáwó",
+    "addSavings": "Ṣàfikún Ìfowópamọ́",
+    "addNewSale": "Ṣàfikún Títà Tuntun"
   },
   "inventory": {
     "title": "Ìkójọpọ̀ / Àtòjọ Ọjà",
