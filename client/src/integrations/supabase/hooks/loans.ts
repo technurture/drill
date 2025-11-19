@@ -132,9 +132,25 @@ export const useAddRepayment = () => {
       if (error) throw error;
       return data as LoanRepayment;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      // Invalidate the repayments for this specific loan
       queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
-      // Also refresh loans summary by store; fetch the loan to get store_id
+      
+      // Fetch the loan to get the store_id for invalidating store-wide queries
+      const { data: loan } = await supabase
+        .from("loans")
+        .select("store_id")
+        .eq("id", data.loan_id)
+        .single();
+      
+      if (loan?.store_id) {
+        // Invalidate loans summary to update totals (total repaid, outstanding, etc.)
+        queryClient.invalidateQueries({ queryKey: ["loans-summary", loan.store_id] });
+        // Invalidate store-wide repayments used for calculating per-loan totals
+        queryClient.invalidateQueries({ queryKey: ["loan-repayments-by-store", loan.store_id] });
+        // Invalidate the loans list in case status needs to update
+        queryClient.invalidateQueries({ queryKey: ["loans", loan.store_id] });
+      }
     },
     getOptimisticData: (variables) => ({
       id: crypto.randomUUID(),
