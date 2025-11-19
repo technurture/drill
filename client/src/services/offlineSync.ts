@@ -36,9 +36,10 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
   }, {} as Record<string, number>);
   console.log('📊 Queue summary:', summary);
 
-  toast.info(`Syncing ${queue.length} offline changes...`, {
-    description: 'Please wait while we sync your data',
+  toast.loading(`Syncing ${queue.length} offline ${queue.length === 1 ? 'change' : 'changes'}...`, {
+    description: 'Your offline data is being synced to the server',
     duration: 3000,
+    id: 'offline-sync',
   });
 
   for (const item of queue) {
@@ -71,9 +72,11 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
 
   console.log(`Offline sync complete - Success: ${success}, Failed: ${failed}`);
   
+  toast.dismiss('offline-sync');
+  
   if (success > 0) {
-    toast.success(`Successfully synced ${success} changes!`, {
-      description: failed > 0 ? `${failed} changes failed to sync` : 'All your offline data is now synced',
+    toast.success(`Successfully synced ${success} ${success === 1 ? 'change' : 'changes'}!`, {
+      description: failed > 0 ? `${failed} ${failed === 1 ? 'change' : 'changes'} failed to sync` : 'All your offline data is now synced to the server',
       duration: 5000,
     });
 
@@ -101,8 +104,8 @@ export async function syncOfflineData(): Promise<{ success: number; failed: numb
       console.log('✅ React Query cache invalidated - UI will refresh with synced data');
     }
   } else if (failed > 0) {
-    toast.error(`Failed to sync ${failed} changes`, {
-      description: 'Please check your connection and try again',
+    toast.error(`Failed to sync ${failed} ${failed === 1 ? 'change' : 'changes'}`, {
+      description: 'Please check your internet connection and try again',
       duration: 5000,
     });
   }
