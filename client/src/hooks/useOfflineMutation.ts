@@ -59,7 +59,14 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
 
   return useMutation({
     mutationFn: async (variables: TVariables) => {
-      if (!isOnline) {
+      // CRITICAL: Re-check navigator.onLine at call time for most accurate status
+      // The hook's isOnline may be stale if network changed after component render
+      // Use OR logic: if EITHER says offline, treat as offline; safer than AND
+      const navigatorOffline = typeof navigator !== 'undefined' && navigator.onLine === false;
+      const hookOffline = isOnline === false;
+      const currentlyOffline = navigatorOffline || hookOffline;
+      
+      if (currentlyOffline) {
         console.log(`📴 Offline: Queueing ${config.action} operation for ${config.tableName}`);
         
         // Queue the FULL operation payload for later sync - preserve all nested data
@@ -156,7 +163,11 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
       return await config.mutationFn(variables);
     },
     onSuccess: (data, variables) => {
-      if (!isOnline) {
+      const navigatorOffline = typeof navigator !== 'undefined' && navigator.onLine === false;
+      const hookOffline = isOnline === false;
+      const currentlyOffline = navigatorOffline || hookOffline;
+      
+      if (currentlyOffline) {
         console.log(`📴 Offline operation queued successfully for ${config.tableName}`);
       } else {
         console.log(`✅ Online operation completed for ${config.tableName}`);

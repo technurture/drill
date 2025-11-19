@@ -40,12 +40,18 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Help from "./pages/Help";
 
-// Create a client
+// Create a client with offline-friendly defaults
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
+      refetchOnReconnect: false,  // Don't auto-refetch when coming back online
+      networkMode: 'offlineFirst', // Allow queries to work with cached data when offline
+      staleTime: 1000 * 60 * 5,    // 5 minutes - prevent excessive refetching
+    },
+    mutations: {
+      networkMode: 'offlineFirst',  // Allow mutations to queue when offline
     },
   },
 });
