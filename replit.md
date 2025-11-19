@@ -14,7 +14,16 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ### Frontend Architecture
 
-SheBalance is built as a PWA using React 18+ with TypeScript, Vite, and React Router v6. State management is handled primarily via React Context API. The UI is constructed with Shadcn/ui components, based on Radix UI primitives, and styled using Tailwind CSS. Data fetching and server state management are powered by TanStack Query. The application supports multi-store management, with all data operations scoped to the selected store. An offline-first design is implemented, utilizing service workers for asset caching, local storage for preferences, and pending sync indicators.
+SheBalance is built as a PWA using React 18+ with TypeScript, Vite, and React Router v6. State management is handled primarily via React Context API. The UI is constructed with Shadcn/ui components, based on Radix UI primitives, and styled using Tailwind CSS. Data fetching and server state management are powered by TanStack Query. The application supports multi-store management, with all data operations scoped to the selected store. 
+
+**Offline-First Architecture:** The application implements a comprehensive offline-first design with:
+- IndexedDB-based operation queuing system for all critical mutations (create, update, delete)
+- Custom `useOfflineMutation` hook that automatically queues operations when offline and syncs when online
+- Optimistic UI updates for immediate feedback during offline operations
+- Offline-aware toast messages that inform users when data is saved locally vs synced to the server
+- Automatic background sync when connectivity is restored
+- Service workers for asset caching and local storage for user preferences
+- All major operations (sales, inventory, finance, loans, savings) work seamlessly offline with proper queuing and sync
 
 ### Backend Architecture
 
