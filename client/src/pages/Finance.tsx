@@ -17,12 +17,14 @@ import NoStoreMessage from "@/components/NoStoreMessage";
 import { formatNumber } from "@/utils/formatNumber";
 import { FinancialRecord } from "@/integrations/supabase/hooks/finance";
 import { useTranslation } from "react-i18next";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 const Finance = () => {
   const { t } = useTranslation('pages');
   const { t: tc } = useTranslation('common');
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
+  const { isOnline } = useOfflineStatus();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -111,7 +113,7 @@ const Finance = () => {
       const result = await addFinancialRecord.mutateAsync(recordData);
       console.log("Finance - Record added successfully:", result);
 
-      toast.success(formData.type === 'income' ? tc('incomeAddedSuccessfully') : tc('expenseAddedSuccessfully'));
+      toast.success(isOnline ? (formData.type === 'income' ? tc('incomeAddedSuccessfully') : tc('expenseAddedSuccessfully')) : 'Saved locally. Will sync when online.');
       setIsAddModalOpen(false);
       setFormData({
         type: "income",
@@ -130,7 +132,7 @@ const Finance = () => {
     if (confirm(tc('confirmDeleteRecord'))) {
       try {
         await deleteFinancialRecord.mutateAsync(recordId);
-        toast.success(tc('recordDeletedSuccessfully'));
+        toast.success(isOnline ? tc('recordDeletedSuccessfully') : 'Saved locally. Will sync when online.');
         refetch();
       } catch (error) {
         toast.error(tc('failedToDeleteRecord'));

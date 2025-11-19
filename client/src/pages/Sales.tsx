@@ -36,10 +36,12 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import { useTranslation } from "react-i18next";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 const Sales = () => {
   const { t } = useTranslation('pages');
   const theStore = useContext(StoreContext);
+  const { isOnline } = useOfflineStatus();
   const navigate = useNavigate()
   const { data: token } = useGetDeviceToken(theStore?.owner_id);
   const subscriptionData = useContext(SubscriptionContext);
@@ -239,7 +241,7 @@ const Sales = () => {
           quantity: sale?.quantity
          })
       })
-      toast.success(t('notifications:sale.deleted'));
+      toast.success(isOnline ? t('notifications:sale.deleted') : 'Saved locally. Will sync when online.');
       setIsDeleteModalOpen(false);
     } catch (error) {
       console.error(error)
@@ -265,7 +267,7 @@ const Sales = () => {
         `"${newNote}" added by Admin`,
         t('common:newNote'),
       );
-      toast.success(t('notifications:sale.noteUpdated'));
+      toast.success(isOnline ? t('notifications:sale.noteUpdated') : 'Saved locally. Will sync when online.');
     } catch (error) {
       toast.error(t('notifications:sale.failedToUpdateNote'));
     }

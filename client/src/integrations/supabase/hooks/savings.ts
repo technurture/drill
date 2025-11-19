@@ -154,7 +154,9 @@ export const useAddContribution = () => {
 export const useDeleteSavingsPlan = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "savings_plans",
+    action: "delete",
     mutationFn: async (planId: string) => {
       const { error } = await supabase
         .from("savings_plans")
@@ -167,6 +169,7 @@ export const useDeleteSavingsPlan = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["savings-plans"] });
     },
+    getOptimisticData: (planId) => planId,
   });
 };
 
@@ -174,7 +177,9 @@ export const useDeleteSavingsPlan = () => {
 export const useDeleteContribution = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "savings_contributions",
+    action: "delete",
     mutationFn: async (contributionId: string) => {
       const { error } = await supabase
         .from("savings_contributions")
@@ -189,6 +194,7 @@ export const useDeleteContribution = () => {
       queryClient.invalidateQueries({ queryKey: ["savings-contributions"] });
       queryClient.invalidateQueries({ queryKey: ["savings-plans"] });
     },
+    getOptimisticData: (contributionId) => contributionId,
   });
 };
 

@@ -31,6 +31,7 @@ import { sendPushNotification } from "@/utils/pushNotification";
 import React from "react";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CartItem extends Product {
   cartQuantity: number;
@@ -42,6 +43,7 @@ const AddSales = () => {
   const subscriptionData = useContext(SubscriptionContext);
   const addProduct = useAddProduct();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [modal, setModal] = useState<boolean>(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(undefined)
   const [cartModalOpen, setCartModalOpen] = useState(false);
@@ -339,6 +341,8 @@ const AddSales = () => {
       }
 
       // Update product quantities
+      // CRITICAL: Always call the mutation (it queues when offline via useOfflineMutation)
+      // Then optionally update cache for immediate UI feedback
       for (const item of cartItems) {
         await updateProductQuantity.mutateAsync({
           id: item.id,
@@ -347,8 +351,30 @@ const AddSales = () => {
         });
       }
 
-      // Add notification
-      if (theStore?.id) {
+      // Additionally update cache when offline for immediate UI feedback
+      // (The mutation already queues the operation for sync)
+      if (!isOnline && theStore?.id) {
+        queryClient.setQueryData(['products', theStore.id], (oldProducts: Product[] | undefined) => {
+          if (!oldProducts) return oldProducts;
+          
+          return oldProducts.map((product) => {
+            const cartItem = cartItems.find(item => item.id === product.id);
+            if (cartItem) {
+              return {
+                ...product,
+                quantity: product.quantity - cartItem.cartQuantity
+              };
+            }
+            return product;
+          });
+        });
+        
+        console.log('📴 Offline: Product quantities queued for sync + cache updated for UI');
+      }
+
+      // Add notifications - ONLY when online
+      // When offline, skip notifications as they're not critical
+      if (isOnline && theStore?.id) {
         const productNames = cartItems.map((item) => item.name).join(", ");
         await addNotification.mutateAsync({
           user_id: user?.id || theStore?.owner_id,
@@ -385,7 +411,10 @@ const AddSales = () => {
         }
       }
 
-      toast.success("Sale completed successfully!");
+      const successMessage = isOnline 
+        ? "Sale completed successfully!" 
+        : "Sale saved offline! It will sync when you're back online.";
+      toast.success(successMessage);
       
       // Clear cart and close modals
       setCartItems([]);
@@ -398,7 +427,10 @@ const AddSales = () => {
 
     } catch (error) {
       console.error("Checkout error:", error);
-      toast.error("Failed to complete sale. Please try again.");
+      const errorMessage = isOnline
+        ? "Failed to complete sale. Please try again."
+        : "Failed to save sale offline. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setIsCheckingOut(false);
     }

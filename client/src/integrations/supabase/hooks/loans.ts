@@ -87,7 +87,9 @@ export const useUpdateLoanStatus = () => {
 
 export const useDeleteLoan = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "loans",
+    action: "delete",
     mutationFn: async ({ loanId }: { loanId: string }) => {
       const { error } = await supabase.from("loans").delete().eq("id", loanId);
       if (error) throw error;
@@ -96,7 +98,8 @@ export const useDeleteLoan = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["loans"] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary"] });
-    }
+    },
+    getOptimisticData: ({ loanId }) => loanId,
   });
 };
 
@@ -132,25 +135,49 @@ export const useAddRepayment = () => {
       if (error) throw error;
       return data as LoanRepayment;
     },
-    onSuccess: async (data) => {
-      // Invalidate the repayments for this specific loan
-      queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
+    onSuccess: async (data, variables) => {
+      // CRITICAL: Immediately update the cache before invalidation for instant UI update
+      // Deduplicate to prevent double-insert when refetch occurs
+      queryClient.setQueryData<LoanRepayment[]>(
+        ["loan-repayments", data.loan_id],
+        (oldRepayments) => {
+          if (!oldRepayments) return [data];
+          // Check if this repayment already exists to prevent duplicates
+          const exists = oldRepayments.some(r => r.id === data.id);
+          if (exists) return oldRepayments;
+          // Add new repayment to the beginning (most recent first)
+          return [data, ...oldRepayments];
+        }
+      );
       
-      // Fetch the loan to get the store_id for invalidating store-wide queries
-      const { data: loan } = await supabase
-        .from("loans")
-        .select("store_id")
-        .eq("id", data.loan_id)
-        .single();
+      // Derive store_id from the loan in cache (avoid network call which fails offline)
+      const loan = queryClient.getQueryData<Loan>(["loan", data.loan_id]) || 
+                   queryClient.getQueriesData<Loan[]>({ queryKey: ["loans"] })
+                     .flatMap(([, loans]) => loans || [])
+                     .find(l => l.id === data.loan_id);
       
-      if (loan?.store_id) {
-        // Invalidate loans summary to update totals (total repaid, outstanding, etc.)
-        queryClient.invalidateQueries({ queryKey: ["loans-summary", loan.store_id] });
-        // Invalidate store-wide repayments used for calculating per-loan totals
-        queryClient.invalidateQueries({ queryKey: ["loan-repayments-by-store", loan.store_id] });
+      const storeId = loan?.store_id;
+      
+      if (storeId) {
+        // Update store-wide repayments cache immediately (with deduplication)
+        queryClient.setQueryData<LoanRepayment[]>(
+          ["loan-repayments-by-store", storeId],
+          (oldRepayments) => {
+            if (!oldRepayments) return [data];
+            const exists = oldRepayments.some(r => r.id === data.id);
+            if (exists) return oldRepayments;
+            return [data, ...oldRepayments];
+          }
+        );
+        
+        // Invalidate loans summary to refetch and recalculate totals
+        queryClient.invalidateQueries({ queryKey: ["loans-summary", storeId] });
         // Invalidate the loans list in case status needs to update
-        queryClient.invalidateQueries({ queryKey: ["loans", loan.store_id] });
+        queryClient.invalidateQueries({ queryKey: ["loans", storeId] });
       }
+      
+      // After cache updates, invalidate to trigger background refetch (keeps data fresh)
+      queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
     },
     getOptimisticData: (variables) => ({
       id: crypto.randomUUID(),

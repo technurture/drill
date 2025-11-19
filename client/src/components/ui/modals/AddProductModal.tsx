@@ -11,6 +11,7 @@ import { useStores } from "@/integrations/supabase/hooks/stores";
 import SlideInModal from "../SlideInModal";
 import { Loader2, ArrowLeft } from "lucide-react";
 import toast from "react-hot-toast";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 // Full screen mobile component
 const MobileAddProductScreen = ({ 
@@ -75,6 +76,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
   const thresholdValue = useWatch({ control, name: "low_stock_threshold" });
 
   const addProductMutation = useAddProduct();
+  const { isOnline } = useOfflineStatus();
 
   // Detect mobile screen size
   useEffect(() => {
@@ -103,8 +105,41 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
       return;
     }
 
+    // Check online status at submit time (not from stale hook state)
+    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
+    console.log("Is currently online:", currentlyOnline);
+    
+    if (!currentlyOnline) {
+      // OFFLINE MODE: Use fire-and-forget mutate (not mutateAsync)
+      // This prevents blocking and allows immediate UI feedback
+      setIsLoading(true);
+      console.log("📴 Offline: Queueing products immediately without awaiting");
+      
+      selectedStoreIds.forEach(storeId => {
+        const productData = {
+          ...data,
+          store_id: storeId,
+        };
+        console.log("Queueing product for store:", storeId);
+        // Fire-and-forget: mutate() returns void and completes instantly
+        addProductMutation.mutate(productData);
+      });
+      
+      // Immediately reset form and close modal - don't wait for anything
+      reset();
+      setOpen(false);
+      setSelectedStoreIds(theStore?.id ? [theStore.id] : []);
+      setIsLoading(false);
+      // The useOfflineMutation hook will show its own success toast
+      console.log("✅ Offline products queued, form reset immediately");
+      return;
+    }
+
+    // ONLINE MODE: Use async/await for proper error handling
     setIsLoading(true);
     try {
+      console.log("🌐 Online: Adding products with Promise.all");
+      
       const promises = selectedStoreIds.map(storeId => {
         const productData = {
           ...data,

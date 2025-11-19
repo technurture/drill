@@ -136,7 +136,9 @@ export const useAddFinancialRecord = () => {
 export const useDeleteFinancialRecord = () => {
   const queryClient = useQueryClient();
   
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "financial_records",
+    action: "delete",
     mutationFn: async (recordId: string) => {
       const { error } = await supabase
         .from("financial_records")
@@ -150,6 +152,7 @@ export const useDeleteFinancialRecord = () => {
       // Invalidate all financial records queries
       queryClient.invalidateQueries({ queryKey: ["financial-records"] });
     },
+    getOptimisticData: (recordId) => recordId,
   });
 };
 
