@@ -252,10 +252,25 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
               }
             }
             
-            // DON'T invalidate queries when offline - the optimistic cache data is the source of truth
-            // Invalidation will happen after successful sync when back online in offlineSync.ts
-            // Just log that we've updated the cache
-            console.log(`🎯 Optimistic update applied for ${config.action} on ${config.tableName} (${queryKeys.length} cache entries updated, invalidation deferred until sync)`);
+            // CRITICAL: Invalidate queries to trigger UI re-renders with optimistic data
+            // Use refetchType: 'none' to prevent refetching while offline
+            queryKeys.forEach(queryKey => {
+              queryClient.invalidateQueries({ 
+                queryKey,
+                refetchType: 'none', // Don't refetch, just mark as stale and trigger re-render
+              });
+            });
+            
+            // Also invalidate summary/aggregate queries
+            const summaryKeys = getSummaryQueryKeys(config.tableName, storeId);
+            summaryKeys.forEach(queryKey => {
+              queryClient.invalidateQueries({ 
+                queryKey,
+                refetchType: 'none',
+              });
+            });
+            
+            console.log(`🎯 Optimistic update applied and queries invalidated for ${config.action} on ${config.tableName} (${queryKeys.length} data queries + ${summaryKeys.length} summary queries updated)`);
           }
           
           const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';

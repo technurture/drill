@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 Database Backend: Using Supabase ONLY (NOT PostgreSQL/Neon)
 Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
+## Recent Changes
+
+**November 19, 2025 - Offline UI Update Fix**
+- **Issue**: When users performed offline actions (adding sales, products, financial records, etc.), the changes didn't appear in the UI until they reconnected to the internet
+- **Root Cause**: Optimistic updates were being applied to React Query cache, but queries weren't being invalidated to notify components of the changes
+- **Solution**: Modified `useOfflineMutation` hook to invalidate queries with `refetchType: 'none'` after applying optimistic updates. This triggers component re-renders without attempting to refetch from the server while offline
+- **Impact**: All offline operations now show immediate UI feedback - users can see their added sales, products, loan repayments, savings contributions, and financial records instantly while offline
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -19,7 +27,7 @@ SheBalance is built as a PWA using React 18+ with TypeScript, Vite, and React Ro
 **Offline-First Architecture:** The application implements a comprehensive offline-first design with:
 - IndexedDB-based operation queuing system for all critical mutations (create, update, delete)
 - Custom `useOfflineMutation` hook that automatically queues operations when offline and syncs when online
-- Optimistic UI updates for immediate feedback during offline operations
+- **Optimistic UI updates with immediate re-rendering**: When users perform actions offline (adding sales, products, etc.), changes appear instantly in the UI through React Query cache updates and query invalidation with `refetchType: 'none'`
 - Offline-aware toast messages that inform users when data is saved locally vs synced to the server
 - Automatic background sync when connectivity is restored
 - Service workers for asset caching and local storage for user preferences
