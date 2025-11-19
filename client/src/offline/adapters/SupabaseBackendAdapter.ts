@@ -87,18 +87,32 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createProduct(payload: any): Promise<void> {
-    const { error } = await supabase.from('products').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('products')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Product ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('products').insert([insertData]);
     if (error) throw error;
   }
 
   private async updateProduct(payload: any): Promise<void> {
     const { id, quantity, storeId, store_id, ...updateData } = payload;
     
-    // If this is a restock operation (has quantity and storeId/store_id)
     if (quantity !== undefined && (storeId || store_id)) {
       const actualStoreId = storeId || store_id;
       
-      // Fetch current product to calculate new quantity
       const { data: product, error: fetchError } = await supabase
         .from('products')
         .select('*')
@@ -109,10 +123,8 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
       if (fetchError) throw fetchError;
       if (!product) throw new Error('Product not found');
 
-      // Calculate new quantity (add the restock amount to current quantity)
       const newQuantity = product.quantity + quantity;
 
-      // Update with the new total quantity
       const { error } = await supabase
         .from('products')
         .update({ quantity: newQuantity, ...updateData })
@@ -121,7 +133,6 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
       if (error) throw error;
     } else {
-      // Regular update without restock logic
       const { error } = await supabase
         .from('products')
         .update(updateData)
@@ -139,25 +150,40 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createSale(payload: any): Promise<void> {
-    const { items, ...saleData } = payload;
+    const { items, id, ...saleData } = payload;
 
-    // Insert sale into 'sales' table
+    if (id) {
+      const { data: existing } = await supabase
+        .from('sales')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Sale ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+
+    const insertData = id ? { id, ...saleData } : saleData;
     const { data: sale, error: saleError } = await supabase
       .from('sales')
-      .insert([saleData])
+      .insert([insertData])
       .select()
       .single();
 
     if (saleError) throw saleError;
     if (!sale) throw new Error('Failed to create sale');
 
-    // Insert sale items into 'sale_items' table if items exist
     if (items && items.length > 0) {
       const { error: itemsError } = await supabase.from('sale_items').insert(
-        items.map((item: any) => ({
-          ...item,
-          sale_id: sale.id,
-        }))
+        items.map((item: any) => {
+          const { id: itemId, ...itemData } = item;
+          return {
+            ...itemData,
+            sale_id: sale.id,
+          };
+        })
       );
 
       if (itemsError) throw itemsError;
@@ -182,7 +208,23 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createStore(payload: any): Promise<void> {
-    const { error } = await supabase.from('stores').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('stores')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Store ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('stores').insert([insertData]);
     if (error) throw error;
   }
 
@@ -196,7 +238,23 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async addFinancialRecord(payload: any): Promise<void> {
-    const { error } = await supabase.from('financial_records').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('financial_records')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Financial record ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('financial_records').insert([insertData]);
     if (error) throw error;
   }
 
@@ -218,7 +276,23 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createLoan(payload: any): Promise<void> {
-    const { error } = await supabase.from('loans').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('loans')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Loan ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('loans').insert([insertData]);
     if (error) throw error;
   }
 
@@ -240,17 +314,65 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async addLoanRepayment(payload: any): Promise<void> {
-    const { error } = await supabase.from('loan_repayments').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('loan_repayments')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Loan repayment ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('loan_repayments').insert([insertData]);
     if (error) throw error;
   }
 
   private async createSavingsPlan(payload: any): Promise<void> {
-    const { error } = await supabase.from('savings_plans').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('savings_plans')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Savings plan ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('savings_plans').insert([insertData]);
     if (error) throw error;
   }
 
   private async addSavingsContribution(payload: any): Promise<void> {
-    const { error } = await supabase.from('savings_contributions').insert([payload]);
+    const { id, ...dataWithoutId } = payload;
+    
+    if (id) {
+      const { data: existing } = await supabase
+        .from('savings_contributions')
+        .select('id')
+        .eq('id', id)
+        .maybeSingle();
+      
+      if (existing) {
+        console.log(`Savings contribution ${id} already exists, skipping insert`);
+        return;
+      }
+    }
+    
+    const insertData = id ? payload : dataWithoutId;
+    const { error } = await supabase.from('savings_contributions').insert([insertData]);
     if (error) throw error;
   }
 
@@ -271,37 +393,61 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async withdrawSavings(payload: any): Promise<void> {
-    const { planId } = payload;
-    const { error } = await supabase
+    const { planId, totalAmount } = payload;
+    
+    const { error: planError } = await supabase
       .from('savings_plans')
       .update({ 
         status: 'withdrawn',
         end_date: new Date().toISOString().split('T')[0]
       })
       .eq('id', planId);
-    if (error) throw error;
+      
+    if (planError) throw planError;
+
+    const { error: withdrawalError } = await supabase
+      .from('savings_withdrawals')
+      .insert({
+        savings_plan_id: planId,
+        amount_withdrawn: totalAmount || 0,
+        withdrawal_date: new Date().toISOString().split('T')[0]
+      });
+    
+    if (withdrawalError) throw withdrawalError;
   }
 
   private async withdrawPartialSavings(payload: any): Promise<void> {
     const { planId, amount } = payload;
     
-    // Fetch current amount
     const { data: plan, error: fetchError } = await supabase
       .from('savings_plans')
-      .select('current_amount')
+      .select('current_amount,contributions:savings_contributions(amount)')
       .eq('id', planId)
       .single();
       
     if (fetchError) throw fetchError;
     
-    const newAmount = Math.max(0, parseFloat(plan.current_amount || '0') - amount);
+    const currentFromField = parseFloat(plan?.current_amount ?? 0);
+    const sumContrib = (plan?.contributions || []).reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0);
+    const effectiveSaved = currentFromField > 0 ? currentFromField : sumContrib;
+    const newAmount = Math.max(0, effectiveSaved - amount);
     
-    const { error } = await supabase
+    const { error: planError } = await supabase
       .from('savings_plans')
       .update({ current_amount: newAmount.toString() })
       .eq('id', planId);
       
-    if (error) throw error;
+    if (planError) throw planError;
+
+    const { error: withdrawalError } = await supabase
+      .from('savings_withdrawals')
+      .insert({
+        savings_plan_id: planId,
+        amount_withdrawn: amount,
+        withdrawal_date: new Date().toISOString().split('T')[0]
+      });
+    
+    if (withdrawalError) throw withdrawalError;
   }
 }
 
