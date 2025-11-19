@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Sale, SaleItem } from "../../../types/database.types";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 const fromSupabase = async (query) => {
   const { data, error } = await query;
@@ -9,8 +10,10 @@ const fromSupabase = async (query) => {
   return data;
 };
 
-export const useSales = (storeId?: string, options = {}) =>
-  useQuery({
+export const useSales = (storeId?: string, options = {}) => {
+  const { isOnline } = useOfflineStatus();
+  
+  return useQuery({
     queryKey: ["sales", storeId],
     queryFn: async () => {
       if (!storeId) return [];
@@ -37,9 +40,13 @@ export const useSales = (storeId?: string, options = {}) =>
       console.log("Sales data fetched:", data);
       return (data || []) as unknown as Sale[];
     },
-    enabled: !!storeId,
+    enabled: !!storeId && (isOnline || navigator.onLine),
+    refetchOnMount: isOnline ? 'always' : false,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: isOnline,
     ...options,
   });
+};
 
 export const useSalesPerDay = (storeId: string, time: string) =>
   useQuery({

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 export interface FinancialRecord {
   id: string;
@@ -39,6 +40,8 @@ export interface AddFinancialRecordData {
 
 // Fetch financial records for a store
 export const useFinancialRecords = (storeId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["financial-records", storeId],
     queryFn: async () => {
@@ -67,7 +70,10 @@ export const useFinancialRecords = (storeId?: string) => {
       if (error) throw error;
       return (data || []) as FinancialRecord[];
     },
-    enabled: !!storeId,
+    enabled: !!storeId && (isOnline || navigator.onLine),
+    refetchOnMount: isOnline ? 'always' : false,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: isOnline,
   });
 };
 

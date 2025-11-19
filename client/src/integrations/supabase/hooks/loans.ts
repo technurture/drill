@@ -2,8 +2,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Loan, LoanRepayment, CreateLoanData, AddRepaymentData, LoansSummary } from "@/types/loans.types";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
+import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 export const useLoans = (storeId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["loans", storeId],
     queryFn: async () => {
@@ -16,7 +19,10 @@ export const useLoans = (storeId?: string) => {
       if (error) throw error;
       return (data || []) as Loan[];
     },
-    enabled: !!storeId,
+    enabled: !!storeId && (isOnline || navigator.onLine),
+    refetchOnMount: isOnline ? 'always' : false,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: isOnline,
   });
 };
 

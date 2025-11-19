@@ -252,25 +252,16 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
               }
             }
             
-            // CRITICAL: Invalidate queries to trigger UI re-renders with optimistic data
-            // Use refetchType: 'none' to prevent refetching while offline
-            queryKeys.forEach(queryKey => {
-              queryClient.invalidateQueries({ 
-                queryKey,
-                refetchType: 'none', // Don't refetch, just mark as stale and trigger re-render
-              });
+            // IMPORTANT: While offline, we rely ONLY on cache updates without invalidation
+            // Invalidation while offline would trigger React Query to try to refetch
+            // We'll invalidate after syncing when back online
+            console.log(`📦 DEBUG: Optimistic cache update applied to ${queryKeys.length} query keys`);
+            queryKeys.forEach((queryKey, index) => {
+              const cachedData = queryClient.getQueryData(queryKey);
+              console.log(`   ✅ Query ${index + 1}: ${JSON.stringify(queryKey)} now has ${Array.isArray(cachedData) ? cachedData.length : 0} items`);
             });
             
-            // Also invalidate summary/aggregate queries
-            const summaryKeys = getSummaryQueryKeys(config.tableName, storeId);
-            summaryKeys.forEach(queryKey => {
-              queryClient.invalidateQueries({ 
-                queryKey,
-                refetchType: 'none',
-              });
-            });
-            
-            console.log(`🎯 Optimistic update applied and queries invalidated for ${config.action} on ${config.tableName} (${queryKeys.length} data queries + ${summaryKeys.length} summary queries updated)`);
+            console.log(`🎯 Offline optimistic update complete for ${config.action} on ${config.tableName} (${queryKeys.length} cache entries updated, invalidation deferred until sync)`);
           }
           
           const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';
