@@ -41,7 +41,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedStore?.id || !user?.id) {
       toast.error("Store and user information required");
       return;
@@ -51,14 +51,15 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
       ...formData,
       target_amount: parseFloat(formData.target_amount),
       store_id: selectedStore.id,
-      user_id: user.id
+      user_id: user.id,
+      status: 'just_started' as const
     };
 
     const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
-    
+
     if (!currentlyOnline) {
       createSavingsPlan.mutate(planData);
-      
+
       setOpen(false);
       setFormData({
         title: "",
@@ -73,7 +74,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
 
     try {
       await createSavingsPlan.mutateAsync(planData);
-      
+
       toast.success("Savings plan created successfully!");
       setOpen(false);
       setFormData({
@@ -102,12 +103,12 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
             <Input
               id="title"
               value={formData.title}
-              onChange={(e) => setFormData({...formData, title: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="e.g., House rent or Shop rent"
               required
             />
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="start_date">{t('startDate')}</Label>
@@ -115,37 +116,37 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
                 id="start_date"
                 type="date"
                 value={formData.start_date}
-                onChange={(e) => setFormData({...formData, start_date: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
                 required
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="end_date">{t('endDate')}</Label>
               <Input
                 id="end_date"
                 type="date"
                 value={formData.end_date}
-                onChange={(e) => setFormData({...formData, end_date: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
                 required
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="contributing_to">{t('contributingTo')}</Label>
             <Input
               id="contributing_to"
               value={formData.contributing_to}
-              onChange={(e) => setFormData({...formData, contributing_to: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, contributing_to: e.target.value })}
               placeholder="e.g., Iya Omo, Baba Alajo Ipata, or Self"
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="savings_duration">{t('savingsDuration')}</Label>
-            <Select value={formData.savings_duration} onValueChange={(value) => setFormData({...formData, savings_duration: value as SavingsDuration})}>
+            <Select value={formData.savings_duration} onValueChange={(value) => setFormData({ ...formData, savings_duration: value as SavingsDuration })}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -158,7 +159,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
               </SelectContent>
             </Select>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="target_amount">{t('targetAmount')} (₦)</Label>
             <Input
@@ -167,12 +168,12 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
               step="0.01"
               min="0"
               value={formData.target_amount}
-              onChange={(e) => setFormData({...formData, target_amount: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, target_amount: e.target.value })}
               placeholder="0.00"
               required
             />
           </div>
-          
+
           <div className="flex gap-2 pt-4">
             <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={createSavingsPlan.isPending}>
               {createSavingsPlan.isPending ? t('creating') : t('createPlan')}

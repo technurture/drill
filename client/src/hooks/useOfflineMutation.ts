@@ -239,7 +239,10 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
 
         const optimisticData = config.getOptimisticData?.(variables) ?? queueData;
 
-        const storeId = (variables as any).store_id || (variables as any).storeId;
+        const storeId = (variables as any).store_id || (variables as any).storeId || (variables as any).storeID;
+
+        console.log(`🔍 Optimistic Update Debug: storeId extracted:`, storeId, 'from variables:', variables);
+
         if (storeId) {
           // Get all possible query keys for this resource
           const queryKeys = getQueryKeysForTable(config.tableName, storeId, variables);
@@ -333,6 +336,8 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
           });
 
           console.log(`🎯 Offline optimistic update complete for ${config.action} on ${config.tableName} (${queryKeys.length} cache entries updated, invalidation deferred until sync)`);
+        } else {
+          console.warn(`⚠️ SKIPPING optimistic update for ${config.tableName} - Could not find store_id in variables!`, variables);
         }
 
         console.log(`✅ ✅ ✅ Offline operation completed successfully for ${config.tableName}`);

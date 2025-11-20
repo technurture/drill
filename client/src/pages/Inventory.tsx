@@ -58,7 +58,7 @@ const Inventory = () => {
     productOption: false
   });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  
+
   // Get the stock filter from navigation state, default to "all"
   const [stockFilter, setStockFilter] = useState(location.state?.stockFilter || "all");
 
@@ -76,7 +76,7 @@ const Inventory = () => {
   // Show NoStoreMessage if no store is selected (after all hooks)
   if (!theStore) {
     return (
-      <NoStoreMessage 
+      <NoStoreMessage
         title={t('pages:inventory.title')}
         description={t('pages:inventory.createStoreDesc')}
       />
@@ -108,17 +108,17 @@ const Inventory = () => {
       }
 
       /* Commented out subscription checker to make all features free for the main time */
-      
+
       // const inventoryRestriction = CheckinventoryRestriction(
       //   subscriptionData?.userSub?.userSub?.plan_type,
       //   products.length,
       // );
       // if (inventoryRestriction === "success") {
-        await addProduct.mutateAsync({
-          ...productData,
-          store_id: theStore?.id,
-        } as Omit<Product, "id">);
-        toast.success(isOnline ? t('notifications:product.added') : 'Product saved locally. Will sync when online.');
+      await addProduct.mutateAsync({
+        ...productData,
+        store_id: theStore?.id,
+      } as Omit<Product, "id">);
+      toast.success(t('notifications:product.added'));
       // } else {
       //   toast.error("Upgrade your plan to add more products");
       // }
@@ -139,7 +139,7 @@ const Inventory = () => {
         quantity,
         storeId: theStore?.id || "",
       });
-      toast.success(isOnline ? t('notifications:product.restocked') : 'Restock saved locally. Will sync when online.');
+      toast.success(t('notifications:product.restocked'));
       setModals((prev: any) => ({ ...prev, restockModal: false }));
     } catch (error) {
       toast.error(t('notifications:product.restockFailed'));
@@ -153,7 +153,7 @@ const Inventory = () => {
         id: selectedProduct.id,
         storeId: theStore?.id || "",
       });
-      toast.success(isOnline ? t('notifications:product.deleted') : 'Product deletion saved locally. Will sync when online.');
+      toast.success(t('notifications:product.deleted'));
       setModals((prev: any) => ({ ...prev, deleteModal: false }));
     } catch (error) {
       toast.error(t('notifications:product.deleteFailed'));
@@ -167,7 +167,7 @@ const Inventory = () => {
   if (productsLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       </div>
     );
   }
@@ -199,7 +199,7 @@ const Inventory = () => {
                 {t('inventory.title')}
               </h1>
             </div>
-            
+
             {/* Add Product Button with Dropdown */}
             <div className="relative">
               <div className="flex items-center gap-2">
@@ -224,7 +224,7 @@ const Inventory = () => {
                           onChange={(e) => setSearchTerm(e.target.value)}
                         />
                       </div>
-                      
+
                       <div>
                         <Label htmlFor="stock-filter">{t('inventory.stockStatus')}</Label>
                         <Select value={stockFilter} onValueChange={setStockFilter}>
@@ -240,8 +240,8 @@ const Inventory = () => {
                       </div>
 
                       <div className="flex gap-2 pt-4">
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           onClick={() => {
                             setSearchTerm("");
                             setStockFilter("all");
@@ -250,7 +250,7 @@ const Inventory = () => {
                         >
                           Clear Filters
                         </Button>
-                        <Button 
+                        <Button
                           onClick={() => setIsFilterModalOpen(false)}
                           className="flex-1"
                         >
@@ -260,8 +260,8 @@ const Inventory = () => {
                     </div>
                   </DialogContent>
                 </Dialog>
-                
-                <Button 
+
+                <Button
                   onClick={() => setModals((prev: any) => ({ ...prev, addModal: true }))}
                   className="hidden md:inline-flex bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium"
                 >
@@ -269,7 +269,7 @@ const Inventory = () => {
                   {t('inventory.addProduct')}
                 </Button>
               </div>
-              
+
               {modals.productOption && (
                 <div className="absolute top-full right-0 mt-2 w-56 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg z-20">
                   <div className="py-2">
@@ -283,7 +283,7 @@ const Inventory = () => {
 
         {/* Inventory Summary */}
         <InventorySummary products={products || []} sales={sales || []} />
-        
+
         {/* Product Table */}
         <div className="bg-white dark:bg-[#18191A] rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
           {filteredProducts.length === 0 && !productsLoading ? (
@@ -297,13 +297,13 @@ const Inventory = () => {
                 {searchTerm ? t('inventory.noProductsFound') : t('inventory.noProductsYet')}
               </h3>
               <p className="text-gray-500 dark:text-gray-400 mb-6">
-                {searchTerm 
+                {searchTerm
                   ? t('inventory.noProductsDesc')
                   : t('inventory.noProductsGetStarted')
                 }
               </p>
               {!searchTerm && (
-                <Button 
+                <Button
                   onClick={() => setModals((prev: any) => ({ ...prev, addModal: true }))}
                   className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium"
                 >
@@ -345,7 +345,7 @@ const Inventory = () => {
           }}
           product={selectedProduct}
         />
-        
+
         {modals.restockModal && (
           <RestockModal
             isOpen={modals.restockModal}
@@ -356,7 +356,7 @@ const Inventory = () => {
             product={selectedProduct}
           />
         )}
-        
+
         <DeleteConfirmationModal
           isOpen={modals.deleteModal}
           onClose={() =>
@@ -369,7 +369,7 @@ const Inventory = () => {
 
       {/* Floating Add Product Button for Mobile */}
       <div className="md:hidden fixed bottom-6 right-6 z-50">
-        <Button 
+        <Button
           size="icon"
           className="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-lg"
           onClick={() => setModals((prev: any) => ({ ...prev, addModal: true }))}

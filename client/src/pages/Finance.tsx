@@ -48,7 +48,7 @@ const Finance = () => {
   // Show NoStoreMessage if no store is selected
   if (!selectedStore) {
     return (
-      <NoStoreMessage 
+      <NoStoreMessage
         title={t('finance.financeManagement')}
         description={t('finance.financeManagementDesc')}
       />
@@ -63,19 +63,19 @@ const Finance = () => {
   // Filter records
   const filteredRecords = financialRecords?.filter(record => {
     const typeMatch = filterType === "all" || record.type === filterType;
-    const dateMatch = !dateRange.from || !dateRange.to || 
+    const dateMatch = !dateRange.from || !dateRange.to ||
       (record.date >= dateRange.from && record.date <= dateRange.to);
     return typeMatch && dateMatch;
   }) || [];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     console.log("Finance - Submit clicked");
     console.log("Finance - Store:", selectedStore);
     console.log("Finance - User:", user);
     console.log("Finance - Form data:", formData);
-    
+
     if (!selectedStore?.id) {
       toast.error(tc('selectStoreFirst'));
       return;
@@ -108,27 +108,7 @@ const Finance = () => {
 
     console.log("Finance - Record data to insert:", recordData);
 
-    if (!isOnline) {
-      console.log('📴 Offline: Queueing financial record immediately without awaiting');
-      
-      addFinancialRecord.mutate(recordData, {
-        onError: (error: any) => {
-          setIsAddModalOpen(true);
-          toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
-        }
-      });
-      
-      // Close immediately after queueing starts
-      toast.success(tc('savedLocallyWillSync'));
-      setIsAddModalOpen(false);
-      setFormData({
-        type: "income",
-        reason: "",
-        amount: "",
-        date: format(new Date(), "yyyy-MM-dd")
-      });
-      return;
-    }
+    // Offline handling is managed by useOfflineMutation in the hook
 
     try {
       const result = await addFinancialRecord.mutateAsync(recordData);
@@ -221,30 +201,30 @@ const Finance = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="date-from">{tc('dateFrom')}</Label>
                     <Input
                       id="date-from"
                       type="date"
                       value={dateRange.from}
-                      onChange={(e) => setDateRange({...dateRange, from: e.target.value})}
+                      onChange={(e) => setDateRange({ ...dateRange, from: e.target.value })}
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="date-to">{tc('dateTo')}</Label>
                     <Input
                       id="date-to"
                       type="date"
                       value={dateRange.to}
-                      onChange={(e) => setDateRange({...dateRange, to: e.target.value})}
+                      onChange={(e) => setDateRange({ ...dateRange, to: e.target.value })}
                     />
                   </div>
 
                   <div className="flex gap-2 pt-4">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={() => {
                         setFilterType("all");
                         setDateRange({ from: "", to: "" });
@@ -253,7 +233,7 @@ const Finance = () => {
                     >
                       {tc('clearFilters')}
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => setIsFilterModalOpen(false)}
                       className="flex-1"
                     >
@@ -281,7 +261,7 @@ const Finance = () => {
               <div className="text-2xl font-bold text-green-600">₦{new Intl.NumberFormat().format(totalIncome)}</div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{t('finance.totalExpenses')}</CardTitle>
@@ -291,7 +271,7 @@ const Finance = () => {
               <div className="text-2xl font-bold text-red-600">₦{new Intl.NumberFormat().format(totalExpenses)}</div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <div className="flex items-center gap-2">
@@ -315,7 +295,7 @@ const Finance = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="type">{tc('type')}</Label>
-                <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
+                <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -325,18 +305,18 @@ const Finance = () => {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="reason">{tc('reasonDescription')}</Label>
                 <Input
                   id="reason"
                   value={formData.reason}
-                  onChange={(e) => setFormData({...formData, reason: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                   placeholder={t('finance.reasonPlaceholder')}
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="amount">{tc('amountNairaLabel')}</Label>
                 <Input
@@ -345,23 +325,23 @@ const Finance = () => {
                   step="0.01"
                   min="0"
                   value={formData.amount}
-                  onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                   placeholder={tc('placeholderAmount')}
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="date">{tc('date')}</Label>
                 <Input
                   id="date"
                   type="date"
                   value={formData.date}
-                  onChange={(e) => setFormData({...formData, date: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   required
                 />
               </div>
-              
+
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addFinancialRecord.isPending}>
                   {addFinancialRecord.isPending ? tc('adding') : tc('addRecord')}
@@ -385,8 +365,8 @@ const Finance = () => {
                 <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('finance.noFinancialRecordsFound')}</h3>
                 <p className="text-gray-500 dark:text-gray-400 mb-4">
-                  {filterType !== "all" || dateRange.from || dateRange.to 
-                    ? t('finance.tryAdjustingFilters') 
+                  {filterType !== "all" || dateRange.from || dateRange.to
+                    ? t('finance.tryAdjustingFilters')
                     : t('finance.addYourFirstRecord')}
                 </p>
                 {filterType === "all" && !dateRange.from && !dateRange.to && (
@@ -420,11 +400,11 @@ const Finance = () => {
                           {record.sale_id ? t('finance.salesOfProducts') : record.reason}
                         </div>
                         <div className="text-xs text-gray-500 mt-1">
-                          {record.sale?.items && record.sale.items.length > 0 
+                          {record.sale?.items && record.sale.items.length > 0
                             ? `${record.sale.items.length} ${t('finance.itemsSold')}`
-                            : record.sale_id 
-                            ? t('finance.autoGeneratedFromSale')
-                            : ""}
+                            : record.sale_id
+                              ? t('finance.autoGeneratedFromSale')
+                              : ""}
                         </div>
                       </div>
                       <div className="text-right">
@@ -527,7 +507,7 @@ const Finance = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="type">{tc('type')}</Label>
-                <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
+                <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -537,18 +517,18 @@ const Finance = () => {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="reason">{tc('reasonDescription')}</Label>
                 <Input
                   id="reason"
                   value={formData.reason}
-                  onChange={(e) => setFormData({...formData, reason: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                   placeholder={t('finance.reasonPlaceholder')}
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="amount">{tc('amountNairaLabel')}</Label>
                 <Input
@@ -557,23 +537,23 @@ const Finance = () => {
                   step="0.01"
                   min="0"
                   value={formData.amount}
-                  onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                   placeholder={tc('placeholderAmount')}
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="date">{tc('date')}</Label>
                 <Input
                   id="date"
                   type="date"
                   value={formData.date}
-                  onChange={(e) => setFormData({...formData, date: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   required
                 />
               </div>
-              
+
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addFinancialRecord.isPending}>
                   {addFinancialRecord.isPending ? tc('adding') : tc('addRecord')}
@@ -603,7 +583,7 @@ const Finance = () => {
               </Button>
             </DialogTitle>
           </DialogHeader>
-          
+
           {selectedRecord && (
             <div className="space-y-6">
               {/* Record Type and Amount */}
@@ -662,7 +642,7 @@ const Finance = () => {
                 </div>
               </div>
 
-              
+
 
               {/* Actions */}
               <div className="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">

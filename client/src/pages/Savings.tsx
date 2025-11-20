@@ -188,32 +188,11 @@ const Savings = () => {
       store_id: selectedStore.id,
       user_id: user.id,
       current_amount: "0",
-      status: 'just_started'
+      status: 'just_started' as const
     };
 
-    if (!isOnline) {
-      console.log('📴 Offline: Queueing savings plan creation immediately without awaiting');
-
-      createSavingsPlan.mutate(planData, {
-        onError: (error: any) => {
-          setIsCreateModalOpen(true);
-          toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
-        }
-      });
-
-      // Close immediately after queueing starts
-      toast.success(tc('savedLocallyWillSync'));
-      setIsCreateModalOpen(false);
-      setCreateFormData({
-        title: "",
-        start_date: format(new Date(), "yyyy-MM-dd"),
-        end_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
-        contributing_to: "",
-        savings_duration: "weekly",
-        target_amount: ""
-      });
-      return;
-    }
+    // Offline handling is managed by useOfflineMutation in the hook
+    // We just call mutateAsync and let it handle queueing or online submission
 
     try {
       await createSavingsPlan.mutateAsync(planData);
@@ -287,28 +266,7 @@ const Savings = () => {
       user_id: user.id
     };
 
-    if (!isOnline) {
-      console.log('📴 Offline: Queueing contribution immediately without awaiting');
-
-      addContribution.mutate(contributionPayload, {
-        onError: (error: any) => {
-          setIsContributionModalOpen(true);
-          toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
-        }
-      });
-
-      // Close immediately after queueing starts
-      toast.success(tc('savedLocallyWillSync'));
-      setIsContributionModalOpen(false);
-      setContributionWarning(null);
-      setContributionData({
-        savings_plan_id: "",
-        amount: "",
-        contribution_date: format(new Date(), "yyyy-MM-dd")
-      });
-      setSelectedPlan(null);
-      return;
-    }
+    // Offline handling is managed by useOfflineMutation in the hook
 
     try {
       const result = await addContribution.mutateAsync(contributionPayload);

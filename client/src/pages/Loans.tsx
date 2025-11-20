@@ -116,29 +116,8 @@ const Loans = () => {
       status: 'active' as LoanStatus,
     };
 
-    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
-    console.log("📋 Create Loan - navigator.onLine:", currentlyOnline);
-
-    if (!currentlyOnline) {
-      console.log("📴 OFFLINE: Queueing loan immediately without awaiting");
-      createLoan.mutate(loanData);
-
-      console.log("📴 OFFLINE: Closing modal and resetting form immediately");
-      setIsCreateOpen(false);
-      setCreateForm({
-        borrower_name: "",
-        principal: "",
-        interest_percent: "",
-        interest_amount: "",
-        interest_mode: "percent",
-        start_date: format(new Date(), "yyyy-MM-dd"),
-        due_date: format(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "yyyy-MM-dd"),
-        repayment_frequency: "every_week",
-        purpose: "",
-      });
-      console.log("✅ OFFLINE: Loan form reset and modal closed");
-      return;
-    }
+    // Offline handling is managed by useOfflineMutation in the hook
+    // We just call mutateAsync and let it handle queueing or online submission
 
     console.log("🌐 ONLINE: Creating loan with await");
     try {
@@ -175,19 +154,7 @@ const Loans = () => {
       note: repaymentForm.note?.trim() || undefined,
     };
 
-    const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
-    console.log("📋 Add Repayment - navigator.onLine:", currentlyOnline);
-
-    if (!currentlyOnline) {
-      console.log("📴 OFFLINE: Queueing repayment immediately without awaiting");
-      addRepayment.mutate(repaymentData);
-
-      console.log("📴 OFFLINE: Closing modal and resetting form immediately");
-      setIsRepayOpen(false);
-      setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
-      console.log("✅ OFFLINE: Repayment form reset and modal closed");
-      return;
-    }
+    // Offline handling is managed by useOfflineMutation in the hook
 
     console.log("🌐 ONLINE: Adding repayment with await");
     try {
