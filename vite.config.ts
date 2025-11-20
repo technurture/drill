@@ -12,9 +12,12 @@ export default defineConfig(({ mode }) => ({
     port: 5000,
     strictPort: !!process.env.REPLIT_DEPLOYMENT,
     allowedHosts: true,
-    hmr: {
-      protocol: "ws",
-    },
+    hmr: process.env.REPL_OWNER
+      ? {
+          protocol: "wss",
+          clientPort: 443,
+        }
+      : true,
   },
   build: {
     outDir: path.resolve(__dirname, "dist"),
