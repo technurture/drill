@@ -18,8 +18,6 @@ export const useSales = (storeId?: string, options = {}) => {
     queryFn: async () => {
       if (!storeId) return [];
       
-      // No offline check - just call Supabase
-      // Natural network failure when offline
       const { data, error } = await supabase
         .from("sales")
         .select(`
@@ -35,7 +33,7 @@ export const useSales = (storeId?: string, options = {}) => {
       return (data || []) as unknown as Sale[];
     },
     enabled: Boolean(storeId),
-    networkMode: 'offlineFirst',
+    networkMode: 'online',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -52,8 +50,6 @@ export const useSalesPerDay = (storeId: string, time: string) => {
     queryFn: async () => {
       if (!storeId) return [];
       
-      // No offline check - just call Supabase
-      // Natural network failure when offline
       const { data, error } = await supabase
         .from("sales")
         .select(`*`)
@@ -63,7 +59,7 @@ export const useSalesPerDay = (storeId: string, time: string) => {
       return (data || []) as unknown as Sale[];
     },
     enabled: Boolean(storeId),
-    networkMode: 'offlineFirst',
+    networkMode: 'online',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -82,8 +78,6 @@ export const useProductSoldPerDay = (
     queryFn: async () => {
       if (!storeId) return [];
       
-      // No offline check - just call Supabase
-      // Natural network failure when offline
       const { data, error } = await supabase
         .from("sales")
         .select("*")
@@ -92,7 +86,7 @@ export const useProductSoldPerDay = (
       return (data || []) as unknown as Sale[];
     },
     enabled: Boolean(storeId),
-    networkMode: 'offlineFirst',
+    networkMode: 'online',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -106,14 +100,12 @@ export const useGetSale = (saleId: string) => {
   return useQuery({
     queryKey: ["sales", saleId],
     queryFn: async () => {
-      // No offline check - just call Supabase
-      // Natural network failure when offline
       return await fromSupabase(
         supabase.from("sales").select("*").eq("id", saleId).single(),
       );
     },
     enabled: Boolean(saleId),
-    networkMode: 'offlineFirst',
+    networkMode: 'online',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,

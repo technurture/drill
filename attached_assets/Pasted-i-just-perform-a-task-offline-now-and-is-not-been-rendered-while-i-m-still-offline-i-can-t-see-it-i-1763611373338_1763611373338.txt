@@ -1,0 +1,74 @@
+i just perform a task offline now and is not been rendered while i'm still offline, i can't see it in the UI
+I found the issue! The problem is that addSale.mutate(saleData) is asynchronous, but the code navigates immediately without waiting for the mutation to apply the optimistic update to the cache. Let me fix this:
+Fixed Issues:
+1. Offline Sales Not Appearing After Page Refresh ✅
+
+    Root Cause: When the page refreshed, React Query's in-memory cache was cleared, but queued offline operations in IndexedDB weren't being reloaded
+    Solution: Created useHydrateOfflineCache hook that loads pending operations from IndexedDB into React Query cache on app initialization
+    Result: Offline sales now persist across page refreshes!
+
+2. Modal Not Closing 🔍
+
+    Added debugging logs to track if the onSuccess callback is executing
+    This will help us see why the modal isn't closing
+
+useOfflineStatus.ts:28 🔌 Initial online status: OFFLINE
+StoreContext.tsx:32 StoreContext - User: {id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', aud: 'authenticated', role: 'authenticated', email: 'dareyoloye@gmail.com', email_confirmed_at: '2025-09-18T11:25:19.349807Z', …}
+StoreContext.tsx:33 StoreContext - Stores: (2) [{…}, {…}]
+StoreContext.tsx:34 StoreContext - Selected store: {id: '7e90d519-60a3-452e-9c0f-f136ae9291e6', owner_id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', store_name: 'Darey store ', location: null, created_at: '2025-09-18T11:25:28.587401+00:00', …}
+chunk-FWFYZ7QY.js?v=1548cff2:283 workbox Router is responding to: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081
+chunk-FWFYZ7QY.js?v=1548cff2:283 workbox Router is responding to: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/sales?select=*&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&created_date=eq.2025-11-19
+sw-custom.ts:25 [SW] Offline - Supabase API call queued for sync: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081
+@supabase_supabase-js.js?v=1548cff2:3930  GET https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 503 (Service Unavailable - Offline Mode)
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3930
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3951
+fulfilled @ @supabase_supabase-js.js?v=1548cff2:3903
+Promise.then
+step @ @supabase_supabase-js.js?v=1548cff2:3916
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3918
+__awaiter6 @ @supabase_supabase-js.js?v=1548cff2:3900
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3941
+then @ @supabase_supabase-js.js?v=1548cff2:89Understand this error
+sw-custom.ts:25 [SW] Offline - Supabase API call queued for sync: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/sales?select=*&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&created_date=eq.2025-11-19
+@supabase_supabase-js.js?v=1548cff2:3930  GET https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/sales?select=*&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&created_date=eq.2025-11-19 503 (Service Unavailable - Offline Mode)
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3930
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3951
+fulfilled @ @supabase_supabase-js.js?v=1548cff2:3903
+Promise.then
+step @ @supabase_supabase-js.js?v=1548cff2:3916
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3918
+__awaiter6 @ @supabase_supabase-js.js?v=1548cff2:3900
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3941
+then @ @supabase_supabase-js.js?v=1548cff2:89Understand this error
+AddSales.tsx:132 Adding to cart: Drawing Book  Quantity: 1 Price Option: retail Custom: undefined
+AddSales.tsx:171 Added new item to cart: {id: '25f38840-8301-4266-8199-0b42162cdae6', name: 'Drawing Book ', unit_price: 300, quantity: 3, low_stock_threshold: 2, …} New cart: [{…}]
+AddSales.tsx:318 📴 Offline: Attaching financial record data to sale for later creation
+AddSales.tsx:331 📴 Offline: Queueing sale for sync
+AddSales.tsx:318 📴 Offline: Attaching financial record data to sale for later creation
+AddSales.tsx:331 📴 Offline: Queueing sale for sync
+chunk-FWFYZ7QY.js?v=1548cff2:283 workbox Router is responding to: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5
+sw-custom.ts:25 [SW] Offline - Supabase API call queued for sync: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5
+@supabase_supabase-js.js?v=1548cff2:3930  GET https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5 503 (Service Unavailable - Offline Mode)
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3930
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3951
+fulfilled @ @supabase_supabase-js.js?v=1548cff2:3903
+Promise.then
+step @ @supabase_supabase-js.js?v=1548cff2:3916
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3918
+__awaiter6 @ @supabase_supabase-js.js?v=1548cff2:3900
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3941
+then @ @supabase_supabase-js.js?v=1548cff2:89Understand this error
+StoreContext.tsx:32 StoreContext - User: {id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', aud: 'authenticated', role: 'authenticated', email: 'dareyoloye@gmail.com', email_confirmed_at: '2025-09-18T11:25:19.349807Z', …}
+StoreContext.tsx:33 StoreContext - Stores: (2) [{…}, {…}]
+StoreContext.tsx:34 StoreContext - Selected store: {id: '7e90d519-60a3-452e-9c0f-f136ae9291e6', owner_id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', store_name: 'Darey store ', location: null, created_at: '2025-09-18T11:25:28.587401+00:00', …}
+TopBar.tsx:29 TopBar - user: {id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', aud: 'authenticated', role: 'authenticated', email: 'dareyoloye@gmail.com', email_confirmed_at: '2025-09-18T11:25:19.349807Z', …}
+TopBar.tsx:30 TopBar - currentUser: {id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', email: 'dareyoloye@gmail.com', created_store: false, created_at: '2025-09-18T11:24:47.498703+00:00', hide_balance: null, …}
+TopBar.tsx:31 TopBar - is_agent: false
+TopBar.tsx:32 TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081
+TopBar.tsx:33 TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081
+TopBar.tsx:34 TopBar - Should show agent badge: false
+Sales.tsx:66 Sales page - Active store: {id: '7e90d519-60a3-452e-9c0f-f136ae9291e6', owner_id: '1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081', store_name: 'Darey store ', location: null, created_at: '2025-09-18T11:25:28.587401+00:00', …}
+Sales.tsx:67 Sales page - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6
+Sales.tsx:85 Sales page - Sales data: (52) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+Sales.tsx:86 Sales page - Sales loading: false
+Sales.tsx:87 Sales page - Sales error: null

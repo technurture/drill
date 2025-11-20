@@ -264,13 +264,7 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
             console.log(`🎯 Offline optimistic update complete for ${config.action} on ${config.tableName} (${queryKeys.length} cache entries updated, invalidation deferred until sync)`);
           }
           
-          const actionText = config.action === 'create' ? 'created' : config.action === 'update' ? 'updated' : 'deleted';
-          toast.success(`Saved offline!`, {
-            description: `Your data has been saved locally and will sync when you're back online.`,
-            duration: 4000,
-          });
-          
-          console.log(`✅ Offline operation completed successfully for ${config.tableName}`);
+          console.log(`✅ Offline operation completed successfully for ${config.tableName}, returning optimistic data:`, optimisticData);
           
           return optimisticData as TData;
         } catch (error) {
