@@ -1,8 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-dotenv.config();
+// Dynamic import for dotenv to handle environments where it might not be installed
+try {
+  const dotenv = await import('dotenv');
+  dotenv.default.config();
+} catch (e) {
+  // Silent failure if dotenv is missing - env vars should be set in the environment
+  console.log('dotenv not found, assuming environment variables are set.');
+}
 
 
 
