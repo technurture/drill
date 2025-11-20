@@ -329,6 +329,9 @@ const AddSales = () => {
       if (!isOnline) {
         // OFFLINE MODE: Queue for sync (useOfflineMutation handles optimistic updates)
         console.log('📴 Offline: Queueing sale for sync');
+        console.log('🔍 DEBUG: About to call addSale.mutate with data:', JSON.stringify(saleData, null, 2).substring(0, 500));
+        console.log('🔍 DEBUG: addSale mutation object:', addSale);
+        console.log('🔍 DEBUG: isCheckingOut state before mutation:', isCheckingOut);
         
         // Queue the sale - useOfflineMutation will:
         // 1. Create optimistic data with temporary ID
@@ -336,7 +339,14 @@ const AddSales = () => {
         // 3. Queue it in IndexedDB for sync when back online
         addSale.mutate(saleData, {
           onSuccess: (data) => {
-            console.log('✅ Offline sale mutation onSuccess called!', data);
+            console.log('✅✅✅ OFFLINE SALE MUTATION onSuccess CALLBACK TRIGGERED!', data);
+            console.log('🔍 DEBUG: onSuccess - Current modal states:', {
+              cartModalOpen,
+              cartSlideOpen,
+              isCheckingOut,
+              cartItemsCount: cartItems.length
+            });
+            
             // Only navigate after mutation completes to ensure cache is updated
             // Show success message
             toast.success("Sale saved offline! It will sync when you're back online.");
@@ -352,13 +362,16 @@ const AddSales = () => {
             console.log('🔀 Navigating to sales page...');
             // Navigate to sales page (sale will be visible via optimistic update)
             navigate("/dashboard/sales");
+            console.log('✅ Navigation triggered successfully');
           },
           onError: (error: any) => {
-            console.error('❌ Failed to queue sale offline:', error);
+            console.error('❌❌❌ OFFLINE SALE MUTATION onError CALLBACK TRIGGERED:', error);
             toast.error("Failed to save sale offline");
             setIsCheckingOut(false);
           }
         });
+        
+        console.log('🔍 DEBUG: addSale.mutate() called, waiting for callbacks...');
         return;
       }
 

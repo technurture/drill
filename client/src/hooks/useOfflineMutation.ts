@@ -162,10 +162,12 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
     mutationFn: async (variables: TVariables) => {
       const currentlyOffline = !navigator.onLine || !isOnline;
       
+      console.log(`🔍 🔍 🔍 MUTATION FUNCTION CALLED - table: ${config.tableName}, action: ${config.action}`);
       console.log(`🔍 Mutation check - navigator.onLine: ${navigator.onLine}, hook isOnline: ${isOnline}, treating as offline: ${currentlyOffline}`);
+      console.log(`🔍 Mutation variables:`, variables);
       
       if (currentlyOffline) {
-        console.log(`📴 OFFLINE: Queueing ${config.action} operation for ${config.tableName}`);
+        console.log(`📴 📴 📴 OFFLINE: Queueing ${config.action} operation for ${config.tableName}`);
         
         const queueData: any = { ...variables };
         
@@ -264,7 +266,9 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
             console.log(`🎯 Offline optimistic update complete for ${config.action} on ${config.tableName} (${queryKeys.length} cache entries updated, invalidation deferred until sync)`);
           }
           
-          console.log(`✅ Offline operation completed successfully for ${config.tableName}, returning optimistic data:`, optimisticData);
+          console.log(`✅ ✅ ✅ Offline operation completed successfully for ${config.tableName}`);
+          console.log(`🔍 Returning optimistic data:`, optimisticData);
+          console.log(`🔍 About to return from mutationFn, this should trigger onSuccess...`);
           
           return optimisticData as TData;
         } catch (error) {
@@ -279,16 +283,26 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
     onSuccess: (data, variables) => {
       const currentlyOffline = !navigator.onLine || !isOnline;
       
+      console.log(`🎉 🎉 🎉 useOfflineMutation onSuccess TRIGGERED for ${config.tableName}`);
+      console.log(`🔍 onSuccess - offline: ${currentlyOffline}, data:`, data);
+      
       if (currentlyOffline) {
         console.log(`📴 Offline operation queued successfully for ${config.tableName}`);
       } else {
         console.log(`✅ Online operation completed for ${config.tableName}`);
       }
       
-      config.onSuccess?.(data, variables);
+      console.log(`🔍 About to call config.onSuccess callback...`);
+      if (config.onSuccess) {
+        console.log(`🔍 config.onSuccess exists, calling it now...`);
+        config.onSuccess(data, variables);
+        console.log(`🔍 config.onSuccess callback completed`);
+      } else {
+        console.log(`⚠️ config.onSuccess is undefined - no callback to call`);
+      }
     },
     onError: (error: Error, variables) => {
-      console.error(`❌ Mutation error for ${config.tableName}:`, error);
+      console.error(`❌ ❌ ❌ useOfflineMutation onError TRIGGERED for ${config.tableName}:`, error);
       const currentlyOffline = !navigator.onLine || !isOnline;
       
       if (currentlyOffline) {
@@ -297,7 +311,14 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
         });
       }
       
-      config.onError?.(error, variables);
+      console.log(`🔍 About to call config.onError callback...`);
+      if (config.onError) {
+        console.log(`🔍 config.onError exists, calling it now...`);
+        config.onError(error, variables);
+        console.log(`🔍 config.onError callback completed`);
+      } else {
+        console.log(`⚠️ config.onError is undefined - no callback to call`);
+      }
     },
   });
 }
