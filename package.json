@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "npm run generate:sw && vite",
-    "build": "npm run generate:sw && tsc && vite build",
-    "start": "NODE_ENV=production node server/index.ts",
+    "build": "npm run generate:sw && npm run build:client && npm run build:server",
+    "build:client": "tsc --noEmit && vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "start": "NODE_ENV=production node dist/server/index.js",
     "lint": "eslint .",
     "generate:sw": "node scripts/generate-sw.js"
   },
