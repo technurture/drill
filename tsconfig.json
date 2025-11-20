@@ -30,8 +30,7 @@
   },
   "include": [
     "client/src/**/*",
-    "client/src/vite-env.d.ts",
-    "server"
+    "client/src/vite-env.d.ts"
   ],
   "exclude": [
     "node_modules",
