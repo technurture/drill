@@ -49,34 +49,44 @@ export const requestNotificationPermission = async (userId: string) => {
     }
 
     const token = await getToken(messaging, { vapidKey });
-    
+
     if (token) {
+      // ✅ Log FCM token for testing
+      console.log("🔔 FCM Registration Token:");
+      console.log(token);
+      console.log("\n📋 Copy the token above to test Firebase notifications!");
+      console.log("👉 Go to Firebase Console → Messaging → Send test message");
+
       const { data, error } = await supabase
         .from("devices_token")
         .select("*")
         .eq("user_id", userId)
         .eq("token", token);
-      
+
       if (error) {
         console.error("Error checking token:", error);
         return null;
       }
 
       if (data && data.length > 0) {
+        console.log("✅ Token already registered in database");
         return token;
       } else {
         const { error: insertError } = await supabase
           .from("devices_token")
           .insert({ token: token, user_id: userId });
-        
+
         if (insertError) {
           console.error("Error saving token:", insertError);
           return null;
         }
-        
+
+        console.log("✅ Token saved to database");
         toast.success("Push notifications enabled!");
         return token;
       }
+    } else {
+      console.warn("⚠️ No FCM token received. Check Firebase configuration.");
     }
   } catch (error) {
     console.error("Error requesting notification permission:", error);
@@ -93,7 +103,7 @@ export const onNotificationReceived = (callback?: (payload: any) => void) => {
 
   onMessage(messaging, (payload) => {
     console.log("Notification received:", payload);
-    
+
     const { notification } = payload;
     if (notification) {
       toast.success(`${notification.title}: ${notification.body}`, {
@@ -101,7 +111,7 @@ export const onNotificationReceived = (callback?: (payload: any) => void) => {
         position: "top-right",
       });
     }
-    
+
     if (callback) {
       callback(payload);
     }

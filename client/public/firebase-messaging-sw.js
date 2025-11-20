@@ -2,7 +2,7 @@ importScripts("https://www.gstatic.com/firebasejs/11.9.0/firebase-app-compat.js"
 importScripts("https://www.gstatic.com/firebasejs/11.9.0/firebase-messaging-compat.js");
 
 firebase.initializeApp({
-  "apiKey": "AIzaSyDbSNIk_nEY6KAA42xn3SZnILTYA1EZKC0",
+  "apiKey": "AIzaSyAnEqc23jGer2bxMn0nzFKatd1-dAWpfZI",
   "authDomain": "shebalance-515fb.firebaseapp.com",
   "projectId": "shebalance-515fb",
   "storageBucket": "shebalance-515fb.firebasestorage.app",
