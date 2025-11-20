@@ -1,14 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "strict": false,
-    "skipLibCheck": true,
-    /* FRONTEND (Vite/React) */
-    "jsx": "react-jsx",
+    // "baseUrl": ".",
     "paths": {
       "@/*": [
         "./client/src/*"
@@ -17,29 +9,36 @@
     "types": [
       "vite/client"
     ],
+    "noImplicitAny": false,
+    "noUnusedParameters": false,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "noUnusedLocals": false,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "target": "ES2020",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "lib": [
       "ES2020",
       "DOM",
       "DOM.Iterable",
       "WebWorker"
-    ],
-    /* BACKEND COMPILATION */
-    "allowJs": false,
-    "noEmit": false, // IMPORTANT: Compile backend!
-    "outDir": "dist", // Output JS goes here
-    "isolatedModules": false,
-    /* QUALITY */
-    "noUnusedLocals": false,
-    "noUnusedParameters": false
+    ]
   },
   "include": [
     "client/src/**/*",
     "client/src/vite-env.d.ts",
-    "server/**/*.ts" // Backend ONLY
+    "server"
   ],
   "exclude": [
     "node_modules",
     "client/dist",
-    "dist"
+    "server/**/*.UNUSED",
+    "server/**/*.js"
   ]
 }

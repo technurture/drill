@@ -14,13 +14,13 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: true,
     hmr: process.env.REPL_OWNER
       ? {
-          protocol: "wss",
-          clientPort: 443,
-        }
+        protocol: "wss",
+        clientPort: 443,
+      }
       : true,
   },
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: path.resolve(__dirname, "dist/client"),
     emptyOutDir: true,
   },
   optimizeDeps: {

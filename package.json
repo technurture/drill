@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run generate:sw && vite",
-    "build": "npm run generate:sw && tsc && vite build",
+    "build": "npm run generate:sw && tsc -p tsconfig.server.json && vite build",
     "start": "NODE_ENV=production node dist/server/index.js",
     "lint": "eslint .",
     "generate:sw": "node scripts/generate-sw.js"
