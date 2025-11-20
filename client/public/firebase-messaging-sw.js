@@ -8,6 +8,7 @@ firebase.initializeApp({
   "storageBucket": "shebalance-515fb.firebasestorage.app",
   "messagingSenderId": "814494556312",
   "appId": "1:814494556312:web:f92a2d67e5315e764f70ed",
+  "vapidKey": "BD5Te8E-LTutgevf-8wvBwQf_qOkwWnjerU5JilsqcJ78YJODJQI7Ib5lNEil3ciRPE_73MMlWX1W9SMZ2tZMyo",
   "measurementId": "G-18KQJ78C6Q"
 });
 
