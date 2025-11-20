@@ -37,7 +37,8 @@ if (process.env.NODE_ENV === "production") {
     res.json({ status: "ok" });
   });
 
-  app.get("*", (_req, res) => {
+  // Serve index.html for all other routes (SPA support)
+  app.use((_req, res) => {
     res.sendFile(path.resolve(clientDistPath, "index.html"));
   });
 } else {
