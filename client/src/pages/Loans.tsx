@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useState } from "react";
 import { StoreContext } from "@/contexts/StoreContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,7 @@ const Loans = () => {
   const { t } = useTranslation('pages');
   const { t: tc } = useTranslation('common');
   const store = useContext(StoreContext);
+  const { user } = useAuth();
   const { isOnline } = useOfflineStatus();
 
   const frequencyOptions: { value: RepaymentFrequency; label: string }[] = [
@@ -92,15 +94,15 @@ const Loans = () => {
 
   const handleCreateLoan = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!store?.id) return;
-    
+    if (!store?.id || !user?.id) return;
+
     const principalNum = Number(createForm.principal || 0);
     const interestPct = Number(createForm.interest_percent || 0);
     const interestAmt = Number(createForm.interest_amount || 0);
     const rateDecimal = createForm.interest_mode === "percent"
       ? (interestPct / 100)
       : (principalNum > 0 ? (interestAmt / principalNum) : 0);
-    
+
     const loanData = {
       store_id: store.id,
       borrower_name: createForm.borrower_name.trim(),
@@ -110,15 +112,16 @@ const Loans = () => {
       due_date: createForm.due_date,
       repayment_frequency: createForm.repayment_frequency,
       purpose: createForm.purpose?.trim() || undefined,
+      user_id: user.id,
     };
 
     const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
     console.log("📋 Create Loan - navigator.onLine:", currentlyOnline);
-    
+
     if (!currentlyOnline) {
       console.log("📴 OFFLINE: Queueing loan immediately without awaiting");
       createLoan.mutate(loanData);
-      
+
       console.log("📴 OFFLINE: Closing modal and resetting form immediately");
       setIsCreateOpen(false);
       setCreateForm({
@@ -139,7 +142,7 @@ const Loans = () => {
     console.log("🌐 ONLINE: Creating loan with await");
     try {
       await createLoan.mutateAsync(loanData);
-      
+
       setIsCreateOpen(false);
       setCreateForm({
         borrower_name: "",
@@ -163,7 +166,7 @@ const Loans = () => {
   const handleAddRepayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!activeLoan) return;
-    
+
     const repaymentData = {
       loan_id: activeLoan.id,
       amount: Number(repaymentForm.amount || 0),
@@ -173,11 +176,11 @@ const Loans = () => {
 
     const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;
     console.log("📋 Add Repayment - navigator.onLine:", currentlyOnline);
-    
+
     if (!currentlyOnline) {
       console.log("📴 OFFLINE: Queueing repayment immediately without awaiting");
       addRepayment.mutate(repaymentData);
-      
+
       console.log("📴 OFFLINE: Closing modal and resetting form immediately");
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
@@ -188,7 +191,7 @@ const Loans = () => {
     console.log("🌐 ONLINE: Adding repayment with await");
     try {
       await addRepayment.mutateAsync(repaymentData);
-      
+
       setIsRepayOpen(false);
       setRepaymentForm({ amount: "", paid_at: format(new Date(), "yyyy-MM-dd"), note: "" });
       toast.success(tc('repaymentAdded'));
@@ -201,7 +204,7 @@ const Loans = () => {
 
   if (!store) {
     return (
-      <NoStoreMessage 
+      <NoStoreMessage
         title={t('loans.loansManagement')}
         description={t('loans.loansManagementDesc')}
       />

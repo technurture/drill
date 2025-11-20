@@ -41,12 +41,12 @@ export interface AddFinancialRecordData {
 // Fetch financial records for a store
 export const useFinancialRecords = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["financial-records", storeId],
     queryFn: async () => {
       if (!storeId) return [];
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data, error } = await supabase
@@ -84,13 +84,13 @@ export const useFinancialRecords = (storeId?: string) => {
 // Add a new financial record
 export const useAddFinancialRecord = () => {
   const queryClient = useQueryClient();
-  
+
   return useOfflineMutation({
     tableName: "financial_records",
     action: "create",
     mutationFn: async (newRecord: AddFinancialRecordData) => {
       console.log("Finance Hook - Attempting to insert record:", newRecord);
-      
+
       // If a sale_id is provided, check for an existing finance record to avoid duplicates
       if (newRecord.sale_id) {
         const { data: existing, error: existingErr } = await supabase
@@ -107,7 +107,7 @@ export const useAddFinancialRecord = () => {
           return existing as FinancialRecord;
         }
       }
-      
+
       const { data, error } = await supabase
         .from("financial_records")
         .insert([newRecord])
@@ -120,7 +120,7 @@ export const useAddFinancialRecord = () => {
         console.error("Finance Hook - Insert error:", error);
         throw error;
       }
-      
+
       console.log("Finance Hook - Insert successful:", data);
       return data as FinancialRecord;
     },
@@ -145,7 +145,7 @@ export const useAddFinancialRecord = () => {
 // Delete a financial record
 export const useDeleteFinancialRecord = () => {
   const queryClient = useQueryClient();
-  
+
   return useOfflineMutation({
     tableName: "financial_records",
     action: "delete",
@@ -169,8 +169,10 @@ export const useDeleteFinancialRecord = () => {
 // Update a financial record
 export const useUpdateFinancialRecord = () => {
   const queryClient = useQueryClient();
-  
-  return useMutation({
+
+  return useOfflineMutation({
+    tableName: "financial_records",
+    action: "update",
     mutationFn: async ({ id, updates }: { id: string; updates: Partial<AddFinancialRecordData> }) => {
       const { data, error } = await supabase
         .from("financial_records")
@@ -186,18 +188,22 @@ export const useUpdateFinancialRecord = () => {
       // Invalidate and refetch financial records
       queryClient.invalidateQueries({ queryKey: ["financial-records", data.store_id] });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.id,
+      ...variables.updates,
+    } as unknown as FinancialRecord),
   });
 };
 
 // Get financial summary for a store
 export const useFinancialSummary = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["financial-summary", storeId],
     queryFn: async () => {
       if (!storeId) return { totalIncome: 0, totalExpenses: 0, netIncome: 0 };
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data, error } = await supabase
@@ -206,17 +212,17 @@ export const useFinancialSummary = (storeId?: string) => {
         .eq("store_id", storeId);
 
       if (error) throw error;
-      
+
       const totalIncome = data
         ?.filter(record => record.type === 'income')
         ?.reduce((sum, record) => sum + parseFloat(record.amount), 0) || 0;
-        
+
       const totalExpenses = data
         ?.filter(record => record.type === 'expense')
         ?.reduce((sum, record) => sum + parseFloat(record.amount), 0) || 0;
-        
+
       const netIncome = totalIncome - totalExpenses;
-      
+
       return { totalIncome, totalExpenses, netIncome };
     },
     enabled: Boolean(storeId),

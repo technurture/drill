@@ -12,12 +12,12 @@ const fromSupabase = async (query) => {
 
 export const useSales = (storeId?: string, options = {}) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["sales", storeId],
     queryFn: async () => {
       if (!storeId) return [];
-      
+
       const { data, error } = await supabase
         .from("sales")
         .select(`
@@ -33,7 +33,7 @@ export const useSales = (storeId?: string, options = {}) => {
       return (data || []) as unknown as Sale[];
     },
     enabled: Boolean(storeId),
-    networkMode: 'online',
+    networkMode: 'offlineFirst',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -44,12 +44,12 @@ export const useSales = (storeId?: string, options = {}) => {
 
 export const useSalesPerDay = (storeId: string, time: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["sales", storeId, time],
     queryFn: async () => {
       if (!storeId) return [];
-      
+
       const { data, error } = await supabase
         .from("sales")
         .select(`*`)
@@ -59,7 +59,7 @@ export const useSalesPerDay = (storeId: string, time: string) => {
       return (data || []) as unknown as Sale[];
     },
     enabled: Boolean(storeId),
-    networkMode: 'online',
+    networkMode: 'offlineFirst',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -72,12 +72,12 @@ export const useProductSoldPerDay = (
   name: string,
 ) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["sales", storeId, time, name],
     queryFn: async () => {
       if (!storeId) return [];
-      
+
       const { data, error } = await supabase
         .from("sales")
         .select("*")
@@ -86,7 +86,7 @@ export const useProductSoldPerDay = (
       return (data || []) as unknown as Sale[];
     },
     enabled: Boolean(storeId),
-    networkMode: 'online',
+    networkMode: 'offlineFirst',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -96,7 +96,7 @@ export const useProductSoldPerDay = (
 
 export const useGetSale = (saleId: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["sales", saleId],
     queryFn: async () => {
@@ -105,7 +105,7 @@ export const useGetSale = (saleId: string) => {
       );
     },
     enabled: Boolean(saleId),
-    networkMode: 'online',
+    networkMode: 'offlineFirst',
     placeholderData: (previousData) => previousData,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
@@ -115,7 +115,7 @@ export const useGetSale = (saleId: string) => {
 
 export const useAddSale = () => {
   const queryClient = useQueryClient();
-  
+
   return useOfflineMutation({
     tableName: "sales",
     action: "create",
@@ -131,15 +131,21 @@ export const useAddSale = () => {
       product_id?: string;
       quantity_sold?: string;
       items?: Array<Omit<SaleItem, "id" | "sale_id">>;
+      financial_record_data?: any;
+      id?: string; // Add optional ID for offline retries
     }) => {
-      const { items, ...saleData } = newSale;
+      const { items, financial_record_data, id, ...saleData } = newSale;
 
-      console.log('🔄 Creating sale:', saleData);
+      // If we have an ID (from offline queue), include it.
+      // Using upsert ensures idempotency for retries.
+      const payload = id ? { ...saleData, id } : saleData;
 
-      // Insert sale into 'sales' table
+      console.log('🔄 Creating sale (idempotent):', payload);
+
+      // Insert/Upsert sale into 'sales' table
       const { data: sale, error: saleError } = await supabase
         .from("sales")
-        .insert([saleData])
+        .upsert(payload)
         .select()
         .single();
 
@@ -149,15 +155,22 @@ export const useAddSale = () => {
       }
       if (!sale) throw new Error("Failed to create sale");
 
-      console.log('✅ Sale created:', sale);
+      console.log('✅ Sale created/updated:', sale);
 
       const saleWithId = sale as unknown as Sale;
 
       // Insert sale items into 'sale_items' table
       if (items && items.length > 0) {
         console.log('🔄 Creating sale items:', items);
+
+        // If this is a retry (we have an ID), clean up potential partial writes first
+        if (id) {
+          console.log('🧹 Cleaning up existing items for retry...');
+          await supabase.from("sale_items").delete().eq("sale_id", saleWithId.id);
+        }
+
         const { error: itemsError } = await supabase.from("sale_items").insert(
-          items.map((item) => ({
+          items.map(({ product, ...item }: any) => ({
             ...item,
             sale_id: saleWithId.id,
           })),
@@ -174,7 +187,7 @@ export const useAddSale = () => {
     },
     onSuccess: (data, variables) => {
       console.log('✅ Sale onSuccess called, data:', data);
-      
+
       // Invalidate to refetch and get the complete data with items
       // Note: useOfflineMutation already handles optimistic updates when offline
       queryClient.invalidateQueries({
@@ -191,6 +204,8 @@ export const useAddSale = () => {
           id: crypto.randomUUID(),
           sale_id: crypto.randomUUID(),
           ...item,
+          // Ensure product structure matches what the UI expects (from useSales select)
+          product: (item as any).product || { name: 'Loading...' },
         })) || [],
       } as unknown as Sale;
     },
@@ -199,7 +214,9 @@ export const useAddSale = () => {
 
 export const useUpdateSale = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "sales",
+    action: "update",
     mutationFn: async ({
       id,
       ...updateData
@@ -226,6 +243,10 @@ export const useUpdateSale = () => {
         queryKey: ["sales", variables.store_id],
       });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.id,
+      ...variables,
+    } as unknown as Sale),
   });
 };
 
@@ -245,7 +266,7 @@ export const useDeleteSale = () => {
       // Then delete the sale
       const { error } = await supabase.from("sales").delete().eq("id", id);
       if (error) throw error;
-      
+
       return { id, store_id: storeId };
     },
     onSuccess: (_, variables) => {
@@ -263,7 +284,9 @@ export const useDeleteSale = () => {
 
 export const useUpdateSaleNote = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "sales",
+    action: "update",
     mutationFn: async ({
       id,
       note,
@@ -286,16 +309,29 @@ export const useUpdateSaleNote = () => {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["sales", variables.storeId] });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.id,
+      note: variables.note,
+    } as unknown as Sale),
   });
 };
+
 export const useDeleteNote = () => {
   const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async(sales_id: string) => {
-       const {data, error} = await supabase.from("sales").update({note: ""}).eq("id", sales_id).select().single()
+  return useOfflineMutation({
+    tableName: "sales",
+    action: "update",
+    mutationFn: async ({ sales_id, storeId }: { sales_id: string, storeId: string }) => {
+      const { data, error } = await supabase.from("sales").update({ note: "" }).eq("id", sales_id).select().single();
+      if (error) throw error;
+      return data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["sales"]});
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["sales", variables.storeId] });
     },
+    getOptimisticData: (variables) => ({
+      id: variables.sales_id,
+      note: "",
+    } as unknown as Sale),
   })
 }

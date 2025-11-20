@@ -11,20 +11,27 @@ export class ActionQueueRepository {
       maxRetries?: number;
     }
   ): Promise<ActionEnvelope<T>> {
-    const action: ActionEnvelope<T> = {
-      id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      type,
-      payload,
-      timestamp: Date.now(),
-      status: 'pending',
-      retryCount: 0,
-      maxRetries: options?.maxRetries ?? 3,
-      userId: options?.userId,
-      storeId: options?.storeId
-    };
+    console.log(`📥 ActionQueueRepository: Enqueuing action ${type}`, payload);
+    try {
+      const action: ActionEnvelope<T> = {
+        id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        type,
+        payload,
+        timestamp: Date.now(),
+        status: 'pending',
+        retryCount: 0,
+        maxRetries: options?.maxRetries ?? 3,
+        userId: options?.userId,
+        storeId: options?.storeId
+      };
 
-    await offlineDB.actionQueue.add(action as ActionEnvelope);
-    return action;
+      await offlineDB.actionQueue.add(action as ActionEnvelope);
+      console.log(`✅ ActionQueueRepository: Successfully added action ${action.id} to DB`);
+      return action;
+    } catch (error) {
+      console.error(`❌ ActionQueueRepository: Failed to enqueue action ${type}`, error);
+      throw error;
+    }
   }
 
   async getAll(): Promise<ActionEnvelope[]> {

@@ -6,12 +6,12 @@ import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
 export const useLoans = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["loans", storeId],
     queryFn: async () => {
       if (!storeId) return [] as Loan[];
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data, error } = await supabase
@@ -33,12 +33,12 @@ export const useLoans = (storeId?: string) => {
 
 export const useLoan = (loanId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["loan", loanId],
     queryFn: async () => {
       if (!loanId) return null;
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data, error } = await supabase
@@ -60,7 +60,7 @@ export const useLoan = (loanId?: string) => {
 
 export const useCreateLoan = () => {
   const queryClient = useQueryClient();
-  
+
   return useOfflineMutation({
     tableName: "loans",
     action: "create",
@@ -88,7 +88,9 @@ export const useCreateLoan = () => {
 
 export const useUpdateLoanStatus = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useOfflineMutation({
+    tableName: "loans",
+    action: "update",
     mutationFn: async ({ loanId, status }: { loanId: string; status: Loan["status"] }) => {
       const { data, error } = await supabase
         .from("loans")
@@ -102,7 +104,12 @@ export const useUpdateLoanStatus = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["loans", data.store_id] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary", data.store_id] });
-    }
+    },
+    getOptimisticData: (variables) => ({
+      id: variables.loanId,
+      status: variables.status,
+      updated_at: new Date().toISOString(),
+    } as any),
   });
 };
 
@@ -126,12 +133,12 @@ export const useDeleteLoan = () => {
 
 export const useRepayments = (loanId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["loan-repayments", loanId],
     queryFn: async () => {
       if (!loanId) return [] as LoanRepayment[];
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data, error } = await supabase
@@ -153,7 +160,7 @@ export const useRepayments = (loanId?: string) => {
 
 export const useAddRepayment = () => {
   const queryClient = useQueryClient();
-  
+
   return useOfflineMutation({
     tableName: "loan_repayments",
     action: "create",
@@ -180,15 +187,15 @@ export const useAddRepayment = () => {
           return [data, ...oldRepayments];
         }
       );
-      
+
       // Derive store_id from the loan in cache (avoid network call which fails offline)
-      const loan = queryClient.getQueryData<Loan>(["loan", data.loan_id]) || 
-                   queryClient.getQueriesData<Loan[]>({ queryKey: ["loans"] })
-                     .flatMap(([, loans]) => loans || [])
-                     .find(l => l.id === data.loan_id);
-      
+      const loan = queryClient.getQueryData<Loan>(["loan", data.loan_id]) ||
+        queryClient.getQueriesData<Loan[]>({ queryKey: ["loans"] })
+          .flatMap(([, loans]) => loans || [])
+          .find(l => l.id === data.loan_id);
+
       const storeId = loan?.store_id;
-      
+
       if (storeId) {
         // Update store-wide repayments cache immediately (with deduplication)
         queryClient.setQueryData<LoanRepayment[]>(
@@ -200,13 +207,13 @@ export const useAddRepayment = () => {
             return [data, ...oldRepayments];
           }
         );
-        
+
         // Invalidate loans summary to refetch and recalculate totals
         queryClient.invalidateQueries({ queryKey: ["loans-summary", storeId] });
         // Invalidate the loans list in case status needs to update
         queryClient.invalidateQueries({ queryKey: ["loans", storeId] });
       }
-      
+
       // After cache updates, invalidate to trigger background refetch (keeps data fresh)
       queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
     },
@@ -221,12 +228,12 @@ export const useAddRepayment = () => {
 // Fetch all repayments for loans belonging to a store (for aggregation on the page)
 export const useRepaymentsByStore = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["loan-repayments-by-store", storeId],
     queryFn: async () => {
       if (!storeId) return [] as LoanRepayment[];
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data, error } = await supabase
@@ -248,12 +255,12 @@ export const useRepaymentsByStore = (storeId?: string) => {
 
 export const useLoansSummary = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
-  
+
   return useQuery({
     queryKey: ["loans-summary", storeId],
     queryFn: async () => {
       if (!storeId) return null as LoansSummary | null;
-      
+
       // No offline check - just call Supabase
       // Natural network failure when offline
       const { data: loans, error } = await supabase

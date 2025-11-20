@@ -1,15 +1,15 @@
 // Savings System Types
 
-export type SavingsDuration = 
-  | 'everyday' 
-  | 'every_2_days' 
-  | 'every_3_days' 
-  | 'weekly' 
-  | 'every_2_weeks' 
-  | 'monthly' 
-  | 'every_2_months' 
-  | 'every_3_months' 
-  | 'every_6_months' 
+export type SavingsDuration =
+  | 'everyday'
+  | 'every_2_days'
+  | 'every_3_days'
+  | 'weekly'
+  | 'every_2_weeks'
+  | 'monthly'
+  | 'every_2_months'
+  | 'every_3_months'
+  | 'every_6_months'
   | 'yearly';
 
 export type SavingsStatus = 'just_started' | 'in_progress' | 'completed' | 'withdrawn';
@@ -47,6 +47,7 @@ export interface CreateSavingsPlanData {
   contributing_to: string;
   savings_duration: SavingsDuration;
   target_amount: number;
+  current_amount?: string;
 }
 
 export interface AddContributionData {

@@ -9,13 +9,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { 
-  Plus, 
-  PiggyBank, 
-  TrendingUp, 
-  Calendar, 
-  Target, 
-  Users, 
+import {
+  Plus,
+  PiggyBank,
+  TrendingUp,
+  Calendar,
+  Target,
+  Users,
   Clock,
   CheckCircle,
   PlayCircle,
@@ -25,21 +25,21 @@ import {
   Filter
 } from "lucide-react";
 import { format, parseISO } from "date-fns";
-import { 
-  useSavingsPlans, 
-  useCreateSavingsPlan, 
-  useAddContribution, 
+import {
+  useSavingsPlans,
+  useCreateSavingsPlan,
+  useAddContribution,
   useDeleteSavingsPlan,
   useSavingsSummary,
   useWithdrawSavings,
   useWithdrawPartialSavings,
   useSavingsWithdrawals
 } from "@/integrations/supabase/hooks/savings";
-import { 
-  SAVINGS_DURATION_OPTIONS, 
+import {
+  SAVINGS_DURATION_OPTIONS,
   SAVINGS_STATUS_OPTIONS,
   type CreateSavingsPlanData,
-  type AddContributionData 
+  type AddContributionData
 } from "@/types/savings.types";
 import { toast } from "sonner";
 import NoStoreMessage from "@/components/NoStoreMessage";
@@ -116,7 +116,7 @@ const Savings = () => {
   // Show NoStoreMessage if no store is selected
   if (!selectedStore) {
     return (
-      <NoStoreMessage 
+      <NoStoreMessage
         title={t('savings.savingsManagement')}
         description={t('savings.savingsManagementDesc')}
       />
@@ -143,15 +143,15 @@ const Savings = () => {
   // Filter plans based on status
   const filteredPlans = savingsPlans?.filter(plan => {
     if (filterStatus === "all") return true;
-    
+
     // Calculate actual status based on contributions and database status
     let actualStatus;
     if (plan.status === 'withdrawn') {
       actualStatus = 'withdrawn';
     } else {
-      const totalContributions = plan.contributions?.reduce((sum, contribution) => 
+      const totalContributions = plan.contributions?.reduce((sum, contribution) =>
         sum + parseFloat(contribution.amount), 0) || 0;
-      
+
       if (totalContributions === 0) {
         actualStatus = 'just_started';
       } else if (totalContributions >= parseFloat(plan.target_amount)) {
@@ -160,13 +160,13 @@ const Savings = () => {
         actualStatus = 'in_progress';
       }
     }
-    
+
     return actualStatus === filterStatus;
   }) || [];
 
   const handleCreatePlan = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedStore?.id || !user?.id) {
       toast.error("No store selected or user not logged in");
       return;
@@ -186,19 +186,20 @@ const Savings = () => {
       ...createFormData,
       target_amount: parseFloat(createFormData.target_amount),
       store_id: selectedStore.id,
-      user_id: user.id
+      user_id: user.id,
+      current_amount: "0"
     };
 
     if (!isOnline) {
       console.log('📴 Offline: Queueing savings plan creation immediately without awaiting');
-      
+
       createSavingsPlan.mutate(planData, {
         onError: (error: any) => {
           setIsCreateModalOpen(true);
           toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
         }
       });
-      
+
       // Close immediately after queueing starts
       toast.success(tc('savedLocallyWillSync'));
       setIsCreateModalOpen(false);
@@ -235,9 +236,9 @@ const Savings = () => {
 
   const handleAddContribution = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     console.log("Adding contribution:", contributionData);
-    
+
     if (!selectedStore?.id || !user?.id) {
       toast.error("No store selected or user not logged in");
       return;
@@ -250,7 +251,7 @@ const Savings = () => {
 
     // Find the selected plan to check its status and current amount
     const selectedPlanData = savingsPlans?.find(plan => plan.id === contributionData.savings_plan_id);
-    
+
     if (!selectedPlanData) {
       toast.error("Selected savings plan not found");
       return;
@@ -264,10 +265,10 @@ const Savings = () => {
 
     // Calculate effective saved amount (accounts for partial withdrawals via current_amount)
     const currentFromField = parseFloat((selectedPlanData as any)?.current_amount ?? 0);
-    const sumContrib = selectedPlanData.contributions?.reduce((sum, contribution) => 
+    const sumContrib = selectedPlanData.contributions?.reduce((sum, contribution) =>
       sum + parseFloat(contribution.amount), 0) || 0;
     const effectiveSaved = currentFromField > 0 ? currentFromField : sumContrib;
-    
+
     const targetAmount = parseFloat(selectedPlanData.target_amount);
     const newTotal = effectiveSaved + parseFloat(contributionData.amount);
 
@@ -287,14 +288,14 @@ const Savings = () => {
 
     if (!isOnline) {
       console.log('📴 Offline: Queueing contribution immediately without awaiting');
-      
+
       addContribution.mutate(contributionPayload, {
         onError: (error: any) => {
           setIsContributionModalOpen(true);
           toast.error(tc('failedToSaveOffline') + ': ' + (error?.message || tc('pleaseTryAgain')));
         }
       });
-      
+
       // Close immediately after queueing starts
       toast.success(tc('savedLocallyWillSync'));
       setIsContributionModalOpen(false);
@@ -322,10 +323,10 @@ const Savings = () => {
         contribution_date: format(new Date(), "yyyy-MM-dd")
       });
       setSelectedPlan(null);
-      
+
       // Force refresh all data
       await refetch();
-      
+
     } catch (error) {
       console.error("Failed to add contribution:", error);
       toast.error("Failed to add contribution");
@@ -394,9 +395,9 @@ const Savings = () => {
       return;
     }
 
-    const withdrawalData = { 
-      planId: selectedPlanForWithdrawal.id, 
-      storeId: selectedStore!.id 
+    const withdrawalData = {
+      planId: selectedPlanForWithdrawal.id,
+      storeId: selectedStore!.id
     };
 
     if (!currentlyOnline) {
@@ -424,10 +425,10 @@ const Savings = () => {
     if (!selectedPlanData) return null;
 
     const currentFromField = parseFloat((selectedPlanData as any)?.current_amount ?? 0);
-    const sumContrib = selectedPlanData.contributions?.reduce((sum, contribution) => 
+    const sumContrib = selectedPlanData.contributions?.reduce((sum, contribution) =>
       sum + parseFloat(contribution.amount), 0) || 0;
     const effectiveSaved = currentFromField > 0 ? currentFromField : sumContrib;
-    
+
     const targetAmount = parseFloat(selectedPlanData.target_amount);
     const newTotal = effectiveSaved + amount;
 
@@ -530,8 +531,8 @@ const Savings = () => {
                     </div>
 
                     <div className="flex gap-2 pt-4">
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         onClick={() => {
                           setFilterStatus("all");
                         }}
@@ -539,7 +540,7 @@ const Savings = () => {
                       >
                         Clear Filters
                       </Button>
-                      <Button 
+                      <Button
                         onClick={() => setIsFilterModalOpen(false)}
                         className="flex-1"
                       >
@@ -566,12 +567,12 @@ const Savings = () => {
                       <Input
                         id="title"
                         value={createFormData.title}
-                        onChange={(e) => setCreateFormData({...createFormData, title: e.target.value})}
+                        onChange={(e) => setCreateFormData({ ...createFormData, title: e.target.value })}
                         placeholder="e.g., House rent or Shop rent"
                         required
                       />
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="start_date">Start Date</Label>
@@ -579,39 +580,39 @@ const Savings = () => {
                           id="start_date"
                           type="date"
                           value={createFormData.start_date}
-                          onChange={(e) => setCreateFormData({...createFormData, start_date: e.target.value})}
+                          onChange={(e) => setCreateFormData({ ...createFormData, start_date: e.target.value })}
                           required
                         />
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Label htmlFor="end_date">End Date</Label>
                         <Input
                           id="end_date"
                           type="date"
                           value={createFormData.end_date}
-                          onChange={(e) => setCreateFormData({...createFormData, end_date: e.target.value})}
+                          onChange={(e) => setCreateFormData({ ...createFormData, end_date: e.target.value })}
                           required
                         />
                       </div>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="contributing_to">Contributing To</Label>
                       <Input
                         id="contributing_to"
                         value={createFormData.contributing_to}
-                        onChange={(e) => setCreateFormData({...createFormData, contributing_to: e.target.value})}
+                        onChange={(e) => setCreateFormData({ ...createFormData, contributing_to: e.target.value })}
                         placeholder="e.g., Iya Omo, Baba Alajo Ipata, or Self"
                         required
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="savings_duration">Savings Duration</Label>
-                      <Select 
-                        value={createFormData.savings_duration} 
-                        onValueChange={(value) => setCreateFormData({...createFormData, savings_duration: value as any})}
+                      <Select
+                        value={createFormData.savings_duration}
+                        onValueChange={(value) => setCreateFormData({ ...createFormData, savings_duration: value as any })}
                       >
                         <SelectTrigger>
                           <SelectValue />
@@ -625,21 +626,21 @@ const Savings = () => {
                         </SelectContent>
                       </Select>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="target_amount">Target Amount (₦)</Label>
                       <Input
                         id="target_amount"
                         type="number"
                         value={createFormData.target_amount}
-                        onChange={(e) => setCreateFormData({...createFormData, target_amount: e.target.value})}
+                        onChange={(e) => setCreateFormData({ ...createFormData, target_amount: e.target.value })}
                         placeholder="0.00"
                         min="0"
                         step="0.01"
                         required
                       />
                     </div>
-                    
+
                     <div className="flex gap-2 pt-4">
                       <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={createSavingsPlan.isPending}>
                         {createSavingsPlan.isPending ? "Creating..." : "Create Plan"}
@@ -654,7 +655,7 @@ const Savings = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Filter Modal */}
         <Dialog open={isFilterModalOpen} onOpenChange={setIsFilterModalOpen}>
           <DialogContent className="sm:max-w-md">
@@ -679,8 +680,8 @@ const Savings = () => {
               </div>
 
               <div className="flex gap-2 pt-4">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={() => {
                     setFilterStatus("all");
                   }}
@@ -688,7 +689,7 @@ const Savings = () => {
                 >
                   Clear Filters
                 </Button>
-                <Button 
+                <Button
                   onClick={() => setIsFilterModalOpen(false)}
                   className="flex-1"
                 >
@@ -698,7 +699,7 @@ const Savings = () => {
             </div>
           </DialogContent>
         </Dialog>
-        
+
         {/* Summary Cards */}
         {summary && (
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -711,7 +712,7 @@ const Savings = () => {
                 <div className="text-2xl font-bold">{summary.total_plans}</div>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{t('savings.activePlans')}</CardTitle>
@@ -721,7 +722,7 @@ const Savings = () => {
                 <div className="text-2xl font-bold text-green-600">{summary.active_plans}</div>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{t('savings.completedPlans')}</CardTitle>
@@ -731,7 +732,7 @@ const Savings = () => {
                 <div className="text-2xl font-bold text-green-600">{summary.completed_plans}</div>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{t('savings.totalSaved')}</CardTitle>
@@ -743,7 +744,7 @@ const Savings = () => {
                 <p className="text-xs text-gray-500 mt-1">{summary.progress_percentage.toFixed(1)}% {t('common:ofTarget')}</p>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{t('savings.totalWithdrawn')}</CardTitle>
@@ -764,8 +765,8 @@ const Savings = () => {
               <PiggyBank className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No savings plans found</h3>
               <p className="text-gray-500 dark:text-gray-400 mb-4">
-                {filterStatus !== "all" 
-                  ? "Try adjusting your filters" 
+                {filterStatus !== "all"
+                  ? "Try adjusting your filters"
                   : "Create your first savings plan to get started"}
               </p>
               {filterStatus === "all" && (
@@ -782,10 +783,10 @@ const Savings = () => {
               const withdrawalsSum = (plan.withdrawals || []).reduce((sum: number, w: any) => sum + Number(w.amount_withdrawn || 0), 0);
               const effectiveSaved = Math.max(0, contributedSum - withdrawalsSum);
 
-              const progress = parseFloat(plan.target_amount) > 0 
-                ? (effectiveSaved / parseFloat(plan.target_amount)) * 100 
+              const progress = parseFloat(plan.target_amount) > 0
+                ? (effectiveSaved / parseFloat(plan.target_amount)) * 100
                 : 0;
-              
+
               // Determine status based on actual contributions and database status
               let actualStatus;
               if (plan.status === 'withdrawn') {
@@ -797,7 +798,7 @@ const Savings = () => {
               } else {
                 actualStatus = 'in_progress';
               }
-              
+
               console.log(`Plan ${plan.title}:`, {
                 target: plan.target_amount,
                 current_amount_from_db: plan.current_amount,
@@ -809,7 +810,7 @@ const Savings = () => {
                 actual_status: actualStatus,
                 contributions_count: plan.contributions?.length || 0
               });
-              
+
               return (
                 <Card key={plan.id} className="relative min-h-[320px] flex flex-col hover:shadow-md transition-shadow duration-200 border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#18191A]">
                   <CardHeader className="pb-3">
@@ -845,7 +846,7 @@ const Savings = () => {
                         </p>
                       )}
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="text-gray-500">Duration</p>
@@ -860,7 +861,7 @@ const Savings = () => {
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="mt-auto pt-4 space-y-3">
                       <div className="flex gap-2">
                         <Button
@@ -949,7 +950,7 @@ const Savings = () => {
                   value={contributionData.amount}
                   onChange={(e) => {
                     const amount = e.target.value;
-                    setContributionData({...contributionData, amount});
+                    setContributionData({ ...contributionData, amount });
                     const warning = calculateContributionWarning(parseFloat(amount), contributionData.savings_plan_id);
                     setContributionWarning(warning);
                   }}
@@ -965,18 +966,18 @@ const Savings = () => {
                   </p>
                 )}
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="contribution_date">Date</Label>
                 <Input
                   id="contribution_date"
                   type="date"
                   value={contributionData.contribution_date}
-                  onChange={(e) => setContributionData({...contributionData, contribution_date: e.target.value})}
+                  onChange={(e) => setContributionData({ ...contributionData, contribution_date: e.target.value })}
                   required
                 />
               </div>
-              
+
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addContribution.isPending}>
                   {addContribution.isPending ? "Adding..." : "Add Contribution"}
@@ -1000,12 +1001,12 @@ const Savings = () => {
                 {/* Calculate values for this specific plan */}
                 {(() => {
                   const planContributions = selectedPlanForDetails.contributions || [];
-                  const planTotalContributions = planContributions.reduce((sum: number, contribution: any) => 
+                  const planTotalContributions = planContributions.reduce((sum: number, contribution: any) =>
                     sum + parseFloat(contribution.amount), 0);
                   const withdrawalsSum = (selectedPlanForDetails.withdrawals || []).reduce((s: number, w: any) => s + Number(w.amount_withdrawn || 0), 0);
                   const effectiveSaved = Math.max(0, planTotalContributions - withdrawalsSum);
-                  const planProgress = parseFloat(selectedPlanForDetails.target_amount) > 0 
-                    ? (effectiveSaved / parseFloat(selectedPlanForDetails.target_amount)) * 100 
+                  const planProgress = parseFloat(selectedPlanForDetails.target_amount) > 0
+                    ? (effectiveSaved / parseFloat(selectedPlanForDetails.target_amount)) * 100
                     : 0;
                   // Determine status based on effective saved and database status
                   let planStatus;
@@ -1018,7 +1019,7 @@ const Savings = () => {
                   } else {
                     planStatus = 'in_progress';
                   }
-                  
+
                   return (
                     <>
                       {/* Plan Overview */}
@@ -1077,12 +1078,12 @@ const Savings = () => {
                         <h4 className="font-semibold">Progress Overview</h4>
                         {(() => {
                           const planContributions = selectedPlanForDetails.contributions || [];
-                          const planTotalContributions = planContributions.reduce((sum: number, contribution: any) => 
+                          const planTotalContributions = planContributions.reduce((sum: number, contribution: any) =>
                             sum + parseFloat(contribution.amount), 0);
                           const currentField = typeof selectedPlanForDetails.current_amount === 'number' ? selectedPlanForDetails.current_amount : parseFloat(selectedPlanForDetails.current_amount);
                           const effectiveSaved = !isNaN(currentField) && currentField > 0 ? currentField : planTotalContributions;
-                          const planProgress = parseFloat(selectedPlanForDetails.target_amount) > 0 
-                            ? (effectiveSaved / parseFloat(selectedPlanForDetails.target_amount)) * 100 
+                          const planProgress = parseFloat(selectedPlanForDetails.target_amount) > 0
+                            ? (effectiveSaved / parseFloat(selectedPlanForDetails.target_amount)) * 100
                             : 0;
                           const withdrawalsArr = (selectedPlanForDetails.withdrawals || []) as Array<{ amount_withdrawn: number }>
                           const totalWithdrawn = withdrawalsArr.reduce((s, r) => s + Number(r.amount_withdrawn || 0), 0);
@@ -1280,12 +1281,12 @@ const Savings = () => {
                 <Input
                   id="title"
                   value={createFormData.title}
-                  onChange={(e) => setCreateFormData({...createFormData, title: e.target.value})}
+                  onChange={(e) => setCreateFormData({ ...createFormData, title: e.target.value })}
                   placeholder="e.g., House rent or Shop rent"
                   required
                 />
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="start_date">Start Date</Label>
@@ -1293,39 +1294,39 @@ const Savings = () => {
                     id="start_date"
                     type="date"
                     value={createFormData.start_date}
-                    onChange={(e) => setCreateFormData({...createFormData, start_date: e.target.value})}
+                    onChange={(e) => setCreateFormData({ ...createFormData, start_date: e.target.value })}
                     required
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="end_date">End Date</Label>
                   <Input
                     id="end_date"
                     type="date"
                     value={createFormData.end_date}
-                    onChange={(e) => setCreateFormData({...createFormData, end_date: e.target.value})}
+                    onChange={(e) => setCreateFormData({ ...createFormData, end_date: e.target.value })}
                     required
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="contributing_to">Contributing To</Label>
                 <Input
                   id="contributing_to"
                   value={createFormData.contributing_to}
-                  onChange={(e) => setCreateFormData({...createFormData, contributing_to: e.target.value})}
+                  onChange={(e) => setCreateFormData({ ...createFormData, contributing_to: e.target.value })}
                   placeholder="e.g., Iya Omo, Baba Alajo Ipata, or Self"
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="savings_duration">Savings Duration</Label>
-                <Select 
-                  value={createFormData.savings_duration} 
-                  onValueChange={(value) => setCreateFormData({...createFormData, savings_duration: value as any})}
+                <Select
+                  value={createFormData.savings_duration}
+                  onValueChange={(value) => setCreateFormData({ ...createFormData, savings_duration: value as any })}
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -1339,21 +1340,21 @@ const Savings = () => {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="target_amount">Target Amount (₦)</Label>
                 <Input
                   id="target_amount"
                   type="number"
                   value={createFormData.target_amount}
-                  onChange={(e) => setCreateFormData({...createFormData, target_amount: e.target.value})}
+                  onChange={(e) => setCreateFormData({ ...createFormData, target_amount: e.target.value })}
                   placeholder="0.00"
                   min="0"
                   step="0.01"
                   required
                 />
               </div>
-              
+
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={createSavingsPlan.isPending}>
                   {createSavingsPlan.isPending ? "Creating..." : "Create Plan"}

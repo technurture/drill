@@ -43,6 +43,7 @@ export interface CreateLoanData {
   due_date: string;
   repayment_frequency?: RepaymentFrequency;
   purpose?: string;
+  user_id: string;
 }
 
 export interface AddRepaymentData {

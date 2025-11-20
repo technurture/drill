@@ -88,20 +88,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async createProduct(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('products')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Product ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('products').insert([insertData]);
     if (error) throw error;
@@ -109,10 +109,10 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async updateProduct(payload: any): Promise<void> {
     const { id, quantity, storeId, store_id, ...updateData } = payload;
-    
+
     if (quantity !== undefined && (storeId || store_id)) {
       const actualStoreId = storeId || store_id;
-      
+
       const { data: product, error: fetchError } = await supabase
         .from('products')
         .select('*')
@@ -158,7 +158,7 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Sale ${id} already exists, skipping insert`);
         return;
@@ -178,7 +178,7 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
     if (items && items.length > 0) {
       const { error: itemsError } = await supabase.from('sale_items').insert(
         items.map((item: any) => {
-          const { id: itemId, ...itemData } = item;
+          const { id: itemId, product, ...itemData } = item;
           return {
             ...itemData,
             sale_id: sale.id,
@@ -191,12 +191,12 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
     if (financial_record_data) {
       const { store_id, user_id, type, amount } = financial_record_data;
-      
+
       if (!store_id || !user_id || !type || amount === undefined || amount === null) {
         console.error('Invalid financial_record_data: missing required fields', financial_record_data);
         throw new Error('Financial record data is missing required fields: store_id, user_id, type, or amount');
       }
-      
+
       if (amount <= 0) {
         console.log(`Skipping financial record creation for sale ${sale.id} - amount is ${amount}`);
         return;
@@ -208,7 +208,7 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
         .eq('sale_id', sale.id)
         .eq('store_id', store_id)
         .maybeSingle();
-      
+
       if (existingRecord) {
         console.log(`Financial record for sale ${sale.id} already exists, skipping insert`);
         return;
@@ -248,20 +248,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async createStore(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('stores')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Store ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('stores').insert([insertData]);
     if (error) throw error;
@@ -278,20 +278,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async addFinancialRecord(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('financial_records')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Financial record ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('financial_records').insert([insertData]);
     if (error) throw error;
@@ -316,20 +316,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async createLoan(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('loans')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Loan ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('loans').insert([insertData]);
     if (error) throw error;
@@ -354,20 +354,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async addLoanRepayment(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('loan_repayments')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Loan repayment ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('loan_repayments').insert([insertData]);
     if (error) throw error;
@@ -375,20 +375,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async createSavingsPlan(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('savings_plans')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Savings plan ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('savings_plans').insert([insertData]);
     if (error) throw error;
@@ -396,20 +396,20 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async addSavingsContribution(payload: any): Promise<void> {
     const { id, ...dataWithoutId } = payload;
-    
+
     if (id) {
       const { data: existing } = await supabase
         .from('savings_contributions')
         .select('id')
         .eq('id', id)
         .maybeSingle();
-      
+
       if (existing) {
         console.log(`Savings contribution ${id} already exists, skipping insert`);
         return;
       }
     }
-    
+
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('savings_contributions').insert([insertData]);
     if (error) throw error;
@@ -433,15 +433,15 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
   private async withdrawSavings(payload: any): Promise<void> {
     const { planId, totalAmount } = payload;
-    
+
     const { error: planError } = await supabase
       .from('savings_plans')
-      .update({ 
+      .update({
         status: 'withdrawn',
         end_date: new Date().toISOString().split('T')[0]
       })
       .eq('id', planId);
-      
+
     if (planError) throw planError;
 
     const { error: withdrawalError } = await supabase
@@ -451,31 +451,31 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
         amount_withdrawn: totalAmount || 0,
         withdrawal_date: new Date().toISOString().split('T')[0]
       });
-    
+
     if (withdrawalError) throw withdrawalError;
   }
 
   private async withdrawPartialSavings(payload: any): Promise<void> {
     const { planId, amount } = payload;
-    
+
     const { data: plan, error: fetchError } = await supabase
       .from('savings_plans')
       .select('current_amount,contributions:savings_contributions(amount)')
       .eq('id', planId)
       .single();
-      
+
     if (fetchError) throw fetchError;
-    
+
     const currentFromField = parseFloat(plan?.current_amount ?? 0);
     const sumContrib = (plan?.contributions || []).reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0);
     const effectiveSaved = currentFromField > 0 ? currentFromField : sumContrib;
     const newAmount = Math.max(0, effectiveSaved - amount);
-    
+
     const { error: planError } = await supabase
       .from('savings_plans')
       .update({ current_amount: newAmount.toString() })
       .eq('id', planId);
-      
+
     if (planError) throw planError;
 
     const { error: withdrawalError } = await supabase
@@ -485,7 +485,7 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
         amount_withdrawn: amount,
         withdrawal_date: new Date().toISOString().split('T')[0]
       });
-    
+
     if (withdrawalError) throw withdrawalError;
   }
 }
