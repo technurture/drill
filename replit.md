@@ -12,6 +12,15 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+**November 20, 2025 - React Query Offline Mode Improvements**
+- **Issue**: React Query queries were not preserving cached data when offline, causing empty UI states and breaking optimistic updates
+- **Root Cause**: Queries were attempting to refetch when offline and replacing cached data with empty results or error states
+- **Solution**: Implemented correct React Query offline pattern using `placeholderData: (previousData) => previousData` combined with `networkMode: 'offlineFirst'`. This configuration allows queries to gracefully handle network failures by keeping previous data visible while the app is offline
+- **Additional Fixes**: 
+  - Removed security vulnerability (deleted unused file with hardcoded Supabase credentials)
+  - Fixed database constraint error where financial records with 0 amount were rejected during sync
+- **Impact**: Users now see cached data while offline, optimistic updates persist correctly, and all offline operations sync successfully when connectivity is restored
+
 **November 19, 2025 - Offline UI Update Fix**
 - **Issue**: When users performed offline actions (adding sales, products, financial records, etc.), the changes didn't appear in the UI until they reconnected to the internet
 - **Root Cause**: Optimistic updates were being applied to React Query cache, but queries weren't being invalidated to notify components of the changes

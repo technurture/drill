@@ -196,6 +196,11 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
         console.error('Invalid financial_record_data: missing required fields', financial_record_data);
         throw new Error('Financial record data is missing required fields: store_id, user_id, type, or amount');
       }
+      
+      if (amount <= 0) {
+        console.log(`Skipping financial record creation for sale ${sale.id} - amount is ${amount}`);
+        return;
+      }
 
       const { data: existingRecord } = await supabase
         .from('financial_records')
