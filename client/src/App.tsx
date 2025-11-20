@@ -13,6 +13,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import PWAInstallPopup from "./components/PWAInstallPopup";
 import { OfflineIndicator } from "./components/OfflineIndicator";
 import { setupAutoSync, setQueryClient } from "./services/offlineSync";
+import { useHydrateOfflineCache } from "./hooks/useHydrateOfflineCache";
 import LandingPageWrapper from "./components/LandingPageWrapper";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
@@ -84,6 +85,11 @@ function OfflineSync() {
   return null;
 }
 
+function OfflineCacheHydration() {
+  useHydrateOfflineCache();
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -97,6 +103,7 @@ function App() {
                     <Toaster />
                     <PWAInstallPopup />
                     <OfflineIndicator />
+                    <OfflineCacheHydration />
                     <OfflineSync />
                     <ScrollToTop />
                     <Routes>

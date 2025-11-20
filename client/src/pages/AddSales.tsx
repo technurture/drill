@@ -335,23 +335,26 @@ const AddSales = () => {
         // 2. Add it to the cache immediately (so it appears in UI)
         // 3. Queue it in IndexedDB for sync when back online
         addSale.mutate(saleData, {
-          onSuccess: () => {
+          onSuccess: (data) => {
+            console.log('✅ Offline sale mutation onSuccess called!', data);
             // Only navigate after mutation completes to ensure cache is updated
             // Show success message
             toast.success("Sale saved offline! It will sync when you're back online.");
             
             // Clear cart and close modals
+            console.log('🧹 Clearing cart and closing modals...');
             setCartItems([]);
             setCartModalOpen(false);
             setCartSlideOpen(false);
             setPaymentMode('cash');
             setIsCheckingOut(false);
             
+            console.log('🔀 Navigating to sales page...');
             // Navigate to sales page (sale will be visible via optimistic update)
             navigate("/dashboard/sales");
           },
           onError: (error: any) => {
-            console.error('Failed to queue sale offline:', error);
+            console.error('❌ Failed to queue sale offline:', error);
             toast.error("Failed to save sale offline");
             setIsCheckingOut(false);
           }
