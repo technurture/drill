@@ -47,6 +47,8 @@ export const useFinancialRecords = (storeId?: string) => {
     queryFn: async () => {
       if (!storeId) return [];
       
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("financial_records")
         .select(`
@@ -70,11 +72,12 @@ export const useFinancialRecords = (storeId?: string) => {
       if (error) throw error;
       return (data || []) as FinancialRecord[];
     },
-    enabled: !!storeId,
-    networkMode: isOnline ? 'online' : 'offlineFirst',
-    refetchOnMount: isOnline ? 'always' : false,
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
-    refetchOnReconnect: isOnline,
+    refetchOnReconnect: true,
   });
 };
 
@@ -188,11 +191,15 @@ export const useUpdateFinancialRecord = () => {
 
 // Get financial summary for a store
 export const useFinancialSummary = (storeId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["financial-summary", storeId],
     queryFn: async () => {
       if (!storeId) return { totalIncome: 0, totalExpenses: 0, netIncome: 0 };
       
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("financial_records")
         .select("type, amount")
@@ -212,6 +219,11 @@ export const useFinancialSummary = (storeId?: string) => {
       
       return { totalIncome, totalExpenses, netIncome };
     },
-    enabled: !!storeId,
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
 }; 

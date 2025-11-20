@@ -3,35 +3,32 @@ import { supabase } from "../supabase";
 import { Product } from "../../../types/database.types";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 
-export const useProducts = (storeId: string) => {
+export const useProducts = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
   
   return useQuery({
     queryKey: ["products", storeId],
     queryFn: async () => {
-      if (!storeId) {
-        throw new Error("Store ID is required to fetch products");
-      }
+      if (!storeId) return [] as Product[];
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("products")
         .select("*")
         .eq("store_id", storeId)
         .order("updated_at", { ascending: false });
 
-      if (error) {
-        console.error("Error fetching products:", error);
-        throw error;
-      }
-
-      console.log('Fetched products for store:', storeId, 'data:', data); // Debug log
+      if (error) throw error;
       return (data || []) as Product[];
     },
     enabled: Boolean(storeId),
-    networkMode: isOnline ? 'online' : 'offlineFirst',
-    staleTime: 1000 * 60, // 1 minute
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    staleTime: 1000 * 60,
     refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
-    refetchOnReconnect: isOnline,
+    refetchOnReconnect: true,
   });
 };
 

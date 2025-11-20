@@ -11,6 +11,9 @@ export const useLoans = (storeId?: string) => {
     queryKey: ["loans", storeId],
     queryFn: async () => {
       if (!storeId) return [] as Loan[];
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("loans")
         .select("*")
@@ -19,19 +22,25 @@ export const useLoans = (storeId?: string) => {
       if (error) throw error;
       return (data || []) as Loan[];
     },
-    enabled: !!storeId,
-    networkMode: isOnline ? 'online' : 'offlineFirst',
-    refetchOnMount: isOnline ? 'always' : false,
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
-    refetchOnReconnect: isOnline,
+    refetchOnReconnect: true,
   });
 };
 
 export const useLoan = (loanId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["loan", loanId],
     queryFn: async () => {
       if (!loanId) return null;
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("loans")
         .select("*")
@@ -40,7 +49,12 @@ export const useLoan = (loanId?: string) => {
       if (error) throw error;
       return data as Loan;
     },
-    enabled: !!loanId,
+    enabled: Boolean(loanId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
 };
 
@@ -111,10 +125,15 @@ export const useDeleteLoan = () => {
 };
 
 export const useRepayments = (loanId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["loan-repayments", loanId],
     queryFn: async () => {
       if (!loanId) return [] as LoanRepayment[];
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("loan_repayments")
         .select("*")
@@ -123,7 +142,12 @@ export const useRepayments = (loanId?: string) => {
       if (error) throw error;
       return (data || []) as LoanRepayment[];
     },
-    enabled: !!loanId,
+    enabled: Boolean(loanId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
 };
 
@@ -196,10 +220,15 @@ export const useAddRepayment = () => {
 
 // Fetch all repayments for loans belonging to a store (for aggregation on the page)
 export const useRepaymentsByStore = (storeId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["loan-repayments-by-store", storeId],
     queryFn: async () => {
       if (!storeId) return [] as LoanRepayment[];
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("loan_repayments")
         .select("id, loan_id, amount, paid_at, note, created_at, loans!inner(store_id)")
@@ -208,15 +237,25 @@ export const useRepaymentsByStore = (storeId?: string) => {
       if (error) throw error;
       return (data || []) as unknown as LoanRepayment[];
     },
-    enabled: !!storeId,
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
 };
 
 export const useLoansSummary = (storeId?: string) => {
+  const { isOnline } = useOfflineStatus();
+  
   return useQuery({
     queryKey: ["loans-summary", storeId],
     queryFn: async () => {
       if (!storeId) return null as LoansSummary | null;
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data: loans, error } = await supabase
         .from("loans")
         .select("*")
@@ -246,6 +285,11 @@ export const useLoansSummary = (storeId?: string) => {
 
       return { total_loans, active_loans, completed_loans, total_principal, total_repaid, outstanding_balance } as LoansSummary;
     },
-    enabled: !!storeId,
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
 };

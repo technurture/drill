@@ -18,8 +18,8 @@ export const useSales = (storeId?: string, options = {}) => {
     queryFn: async () => {
       if (!storeId) return [];
       
-      console.log("Fetching sales for store ID:", storeId);
-      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("sales")
         .select(`
@@ -31,28 +31,29 @@ export const useSales = (storeId?: string, options = {}) => {
         `)
         .eq("store_id", storeId);
 
-      if (error) {
-        console.error("Sales fetch error:", error);
-        throw error;
-      }
-      
-      console.log("Sales data fetched:", data);
+      if (error) throw error;
       return (data || []) as unknown as Sale[];
     },
-    enabled: !!storeId,
-    networkMode: isOnline ? 'online' : 'offlineFirst',
-    refetchOnMount: isOnline ? 'always' : false,
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
-    refetchOnReconnect: isOnline,
+    refetchOnReconnect: true,
     ...options,
   });
 };
 
-export const useSalesPerDay = (storeId: string, time: string) =>
-  useQuery({
+export const useSalesPerDay = (storeId: string, time: string) => {
+  const { isOnline } = useOfflineStatus();
+  
+  return useQuery({
     queryKey: ["sales", storeId, time],
     queryFn: async () => {
       if (!storeId) return [];
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("sales")
         .select(`*`)
@@ -61,16 +62,28 @@ export const useSalesPerDay = (storeId: string, time: string) =>
       if (error) throw error;
       return (data || []) as unknown as Sale[];
     },
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
+};
 export const useProductSoldPerDay = (
   storeId: string,
   time: string,
   name: string,
-) =>
-  useQuery({
+) => {
+  const { isOnline } = useOfflineStatus();
+  
+  return useQuery({
     queryKey: ["sales", storeId, time, name],
     queryFn: async () => {
       if (!storeId) return [];
+      
+      // No offline check - just call Supabase
+      // Natural network failure when offline
       const { data, error } = await supabase
         .from("sales")
         .select("*")
@@ -78,16 +91,35 @@ export const useProductSoldPerDay = (
       if (error) throw error;
       return (data || []) as unknown as Sale[];
     },
+    enabled: Boolean(storeId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
+};
 
-export const useGetSale = (saleId: string) =>
-  useQuery({
+export const useGetSale = (saleId: string) => {
+  const { isOnline } = useOfflineStatus();
+  
+  return useQuery({
     queryKey: ["sales", saleId],
-    queryFn: () =>
-      fromSupabase(
+    queryFn: async () => {
+      // No offline check - just call Supabase
+      // Natural network failure when offline
+      return await fromSupabase(
         supabase.from("sales").select("*").eq("id", saleId).single(),
-      ),
+      );
+    },
+    enabled: Boolean(saleId),
+    networkMode: 'offlineFirst',
+    placeholderData: (previousData) => previousData,
+    refetchOnMount: isOnline,
+    refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: true,
   });
+};
 
 export const useAddSale = () => {
   const queryClient = useQueryClient();
