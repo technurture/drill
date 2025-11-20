@@ -2,11 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_KEY || '',
@@ -64,6 +62,9 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 `;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const outputPath = path.resolve(__dirname, '../client/public/firebase-messaging-sw.js');
 fs.writeFileSync(outputPath, serviceWorkerContent);
