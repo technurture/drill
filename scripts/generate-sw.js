@@ -1,12 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+// Try to load dotenv, but don't crash if missing (e.g. in production if env vars are already set)
+try {
+  const { config } = await import('dotenv');
+  config({ path: path.resolve(__dirname, '../.env') });
+} catch (error) {
+  console.log('Note: dotenv not loaded. Assuming environment variables are set natively.');
+}
 
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_KEY || '',
