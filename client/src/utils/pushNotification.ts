@@ -4,6 +4,23 @@ export const sendPushNotification = async (
   title,
   actionLink,
 ) => {
+  // NOTE: This function is currently disabled because Firebase Cloud Messaging (FCM)
+  // handles push notifications automatically via the FCM token stored in the database.
+  // The Firebase Admin SDK on your backend (or Firebase Console) should be used to
+  // send notifications to users based on their stored FCM tokens.
+
+  console.log("Push notification request (handled by Firebase):", {
+    fcmToken,
+    title,
+    message
+  });
+
+  return; // Early return - notifications are handled by Firebase FCM
+
+  /* 
+  // Disabled: Custom backend notification endpoint
+  // This was causing CORS errors and is unnecessary with Firebase FCM
+  
   if (!navigator.onLine) {
     console.log("Offline: Skipping push notification");
     return;
@@ -45,4 +62,5 @@ export const sendPushNotification = async (
       console.log("Push notification failed (non-critical):", error.message);
     }
   }
+  */
 };
