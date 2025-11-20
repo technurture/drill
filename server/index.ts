@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 if (process.env.NODE_ENV === "production") {
   const clientDistPath = path.resolve(__dirname, "..");
-  
+
   if (!fs.existsSync(clientDistPath)) {
     throw new Error(
       `Client build directory not found at ${clientDistPath}. ` +
@@ -37,12 +37,12 @@ if (process.env.NODE_ENV === "production") {
     res.json({ status: "ok" });
   });
 
-  app.get("/*", (_req, res) => {
+  app.get("*", (_req, res) => {
     res.sendFile(path.resolve(clientDistPath, "index.html"));
   });
 } else {
   const vite = await createViteServer({
-    server: { 
+    server: {
       middlewareMode: true,
       host: "0.0.0.0",
       hmr: {
