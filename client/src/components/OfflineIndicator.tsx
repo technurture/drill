@@ -3,7 +3,7 @@ import { WifiOff, Wifi, RefreshCw } from 'lucide-react';
 import { useOfflineStatus } from '@/hooks/useOfflineStatus';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { getOfflineQueue } from '@/utils/indexedDB';
+import { actionQueueRepository } from '@/offline/queue/ActionQueueRepository';
 import { syncOfflineData } from '@/services/offlineSync';
 import { Button } from '@/components/ui/button';
 
@@ -28,9 +28,9 @@ export function OfflineIndicator() {
     
     const updateQueueSize = async () => {
       try {
-        const queue = await getOfflineQueue();
+        const count = await actionQueueRepository.getPendingCount();
         if (isCurrentEffect && isOnlineRef.current === isOnline) {
-          setQueueSize(queue.length);
+          setQueueSize(count);
         }
       } catch (error) {
         console.error('Failed to get queue size:', error);
@@ -58,8 +58,8 @@ export function OfflineIndicator() {
       
       recoveryTimerRef.current = setTimeout(async () => {
         if (isOnlineRef.current && isCurrentEffect) {
-          const queue = await getOfflineQueue();
-          if (queue.length === 0) {
+          const count = await actionQueueRepository.getPendingCount();
+          if (count === 0) {
             setShowOnlineRecovery(false);
             setShowIndicator(false);
           }
@@ -81,10 +81,10 @@ export function OfflineIndicator() {
       const result = await syncOfflineData();
       console.log(`✨ Manual sync complete: ${result.success} successful, ${result.failed} failed`);
       
-      const queue = await getOfflineQueue();
-      setQueueSize(queue.length);
+      const count = await actionQueueRepository.getPendingCount();
+      setQueueSize(count);
       
-      if (queue.length === 0) {
+      if (count === 0) {
         setTimeout(() => {
           setShowIndicator(false);
           setShowOnlineRecovery(false);
