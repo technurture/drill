@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  const clientDistPath = path.resolve(__dirname, "../client/dist");
+  const clientDistPath = path.resolve(__dirname, "..");
   
   if (!fs.existsSync(clientDistPath)) {
     throw new Error(
