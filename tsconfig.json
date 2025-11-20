@@ -2,13 +2,9 @@
   "compilerOptions": {
     // "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./client/src/*"
-      ]
+      "@/*": ["./client/src/*"]
     },
-    "types": [
-      "vite/client"
-    ],
+    "types": ["vite/client"],
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
@@ -23,22 +19,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable",
-      "WebWorker"
-    ]
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"]
   },
-  "include": [
-    "client/src/**/*",
-    "client/src/vite-env.d.ts",
-    "server"
-  ],
-  "exclude": [
-    "node_modules",
-    "client/dist",
-    "server/**/*.UNUSED",
-    "server/**/*.js"
-  ]
+  "include": ["client/src/**/*", "client/src/vite-env.d.ts", "server"],
+  "exclude": ["node_modules", "client/dist", "server/**/*.UNUSED", "server/**/*.js"]
 }

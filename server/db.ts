@@ -1,11 +1,15 @@
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-import type { Database } from '../client/src/types/database.types';
+/**
+ * Database Connection
+ * 
+ * This file provides database access for server-side operations.
+ * Currently uses Supabase client for database interactions.
+ * 
+ * For server-side database operations, you can:
+ * 1. Use the Supabase client with service role key (for admin operations)
+ * 2. Or use direct PostgreSQL connection for better performance
+ */
 
-dotenv.config();
+import { supabase } from '../client/src/integrations/supabase/supabase';
 
-const supabaseUrl = process.env.VITE_SUPABASE_PROJECT_URL || '';
-const supabaseKey = process.env.VITE_SUPABASE_API_KEY || '';
-
-export const supabase = createClient<Database>(supabaseUrl, supabaseKey);
-export type { Database };
+export { supabase };
+export type { Database } from '../client/src/types/database.types';

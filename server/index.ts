@@ -2,7 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import { createServer as createViteServer } from "vite";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,9 +22,8 @@ app.use((req, res, next) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  // In production, we serve the built client files from ../client (relative to dist/server)
-  const clientDistPath = path.resolve(__dirname, "../client");
-
+  const clientDistPath = path.resolve(__dirname, "../client/dist");
+  
   if (!fs.existsSync(clientDistPath)) {
     throw new Error(
       `Client build directory not found at ${clientDistPath}. ` +
@@ -42,10 +41,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(clientDistPath, "index.html"));
   });
 } else {
-  // Dynamic import for Vite to avoid loading it in production
-  const { createServer: createViteServer } = await import("vite");
   const vite = await createViteServer({
-    server: {
+    server: { 
       middlewareMode: true,
       host: "0.0.0.0",
       hmr: {

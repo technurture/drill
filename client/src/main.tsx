@@ -6,12 +6,12 @@ import "./i18n/i18n";
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      const registration = await navigator.serviceWorker.register('/sw-custom.js', {
+      const registration = await navigator.serviceWorker.register('/sw.js', {
         type: 'module',
         scope: '/',
       });
       console.log('✅ Service Worker registered successfully:', registration.scope);
-
+      
       registration.addEventListener('updatefound', () => {
         const newWorker = registration.installing;
         console.log('🔄 Service Worker update found');
