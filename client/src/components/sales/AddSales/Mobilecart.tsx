@@ -26,6 +26,7 @@ import {
   useProducts,
   useUpdateProductQuantity,
 } from "@/integrations/supabase/hooks/products";
+import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { SubscriptionContext } from "@/contexts/SubscriptionContext";
 import toast from "react-hot-toast";
@@ -58,6 +59,7 @@ const MobileCart = ({ result, removeCart, addMore }: cartType) => {
   const updateProductQuantity = useUpdateProductQuantity();
   const navigate = useNavigate();
   const { isOnline } = useOfflineStatus();
+  const queryClient = useQueryClient();
 
   const [cartItem, setCartItem] = useState<Product[]>([]);
 
@@ -257,7 +259,14 @@ const MobileCart = ({ result, removeCart, addMore }: cartType) => {
 
     // if (checkSalesPerDay === "success") {
       try {
-        await addSale.mutateAsync(saleData);
+        console.log('🔵 MobileCart: Starting sale mutation...');
+        const newSale = await addSale.mutateAsync(saleData);
+        console.log('✅ MobileCart: Sale mutation completed, returned sale:', newSale);
+        
+        // Log cache state after mutation
+        const cachedSales = queryClient.getQueryData(['sales', theStore?.id]);
+        console.log('📦 MobileCart: Sales cache after mutation:', cachedSales);
+        console.log('📊 MobileCart: Number of sales in cache:', Array.isArray(cachedSales) ? cachedSales.length : 'Not an array');
         
         // Only execute these operations when online
         if (theStore?.id && isOnline) {
