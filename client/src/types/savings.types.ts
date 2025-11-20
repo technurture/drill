@@ -48,6 +48,7 @@ export interface CreateSavingsPlanData {
   savings_duration: SavingsDuration;
   target_amount: number;
   current_amount?: string;
+  status: SavingsStatus;
 }
 
 export interface AddContributionData {

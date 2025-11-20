@@ -65,9 +65,10 @@ export const useCreateLoan = () => {
     tableName: "loans",
     action: "create",
     mutationFn: async (payload: CreateLoanData) => {
+      const { user_id, ...cleanPayload } = payload;
       const { data, error } = await supabase
         .from("loans")
-        .insert(payload)
+        .insert(cleanPayload)
         .select()
         .single();
       if (error) throw error;

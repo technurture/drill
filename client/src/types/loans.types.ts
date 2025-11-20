@@ -44,6 +44,7 @@ export interface CreateLoanData {
   repayment_frequency?: RepaymentFrequency;
   purpose?: string;
   user_id: string;
+  status: LoanStatus;
 }
 
 export interface AddRepaymentData {

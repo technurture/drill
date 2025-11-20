@@ -187,7 +187,8 @@ const Savings = () => {
       target_amount: parseFloat(createFormData.target_amount),
       store_id: selectedStore.id,
       user_id: user.id,
-      current_amount: "0"
+      current_amount: "0",
+      status: 'just_started'
     };
 
     if (!isOnline) {

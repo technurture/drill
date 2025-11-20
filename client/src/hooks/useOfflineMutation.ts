@@ -50,8 +50,12 @@ function getQueryKeysForTable(tableName: string, storeId: string, variables: any
 
     case 'savings_contributions':
       // Savings contributions use: ["savings-contributions", planId]
+      // ALSO need to update ["savings-plans", storeId] since that's what the UI displays
       if ((variables as any).savings_plan_id) {
         keys.push(["savings-contributions", (variables as any).savings_plan_id]);
+      }
+      if (storeId) {
+        keys.push(["savings-plans", storeId]);
       }
       break;
 
@@ -245,6 +249,13 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
             if (config.action === 'create') {
               queryClient.setQueryData(queryKey, (oldData: any) => {
                 console.log(`📝 Applying optimistic CREATE to key:`, queryKey, 'Old data type:', typeof oldData, 'is array:', Array.isArray(oldData));
+
+                // Special case: Skip savings-plans update for contributions (handled separately below)
+                if (config.tableName === 'savings_contributions' && queryKey[0] === 'savings-plans') {
+                  console.log(`⏭️ Skipping general CREATE for savings-plans - will handle specially`);
+                  return oldData;
+                }
+
                 // Guard: Only update if oldData is an array or undefined
                 if (oldData === undefined || oldData === null) return [optimisticData];
                 if (!Array.isArray(oldData)) {
@@ -279,6 +290,25 @@ export function useOfflineMutation<TData = unknown, TVariables = unknown>(
           });
 
           // Handle special cases
+          // Special case: savings_contributions need to update nested contributions array in savings-plans
+          if (config.tableName === 'savings_contributions' && config.action === 'create') {
+            const planId = (variables as any).savings_plan_id;
+            if (planId) {
+              queryClient.setQueryData(['savings-plans', storeId], (oldData: any) => {
+                if (!oldData || !Array.isArray(oldData)) return oldData;
+                console.log(`📝 Updating nested contributions for plan ${planId} in savings-plans query`);
+                return oldData.map((plan: any) =>
+                  plan.id === planId
+                    ? {
+                      ...plan,
+                      contributions: [optimisticData, ...(plan.contributions || [])]
+                    }
+                    : plan
+                );
+              });
+            }
+          }
+
           if (config.action === 'withdraw_full' || config.action === 'withdraw_partial') {
             const planId = (variables as any).planId;
             if (planId && config.tableName === 'savings_withdrawals') {

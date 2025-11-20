@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { format } from "date-fns";
 import { useLoans, useCreateLoan, useAddRepayment, useRepayments, useLoansSummary, useRepaymentsByStore, useDeleteLoan } from "@/integrations/supabase/hooks/loans";
 import NoStoreMessage from "@/components/NoStoreMessage";
-import { Loan, RepaymentFrequency } from "@/types/loans.types";
+import { Loan, LoanStatus, RepaymentFrequency } from "@/types/loans.types";
 import DeleteConfirmationModal from "@/components/inventory/DeleteConfirmationModal";
 import { AlertTriangle, CheckCircle, DollarSign, History, Plus, TrendingDown } from "lucide-react";
 import { formatNumber } from "@/utils/formatNumber";
@@ -113,6 +113,7 @@ const Loans = () => {
       repayment_frequency: createForm.repayment_frequency,
       purpose: createForm.purpose?.trim() || undefined,
       user_id: user.id,
+      status: 'active' as LoanStatus,
     };
 
     const currentlyOnline = typeof navigator !== 'undefined' && navigator.onLine;

@@ -315,7 +315,7 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
   }
 
   private async createLoan(payload: any): Promise<void> {
-    const { id, ...dataWithoutId } = payload;
+    const { id, user_id, ...dataWithoutId } = payload;
 
     if (id) {
       const { data: existing } = await supabase
@@ -330,8 +330,15 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
       }
     }
 
-    const insertData = id ? payload : dataWithoutId;
+    const insertData = id ? { id, ...dataWithoutId } : dataWithoutId;
     const { error } = await supabase.from('loans').insert([insertData]);
+
+    // Ignore duplicate key errors (record already exists from a previous sync attempt)
+    if (error && error.code === '23505') {
+      console.log(`Loan ${id} already exists (duplicate key), treating as success`);
+      return;
+    }
+
     if (error) throw error;
   }
 
@@ -391,6 +398,13 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('savings_plans').insert([insertData]);
+
+    // Ignore duplicate key errors (record already exists from a previous sync attempt)
+    if (error && error.code === '23505') {
+      console.log(`Savings plan ${id} already exists (duplicate key), treating as success`);
+      return;
+    }
+
     if (error) throw error;
   }
 
@@ -412,6 +426,13 @@ export class SupabaseBackendAdapter implements BackendSyncAdapter {
 
     const insertData = id ? payload : dataWithoutId;
     const { error } = await supabase.from('savings_contributions').insert([insertData]);
+
+    // Ignore duplicate key errors (record already exists from a previous sync attempt)
+    if (error && error.code === '23505') {
+      console.log(`Savings contribution ${id} already exists (duplicate key), treating as success`);
+      return;
+    }
+
     if (error) throw error;
   }
 

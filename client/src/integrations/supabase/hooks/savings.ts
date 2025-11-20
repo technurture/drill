@@ -104,6 +104,8 @@ export const useCreateSavingsPlan = () => {
     tableName: "savings_plans",
     action: "create",
     mutationFn: async (newPlan: CreateSavingsPlanData & { store_id: string; user_id: string }) => {
+      console.log("Creating savings plan:", newPlan);
+
       const { data, error } = await supabase
         .from("savings_plans")
         .insert([newPlan])
@@ -120,7 +122,7 @@ export const useCreateSavingsPlan = () => {
       id: crypto.randomUUID(),
       ...variables,
       current_amount: "0",
-      status: "active",
+      status: variables.status,
       created_at: new Date().toISOString(),
     } as unknown as SavingsPlan),
   });
