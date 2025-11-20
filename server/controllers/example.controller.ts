@@ -8,7 +8,7 @@
  * In production, you would create specific controllers for each feature.
  */
 
-import { supabase } from '../../client/src/integrations/supabase/supabase';
+import { supabase } from '../db';
 import type { Database } from '../../client/src/types/database.types';
 
 type Product = Database['public']['Tables']['products']['Row'];
