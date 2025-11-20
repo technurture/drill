@@ -19,7 +19,8 @@ export const useLoans = (storeId?: string) => {
       if (error) throw error;
       return (data || []) as Loan[];
     },
-    enabled: !!storeId && (isOnline || navigator.onLine),
+    enabled: !!storeId,
+    networkMode: isOnline ? 'online' : 'offlineFirst',
     refetchOnMount: isOnline ? 'always' : false,
     refetchOnWindowFocus: isOnline,
     refetchOnReconnect: isOnline,

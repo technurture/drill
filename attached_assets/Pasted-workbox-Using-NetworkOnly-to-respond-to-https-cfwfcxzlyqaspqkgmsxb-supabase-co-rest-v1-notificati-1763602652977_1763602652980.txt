@@ -1,0 +1,46 @@
+workbox Using NetworkOnly to respond to 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eeq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5'
+The FetchEvent for "https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5" resulted in a network error response: the promise was rejected.
+Promise.then
+(anonymous) @ chunk-BL4FT6NN.js?v=1548cff2:156Understand this warning
+workbox-strategies.js?v=1548cff2:364 Uncaught (in promise) no-response: The strategy could not generate a response for 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5'. The underlying error is TypeError: Failed to fetch.
+    at NetworkOnly._handle (workbox-strategies.js?v=1548cff2:364:13)
+    at async NetworkOnly._getResponse (chunk-IGSTIKOO.js?v=1548cff2:585:18)
+_handle @ workbox-strategies.js?v=1548cff2:364
+await in _handle
+_getResponse @ chunk-IGSTIKOO.js?v=1548cff2:585
+await in _getResponse
+handleAll @ chunk-IGSTIKOO.js?v=1548cff2:577
+handle @ chunk-IGSTIKOO.js?v=1548cff2:541
+handleRequest @ chunk-BL4FT6NN.js?v=1548cff2:277
+(anonymous) @ chunk-BL4FT6NN.js?v=1548cff2:154Understand this error
+@supabase_supabase-js.js?v=1548cff2:3930  GET https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/notifications?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6&read=eq.false&order=created_at.desc&limit=5 net::ERR_FAILED
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3930
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3951
+fulfilled @ @supabase_supabase-js.js?v=1548cff2:3903
+Promise.then
+step @ @supabase_supabase-js.js?v=1548cff2:3916
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3918
+__awaiter6 @ @supabase_supabase-js.js?v=1548cff2:3900
+(anonymous) @ @supabase_supabase-js.js?v=1548cff2:3941
+then @ @supabase_supabase-js.js?v=1548cff2:89Understand this error
+chunk-FWFYZ7QY.js?v=1548cff2:283 workbox Router is responding to: https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081
+chunk-FWFYZ7QY.js?v=1548cff2:283 workbox Network request for 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081' threw an error. TypeError: Failed to fetch
+    at StrategyHandler.fetch (chunk-IGSTIKOO.js?v=1548cff2:159:29)
+    at NetworkOnly._handle (workbox-strategies.js?v=1548cff2:338:17)
+    at NetworkOnly._getResponse (chunk-IGSTIKOO.js?v=1548cff2:585:29)
+chunk-FWFYZ7QY.js?v=1548cff2:283 workbox Using NetworkOnly to respond to 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081'
+The FetchEvent for "https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081" resulted in a network error response: the promise was rejected.
+Promise.then
+(anonymous) @ chunk-BL4FT6NN.js?v=1548cff2:156Understand this warning
+workbox-strategies.js?v=1548cff2:364 Uncaught (in promise) no-response: The strategy could not generate a response for 'https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081'. The underlying error is TypeError: Failed to fetch.
+    at NetworkOnly._handle (workbox-strategies.js?v=1548cff2:364:13)
+    at async NetworkOnly._getResponse (chunk-IGSTIKOO.js?v=1548cff2:585:18)
+_handle @ workbox-strategies.js?v=1548cff2:364
+await in _handle
+_getResponse @ chunk-IGSTIKOO.js?v=1548cff2:585
+await in _getResponse
+handleAll @ chunk-IGSTIKOO.js?v=1548cff2:577
+handle @ chunk-IGSTIKOO.js?v=1548cff2:541
+handleRequest @ chunk-BL4FT6NN.js?v=1548cff2:277
+(anonymous) @ chunk-BL4FT6NN.js?v=1548cff2:154Understand this error
+@supabase_supabase-js.js?v=1548cff2:3930  GET https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/devices_token?select=*&user_id=eq.1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 net::ERR_FAILED

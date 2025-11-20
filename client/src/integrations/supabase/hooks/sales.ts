@@ -18,7 +18,6 @@ export const useSales = (storeId?: string, options = {}) => {
     queryFn: async () => {
       if (!storeId) return [];
       
-      // First try a simple query to debug the 400 error
       console.log("Fetching sales for store ID:", storeId);
       
       const { data, error } = await supabase
@@ -40,7 +39,8 @@ export const useSales = (storeId?: string, options = {}) => {
       console.log("Sales data fetched:", data);
       return (data || []) as unknown as Sale[];
     },
-    enabled: !!storeId && (isOnline || navigator.onLine),
+    enabled: !!storeId,
+    networkMode: isOnline ? 'online' : 'offlineFirst',
     refetchOnMount: isOnline ? 'always' : false,
     refetchOnWindowFocus: isOnline,
     refetchOnReconnect: isOnline,

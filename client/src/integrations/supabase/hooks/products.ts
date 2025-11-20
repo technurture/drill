@@ -26,10 +26,12 @@ export const useProducts = (storeId: string) => {
       console.log('Fetched products for store:', storeId, 'data:', data); // Debug log
       return (data || []) as Product[];
     },
-    enabled: Boolean(storeId) && (isOnline || navigator.onLine),
+    enabled: Boolean(storeId),
+    networkMode: isOnline ? 'online' : 'offlineFirst',
     staleTime: 1000 * 60, // 1 minute
-    refetchOnMount: isOnline ? true : false,
+    refetchOnMount: isOnline,
     refetchOnWindowFocus: isOnline,
+    refetchOnReconnect: isOnline,
   });
 };
 

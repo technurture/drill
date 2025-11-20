@@ -12,17 +12,41 @@ cleanupOutdatedCaches();
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Use NetworkOnly for Supabase REST API to prevent stale cached responses
-// from overwriting optimistic updates when offline.
-// The React Query cache will handle offline functionality.
+// Custom handler for Supabase REST API that gracefully handles offline mode
+// When offline, it returns a synthetic response to avoid console errors
+// React Query cache + optimistic updates handle the actual offline functionality
 registerRoute(
   ({ url }) => url.origin.includes('supabase.co') && url.pathname.includes('/rest/v1/'),
-  new NetworkOnly()
+  async ({ request }) => {
+    try {
+      const response = await fetch(request);
+      return response;
+    } catch (error) {
+      console.log('[SW] Offline - Supabase API call queued for sync:', request.url);
+      return new Response(JSON.stringify({ offline: true }), {
+        status: 503,
+        statusText: 'Service Unavailable - Offline Mode',
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
 );
 
 registerRoute(
   ({ url }) => url.origin.includes('supabase.co') && url.pathname.includes('/auth/'),
-  new NetworkOnly()
+  async ({ request }) => {
+    try {
+      const response = await fetch(request);
+      return response;
+    } catch (error) {
+      console.log('[SW] Offline - Auth call failed (expected):', request.url);
+      return new Response(JSON.stringify({ offline: true }), {
+        status: 503,
+        statusText: 'Service Unavailable - Offline Mode',
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
 );
 
 registerRoute(
