@@ -327,26 +327,35 @@ const AddSales = () => {
       }
 
       if (!isOnline) {
-        // OFFLINE MODE: Use fire-and-forget mutate (not mutateAsync)
-        // This prevents blocking and allows immediate UI feedback
-        console.log('📴 Offline: Queueing sale immediately without awaiting');
+        // OFFLINE MODE: Queue for sync (useOfflineMutation handles optimistic updates)
+        console.log('📴 Offline: Queueing sale for sync');
         
-        // Queue the sale (returns immediately with optimistic data)
-        // Note: useOfflineMutation already handles optimistic updates in the cache
-        addSale.mutate(saleData);
-        
-        // Show success message
-        toast.success("Sale saved offline! It will sync when you're back online.");
-        
-        // Clear cart and close modals
-        setCartItems([]);
-        setCartModalOpen(false);
-        setCartSlideOpen(false);
-        setPaymentMode('cash');
-        setIsCheckingOut(false);
-        
-        // Navigate to sales page
-        navigate("/dashboard/sales");
+        // Queue the sale - useOfflineMutation will:
+        // 1. Create optimistic data with temporary ID
+        // 2. Add it to the cache immediately (so it appears in UI)
+        // 3. Queue it in IndexedDB for sync when back online
+        addSale.mutate(saleData, {
+          onSuccess: () => {
+            // Only navigate after mutation completes to ensure cache is updated
+            // Show success message
+            toast.success("Sale saved offline! It will sync when you're back online.");
+            
+            // Clear cart and close modals
+            setCartItems([]);
+            setCartModalOpen(false);
+            setCartSlideOpen(false);
+            setPaymentMode('cash');
+            setIsCheckingOut(false);
+            
+            // Navigate to sales page (sale will be visible via optimistic update)
+            navigate("/dashboard/sales");
+          },
+          onError: (error: any) => {
+            console.error('Failed to queue sale offline:', error);
+            toast.error("Failed to save sale offline");
+            setIsCheckingOut(false);
+          }
+        });
         return;
       }
 
