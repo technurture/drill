@@ -266,16 +266,10 @@ export const showInAppNotification = (
       label: "View",
       onClick: () => window.location.href = link
     } : undefined,
+    icon: <img src="/Shebalance_icon.png" alt = "SheBalance" className="w-5 h-5 object-contain" />,
   };
 
-  switch (type) {
-    case "success":
-      toast.success(title, options);
-      break;
-    case "error":
-      toast.error(title, options);
-      break;
-    default:
-      toast(title, options);
-  }
+  // We use toast(title, options) for all types to ensure our custom icon is used
+  // instead of the default success/error icons which might override it.
+  toast(title, options);
 };
