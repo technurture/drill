@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
 import { supabase } from '../db.js';
 
 // Initialize Firebase Admin SDK
