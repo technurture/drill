@@ -394,11 +394,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.removeItem("userType");
       localStorage.removeItem("pendingSync");
       localStorage.removeItem("stockwise-auth-token");
+      localStorage.removeItem("shebalance-has-visited");
       sessionStorage.clear();
       await supabase.auth.signOut().then(() => {
         setUser(null);
         setSession(null);
-        window.location.assign("/login");
+        window.location.assign("/");
         toast.success("Logged out successfully");
       });
     } catch (error: any) {
