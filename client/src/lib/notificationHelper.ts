@@ -6,40 +6,44 @@ interface NotificationData {
   store_id: string;
   message: string;
   type:
-    | "sale"
-    | "note"
-    | "subscription"
-    | "low_stock_threshold"
-    | "expiring_date"
-    | "sales_rep_auth"
-    | "product_update"
-    | "product_create"
-    | "product_delete"
-    | "inventory_update"
-    | "inventory_create"
-    | "inventory_delete"
-    | "restock"
-    | "loan_create"
-    | "loan_update"
-    | "loan_repayment"
-    | "loan_delete"
-    | "savings_create"
-    | "savings_update"
-    | "savings_contribution"
-    | "savings_withdraw"
-    | "savings_delete"
-    | "finance_record"
-    | "language_change";
+  | "sale"
+  | "note"
+  | "subscription"
+  | "low_stock_threshold"
+  | "expiring_date"
+  | "sales_rep_auth"
+  | "product_update"
+  | "product_create"
+  | "product_delete"
+  | "inventory_update"
+  | "inventory_create"
+  | "inventory_delete"
+  | "restock"
+  | "loan_create"
+  | "loan_update"
+  | "loan_repayment"
+  | "loan_delete"
+  | "savings_create"
+  | "savings_update"
+  | "savings_contribution"
+  | "savings_withdraw"
+  | "savings_delete"
+  | "finance_record"
+  | "language_change";
   link?: string;
 }
 
-export const sendNotification = async (
+// Internal helper to avoid double toasts and handle DB/Backend logic
+const sendNotificationInternal = async (
   notificationData: NotificationData
 ): Promise<boolean> => {
   try {
+    // Destructure link out to avoid inserting it into the DB (column doesn't exist)
+    const { link, ...dbData } = notificationData;
+
     const { data: notification, error: notifError } = await supabase
       .from("notifications")
-      .insert([{ ...notificationData, read: false }])
+      .insert([{ ...dbData, read: false }])
       .select()
       .single();
 
@@ -49,7 +53,7 @@ export const sendNotification = async (
     }
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
-    
+
     try {
       const response = await fetch(`${backendUrl}/api/notifications/send-to-user`, {
         method: "POST",
@@ -61,7 +65,7 @@ export const sendNotification = async (
           title: getNotificationTitle(notificationData.type),
           body: notificationData.message,
           data: {
-            link: notificationData.link || "/notifications",
+            link: link || "/notifications",
             type: notificationData.type,
             notification_id: notification.id.toString(),
           },
@@ -79,9 +83,19 @@ export const sendNotification = async (
 
     return true;
   } catch (error) {
-    console.error("Error in sendNotification:", error);
+    console.error("Error in sendNotificationInternal:", error);
     return false;
   }
+};
+
+// Exported for direct single-user notifications (if any)
+export const sendNotification = async (
+  notificationData: NotificationData
+): Promise<boolean> => {
+  // Show toast for direct calls
+  const title = getNotificationTitle(notificationData.type);
+  showInAppNotification(title, notificationData.message, "info", notificationData.link);
+  return sendNotificationInternal(notificationData);
 };
 
 export const sendNotificationToStore = async (
@@ -91,6 +105,10 @@ export const sendNotificationToStore = async (
   link?: string
 ): Promise<boolean> => {
   try {
+    // Show immediate toast to the user performing the action
+    const title = getNotificationTitle(type);
+    showInAppNotification(title, message, "info", link);
+
     let userIds: string[] = [];
 
     // First try to get store_users (sales reps, etc.)
@@ -119,9 +137,9 @@ export const sendNotificationToStore = async (
       }
     }
 
-    // Send notifications to all users
+    // Send notifications to all users using internal helper (no extra toasts)
     const notificationPromises = userIds.map((userId) =>
-      sendNotification({
+      sendNotificationInternal({
         user_id: userId,
         store_id: storeId,
         message,
@@ -140,7 +158,7 @@ export const sendNotificationToStore = async (
 
     // Try to send push notification
     const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
-    
+
     try {
       await fetch(`${backendUrl}/api/notifications/send-to-store`, {
         method: "POST",
@@ -200,15 +218,29 @@ const getNotificationTitle = (type: NotificationData["type"]): string => {
   return titles[type] || "🔔 New Notification";
 };
 
-export const showInAppNotification = (message: string, type: "success" | "error" | "info" = "info") => {
+export const showInAppNotification = (
+  title: string,
+  message: string,
+  type: "success" | "error" | "info" = "info",
+  link?: string
+) => {
+  const options = {
+    duration: 4000,
+    description: message,
+    action: link ? {
+      label: "View",
+      onClick: () => window.location.href = link
+    } : undefined,
+  };
+
   switch (type) {
     case "success":
-      toast.success(message);
+      toast.success(title, options);
       break;
     case "error":
-      toast.error(message);
+      toast.error(title, options);
       break;
     default:
-      toast(message);
+      toast(title, options);
   }
 };
