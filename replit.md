@@ -12,6 +12,23 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+**November 21, 2025 - WhatsApp-Style Push Notification System**
+- **Feature**: Implemented comprehensive push notification system with Firebase Cloud Messaging
+- **Implementation**:
+  - Created NotificationDropdown component that displays notifications in a dropdown modal under the bell icon in TopBar
+  - Integrated notification triggers into all major operations: sales (create/update/delete), products (create/update/delete/low stock alerts), loans (create/update/repayment), and savings (create/contribution)
+  - Set up real-time notification subscription using Supabase real-time channels that shows toast notifications when new notifications arrive
+  - Configured Firebase Admin SDK on server-side (`server/services/notification.service.ts`) to send push notifications
+  - Added notification helper functions (`client/src/lib/notificationHelper.ts`) that trigger both in-app (Supabase) and push notifications (FCM)
+  - Fixed React Rules of Hooks violations by ensuring `useNotificationSubscription` hook is called unconditionally
+  - Implemented backdrop overlay and smooth animations for the notification dropdown
+- **User Experience**: 
+  - When app is open: Notifications appear in a dropdown modal under the bell icon with real-time toast alerts
+  - When app is closed: Browser push notifications appear (via service worker and FCM)
+  - Red badge on bell icon shows unread notification count
+  - All user actions trigger notifications automatically
+- **Architecture**: Dual notification system - Supabase for in-app notifications and Firebase Cloud Messaging for background push notifications
+
 **November 20, 2025 - Production Deployment Configuration**
 - **Changes**: Configured fullstack production deployment with separate frontend and backend build processes
 - **Implementation**:

@@ -82,11 +82,16 @@ const NotificationDropdown = ({
       </Button>
 
       {isOpen && (
+        <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+      )}
+      
+      {isOpen && (
         <Card
           className={cn(
             "absolute right-0 top-12 w-[380px] max-w-[calc(100vw-2rem)] z-50",
-            "border shadow-lg bg-white dark:bg-gray-900"
+            "border shadow-2xl bg-white dark:bg-gray-900 animate-in fade-in slide-in-from-top-2 duration-200"
           )}
+          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="font-semibold text-lg">Notifications</h3>
