@@ -103,6 +103,7 @@ export const sendNotification = async (
                 notification: {
                     icon: 'https://drill-vfv8.onrender.com/Shebalance_icon.png',
                     badge: 'https://drill-vfv8.onrender.com/Shebalance_icon.png',
+                    image: 'https://drill-vfv8.onrender.com/Shebalance_icon.png',
                     requireInteraction: false,
                 },
             },

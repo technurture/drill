@@ -266,7 +266,7 @@ export const showInAppNotification = (
       label: "View",
       onClick: () => window.location.href = link
     } : undefined,
-    icon: <img src="/Shebalance_icon.png" alt="SheBalance" className="w-5 h-5 object-contain" />,
+    icon: <img src="/Shebalance_icon.png" alt="SheBalance" className="w-12 h-12 rounded-md object-contain" />,
   };
 
   // We use toast(title, options) for all types to ensure our custom icon is used
