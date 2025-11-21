@@ -118,6 +118,15 @@ export const sendNotification = async (
             }
         });
 
+        // Cleanup invalid tokens
+        if (failedTokens.length > 0) {
+            console.log(`Cleaning up ${failedTokens.length} invalid tokens...`);
+            await supabase
+                .from('devices_token')
+                .delete()
+                .in('token', failedTokens);
+        }
+
         console.log(`✅ Sent ${response.successCount}/${tokens.length} notifications`);
 
         return {
@@ -171,18 +180,46 @@ export const sendToStore = async (
     data?: Record<string, string>
 ): Promise<boolean> => {
     try {
-        // Get all users in the store
-        const { data: storeUsers, error: storeError } = await supabase
+        let userIds: string[] = [];
+
+        // 1. Get sales reps emails
+        const { data: salesReps, error: repsError } = await supabase
             .from('store_sales_reps')
-            .select('user_id')
+            .select('email')
             .eq('store_id', storeId);
 
-        if (storeError || !storeUsers || storeUsers.length === 0) {
+        if (!repsError && salesReps && salesReps.length > 0) {
+            const emails = salesReps.map(r => r.email);
+
+            // 2. Get user IDs for these emails
+            const { data: users, error: usersError } = await supabase
+                .from('users')
+                .select('id')
+                .in('email', emails);
+
+            if (!usersError && users) {
+                userIds = users.map(u => u.id);
+            }
+        }
+
+        // 3. Also get the store owner
+        const { data: store, error: storeError } = await supabase
+            .from('stores')
+            .select('owner_id')
+            .eq('id', storeId)
+            .single();
+
+        if (!storeError && store?.owner_id) {
+            userIds.push(store.owner_id);
+        }
+
+        if (userIds.length === 0) {
             console.log(`No users found for store ${storeId}`);
             return false;
         }
 
-        const userIds = storeUsers.map(su => su.user_id);
+        // Remove duplicates
+        userIds = [...new Set(userIds)];
 
         // Get all FCM tokens for these users
         const { data: tokens, error: tokenError } = await supabase
