@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { StoreProvider } from "./contexts/StoreContext";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -14,6 +14,7 @@ import PWAInstallPopup from "./components/PWAInstallPopup";
 import { OfflineIndicator } from "./components/OfflineIndicator";
 import { setupAutoSync, setQueryClient } from "./services/offlineSync";
 import { useHydrateOfflineCache } from "./hooks/useHydrateOfflineCache";
+import { onNotificationReceived, setupNotificationClickHandler, requestNotificationPermission } from "./integrations/firebase/firebase";
 import LandingPageWrapper from "./components/LandingPageWrapper";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
@@ -34,6 +35,7 @@ import EditProductPage from "./pages/edit-product/[id]";
 import ObscurityProvider from "./contexts/ObscureContext";
 import AddSales from "./pages/AddSales";
 import Notifications from "./pages/Notification";
+import NotificationSettings from "./pages/NotificationSettings";
 import Finance from "./pages/Finance";
 import Savings from "./pages/Savings";
 import Loans from "./pages/Loans";
@@ -90,6 +92,36 @@ function OfflineCacheHydration() {
   return null;
 }
 
+function FCMNotifications() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    // Initialize FCM message handler for foreground notifications
+    onNotificationReceived((payload) => {
+      console.log('FCM foreground message received:', payload);
+      // Toast notification is already shown by onNotificationReceived
+    });
+
+    // Setup notification click handler for deep-linking
+    setupNotificationClickHandler((link) => {
+      console.log('Navigating to:', link);
+      navigate(link);
+    });
+
+    // Request notification permission if not already granted
+    if (Notification.permission === 'default') {
+      requestNotificationPermission(user.id).catch(err =>
+        console.log('Notification permission request failed:', err)
+      );
+    }
+  }, [user?.id, navigate]);
+
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -105,178 +137,187 @@ function App() {
                     <OfflineIndicator />
                     <OfflineCacheHydration />
                     <OfflineSync />
+                    <FCMNotifications />
                     <ScrollToTop />
                     <Routes>
-                    <Route path="/" element={<LandingPageWrapper />} />
-                    <Route path="/landing" element={<Landing />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/termsandprivacy" element={<TermsAndPrivacy />} />
-                    <Route path="/login" element={<Login />} />
+                      <Route path="/" element={<LandingPageWrapper />} />
+                      <Route path="/landing" element={<Landing />} />
+                      <Route path="/signup" element={<Signup />} />
+                      <Route path="/termsandprivacy" element={<TermsAndPrivacy />} />
+                      <Route path="/login" element={<Login />} />
 
-                    <Route path="/create-store" element={
-                      <ProtectedRoute>
-                      <CreateStore />
-                      </ProtectedRoute>
+                      <Route path="/create-store" element={
+                        <ProtectedRoute>
+                          <CreateStore />
+                        </ProtectedRoute>
                       } />
-                    <Route path="/add-sales" element={
-                       <ProtectedRoute>
-                      <AddSales />
-                      </ProtectedRoute>
-                      } 
-                      />                    
-                    <Route
-                      path="/email-verification"
-                      element={<EmailVerification />}
-                    />
-                    <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route
-                      path="/termsandprivacy"
-                      element={<TermsAndPrivacy />}
-                    />
-                    <Route
-                      path="/help"
-                      element={<Help />}
-                    />
-                    <Route
-                      path="/dashboard"
-                      element={
+                      <Route path="/add-sales" element={
+                        <ProtectedRoute>
+                          <AddSales />
+                        </ProtectedRoute>
+                      }
+                      />
+                      <Route
+                        path="/email-verification"
+                        element={<EmailVerification />}
+                      />
+                      <Route path="/reset-password" element={<ResetPassword />} />
+                      <Route
+                        path="/termsandprivacy"
+                        element={<TermsAndPrivacy />}
+                      />
+                      <Route
+                        path="/help"
+                        element={<Help />}
+                      />
+                      <Route
+                        path="/dashboard"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Dashboard />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route path="/notifications" element={
                         <ProtectedRoute>
                           <DashboardLayout>
-                            <Dashboard />
+                            <Notifications />
                           </DashboardLayout>
                         </ProtectedRoute>
                       }
-                    />
-                    <Route path="/notifications" element={
-                       <ProtectedRoute>
-                        <DashboardLayout>
-                          <Notifications />
-                          </DashboardLayout>
-                      </ProtectedRoute>
-                      } 
-                      />  
-                    <Route
-                      path="/dashboard/sales"
-                      element={
+                      />
+                      <Route path="/notification-settings" element={
                         <ProtectedRoute>
                           <DashboardLayout>
-                            <Sales />
+                            <NotificationSettings />
                           </DashboardLayout>
                         </ProtectedRoute>
                       }
-                    />
-                    <Route
-                      path="/dashboard/inventory"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Inventory />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/inventory/edit-product/:id"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <EditProductPage />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/settings"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Settings />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/cart"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Cart />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/subscription"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Subscription />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/earnings"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Earnings />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/finance"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Finance />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/savings"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Savings />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/loans"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Loans />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/dashboard/help"
-                      element={
-                        <ProtectedRoute>
-                          <DashboardLayout>
-                            <Help />
-                          </DashboardLayout>
-                        </ProtectedRoute>
-                      }
-                    />
-                    
-                    {/* Admin Routes */}
-                    <Route path="/admin" element={<AdminLogin />} />
-                    <Route
-                      path="/admin-dashboard"
-                      element={
-                        <AdminProtectedRoute>
-                          <AdminDashboard />
-                        </AdminProtectedRoute>
-                      }
-                    />
-                  </Routes>
+                      />
+                      <Route
+                        path="/dashboard/sales"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Sales />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/inventory"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Inventory />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/inventory/edit-product/:id"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <EditProductPage />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/settings"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Settings />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/cart"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Cart />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/subscription"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Subscription />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/earnings"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Earnings />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/finance"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Finance />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/savings"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Savings />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/loans"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Loans />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/help"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <Help />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      {/* Admin Routes */}
+                      <Route path="/admin" element={<AdminLogin />} />
+                      <Route
+                        path="/admin-dashboard"
+                        element={
+                          <AdminProtectedRoute>
+                            <AdminDashboard />
+                          </AdminProtectedRoute>
+                        }
+                      />
+                    </Routes>
                   </LanguageProvider>
                 </ThemeProvider>
               </SubscriptionProvider>

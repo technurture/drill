@@ -27,7 +27,6 @@ import { useAddNotification, useGetDeviceToken } from "@/integrations/supabase/h
 import { useAuth } from "@/contexts/AuthContext";
 import { format } from "date-fns";
 import { checkSalesRestriction } from "@/utils/subscriptionHelpers/salesRestriction";
-import { sendPushNotification } from "@/utils/pushNotification";
 import React from "react";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
@@ -249,19 +248,6 @@ const AddSales = () => {
     );
   }, [cartItems]);
 
-  const pushNotification = async (message: string, title: string) => {
-    try {
-      if (token && Array.isArray(token)) {
-        const promises = token.map(device =>
-          sendPushNotification(device?.token, message, title, "/dashboard/notes")
-        );
-        await Promise.allSettled(promises);
-      }
-    } catch (error) {
-      console.log("Push notification error (non-critical):", error);
-    }
-  };
-
   const handleCheckout = async () => {
     if (isCheckingOut) {
       return;
@@ -375,18 +361,42 @@ const AddSales = () => {
         if (theStore?.id) {
           try {
             const productNames = cartItems.map((item) => item.name).join(", ");
+            const notificationMessage = `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`;
+
+            // Create notification record in database
             await addNotification.mutateAsync({
               user_id: user?.id || theStore?.owner_id,
-              message: `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
+              message: notificationMessage,
               type: "sale",
               read: false,
               store_id: theStore.id,
             });
 
-            pushNotification(
-              `New sale by Admin: ${productNames} for ₦${totalAmount.toFixed(2)}`,
-              "New Sale",
-            ).catch(err => console.log("Push notification error:", err));
+            // Send actual push notification via backend API
+            try {
+              const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+              const response = await fetch(`${apiUrl}/api/notifications/send-to-user`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  userId: user?.id || theStore?.owner_id,
+                  title: 'New Sale',
+                  body: notificationMessage,
+                  data: {
+                    link: '/dashboard/sales',
+                    type: 'sale',
+                  },
+                }),
+              });
+
+              if (response.ok) {
+                console.log('✅ Push notification sent successfully');
+              } else {
+                console.log('⚠️ Push notification failed:', await response.text());
+              }
+            } catch (pushError) {
+              console.log('Push notification request failed (non-critical):', pushError);
+            }
 
             // Check for low stock and send notifications
             for (const item of cartItems) {
@@ -394,18 +404,42 @@ const AddSales = () => {
               const threshold = products?.find((p) => p.id === item.id)?.low_stock_threshold || 0;
 
               if (updatedQuantity <= threshold) {
+                const lowStockMessage = `Low stock alert: ${item.name} has ${updatedQuantity} units remaining`;
+
+                // Create low stock notification record
                 await addNotification.mutateAsync({
                   user_id: user?.id,
-                  message: `Low stock alert: ${item.name} has ${updatedQuantity} units remaining`,
+                  message: lowStockMessage,
                   type: "low_stock_threshold",
                   read: false,
                   store_id: theStore.id,
                 });
 
-                pushNotification(
-                  `${item.name} has ${updatedQuantity} units remaining`,
-                  "Low stock Alert",
-                ).catch(err => console.log("Push notification error:", err));
+                // Send low stock push notification via backend API
+                try {
+                  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                  const response = await fetch(`${apiUrl}/api/notifications/send-to-user`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      userId: user?.id,
+                      title: 'Low Stock Alert',
+                      body: lowStockMessage,
+                      data: {
+                        link: '/dashboard/inventory',
+                        type: 'low_stock_threshold',
+                      },
+                    }),
+                  });
+
+                  if (response.ok) {
+                    console.log('✅ Low stock notification sent successfully');
+                  } else {
+                    console.log('⚠️ Low stock notification failed:', await response.text());
+                  }
+                } catch (pushError) {
+                  console.log('Low stock push notification failed (non-critical):', pushError);
+                }
               }
             }
           } catch (notifError) {

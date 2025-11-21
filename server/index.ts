@@ -3,6 +3,9 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
+import notificationRoutes from "./routes/notifications";
+import webhookRoutes from "./routes/webhooks";
+import { initializeFirebaseAdmin } from "./services/notification.service";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +23,13 @@ app.use((req, res, next) => {
   };
   next();
 });
+
+// Initialize Firebase Admin SDK
+initializeFirebaseAdmin();
+
+// API Routes
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/webhooks', webhookRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const clientDistPath = path.resolve(__dirname, "..");

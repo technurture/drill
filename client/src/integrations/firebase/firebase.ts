@@ -117,3 +117,26 @@ export const onNotificationReceived = (callback?: (payload: any) => void) => {
     }
   });
 };
+
+/**
+ * Setup service worker message listener for notification clicks
+ */
+export const setupNotificationClickHandler = (navigate: (path: string) => void) => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'NOTIFICATION_CLICK') {
+        const { link, data } = event.data;
+        console.log('Notification clicked, navigating to:', link);
+
+        // Navigate to the link
+        navigate(link);
+
+        // Notify service worker that we've navigated
+        navigator.serviceWorker.controller?.postMessage({
+          type: 'NOTIFICATION_NAVIGATE',
+          link,
+        });
+      }
+    });
+  }
+};
