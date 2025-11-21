@@ -48,6 +48,13 @@ export const initializeFirebaseAdmin = () => {
             const lastLine = privateKey.split('\n').pop();
             console.log(`Private Key loaded. Starts with: "${firstLine.substring(0, 20)}..." Ends with: "...${lastLine?.substring(lastLine.length - 20)}"`);
             console.log(`Key length: ${privateKey.length}`);
+
+            if (!privateKey.includes('-----BEGIN PRIVATE KEY-----')) {
+                console.error('❌ ERROR: The FIREBASE_ADMIN_PRIVATE_KEY does not look like a valid PEM key.');
+                console.error('It should start with "-----BEGIN PRIVATE KEY-----".');
+                console.error('You might have pasted the "private_key_id" or a truncated value instead of the full "private_key".');
+                return null;
+            }
         }
 
         firebaseApp = admin.initializeApp({
