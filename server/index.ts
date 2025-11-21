@@ -36,13 +36,13 @@ app.use("/api/webhooks", webhookRoutes);
 async function startServer() {
   // Support multiple deployment platforms (Leapcel, Render, Railway, etc.)
   const PORT = parseInt(
-    process.env.PORT || 
-    process.env.LEAPCEL_PORT || 
-    process.env.RAILWAY_PORT || 
-    "8080", 
+    process.env.PORT ||
+    process.env.LEAPCEL_PORT ||
+    process.env.RAILWAY_PORT ||
+    "8080",
     10
   );
-  
+
   // Enhanced logging for deployment debugging
   console.log('🚀 Starting SheBalance server...');
   console.log('📝 Environment:', process.env.NODE_ENV || 'development');
@@ -79,20 +79,20 @@ async function startServer() {
     app.get("/.replit-status-check", (_req, res) => {
       res.json({ status: "ok", service: "SheBalance" });
     });
-    
+
     app.get("/health", (_req, res) => {
-      res.json({ 
-        status: "healthy", 
+      res.json({
+        status: "healthy",
         service: "SheBalance",
-        timestamp: new Date().toISOString() 
+        timestamp: new Date().toISOString()
       });
     });
-    
+
     app.get("/api/health", (_req, res) => {
-      res.json({ 
-        status: "healthy", 
+      res.json({
+        status: "healthy",
         service: "SheBalance API",
-        timestamp: new Date().toISOString() 
+        timestamp: new Date().toISOString()
       });
     });
 
@@ -132,3 +132,5 @@ startServer().catch((err) => {
   console.error("Failed to start server:", err);
   process.exit(1);
 });
+
+
