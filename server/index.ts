@@ -67,7 +67,7 @@ async function startServer() {
     });
 
     // SPA support: serve index.html for other routes
-    app.get("*", (_req, res) => {
+    app.get(/.*/, (_req, res) => {
       res.sendFile(path.resolve(clientDistPath, "index.html"));
     });
   } else {
