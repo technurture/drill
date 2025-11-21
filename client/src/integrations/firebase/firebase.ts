@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { supabase } from "../supabase";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

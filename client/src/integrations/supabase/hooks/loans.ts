@@ -144,16 +144,28 @@ export const useDeleteLoan = () => {
   return useOfflineMutation({
     tableName: "loans",
     action: "delete",
-    mutationFn: async ({ loanId }: { loanId: string }) => {
+    mutationFn: async ({ loanId, storeId }: { loanId: string; storeId: string }) => {
       const { error } = await supabase.from("loans").delete().eq("id", loanId);
       if (error) throw error;
-      return loanId;
+      return { loanId, storeId };
     },
-    onSuccess: () => {
+    onSuccess: async (data) => {
       queryClient.invalidateQueries({ queryKey: ["loans"] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary"] });
+
+      // Send notification about loan deletion
+      try {
+        await sendNotificationToStore(
+          data.storeId,
+          "A loan has been deleted",
+          "loan_delete",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send loan delete notification:", error);
+      }
     },
-    getOptimisticData: ({ loanId }) => loanId,
+    getOptimisticData: (variables) => variables,
   });
 };
 
@@ -242,6 +254,20 @@ export const useAddRepayment = () => {
 
       // After cache updates, invalidate to trigger background refetch (keeps data fresh)
       queryClient.invalidateQueries({ queryKey: ["loan-repayments", data.loan_id] });
+
+      // Send notification about loan repayment
+      if (storeId) {
+        try {
+          await sendNotificationToStore(
+            storeId,
+            `Loan repayment recorded: ₦${data.amount.toLocaleString()}`,
+            "loan_repayment",
+            "/dashboard/finance"
+          );
+        } catch (error) {
+          console.error("Failed to send loan repayment notification:", error);
+        }
+      }
     },
     getOptimisticData: (variables) => ({
       id: crypto.randomUUID(),

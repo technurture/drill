@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { sendNotificationToStore } from "@/lib/notificationHelper";
 
 export interface FinancialRecord {
   id: string;
@@ -124,10 +125,23 @@ export const useAddFinancialRecord = () => {
       console.log("Finance Hook - Insert successful:", data);
       return data as FinancialRecord;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       console.log("Finance Hook - Mutation success, invalidating queries");
       // Invalidate and refetch financial records
       queryClient.invalidateQueries({ queryKey: ["financial-records", data.store_id] });
+
+      // Send notification about new finance record
+      try {
+        const recordType = data.type === 'income' ? 'Income' : 'Expense';
+        await sendNotificationToStore(
+          data.store_id,
+          `New ${recordType} record: ${data.reason} - ₦${Number(data.amount).toLocaleString()}`,
+          "finance_record",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send finance record notification:", error);
+      }
     },
     onError: (error) => {
       console.error("Finance Hook - Mutation error:", error);

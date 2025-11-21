@@ -175,7 +175,7 @@ export const useAddContribution = () => {
         await sendNotificationToStore(
           variables.store_id,
           `New savings contribution: ₦${data.amount.toLocaleString()} added`,
-          "savings_update",
+          "savings_contribution",
           "/dashboard/finance"
         );
       } catch (error) {
@@ -200,19 +200,31 @@ export const useDeleteSavingsPlan = () => {
   return useOfflineMutation({
     tableName: "savings_plans",
     action: "delete",
-    mutationFn: async (planId: string) => {
+    mutationFn: async ({ planId, storeId }: { planId: string; storeId: string }) => {
       const { error } = await supabase
         .from("savings_plans")
         .delete()
         .eq("id", planId);
 
       if (error) throw error;
-      return planId;
+      return { planId, storeId };
     },
-    onSuccess: () => {
+    onSuccess: async (data) => {
       queryClient.invalidateQueries({ queryKey: ["savings-plans"] });
+
+      // Send notification about savings plan deletion
+      try {
+        await sendNotificationToStore(
+          data.storeId,
+          "A savings plan has been deleted",
+          "savings_delete",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send savings delete notification:", error);
+      }
     },
-    getOptimisticData: (planId) => planId,
+    getOptimisticData: (variables) => variables,
   });
 };
 
@@ -292,11 +304,24 @@ export const useWithdrawSavings = () => {
 
       return { planId, storeId, withdrawal: withdrawalData };
     },
-    onSuccess: (data, variables) => {
+    onSuccess: async (data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["savings-plan", data.planId] });
       queryClient.invalidateQueries({ queryKey: ["savings-plans", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["savings-summary", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["savings-withdrawals", data.planId] });
+
+      // Send notification about savings withdrawal
+      try {
+        const withdrawalAmount = data.withdrawal?.amount_withdrawn || variables.totalAmount || 0;
+        await sendNotificationToStore(
+          variables.storeId,
+          `Savings withdrawn: ₦${Number(withdrawalAmount).toLocaleString()}`,
+          "savings_withdraw",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send savings withdrawal notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       planId: variables.planId,

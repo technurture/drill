@@ -334,11 +334,23 @@ export const useRestockProduct = () => {
       if (error) throw error;
       return data as Product;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["products", variables.storeId],
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+
+      // Send notification about product restock
+      try {
+        await sendNotificationToStore(
+          variables.storeId,
+          `Product restocked: ${data.name} (+${variables.quantity} units)`,
+          "restock",
+          "/dashboard/inventory"
+        );
+      } catch (error) {
+        console.error("Failed to send restock notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: variables.id,

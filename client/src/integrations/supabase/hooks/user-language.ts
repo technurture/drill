@@ -2,17 +2,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../supabase';
 import { toast } from 'sonner';
 import { LanguageCode } from '@/i18n/constants';
+import { sendNotificationToStore } from '@/lib/notificationHelper';
 
 interface UpdateLanguageParams {
   userId: string;
   language: LanguageCode;
+  storeId?: string;
 }
 
 export const useUpdateUserLanguage = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async ({ userId, language }: UpdateLanguageParams) => {
+    mutationFn: async ({ userId, language, storeId }: UpdateLanguageParams) => {
       const { data: { user }, error: userError } = await supabase.auth.getUser();
       
       if (userError || !user) {
@@ -25,10 +27,32 @@ export const useUpdateUserLanguage = () => {
 
       if (error) throw error;
 
-      return { language };
+      return { language, storeId };
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
+
+      // Send notification about language change
+      if (data.storeId) {
+        try {
+          const languageNames: Record<LanguageCode, string> = {
+            'en': 'English',
+            'yo': 'Yoruba',
+            'ha': 'Hausa',
+            'ig': 'Igbo',
+            'pidgin': 'Pidgin English'
+          };
+          
+          await sendNotificationToStore(
+            data.storeId,
+            `Language changed to ${languageNames[data.language] || data.language}`,
+            "language_change",
+            "/dashboard/settings"
+          );
+        } catch (error) {
+          console.error("Failed to send language change notification:", error);
+        }
+      }
     },
     onError: (error) => {
       console.error('Failed to update language preference:', error);

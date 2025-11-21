@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase";
 import { useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { Bell } from "lucide-react";
 
 export const useNotificationSubscription = (userId: string, storeId: string) => {
@@ -31,47 +31,19 @@ export const useNotificationSubscription = (userId: string, storeId: string) => 
           const notification = payload.new as any;
 
           if (notification.store_id === storeId) {
-            toast.custom(
-              (t) => (
-                <div
-                  className={`${
-                    t.visible ? "animate-enter" : "animate-leave"
-                  } max-w-md w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-                  onClick={() => toast.dismiss(t.id)}
-                >
-                  <div className="flex-1 w-0 p-4">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 pt-0.5">
-                        <Bell className="h-10 w-10 text-blue-500" />
-                      </div>
-                      <div className="ml-3 flex-1">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">
-                          New Notification
-                        </p>
-                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                          {notification.message}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex border-l border-gray-200 dark:border-gray-700">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toast.dismiss(t.id);
-                      }}
-                      className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 focus:outline-none"
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              ),
-              {
-                duration: 5000,
-                position: "top-right",
-              }
-            );
+            // Show toast notification with custom styling
+            toast(notification.message, {
+              description: getNotificationDescription(notification.type),
+              icon: <Bell className="h-5 w-5 text-blue-500" />,
+              duration: 5000,
+              position: "top-right",
+              action: notification.link ? {
+                label: "View",
+                onClick: () => {
+                  window.location.href = notification.link;
+                }
+              } : undefined,
+            });
 
             queryClient.invalidateQueries({ queryKey: ["notifications", userId, storeId] });
             queryClient.invalidateQueries({ queryKey: ["unreadNotifications", userId, storeId] });
@@ -85,4 +57,35 @@ export const useNotificationSubscription = (userId: string, storeId: string) => 
       supabase.removeChannel(channel);
     };
   }, [userId, storeId, queryClient]);
+};
+
+const getNotificationDescription = (type: string): string => {
+  const descriptions: Record<string, string> = {
+    sale: "A new sale has been recorded",
+    note: "You have a new note",
+    subscription: "Your subscription has been updated",
+    low_stock_threshold: "Product stock is running low",
+    expiring_date: "Product is about to expire",
+    sales_rep_auth: "Sales rep authorization required",
+    product_update: "A product has been updated",
+    product_create: "A new product has been added",
+    product_delete: "A product has been deleted",
+    inventory_update: "Inventory has been updated",
+    inventory_create: "New inventory item added",
+    inventory_delete: "Inventory item deleted",
+    restock: "Product restocked successfully",
+    loan_create: "A new loan has been created",
+    loan_update: "A loan has been updated",
+    loan_repayment: "Loan repayment recorded",
+    loan_delete: "A loan has been deleted",
+    savings_create: "A new savings plan has been created",
+    savings_update: "A savings plan has been updated",
+    savings_contribution: "Contribution added to savings",
+    savings_withdraw: "Withdrawal from savings",
+    savings_delete: "A savings plan has been deleted",
+    finance_record: "A new finance record has been added",
+    language_change: "Language preference updated",
+  };
+
+  return descriptions[type] || "You have a new notification";
 };

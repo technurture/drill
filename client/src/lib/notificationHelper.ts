@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 interface NotificationData {
   user_id: string;
@@ -15,11 +15,21 @@ interface NotificationData {
     | "product_update"
     | "product_create"
     | "product_delete"
+    | "inventory_update"
+    | "inventory_create"
+    | "inventory_delete"
+    | "restock"
     | "loan_create"
     | "loan_update"
+    | "loan_repayment"
+    | "loan_delete"
     | "savings_create"
     | "savings_update"
-    | "finance_record";
+    | "savings_contribution"
+    | "savings_withdraw"
+    | "savings_delete"
+    | "finance_record"
+    | "language_change";
   link?: string;
 }
 
@@ -143,11 +153,21 @@ const getNotificationTitle = (type: NotificationData["type"]): string => {
     product_update: "📦 Product Updated",
     product_create: "✨ New Product Added",
     product_delete: "🗑️ Product Deleted",
+    inventory_update: "📋 Inventory Updated",
+    inventory_create: "📋 Inventory Created",
+    inventory_delete: "📋 Inventory Deleted",
+    restock: "📦 Product Restocked",
     loan_create: "💰 New Loan",
     loan_update: "💰 Loan Updated",
-    savings_create: "🏦 New Savings",
+    loan_repayment: "💰 Loan Repayment",
+    loan_delete: "💰 Loan Deleted",
+    savings_create: "🏦 New Savings Plan",
     savings_update: "🏦 Savings Updated",
+    savings_contribution: "🏦 Savings Contribution",
+    savings_withdraw: "🏦 Savings Withdrawal",
+    savings_delete: "🏦 Savings Deleted",
     finance_record: "💵 Finance Record",
+    language_change: "🌐 Language Changed",
   };
 
   return titles[type] || "🔔 New Notification";
