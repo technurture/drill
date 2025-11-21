@@ -101,8 +101,8 @@ export const sendNotification = async (
                     link: data?.link || '/',
                 },
                 notification: {
-                    icon: '/icon-192x192.png',
-                    badge: '/icon-192x192.png',
+                    icon: 'https://drill-vfv8.onrender.com/Shebalance_icon.png',
+                    badge: 'https://drill-vfv8.onrender.com/Shebalance_icon.png',
                     requireInteraction: false,
                 },
             },
@@ -173,7 +173,7 @@ export const sendToStore = async (
     try {
         // Get all users in the store
         const { data: storeUsers, error: storeError } = await supabase
-            .from('store_users')
+            .from('store_sales_reps')
             .select('user_id')
             .eq('store_id', storeId);
 

@@ -114,14 +114,26 @@ export const sendNotificationToStore = async (
 
     let userIds: string[] = [];
 
-    // First try to get store_users (sales reps, etc.)
-    const { data: storeUsers, error: storeError } = await supabase
-      .from("store_users")
-      .select("user_id")
+    // First try to get store_users (sales reps)
+    // Note: We query store_sales_reps to get emails, then find users by email
+    const { data: salesReps, error: repsError } = await supabase
+      .from("store_sales_reps")
+      .select("email")
       .eq("store_id", storeId);
 
-    if (!storeError && storeUsers && storeUsers.length > 0) {
-      userIds = storeUsers.map((su) => su.user_id);
+    if (!repsError && salesReps && salesReps.length > 0) {
+      const emails = salesReps.map((r) => r.email);
+
+      // Get user_ids for these emails
+      const { data: users, error: usersError } = await supabase
+        .from("users")
+        .select("id")
+        .in("email", emails); // Assuming 'email' column exists in users table (it usually does in auth, but here it's public.users)
+      // Checking database.types.ts: User has 'email'.
+
+      if (!usersError && users) {
+        userIds = users.map((u) => u.id);
+      }
     }
 
     // If no store_users found, fallback to store owner
