@@ -18,8 +18,18 @@
     "noImplicitAny": false,
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "lib": ["ES2022"]
+    "lib": [
+      "ES2022"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "include": ["server/**/*.ts"],
-  "exclude": ["node_modules", "dist", "client"]
+  "include": [
+    "server/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "client"
+  ]
 }

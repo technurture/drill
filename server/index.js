@@ -3,11 +3,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use((req, res, next) => {
     const start = Date.now();
     const originalSend = res.send;
@@ -17,39 +20,55 @@ app.use((req, res, next) => {
     };
     next();
 });
-if (process.env.NODE_ENV === "production") {
-    const clientDistPath = path.resolve(__dirname, "../client/dist");
-    if (!fs.existsSync(clientDistPath)) {
-        throw new Error(`Client build directory not found at ${clientDistPath}. ` +
-            `Please run 'npm run build' before starting the production server.`);
-    }
-    app.use(express.static(clientDistPath));
-    app.get("/.replit-status-check", (_req, res) => {
-        res.json({ status: "ok" });
-    });
-    app.get("/*", (_req, res) => {
-        res.sendFile(path.resolve(clientDistPath, "index.html"));
-    });
-}
-else {
-    const vite = await createViteServer({
-        server: {
-            middlewareMode: true,
-            host: "0.0.0.0",
-            hmr: {
-                protocol: 'ws',
-                host: '0.0.0.0',
-                port: 5000,
+
+async function startServer() {
+    const PORT = parseInt(process.env.PORT || "8080", 10);
+
+    if (process.env.NODE_ENV === "production") {
+        const clientDistPath = path.resolve(__dirname, "../client/dist");
+        if (!fs.existsSync(clientDistPath)) {
+            console.error(
+                `Client build directory not found at ${clientDistPath}. Run 'npm run build' before starting.`
+            );
+            process.exit(1);
+        }
+
+        app.use(express.static(clientDistPath));
+
+        app.get("/.replit-status-check", (_req, res) => {
+            res.json({ status: "ok" });
+        });
+
+        app.get("/*", (_req, res) => {
+            res.sendFile(path.resolve(clientDistPath, "index.html"));
+        });
+    } else {
+        const vite = await createViteServer({
+            server: {
+                middlewareMode: true,
+                host: "0.0.0.0",
+                hmr: {
+                    protocol: "ws",
+                    host: "0.0.0.0",
+                    port: 5000,
+                },
             },
-        },
-        appType: "custom",
-    });
-    app.use(vite.middlewares);
-    app.get("/.replit-status-check", (_req, res) => {
-        res.json({ status: "ok" });
+            appType: "custom",
+        });
+
+        app.use(vite.middlewares);
+
+        app.get("/.replit-status-check", (_req, res) => {
+            res.json({ status: "ok" });
+        });
+    }
+
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`Server running on port ${PORT}`);
     });
 }
-const PORT = parseInt(process.env.PORT || "5000", 10);
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+
+startServer().catch((err) => {
+    console.error("Failed to start server:", err);
+    process.exit(1);
 });
