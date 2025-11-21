@@ -14,8 +14,27 @@ export const initializeFirebaseAdmin = () => {
         const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
 
         let privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
+
+        if (!projectId || !clientEmail || !privateKey) {
+            console.warn('Firebase Admin credentials not configured. Push notifications will be disabled.');
+            return null;
+        }
+
+        // Try to parse as JSON first (in case user pasted the whole service account file)
+        try {
+            if (privateKey.trim().startsWith('{')) {
+                const jsonKey = JSON.parse(privateKey);
+                if (jsonKey.private_key) {
+                    privateKey = jsonKey.private_key;
+                    console.log('Detected JSON service account format, extracted private_key.');
+                }
+            }
+        } catch (e) {
+            // Not JSON, continue as string
+        }
+
         if (privateKey) {
-            // Remove surrounding quotes if they exist (common when copying from JSON or .env files)
+            // Remove surrounding quotes if they exist
             if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
                 privateKey = privateKey.slice(1, -1);
             }
@@ -23,9 +42,12 @@ export const initializeFirebaseAdmin = () => {
             privateKey = privateKey.replace(/\\n/g, '\n');
         }
 
-        if (!projectId || !clientEmail || !privateKey) {
-            console.warn('Firebase Admin credentials not configured. Push notifications will be disabled.');
-            return null;
+        // Debug logging (masked)
+        if (privateKey) {
+            const firstLine = privateKey.split('\n')[0];
+            const lastLine = privateKey.split('\n').pop();
+            console.log(`Private Key loaded. Starts with: "${firstLine.substring(0, 20)}..." Ends with: "...${lastLine?.substring(lastLine.length - 20)}"`);
+            console.log(`Key length: ${privateKey.length}`);
         }
 
         firebaseApp = admin.initializeApp({
