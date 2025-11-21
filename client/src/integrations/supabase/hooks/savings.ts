@@ -9,6 +9,7 @@ import {
 } from "@/types/savings.types";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { sendNotificationToStore } from "@/lib/notificationHelper";
 
 // Fetch all savings plans for a store with contributions
 export const useSavingsPlans = (storeId?: string) => {
@@ -115,8 +116,20 @@ export const useCreateSavingsPlan = () => {
       if (error) throw error;
       return data as SavingsPlan;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       queryClient.invalidateQueries({ queryKey: ["savings-plans", data.store_id] });
+
+      // Send notification about new savings plan
+      try {
+        await sendNotificationToStore(
+          data.store_id,
+          `New savings plan created: ${data.goal_name} - Target: ₦${data.target_amount.toLocaleString()}`,
+          "savings_create",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send savings create notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: crypto.randomUUID(),
@@ -149,13 +162,25 @@ export const useAddContribution = () => {
       if (error) throw error;
       return data as SavingsContribution;
     },
-    onSuccess: (data, variables) => {
+    onSuccess: async (data, variables) => {
       console.log("Contribution added successfully, invalidating queries");
       // Invalidate the specific plan and contributions queries
       queryClient.invalidateQueries({ queryKey: ["savings-plan", variables.savings_plan_id] });
       queryClient.invalidateQueries({ queryKey: ["savings-contributions", variables.savings_plan_id] });
       queryClient.invalidateQueries({ queryKey: ["savings-plans", variables.store_id] });
       queryClient.invalidateQueries({ queryKey: ["savings-summary", variables.store_id] });
+
+      // Send notification about savings contribution
+      try {
+        await sendNotificationToStore(
+          variables.store_id,
+          `New savings contribution: ₦${data.amount.toLocaleString()} added`,
+          "savings_update",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send savings contribution notification:", error);
+      }
     },
     onError: (error) => {
       console.error("Error adding contribution:", error);

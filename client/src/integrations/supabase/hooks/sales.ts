@@ -3,6 +3,7 @@ import { supabase } from "../supabase";
 import { Sale, SaleItem } from "../../../types/database.types";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { sendNotificationToStore } from "@/lib/notificationHelper";
 
 const fromSupabase = async (query) => {
   const { data, error } = await query;
@@ -185,7 +186,7 @@ export const useAddSale = () => {
 
       return saleWithId;
     },
-    onSuccess: (data, variables) => {
+    onSuccess: async (data, variables) => {
       console.log('✅ Sale onSuccess called, data:', data);
 
       // Invalidate to refetch and get the complete data with items
@@ -193,6 +194,18 @@ export const useAddSale = () => {
       queryClient.invalidateQueries({
         queryKey: ["sales", variables.store_id],
       });
+
+      // Send notification to all store users
+      try {
+        await sendNotificationToStore(
+          variables.store_id,
+          `New sale recorded: ₦${variables.total_price.toLocaleString()} (${variables.payment_mode})`,
+          "sale",
+          "/dashboard/sales"
+        );
+      } catch (error) {
+        console.error("Failed to send sale notification:", error);
+      }
     },
     getOptimisticData: (variables) => {
       const { items, ...saleData } = variables;
@@ -238,10 +251,22 @@ export const useUpdateSale = () => {
       if (error) throw error;
       return data as unknown as Sale;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["sales", variables.store_id],
       });
+
+      // Send notification about sale update
+      try {
+        await sendNotificationToStore(
+          variables.store_id,
+          `Sale updated: ₦${data.total_price?.toLocaleString() || 'N/A'}`,
+          "sale",
+          "/dashboard/sales"
+        );
+      } catch (error) {
+        console.error("Failed to send sale update notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: variables.id,
@@ -269,11 +294,23 @@ export const useDeleteSale = () => {
 
       return { id, store_id: storeId };
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (_, variables) => {
       // Invalidate sales and finance queries
       queryClient.invalidateQueries({ queryKey: ["sales", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["financial-records", variables.storeId] });
       queryClient.invalidateQueries({ queryKey: ["financial-summary", variables.storeId] });
+
+      // Send notification about sale deletion
+      try {
+        await sendNotificationToStore(
+          variables.storeId,
+          "A sale record has been deleted",
+          "sale",
+          "/dashboard/sales"
+        );
+      } catch (error) {
+        console.error("Failed to send sale deletion notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: variables.id,

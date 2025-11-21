@@ -3,6 +3,7 @@ import { supabase } from "../supabase";
 import { Loan, LoanRepayment, CreateLoanData, AddRepaymentData, LoansSummary } from "@/types/loans.types";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { sendNotificationToStore } from "@/lib/notificationHelper";
 
 export const useLoans = (storeId?: string) => {
   const { isOnline } = useOfflineStatus();
@@ -74,9 +75,21 @@ export const useCreateLoan = () => {
       if (error) throw error;
       return data as Loan;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       queryClient.invalidateQueries({ queryKey: ["loans", data.store_id] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary", data.store_id] });
+
+      // Send notification about new loan
+      try {
+        await sendNotificationToStore(
+          data.store_id,
+          `New loan created: ${data.customer_name} - ₦${data.loan_amount.toLocaleString()}`,
+          "loan_create",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send loan create notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: crypto.randomUUID(),
@@ -102,9 +115,21 @@ export const useUpdateLoanStatus = () => {
       if (error) throw error;
       return data as Loan;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       queryClient.invalidateQueries({ queryKey: ["loans", data.store_id] });
       queryClient.invalidateQueries({ queryKey: ["loans-summary", data.store_id] });
+
+      // Send notification about loan status update
+      try {
+        await sendNotificationToStore(
+          data.store_id,
+          `Loan status updated: ${data.customer_name} - ${data.status}`,
+          "loan_update",
+          "/dashboard/finance"
+        );
+      } catch (error) {
+        console.error("Failed to send loan update notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: variables.loanId,

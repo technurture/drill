@@ -15,6 +15,9 @@ import { OfflineIndicator } from "./components/OfflineIndicator";
 import { setupAutoSync, setQueryClient } from "./services/offlineSync";
 import { useHydrateOfflineCache } from "./hooks/useHydrateOfflineCache";
 import { onNotificationReceived, setupNotificationClickHandler, requestNotificationPermission } from "./integrations/firebase/firebase";
+import { useNotificationSubscription } from "./hooks/useNotificationSubscription";
+import { useContext } from "react";
+import { StoreContext } from "./contexts/StoreContext";
 import LandingPageWrapper from "./components/LandingPageWrapper";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
@@ -122,6 +125,15 @@ function FCMNotifications() {
   return null;
 }
 
+function RealtimeNotifications() {
+  const { user } = useAuth();
+  const theStore = useContext(StoreContext);
+
+  useNotificationSubscription(user?.id || "", theStore?.id || "");
+
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -138,6 +150,7 @@ function App() {
                     <OfflineCacheHydration />
                     <OfflineSync />
                     <FCMNotifications />
+                    <RealtimeNotifications />
                     <ScrollToTop />
                     <Routes>
                       <Route path="/" element={<LandingPageWrapper />} />

@@ -13,6 +13,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { ThemeSelector } from "./ThemeSelector";
 import { useCurrentUser } from "@/integrations/supabase/hooks/users";
 import { useTranslation } from "react-i18next";
+import NotificationDropdown from "./notifications/NotificationDropdown";
 
 interface TopBarProps {
   onMenuClick?: () => void;
@@ -166,24 +167,13 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
           )}
 
           {/* Notifications */}
-          {
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/notifications")}
-              className="relative hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              {(unreadCount > 0 || notifications.length > 0) && (
-                <Badge
-                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center bg-red-500 hover:bg-red-500 text-white text-xs border-2 border-white dark:border-gray-900"
-                  variant="destructive"
-                >
-                  {unreadCount || notifications.length}
-                </Badge>
-              )}
-              <Bell className="h-5 w-5" />
-            </Button>
-          }
+          {user?.id && theStore?.id && (
+            <NotificationDropdown
+              userId={user.id}
+              storeId={theStore.id}
+              unreadCount={unreadCount || 0}
+            />
+          )}
 
           {/* Theme Selector */}
           <ThemeSelector />

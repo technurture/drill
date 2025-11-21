@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Product } from "../../../types/database.types";
 import { useOfflineMutation } from "@/hooks/useOfflineMutation";
+import { sendNotificationToStore } from "@/lib/notificationHelper";
 
 const fromSupabase = async (query) => {
   const { data, error } = await query;
@@ -30,12 +31,24 @@ export const useAddProduct = () => {
       console.log("AddProduct mutation success, data:", data);
       return data as Product;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (data, variables) => {
       console.log("AddProduct mutation success, invalidating queries for store:", variables.store_id);
       queryClient.invalidateQueries({
         queryKey: ["products", variables.store_id],
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+
+      // Send notification about new product
+      try {
+        await sendNotificationToStore(
+          variables.store_id,
+          `New product added: ${data.name}`,
+          "product_create",
+          "/dashboard/inventory"
+        );
+      } catch (error) {
+        console.error("Failed to send product create notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: crypto.randomUUID(),
@@ -92,11 +105,37 @@ export const useUpdateProduct = () => {
       if (error) throw error;
       return data as Product;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["products", variables.store_id],
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+
+      // Send notification about product update
+      try {
+        await sendNotificationToStore(
+          variables.store_id,
+          `Product updated: ${data.name || 'Product'}`,
+          "product_update",
+          "/dashboard/inventory"
+        );
+      } catch (error) {
+        console.error("Failed to send product update notification:", error);
+      }
+
+      // Check for low stock and send alert if needed
+      if (data.quantity <= (data.low_stock_threshold || 0)) {
+        try {
+          await sendNotificationToStore(
+            variables.store_id,
+            `⚠️ Low stock alert: ${data.name} (${data.quantity} remaining)`,
+            "low_stock_threshold",
+            "/dashboard/inventory"
+          );
+        } catch (error) {
+          console.error("Failed to send low stock notification:", error);
+        }
+      }
     },
     getOptimisticData: (variables) => ({
       ...variables,
@@ -120,11 +159,23 @@ export const useDeleteProduct = () => {
       if (error) throw error;
       return { id, store_id: storeId } as any;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["products", variables.storeId],
       });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+
+      // Send notification about product deletion
+      try {
+        await sendNotificationToStore(
+          variables.storeId,
+          "A product has been deleted from inventory",
+          "product_delete",
+          "/dashboard/inventory"
+        );
+      } catch (error) {
+        console.error("Failed to send product delete notification:", error);
+      }
     },
     getOptimisticData: (variables) => ({
       id: variables.id,
