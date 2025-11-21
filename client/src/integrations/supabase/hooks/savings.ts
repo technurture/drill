@@ -123,7 +123,7 @@ export const useCreateSavingsPlan = () => {
       try {
         await sendNotificationToStore(
           data.store_id,
-          `New savings plan created: ${data.goal_name} - Target: ₦${data.target_amount.toLocaleString()}`,
+          `New savings plan created: ${data.title} - Target: ₦${data.target_amount.toLocaleString()}`,
           "savings_create",
           "/dashboard/finance"
         );

@@ -83,7 +83,7 @@ export const useCreateLoan = () => {
       try {
         await sendNotificationToStore(
           data.store_id,
-          `New loan created: ${data.customer_name} - ₦${data.loan_amount.toLocaleString()}`,
+          `New loan created: ${data.borrower_name} - ₦${data.principal.toLocaleString()}`,
           "loan_create",
           "/dashboard/finance"
         );
@@ -123,7 +123,7 @@ export const useUpdateLoanStatus = () => {
       try {
         await sendNotificationToStore(
           data.store_id,
-          `Loan status updated: ${data.customer_name} - ${data.status}`,
+          `Loan status updated: ${data.borrower_name} - ${data.status}`,
           "loan_update",
           "/dashboard/finance"
         );
