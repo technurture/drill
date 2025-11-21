@@ -12,7 +12,16 @@ export const initializeFirebaseAdmin = () => {
     try {
         const projectId = process.env.FIREBASE_ADMIN_PROJECT_ID;
         const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
-        const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+        let privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY;
+        if (privateKey) {
+            // Remove surrounding quotes if they exist (common when copying from JSON or .env files)
+            if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+                privateKey = privateKey.slice(1, -1);
+            }
+            // Replace escaped newlines
+            privateKey = privateKey.replace(/\\n/g, '\n');
+        }
 
         if (!projectId || !clientEmail || !privateKey) {
             console.warn('Firebase Admin credentials not configured. Push notifications will be disabled.');
