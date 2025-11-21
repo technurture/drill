@@ -5,7 +5,7 @@ import {
     sendToStore,
     getNotificationPreferences,
     updateNotificationPreferences,
-} from '../services/notification.service';
+} from '../services/notification.service.js';
 
 /**
  * POST /api/notifications/send

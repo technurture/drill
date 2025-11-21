@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { supabaseWebhookHandler } from '../events/supabase-events';
+import { supabaseWebhookHandler } from '../events/supabase-events.js';
 
 const router = Router();
 

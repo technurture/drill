@@ -6,7 +6,7 @@ import {
     sendTestNotification,
     getPreferences,
     updatePreferences,
-} from '../controllers/notification.controller';
+} from '../controllers/notification.controller.js';
 
 const router = Router();
 

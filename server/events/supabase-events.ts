@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { sendToStore, sendToUser, getNotificationPreferences } from '../services/notification.service';
+import { sendToStore, sendToUser, getNotificationPreferences } from '../services/notification.service.js';
 
 /**
  * Handle new sale created event
