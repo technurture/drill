@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin';
-import { supabase } from '../db';
+import { supabase } from '../db.js';
 
 // Initialize Firebase Admin SDK
 let firebaseApp: admin.app.App | null = null;
