@@ -12,6 +12,28 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+**November 21, 2025 - Navigation Flow Fixes**
+- **Issue**: Clicking the SheBalance logo or reloading the page incorrectly redirected authenticated users to the login page instead of the dashboard
+- **Root Cause**: LandingPageWrapper forced all returning visitors (even authenticated ones) to the login page; logo click always navigated to "/" which triggered the wrapper's redirect logic
+- **Implementation**:
+  - Updated TopBar logo to always navigate to "/landing" page
+  - Modified LandingPageWrapper to check authentication state first and redirect authenticated users to dashboard with `replace: true` to prevent browser history pollution
+  - Changed landing page logic to show landing for all logged-out visitors (not just first-time), allowing them to navigate to login naturally
+  - Updated signOut function to clear "shebalance-has-visited" flag and redirect to "/" so users see landing page after logout
+- **User Experience**: 
+  - Logo click: Always takes user to landing page (for both logged-in and logged-out users)
+  - Page reload at "/": Authenticated users → dashboard, logged-out users → landing page
+  - After logout: Users see landing page on next visit
+  - No redirect loops, no loading state flashing
+- **Files Modified**: `client/src/components/TopBar.tsx`, `client/src/components/LandingPageWrapper.tsx`, `client/src/contexts/AuthContext.tsx`
+
+**November 21, 2025 - Notification System Production Error Fix**
+- **Issue**: Store notifications failed with "No users found for store" error
+- **Root Cause**: The `sendNotificationToStore` function queried a `store_users` table that may not have records, causing all store notifications to fail
+- **Solution**: Added fallback logic to query store owner from `stores` table when no `store_users` exist; improved error handling with `Promise.allSettled`
+- **Impact**: Notifications now work reliably with graceful fallback to store owner
+- **File Modified**: `client/src/lib/notificationHelper.ts`
+
 **November 21, 2025 - WhatsApp-Style Push Notification System**
 - **Feature**: Implemented comprehensive push notification system with Firebase Cloud Messaging
 - **Implementation**:
