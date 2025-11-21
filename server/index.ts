@@ -38,12 +38,24 @@ async function startServer() {
 
   if (process.env.NODE_ENV === "production") {
     // Production: Serve built client
-    const clientDistPath = path.resolve(__dirname, "../client/dist");
+    // Production: Serve built client
+    // The server is built to dist/server/index.js
+    // The client is built to dist/index.html
+    // So we need to serve the parent directory of the server script
+    const clientDistPath = path.resolve(__dirname, "..");
 
-    if (!fs.existsSync(clientDistPath)) {
+    console.log(`Serving static files from: ${clientDistPath}`);
+
+    if (!fs.existsSync(path.join(clientDistPath, "index.html"))) {
       console.error(
-        `Client build directory not found at ${clientDistPath}. Run 'npm run build' before starting.`
+        `Client build not found at ${clientDistPath}. Run 'npm run build' before starting.`
       );
+      // List files in the directory to help debug
+      try {
+        console.log("Files in dist:", fs.readdirSync(clientDistPath));
+      } catch (e) {
+        console.log("Could not list files in dist");
+      }
       process.exit(1);
     }
 
