@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useCurrentUser } from '@/integrations/supabase/hooks/users';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 export default function NotificationSettings() {
     const navigate = useNavigate();
