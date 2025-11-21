@@ -91,19 +91,38 @@ export const sendNotificationToStore = async (
   link?: string
 ): Promise<boolean> => {
   try {
+    let userIds: string[] = [];
+
+    // First try to get store_users (sales reps, etc.)
     const { data: storeUsers, error: storeError } = await supabase
       .from("store_users")
       .select("user_id")
       .eq("store_id", storeId);
 
-    if (storeError || !storeUsers || storeUsers.length === 0) {
-      console.log("No users found for store:", storeId);
-      return false;
+    if (!storeError && storeUsers && storeUsers.length > 0) {
+      userIds = storeUsers.map((su) => su.user_id);
     }
 
-    const notificationPromises = storeUsers.map((storeUser) =>
+    // If no store_users found, fallback to store owner
+    if (userIds.length === 0) {
+      const { data: store, error: ownerError } = await supabase
+        .from("stores")
+        .select("owner_id")
+        .eq("id", storeId)
+        .single();
+
+      if (!ownerError && store?.owner_id) {
+        userIds.push(store.owner_id);
+      } else {
+        console.warn("No users or owner found for store:", storeId);
+        return false;
+      }
+    }
+
+    // Send notifications to all users
+    const notificationPromises = userIds.map((userId) =>
       sendNotification({
-        user_id: storeUser.user_id,
+        user_id: userId,
         store_id: storeId,
         message,
         type,
@@ -111,8 +130,15 @@ export const sendNotificationToStore = async (
       })
     );
 
-    await Promise.all(notificationPromises);
+    const results = await Promise.allSettled(notificationPromises);
+    const successCount = results.filter((r) => r.status === "fulfilled").length;
 
+    if (successCount === 0) {
+      console.error("All notification attempts failed for store:", storeId);
+      return false;
+    }
+
+    // Try to send push notification
     const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
     
     try {
@@ -132,7 +158,8 @@ export const sendNotificationToStore = async (
         }),
       });
     } catch (pushError) {
-      console.warn("Store push notification failed:", pushError);
+      // Push notifications are optional, don't fail the whole operation
+      console.log("Push notification unavailable (non-critical)");
     }
 
     return true;
