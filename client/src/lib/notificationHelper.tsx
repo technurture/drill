@@ -55,7 +55,7 @@ const sendNotificationInternal = async (
       return false;
     }
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
+    const backendUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || window.location.origin;
 
     try {
       const response = await fetch(`${backendUrl}/api/notifications/send-to-user`, {
@@ -172,7 +172,7 @@ export const sendNotificationToStore = async (
     }
 
     // Try to send push notification
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || window.location.origin;
+    const backendUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || window.location.origin;
 
     try {
       await fetch(`${backendUrl}/api/notifications/send-to-store`, {
@@ -266,7 +266,7 @@ export const showInAppNotification = (
       label: "View",
       onClick: () => window.location.href = link
     } : undefined,
-    icon: <img src="/Shebalance_icon.png" alt = "SheBalance" className="w-5 h-5 object-contain" />,
+    icon: <img src="/Shebalance_icon.png" alt="SheBalance" className="w-5 h-5 object-contain" />,
   };
 
   // We use toast(title, options) for all types to ensure our custom icon is used

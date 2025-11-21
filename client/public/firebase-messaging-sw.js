@@ -20,8 +20,8 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.notification?.title || 'New notification';
   const notificationOptions = {
     body: payload.notification?.body || '',
-    icon: payload.notification?.icon || "/Shebanlace_favicon.png",
-    badge: "/Shebanlace_favicon.png",
+    icon: payload.notification?.icon || "/Shebalance_icon.png",
+    badge: "/Shebalance_icon.png",
     image: payload.notification?.image,
     data: { 
       url: payload.data?.url || payload.fcmOptions?.link || "/",
