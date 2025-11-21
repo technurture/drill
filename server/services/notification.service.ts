@@ -34,12 +34,25 @@ export const initializeFirebaseAdmin = () => {
         }
 
         if (privateKey) {
-            // Remove surrounding quotes if they exist
-            if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
-                privateKey = privateKey.slice(1, -1);
+            let key = privateKey.trim();
+
+            // Try to parse as JSON string if it starts with quote
+            if (key.startsWith('"')) {
+                try {
+                    const parsed = JSON.parse(key);
+                    if (typeof parsed === 'string') {
+                        key = parsed;
+                    }
+                } catch (e) {
+                    // If parsing fails, just strip quotes manually
+                    if (key.startsWith('"') && key.endsWith('"')) {
+                        key = key.slice(1, -1);
+                    }
+                }
             }
-            // Replace escaped newlines
-            privateKey = privateKey.replace(/\\n/g, '\n');
+
+            // Replace escaped newlines (handle both \n and \\n)
+            privateKey = key.replace(/\\n/g, '\n');
         }
 
         // Debug logging (masked)
