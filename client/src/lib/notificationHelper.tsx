@@ -68,7 +68,7 @@ const sendNotificationInternal = async (
           title: getNotificationTitle(notificationData.type),
           body: notificationData.message,
           data: {
-            link: link || "/notifications",
+            link: getAbsoluteLink(link || "/notifications"),
             type: notificationData.type, // Keep original specific type for the app/push
             notification_id: notification.id.toString(),
           },
@@ -185,7 +185,7 @@ export const sendNotificationToStore = async (
           title: getNotificationTitle(type),
           body: message,
           data: {
-            link: link || "/notifications",
+            link: getAbsoluteLink(link || "/notifications"),
             type,
           },
         }),
@@ -272,4 +272,10 @@ export const showInAppNotification = (
   // We use toast(title, options) for all types to ensure our custom icon is used
   // instead of the default success/error icons which might override it.
   toast(title, options);
+};
+
+const getAbsoluteLink = (path: string): string => {
+  const baseUrl = import.meta.env.VITE_API_URL || window.location.origin;
+  if (path.startsWith("http")) return path;
+  return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
 };
