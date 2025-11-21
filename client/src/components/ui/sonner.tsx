@@ -10,7 +10,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
-    const update = () => setPosition(mq.matches ? "top-center" : "top-right");
+    const update = () => setPosition(mq.matches ? "top-center" : "bottom-right");
     update();
     mq.addEventListener?.("change", update);
     return () => mq.removeEventListener?.("change", update);

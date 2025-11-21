@@ -41,9 +41,12 @@ const sendNotificationInternal = async (
     // Destructure link out to avoid inserting it into the DB (column doesn't exist)
     const { link, ...dbData } = notificationData;
 
+    // Map the extended type to a valid DB type to avoid constraint errors
+    const dbType = mapToDbType(notificationData.type);
+
     const { data: notification, error: notifError } = await supabase
       .from("notifications")
-      .insert([{ ...dbData, read: false }])
+      .insert([{ ...dbData, type: dbType, read: false }])
       .select()
       .single();
 
@@ -66,7 +69,7 @@ const sendNotificationInternal = async (
           body: notificationData.message,
           data: {
             link: link || "/notifications",
-            type: notificationData.type,
+            type: notificationData.type, // Keep original specific type for the app/push
             notification_id: notification.id.toString(),
           },
         }),
@@ -184,6 +187,26 @@ export const sendNotificationToStore = async (
   } catch (error) {
     console.error("Error in sendNotificationToStore:", error);
     return false;
+  }
+};
+
+const mapToDbType = (type: NotificationData["type"]): string => {
+  // Allowed DB types: "sale" | "note" | "subscription" | "low_stock_threshold" | "expiring_date" | "sales_rep_auth"
+  switch (type) {
+    case "sale":
+      return "sale";
+    case "subscription":
+      return "subscription";
+    case "low_stock_threshold":
+      return "low_stock_threshold";
+    case "expiring_date":
+      return "expiring_date";
+    case "sales_rep_auth":
+      return "sales_rep_auth";
+    case "note":
+    default:
+      // Map all other new types to "note" as a fallback
+      return "note";
   }
 };
 
