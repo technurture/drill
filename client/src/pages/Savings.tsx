@@ -295,7 +295,7 @@ const Savings = () => {
   const handleDeletePlan = async (planId: string) => {
     if (confirm("Are you sure you want to delete this savings plan? This action cannot be undone.")) {
       try {
-        await deleteSavingsPlan.mutateAsync(planId);
+        await deleteSavingsPlan.mutateAsync({ planId, storeId: selectedStore?.id || "" });
         toast.success("Savings plan deleted successfully!");
         refetch();
       } catch (error) {

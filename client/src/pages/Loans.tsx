@@ -436,7 +436,7 @@ const Loans = () => {
           onConfirm={async () => {
             if (!activeLoan) return;
             try {
-              await deleteLoan.mutateAsync({ loanId: activeLoan.id });
+              await deleteLoan.mutateAsync({ loanId: activeLoan.id, storeId: store?.id || "" });
               toast.success(t('loanDeleted'));
             } catch (err: any) {
               toast.error(err?.message || tc('failedToCreateLoan'));
