@@ -1,0 +1,577 @@
+[Coframe] Replit Enterprise watcher loaded cf.js:8:13
+
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      a0df91602a414c03.js:2:102208
+Download the Apollo DevTools for a better development experience: https://addons.mozilla.org/en-US/firefox/addon/apollo-developer-tools/ a0df91602a414c03.js:2:102208
+[LaunchDarkly] LaunchDarkly client initialized a0df91602a414c03.js:2:102208
+Partitioned cookie or storage access was provided to “https://www.googletagmanager.com/static/service_worker/5ba0/sw_iframe.html?origin=https%3A%2F%2Freplit.com” because it is loaded in the third-party context and dynamic state partitioning is enabled. sw_iframe.html:15:769
+Partitioned cookie or storage access was provided to “https://js.stripe.com/v3/controller-with-preconnect-83ce8c8f57abac3de210863560013abb.html#__shared_params__[version]=acacia&__shared_params__[light_experiment_assignments]=%7B%22token%22%3A%22e46c7779-e6cc-4343-8355-7abf7f95d829%22%2C%22assignments%22%3A%7B%7D%7D&apiKey=pk_live_515YpNsJAmnYVOvfnsBqRdATWS6SzbNAslOz1z2tujdKuvRMDAwWMeFXp6dJL1YKRrQjB0WAp0UDGwlFYL7hxw7Fc00QkfxBFsL&apiVersion=2025-01-27.acacia&stripeJsId=e46c7779-e6cc-4343-8355-7abf7f95d829&stripeObjId=sobj-b8e3dc8f-d982-4140-8d66-a1332fc1373f&firstStripeInstanceCreatedLatency=11&controllerCount=1&isCheckout=false&stripeJsLoadTime=1763842025112&manualBrowserDeprecationRollout=false&mids[guid]=NA&mids[muid]=feb08807-c48f-4ec4-81f9-801b0e1fd33a7916f2&mids[sid]=8860d302-f014-4267-aab7-b34eb1d7ff26ff1682&referrer=https%3A%2F%2Freplit.com%2F%40nosymammalfnfz%2Fdrill&controllerId=__privateStripeController8451” because it is loaded in the third-party context and dynamic state partitioning is enabled. controller-with-preconnect-092006a996cb8b31d014206aff716714.js:1:162366
+Content-Security-Policy warnings 4
+Ignoring unsupported entryTypes: longtask. recaptcha__en.js:500:330
+Partitioned cookie or storage access was provided to “https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LdqhwwoAAAAAFPdw8jCuvY3PaHQItGj3RzOS4fW&co=aHR0cHM6Ly9yZXBsaXQuY29tOjQ0Mw..&hl=en&v=TkacYOdEJbdB_JjX802TMer9&size=invisible&anchor-ms=20000&execute-ms=15000&cb=4498jfoto9yz” because it is loaded in the third-party context and dynamic state partitioning is enabled. recaptcha__en.js:545:500
+Partitioned cookie or storage access was provided to “https://m.stripe.network/inner.html#url=https%3A%2F%2Freplit.com%2F%40nosymammalfnfz%2Fdrill&title=drill%20-%20Replit&referrer=https%3A%2F%2Freplit.com%2Fimport%2Fagent&muid=feb08807-c48f-4ec4-81f9-801b0e1fd33a7916f2&sid=8860d302-f014-4267-aab7-b34eb1d7ff26ff1682&version=6&preview=false&__shared_params__[version]=acacia” because it is loaded in the third-party context and dynamic state partitioning is enabled. out-4.5.45.js:1:39660
+Cookie warnings 2
+Cookie “_GRECAPTCHA” will soon be rejected because it is foreign and does not have the “Partitioned“ attribute. reload
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 2 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 2 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 2 stallwart.build.js:1:886
+Feature Policy: Skipping unsupported feature name “accelerometer”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “ambient-light-sensor”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “autoplay”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “battery”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “encrypted-media”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “execution-while-not-rendered”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “execution-while-out-of-viewport”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “gyroscope”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “layout-animations”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “legacy-image-formats”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “magnetometer”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “midi”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “navigation-override”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “oversized-images”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “payment”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “picture-in-picture”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “publickey-credentials”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “sync-xhr”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “unoptimized-images”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “unsized-media”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “usb”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “xr-spatial-tracking”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “clipboard-read”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “clipboard-write”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “accelerometer”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “ambient-light-sensor”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “autoplay”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “battery”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “encrypted-media”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “execution-while-not-rendered”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “execution-while-out-of-viewport”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “gyroscope”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “layout-animations”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “legacy-image-formats”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “magnetometer”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “midi”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “navigation-override”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “oversized-images”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “payment”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “picture-in-picture”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “publickey-credentials”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “sync-xhr”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “unoptimized-images”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “unsized-media”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “usb”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “xr-spatial-tracking”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “clipboard-read”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “clipboard-write”. workspace_iframe.html
+Feature Policy: Skipping unsupported feature name “accelerometer”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “ambient-light-sensor”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “autoplay”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “battery”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “encrypted-media”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “execution-while-not-rendered”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “execution-while-out-of-viewport”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “gyroscope”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “layout-animations”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “legacy-image-formats”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “magnetometer”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “midi”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “navigation-override”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “oversized-images”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “payment”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “picture-in-picture”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “publickey-credentials”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “sync-xhr”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “unoptimized-images”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “unsized-media”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “usb”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “xr-spatial-tracking”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “clipboard-read”. workspace_iframe.html:151:20
+Feature Policy: Skipping unsupported feature name “clipboard-write”. workspace_iframe.html:151:20
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+Cookie warnings 3
+Partitioned cookie or storage access was provided to “https://d8be988d-e8f4-4b69-9be6-a56f1eb17d3d-00-38ymcerss8bxl.picard.replit.dev/__replco/workspace_iframe.html?initialPath=%2F&id=%3Arb4%3A” because it is loaded in the third-party context and dynamic state partitioning is enabled.
+The script from “https://d8be988d-e8f4-4b69-9be6-a56f1eb17d3d-00-38ymcerss8bxl.picard.replit.dev/__replco/static/devtools/injected.js” was loaded even though its MIME type (“text/plain”) is not a valid JavaScript MIME type. d8be988d-e8f4-4b69-9be6-a56f1eb17d3d-00-38ymcerss8bxl.picard.replit.dev
+stallwart: failed ping 1 stallwart.build.js:1:886
+[vite] connecting... injected.js:37:27
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+[vite] connected. injected.js:37:27
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+If you do not provide children, you must specify an aria-label for accessibility 4 a0df91602a414c03.js:2:102208
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+StoreContext - User: null injected.js:37:27
+StoreContext - Stores: undefined injected.js:37:27
+StoreContext - Selected store: undefined injected.js:37:27
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition. injected.js:37:27
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath. injected.js:37:27
+PWA Status Check: 
+Object { isStandalone: false, isInWebAppiOS: false, hasBeenDismissed: false, isCustomerRoute: false, userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:145.0) Gecko/20100101 Firefox/145.0", hasServiceWorker: true, hasPushManager: true, isHTTPS: true, isLocalhost: false }
+injected.js:37:27
+🔌 Initial online status: ONLINE injected.js:37:27
+🔄 Hydrating offline cache from IndexedDB... injected.js:37:27
+App started while online - triggering initial sync... injected.js:37:27
+🔔 Notification subscription skipped: missing user or store ID injected.js:37:27
+Feature Policy: Skipping unsupported feature name “accelerometer”. chunk-276SZO74.js:1232:22
+Feature Policy: Skipping unsupported feature name “autoplay”. chunk-276SZO74.js:1232:22
+Feature Policy: Skipping unsupported feature name “clipboard-write”. chunk-276SZO74.js:1232:22
+Feature Policy: Skipping unsupported feature name “encrypted-media”. chunk-276SZO74.js:1232:22
+Feature Policy: Skipping unsupported feature name “gyroscope”. chunk-276SZO74.js:1232:22
+Feature Policy: Skipping unsupported feature name “picture-in-picture”. chunk-276SZO74.js:1232:22
+Feature Policy: Skipping unsupported feature name “accelerometer”. chunk-276SZO74.js:8438:24
+Feature Policy: Skipping unsupported feature name “autoplay”. chunk-276SZO74.js:8438:24
+Feature Policy: Skipping unsupported feature name “clipboard-write”. chunk-276SZO74.js:8438:24
+Feature Policy: Skipping unsupported feature name “encrypted-media”. chunk-276SZO74.js:8438:24
+Feature Policy: Skipping unsupported feature name “gyroscope”. chunk-276SZO74.js:8438:24
+Feature Policy: Skipping unsupported feature name “picture-in-picture”. chunk-276SZO74.js:8438:24
+Partitioned cookie or storage access was provided to “https://d8be988d-e8f4-4b69-9be6-a56f1eb17d3d-00-38ymcerss8bxl.picard.replit.dev/” because it is loaded in the third-party context and dynamic state partitioning is enabled. @supabase_supabase-js.js:4323:9
+StoreContext - User: null injected.js:37:27
+StoreContext - Stores: undefined injected.js:37:27
+StoreContext - Selected store: undefined injected.js:37:27
+✅ No pending offline actions to hydrate injected.js:37:27
+🔄 Starting offline sync - 0 items in queue injected.js:37:27
+❌ Service Worker registration failed: DOMException: The operation is insecure. injected.js:37:27
+Uncaught (in promise) TypeError: ServiceWorker script at https://d8be988d-e8f4-4b69-9be6-a56f1eb17d3d-00-38ymcerss8bxl.picard.replit.dev/dev-sw.js?dev-sw for scope https://d8be988d-e8f4-4b69-9be6-a56f1eb17d3d-00-38ymcerss8bxl.picard.replit.dev/ threw an exception during script evaluation.
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+Cookie “__Secure-YEC” has been rejected because it is in a cross-site context and its “SameSite” is “Lax” or “Strict”. BKPPaUXJQ1w
+Cookie warnings 2
+Showing PWA popup after timeout injected.js:37:27
+PWA Status Check: 
+Object { isStandalone: false, isInWebAppiOS: false, hasBeenDismissed: false, isCustomerRoute: false, userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:145.0) Gecko/20100101 Firefox/145.0", hasServiceWorker: true, hasPushManager: true, isHTTPS: true, isLocalhost: false }
+injected.js:37:27
+MouseEvent.mozInputSource is deprecated. Use PointerEvent.pointerType instead. chunk-Q4SWZHEH.js:5823:7
+PWA Status Check: 
+Object { isStandalone: false, isInWebAppiOS: false, hasBeenDismissed: true, isCustomerRoute: false, userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:145.0) Gecko/20100101 Firefox/145.0", hasServiceWorker: true, hasPushManager: true, isHTTPS: true, isLocalhost: false }
+injected.js:37:27
+PWA popup hidden: 
+Object { isStandalone: false, isInWebAppiOS: false, hasBeenDismissed: true, isCustomerRoute: false }
+injected.js:37:27
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+StoreContext - User: null injected.js:37:27
+StoreContext - Stores: undefined injected.js:37:27
+StoreContext - Selected store: undefined injected.js:37:27
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: undefined injected.js:37:27
+StoreContext - Selected store: undefined injected.js:37:27
+🔔 Notification subscription skipped: missing user or store ID injected.js:37:27
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: undefined injected.js:37:27
+StoreContext - Selected store: undefined injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: undefined injected.js:37:27
+TopBar - is_agent: undefined injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: undefined injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+useCurrentUser: Fetching user with ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+🔌 Initial online status: ONLINE 4 injected.js:37:27
+Setting up product changes subscription for store: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+The Notification permission may only be requested in a top-level document or same-origin iframe. dashboard
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: undefined injected.js:37:27
+TopBar - is_agent: undefined injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: undefined injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+StoreContext - Selected store: undefined injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: undefined injected.js:37:27
+TopBar - is_agent: undefined injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: undefined injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+StoreContext - Selected store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: undefined injected.js:37:27
+TopBar - is_agent: undefined injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: undefined injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+Dashboard - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Dashboard - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Dashboard - User ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+Dashboard - All stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+Dashboard - Sales data: undefined injected.js:37:27
+Dashboard - Sales loading: true injected.js:37:27
+Dashboard - Products data: undefined injected.js:37:27
+Dashboard - Products loading: true injected.js:37:27
+Dashboard - Total revenue: 0 injected.js:37:27
+Dashboard - Total sales: 0 injected.js:37:27
+Dashboard - Total products: 0 injected.js:37:27
+🔔 Setting up notification subscription for user: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 store: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Calculating savings summary for store: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Dashboard - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Dashboard - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Dashboard - User ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+Dashboard - All stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+Dashboard - Sales data: undefined injected.js:37:27
+Dashboard - Sales loading: true injected.js:37:27
+Dashboard - Products data: undefined injected.js:37:27
+Dashboard - Products loading: true injected.js:37:27
+Dashboard - Total revenue: 0 injected.js:37:27
+Dashboard - Total sales: 0 injected.js:37:27
+Dashboard - Total products: 0 injected.js:37:27
+Dashboard - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Dashboard - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Dashboard - User ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+Dashboard - All stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+Dashboard - Sales data: undefined injected.js:37:27
+Dashboard - Sales loading: true injected.js:37:27
+Dashboard - Products data: undefined injected.js:37:27
+Dashboard - Products loading: true injected.js:37:27
+Dashboard - Total revenue: 0 injected.js:37:27
+Dashboard - Total sales: 0 injected.js:37:27
+Dashboard - Total products: 0 injected.js:37:27
+stallwart: failed ping 1 stallwart.build.js:1:886
+Cookie “__cf_bm” has been rejected for invalid domain. websocket
+useCurrentUser: Fetched user data: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - is_agent: false injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - is_agent: false injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+StoreContext - Selected store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+stallwart: failed ping 2 stallwart.build.js:1:886
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - is_agent: false injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+Dashboard - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Dashboard - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Dashboard - User ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+Dashboard - All stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+Dashboard - Sales data: 
+Array(120) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Dashboard - Sales loading: false injected.js:37:27
+Dashboard - Products data: 
+Array(19) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Dashboard - Products loading: false injected.js:37:27
+Dashboard - Total revenue: 49700 injected.js:37:27
+Dashboard - Total sales: 120 injected.js:37:27
+Dashboard - Total products: 19 injected.js:37:27
+Plans with contributions: 
+Array(23) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Calculated summary: 
+Object { total_plans: 23, active_plans: 13, completed_plans: 1, total_saved: 312000, total_effective_saved: 312000, total_contributed: 312000, total_target: 942000, progress_percentage: 33.12101910828025 }
+injected.js:37:27
+Dashboard - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Dashboard - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Dashboard - User ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+Dashboard - All stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+Dashboard - Sales data: 
+Array(120) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Dashboard - Sales loading: false injected.js:37:27
+Dashboard - Products data: 
+Array(19) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Dashboard - Products loading: false injected.js:37:27
+Dashboard - Total revenue: 49700 injected.js:37:27
+Dashboard - Total sales: 120 injected.js:37:27
+Dashboard - Total products: 19 injected.js:37:27
+🔌 Initial online status: ONLINE 3 injected.js:37:27
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 4 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 1 stallwart.build.js:1:886
+stallwart: failed ping 2 stallwart.build.js:1:886
+stallwart: failed ping 3 stallwart.build.js:1:886
+stallwart: failed ping 4 stallwart.build.js:1:886
+stallwart: failed ping 5 stallwart.build.js:1:886
+stallwart: session stalled stallwart.build.js:1:193
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+StoreContext - Selected store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Cleaning up product changes subscription injected.js:37:27
+🔌 Initial online status: ONLINE 9 injected.js:37:27
+Adding to cart: Drawing Book  Quantity: 1 Price Option: retail Custom: undefined injected.js:37:27
+Added new item to cart: 
+Object { id: "25f38840-8301-4266-8199-0b42162cdae6", name: "Drawing Book ", unit_price: 300, quantity: 16, low_stock_threshold: 2, created_at: "2025-10-20T11:07:20.142794+00:00", store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", updated_at: null, purchased_price: 200, favourite: true, … }
+ New cart: 
+Array [ {…} ]
+injected.js:37:27
+🔄 Starting sale mutation in AddSales... injected.js:37:27
+🚀 mutationFn STARTED for sales create injected.js:37:27
+🌐 ONLINE: Executing create on sales injected.js:37:27
+🔄 Creating sale (idempotent): 
+Object { total_price: 300, payment_mode: "cash", store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", sales_rep_name: "Admin", created_date: "2025-11-22", sales_type: (1) […] }
+injected.js:37:27
+✅ Sale created/updated: 
+Object { id: "3c1cdfa8-3088-49cf-b432-b845a82a1277", product_id: null, quantity_sold: null, total_price: 300, payment_mode: "cash", sales_rep_id: null, created_at: "2025-11-22T20:12:54.566294+00:00", note: "", product_sold: null, store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", … }
+injected.js:37:27
+🔄 Creating sale items: 
+Array [ {…} ]
+injected.js:37:27
+✅ Sale items created injected.js:37:27
+✅ ONLINE: Operation successful for sales injected.js:37:27
+🎉 🎉 🎉 useOfflineMutation onSuccess TRIGGERED for sales injected.js:37:27
+🔍 onSuccess - offline: false, data: 
+Object { id: "3c1cdfa8-3088-49cf-b432-b845a82a1277", product_id: null, quantity_sold: null, total_price: 300, payment_mode: "cash", sales_rep_id: null, created_at: "2025-11-22T20:12:54.566294+00:00", note: "", product_sold: null, store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", … }
+injected.js:37:27
+✅ Online operation completed for sales injected.js:37:27
+🔍 About to call config.onSuccess callback... injected.js:37:27
+🔍 config.onSuccess exists, calling it now... injected.js:37:27
+✅ Sale onSuccess called, data: 
+Object { id: "3c1cdfa8-3088-49cf-b432-b845a82a1277", product_id: null, quantity_sold: null, total_price: 300, payment_mode: "cash", sales_rep_id: null, created_at: "2025-11-22T20:12:54.566294+00:00", note: "", product_sold: null, store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", … }
+injected.js:37:27
+🔍 config.onSuccess callback completed injected.js:37:27
+✅ Sale mutation completed in AddSales: 
+Object { id: "3c1cdfa8-3088-49cf-b432-b845a82a1277", product_id: null, quantity_sold: null, total_price: 300, payment_mode: "cash", sales_rep_id: null, created_at: "2025-11-22T20:12:54.566294+00:00", note: "", product_sold: null, store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", … }
+injected.js:37:27
+🚀 mutationFn STARTED for financial_records create injected.js:37:27
+🌐 ONLINE: Executing create on financial_records injected.js:37:27
+Finance Hook - Attempting to insert record: 
+Object { store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", user_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", type: "income", reason: "Sales of products", amount: 300, date: "2025-11-22", sale_id: "3c1cdfa8-3088-49cf-b432-b845a82a1277" }
+injected.js:37:27
+XHRGET
+https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/store_sales_reps?select=email&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6
+[HTTP/3 404  350ms]
+
+Finance Hook - Skipping insert; record already exists for sale_id: 3c1cdfa8-3088-49cf-b432-b845a82a1277 injected.js:37:27
+✅ ONLINE: Operation successful for financial_records injected.js:37:27
+🎉 🎉 🎉 useOfflineMutation onSuccess TRIGGERED for financial_records injected.js:37:27
+🔍 onSuccess - offline: false, data: 
+Object { id: "58cde98c-45d7-40a4-ae09-d5f45cf50c70", store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", user_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", type: "income", reason: "Sale - 3c1cdfa8-3088-49cf-b432-b845a82a1277", amount: 300, date: "2025-11-22", sale_id: "3c1cdfa8-3088-49cf-b432-b845a82a1277", created_at: "2025-11-22T20:12:54.566294+00:00", updated_at: "2025-11-22T20:12:54.566294+00:00" }
+injected.js:37:27
+✅ Online operation completed for financial_records injected.js:37:27
+🔍 About to call config.onSuccess callback... injected.js:37:27
+🔍 config.onSuccess exists, calling it now... injected.js:37:27
+Finance Hook - Mutation success, invalidating queries injected.js:37:27
+🔍 config.onSuccess callback completed injected.js:37:27
+🚀 mutationFn STARTED for products update injected.js:37:27
+🌐 ONLINE: Executing update on products injected.js:37:27
+XHRGET
+https://cfwfcxzlyqaspqkgmsxb.supabase.co/rest/v1/store_sales_reps?select=email&store_id=eq.7e90d519-60a3-452e-9c0f-f136ae9291e6
+[HTTP/3 404  640ms]
+
+✅ ONLINE: Operation successful for products injected.js:37:27
+🎉 🎉 🎉 useOfflineMutation onSuccess TRIGGERED for products injected.js:37:27
+🔍 onSuccess - offline: false, data: 
+Object { id: "25f38840-8301-4266-8199-0b42162cdae6", name: "Drawing Book ", unit_price: 300, quantity: 15, low_stock_threshold: 2, created_at: "2025-10-20T11:07:20.142794+00:00", store_id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", updated_at: null, purchased_price: 200, favourite: true }
+injected.js:37:27
+✅ Online operation completed for products injected.js:37:27
+🔍 About to call config.onSuccess callback... injected.js:37:27
+🔍 config.onSuccess exists, calling it now... injected.js:37:27
+🔍 config.onSuccess callback completed injected.js:37:27
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:5001/api/notifications/send-to-user. (Reason: CORS request did not succeed). Status code: (null). 2
+Push notification service unavailable: TypeError: NetworkError when attempting to fetch resource. injected.js:37:27
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:5001/api/notifications/send-to-store. (Reason: CORS request did not succeed). Status code: (null). 2
+Push notification unavailable (non-critical) injected.js:37:27
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:5001/api/notifications/send-to-user. (Reason: CORS request did not succeed). Status code: (null). 2
+Push notification service unavailable: TypeError: NetworkError when attempting to fetch resource. injected.js:37:27
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:5001/api/notifications/send-to-store. (Reason: CORS request did not succeed). Status code: (null). 2
+Push notification unavailable (non-critical) injected.js:37:27
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:5001/api/notifications/send-to-user. (Reason: CORS request did not succeed). Status code: (null).
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:5001/api/notifications/send-to-user. (Reason: CORS request did not succeed). Status code: (null).
+Push notification request failed (non-critical): TypeError: NetworkError when attempting to fetch resource. injected.js:37:27
+StoreContext - User: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+StoreContext - Stores: 
+Array [ {…}, {…} ]
+injected.js:37:27
+StoreContext - Selected store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - is_agent: false injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+Sales page - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Sales page - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Sales page - Sales data: 
+Array(120) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Sales page - Sales loading: false injected.js:37:27
+Sales page - Sales error: null injected.js:37:27
+🔌 Initial online status: ONLINE 6 injected.js:37:27
+The Notification permission may only be requested in a top-level document or same-origin iframe. sales
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - is_agent: false injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+TopBar - user: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", aud: "authenticated", role: "authenticated", email: "dareyoloye@gmail.com", email_confirmed_at: "2025-09-18T11:25:19.349807Z", phone: "", confirmation_sent_at: "2025-09-18T11:24:47.514062Z", confirmed_at: "2025-09-18T11:25:19.349807Z", last_sign_in_at: "2025-11-22T20:12:05.963009795Z", app_metadata: {…}, … }
+injected.js:37:27
+TopBar - currentUser: 
+Object { id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", email: "dareyoloye@gmail.com", created_store: false, created_at: "2025-09-18T11:24:47.498703+00:00", hide_balance: false, gender: "male", age_range: "18-35", is_agent: false, phone_number: "08160208044", updated_at: "2025-11-22T20:12:05.951188+00:00", … }
+injected.js:37:27
+TopBar - is_agent: false injected.js:37:27
+TopBar - user ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - currentUser ID: 1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081 injected.js:37:27
+TopBar - Should show agent badge: false injected.js:37:27
+Sales page - Active store: 
+Object { id: "7e90d519-60a3-452e-9c0f-f136ae9291e6", owner_id: "1172d67c-c5a2-40fe-8c4a-6f5c6d1b8081", store_name: "Darey store ", location: null, created_at: "2025-09-18T11:25:28.587401+00:00", store_avatar: null, store_footnote: "Thank you for your patronage", location_id: "a8824869-707c-4cca-8a56-4d12ba4713bb", market_id: null }
+injected.js:37:27
+Sales page - Store ID: 7e90d519-60a3-452e-9c0f-f136ae9291e6 injected.js:37:27
+Sales page - Sales data: 
+Array(121) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+injected.js:37:27
+Sales page - Sales loading: false injected.js:37:27
+Sales page - Sales error: null injected.js:37:27
