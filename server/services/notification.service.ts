@@ -34,12 +34,12 @@ export const initializeFirebaseAdmin = () => {
         }
 
         if (privateKey) {
-            let key: string = privateKey.trim();
+            let key = privateKey.trim();
 
             // Try to parse as JSON string if it starts with quote
             if (key.startsWith('"')) {
                 try {
-                    const parsed: unknown = JSON.parse(key);
+                    const parsed = JSON.parse(key);
                     if (typeof parsed === 'string') {
                         key = parsed;
                     }
@@ -53,11 +53,6 @@ export const initializeFirebaseAdmin = () => {
 
             // Replace escaped newlines (handle both \n and \\n)
             privateKey = key.replace(/\\n/g, '\n');
-        }
-
-        if (!privateKey) {
-            console.error('❌ ERROR: Private Key is missing or invalid.');
-            return null;
         }
 
         // Debug logging (masked)
