@@ -77,6 +77,7 @@
     "input-otp": "^1.2.4",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.2",
+    "lovable-tagger": "^1.0.19",
     "lucide-react": "^0.451.0",
     "marked": "^16.1.2",
     "next-themes": "^0.3.0",
@@ -121,11 +122,11 @@
     "workbox-routing": "^7.3.0",
     "workbox-strategies": "^7.3.0",
     "workbox-window": "^7.3.0",
-    "zod": "^3.23.8",
-    "lovable-tagger": "^1.0.19"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@vercel/node": "^5.5.9",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
