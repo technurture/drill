@@ -1,6 +1,7 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
+import http from "http";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
 import notificationRoutes from "./routes/notifications.js";
@@ -102,17 +103,12 @@ async function startServer() {
     });
   } else {
     // Development: Use Vite middleware for HMR
+    // Let Vite use its own config from vite.config.ts
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
-        host: "0.0.0.0",
-        hmr: {
-          protocol: "ws",
-          host: "0.0.0.0",
-          port: 5000,
-        },
       },
-      appType: "custom",
+      appType: "spa",
     });
 
     app.use(vite.middlewares);
@@ -122,8 +118,12 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  // Create HTTP server to properly handle WebSocket upgrades
+  const server = http.createServer(app);
+
+  server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Frontend: http://0.0.0.0:${PORT}`);
   });
 }
 
