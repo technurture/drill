@@ -87,7 +87,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{t('add')} {defaultType === 'income' ? t('income') : t('expense')}</DialogTitle>
+          <DialogTitle>{defaultType === 'income' ? t('financialRecord.addIncome', { ns: 'modals' }) : t('financialRecord.addExpense', { ns: 'modals' })}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
@@ -141,7 +141,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
           
           <div className="flex gap-2 pt-4">
             <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addFinancialRecord.isPending}>
-              {addFinancialRecord.isPending ? t('adding') : `${t('add')} ${formData.type === 'income' ? t('income') : t('expense')}`}
+              {addFinancialRecord.isPending ? t('adding') : (formData.type === 'income' ? t('financialRecord.addIncome', { ns: 'modals' }) : t('financialRecord.addExpense', { ns: 'modals' }))}
             </Button>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               {t('cancel')}

@@ -60,6 +60,8 @@ export interface User {
   registered_by?: string;
   created_at?: string;
   updated_at?: string;
+  hide_balance?: boolean;
+  push_notifications_enabled?: boolean;
 }
 
 export interface Location {

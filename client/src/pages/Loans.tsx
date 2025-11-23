@@ -214,8 +214,8 @@ const Loans = () => {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="percent">{t('percentLabel')}</SelectItem>
-                            <SelectItem value="amount">{t('amountLabel')}</SelectItem>
+                            <SelectItem value="percent">{tc('percentLabel')}</SelectItem>
+                            <SelectItem value="amount">{tc('amountLabel')}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>

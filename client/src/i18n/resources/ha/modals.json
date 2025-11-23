@@ -116,6 +116,8 @@
   "financialRecord": {
     "storeAndUserRequired": "[TRANSLATE] Store and user information required",
     "salesRevenueInvestmentReturns": "[TRANSLATE] e.g., Sales revenue, Investment returns",
-    "rentPaymentEquipmentPurchase": "[TRANSLATE] e.g., Rent payment, Equipment purchase"
+    "rentPaymentEquipmentPurchase": "[TRANSLATE] e.g., Rent payment, Equipment purchase",
+    "addIncome": "Ƙara Kudaden Shiga",
+    "addExpense": "Ƙara Kashe Kuɗi"
   }
 }

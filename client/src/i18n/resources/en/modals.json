@@ -129,6 +129,8 @@
   "financialRecord": {
     "storeAndUserRequired": "Store and user information required",
     "salesRevenueInvestmentReturns": "e.g., Sales revenue, Investment returns",
-    "rentPaymentEquipmentPurchase": "e.g., Rent payment, Equipment purchase"
+    "rentPaymentEquipmentPurchase": "e.g., Rent payment, Equipment purchase",
+    "addIncome": "Add Income",
+    "addExpense": "Add Expense"
   }
 }
