@@ -134,3 +134,19 @@ export const useCurrentUser = (userId: string) =>
     enabled: Boolean(userId),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
+
+export const useUpdatePushNotificationPreference = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, push_notifications_enabled }: { id: string; push_notifications_enabled: boolean }) =>
+      fromSupabase(
+        supabase
+          .from("users")
+          .update({ push_notifications_enabled })
+          .eq("id", id),
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+  });
+};

@@ -35,6 +35,7 @@ import LogoutModal from "./ui/modals/LogoutModal";
 import { requestNotificationPermission } from "@/integrations/firebase/firebase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "react-i18next";
+import { usePushNotificationPreference } from "@/hooks/usePushNotificationPreference";
 
 const Sidebar = ({ onClose, isSideBar }) => {
   const { user } = useAuth();
@@ -45,12 +46,13 @@ const Sidebar = ({ onClose, isSideBar }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { tSubheading } = useLanguage();
   const { t } = useTranslation('common');
+  const { isEnabled: pushNotificationsEnabled, isLoading: isLoadingPreference } = usePushNotificationPreference();
 
   useEffect(() => {
-    if (user?.id) {
+    if (user?.id && pushNotificationsEnabled && !isLoadingPreference) {
       requestNotificationPermission(user?.id);
     }
-  }, [user]);
+  }, [user, pushNotificationsEnabled, isLoadingPreference]);
 
   const navItems = [
     { 

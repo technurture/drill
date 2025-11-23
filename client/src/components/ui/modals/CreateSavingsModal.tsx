@@ -95,7 +95,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{t('create')} {t('plan')}</DialogTitle>
+          <DialogTitle>{t('createSavingsPlan')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">

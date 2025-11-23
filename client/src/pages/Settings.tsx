@@ -20,6 +20,7 @@ import { Store } from "@/types/database.types";
 import { useStore as useStoreData } from "@/integrations/supabase/hooks/stores";
 import { useLocations, useMarketsByLocation } from "@/integrations/supabase/hooks/locations";
 import { usePWAInstall } from "@/components/Pwa";
+import { usePushNotificationPreference } from "@/hooks/usePushNotificationPreference";
 import { 
   Settings as SettingsIcon, 
   Store as StoreIcon, 
@@ -41,7 +42,8 @@ import {
   Shield,
   Download,
   Smartphone,
-  CheckCircle
+  CheckCircle,
+  Bell
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -67,6 +69,7 @@ const Settings = () => {
   const { data: markets } = useMarketsByLocation(selectedLocation);
   const { data: currentLocationMarkets } = useMarketsByLocation(store?.location_id || "");
   const { isInstalled, canInstall, installPWA } = usePWAInstall();
+  const { isEnabled: pushNotificationsEnabled, setPreference: setPushNotificationPreference, isUpdating: isUpdatingNotifications } = usePushNotificationPreference();
 
   useEffect(() => {
     if (store?.location_id) {
@@ -90,6 +93,28 @@ const Settings = () => {
       await hideBalance.mutateAsync({
         id: user?.id,
         hide_balance: !admin?.hide_balance,
+      });
+    }
+  };
+
+  const togglePushNotifications = async () => {
+    if (!user?.id) return;
+    
+    try {
+      const newValue = !pushNotificationsEnabled;
+      await setPushNotificationPreference(newValue);
+      
+      toast({
+        title: newValue ? t('settings.notificationsEnabled') : t('settings.notificationsDisabled'),
+        description: newValue 
+          ? t('settings.enablePushNotificationsDesc')
+          : t('settings.notificationsDisabled'),
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update notification preference",
+        variant: "destructive",
       });
     }
   };
@@ -387,6 +412,32 @@ const Settings = () => {
             <Switch
               checked={admin?.hide_balance}
               onCheckedChange={() => toggleBalance()}
+            />
+          </CardContent>
+        </Card>
+
+        {/* Notification Settings */}
+        <Card className="bg-white dark:bg-[#18191A] border border-gray-200 dark:border-gray-700">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Bell className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              <span>{t('settings.notificationSettings')}</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t('settings.enablePushNotifications')}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">{t('settings.enablePushNotificationsDesc')}</p>
+              <p className="text-xs mt-1 font-medium text-gray-700 dark:text-gray-300">
+                {pushNotificationsEnabled 
+                  ? t('settings.notificationsEnabled') 
+                  : t('settings.notificationsDisabled')}
+              </p>
+            </div>
+            <Switch
+              checked={pushNotificationsEnabled}
+              onCheckedChange={() => togglePushNotifications()}
+              disabled={isUpdatingNotifications}
             />
           </CardContent>
         </Card>

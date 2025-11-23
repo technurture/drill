@@ -117,6 +117,8 @@
   "financialRecord": {
     "storeAndUserRequired": "[TRANSLATE] Store and user information required",
     "salesRevenueInvestmentReturns": "[TRANSLATE] e.g., Sales revenue, Investment returns",
-    "rentPaymentEquipmentPurchase": "[TRANSLATE] e.g., Rent payment, Equipment purchase"
+    "rentPaymentEquipmentPurchase": "[TRANSLATE] e.g., Rent payment, Equipment purchase",
+    "addIncome": "Tinye Ego Abata",
+    "addExpense": "Tinye Mmefu"
   }
 }
