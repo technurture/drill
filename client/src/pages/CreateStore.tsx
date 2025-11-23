@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,6 +31,7 @@ import { useLocations, useMarketsByLocation } from '@/integrations/supabase/hook
 import { useStores } from '@/integrations/supabase/hooks/stores';
 
 const CreateStore = () => {
+  const { t } = useTranslation('pages');
   const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -82,8 +84,8 @@ const CreateStore = () => {
       if (error) throw error;
 
       toast({
-        title: "Store created successfully!",
-        description: "Your store has been created and is ready to use.",
+        title: t('createStore.storeCreatedSuccess'),
+        description: t('createStore.storeCreatedDesc'),
       });
 
       setStoreCtx?.setStore(data);
@@ -91,8 +93,8 @@ const CreateStore = () => {
     } catch (error: any) {
       console.error('Error creating store:', error);
       toast({
-        title: "Error creating store",
-        description: error.message || "Something went wrong. Please try again.",
+        title: t('createStore.errorCreatingStore'),
+        description: error.message || t('createStore.somethingWentWrong'),
         variant: "destructive",
       });
     } finally {
@@ -120,7 +122,7 @@ const CreateStore = () => {
               className="mr-2 -ml-2"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {isFirstStore ? 'Skip' : 'Back'}
+              {isFirstStore ? t('createStore.skip') : t('createStore.back')}
             </Button>
           </div>
 
@@ -130,12 +132,12 @@ const CreateStore = () => {
                 <img src="/Shebanlace_favicon.png" alt="SheBalance" className="w-8 h-8" />
               </div>
               <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-                {isFirstStore ? 'Create Your First Store' : 'Create a New Store'}
+                {isFirstStore ? t('createStore.createFirstStore') : t('createStore.createNewStore')}
               </CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">
                 {isFirstStore 
-                  ? 'Set up your first store to start managing your business. You can add location and market details later in Settings.' 
-                  : 'Add another store to your business portfolio. You can add location and market details later in Settings.'
+                  ? t('createStore.createFirstStoreDesc')
+                  : t('createStore.createNewStoreDesc')
                 }
               </CardDescription>
             </CardHeader>
@@ -146,22 +148,22 @@ const CreateStore = () => {
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="storeName">Store Name</Label>
+                  <Label htmlFor="storeName">{t('createStore.storeName')}</Label>
                   <Input
                     id="storeName"
                     name="storeName"
                     value={storeName}
                     onChange={(e) => setStoreName(e.target.value)}
-                    placeholder="Enter store name"
+                    placeholder={t('createStore.enterStoreName')}
                     required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="location">Location</Label>
+                  <Label htmlFor="location">{t('createStore.location')}</Label>
                   <Select value={selectedLocation} onValueChange={setSelectedLocation}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a location" />
+                      <SelectValue placeholder={t('createStore.selectLocation')} />
                     </SelectTrigger>
                     <SelectContent>
                       {locations?.map((location) => (
@@ -174,14 +176,14 @@ const CreateStore = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="market">Market</Label>
+                  <Label htmlFor="market">{t('createStore.market')}</Label>
                   <Select 
                     value={selectedMarket} 
                     onValueChange={setSelectedMarket}
                     disabled={!selectedLocation}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder={selectedLocation ? "Select a market" : "Select location first"} />
+                      <SelectValue placeholder={selectedLocation ? t('createStore.selectMarket') : t('createStore.selectLocationFirst')} />
                     </SelectTrigger>
                     <SelectContent>
                       {markets && markets.length > 0 ? (
@@ -192,7 +194,7 @@ const CreateStore = () => {
                         ))
                       ) : (
                         <div className="px-3 py-2 text-sm text-gray-500">
-                          No markets available for this location
+                          {t('createStore.noMarketsAvailable')}
                         </div>
                       )}
                     </SelectContent>
@@ -207,10 +209,10 @@ const CreateStore = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Creating Store...
+                      {t('createStore.creatingStore')}
                     </>
                   ) : (
-                    "Create Store"
+                    t('createStore.createStore')
                   )}
                 </Button>
               </form>
@@ -220,7 +222,7 @@ const CreateStore = () => {
           {/* Success Message */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              🎉 Ready to start your business journey with SheBalance!
+              🎉 {t('createStore.readyToStart')}
             </p>
           </div>
         </div>
