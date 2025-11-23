@@ -13,6 +13,7 @@ import {
 import NotificationItem from "./NotificationItem";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useTranslation } from 'react-i18next';
 
 interface NotificationDropdownProps {
   userId: string;
@@ -25,6 +26,7 @@ const NotificationDropdown = ({
   storeId,
   unreadCount,
 }: NotificationDropdownProps) => {
+  const { t } = useTranslation(['navigation', 'common']);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { data: notifications, isLoading } = useNotifications(userId, storeId);
@@ -94,7 +96,7 @@ const NotificationDropdown = ({
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between p-4 border-b">
-            <h3 className="font-semibold text-lg">Notifications</h3>
+            <h3 className="font-semibold text-lg">{t('navigation:topBar.notifications')}</h3>
             <Button
               variant="ghost"
               size="icon"
@@ -108,7 +110,7 @@ const NotificationDropdown = ({
           <ScrollArea className="h-[400px]">
             {isLoading ? (
               <div className="p-4 text-center text-muted-foreground">
-                Loading notifications...
+                {t('common:loadingNotifications')}
               </div>
             ) : recentNotifications.length > 0 ? (
               <div className="p-2 space-y-2">
@@ -125,7 +127,7 @@ const NotificationDropdown = ({
             ) : (
               <div className="p-8 text-center text-muted-foreground">
                 <Bell className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>No notifications yet</p>
+                <p>{t('common:noNotificationsYet')}</p>
               </div>
             )}
           </ScrollArea>
@@ -139,7 +141,7 @@ const NotificationDropdown = ({
                   className="w-full"
                   onClick={handleViewAll}
                 >
-                  View all notifications
+                  {t('common:viewAllNotifications')}
                 </Button>
               </div>
             </>

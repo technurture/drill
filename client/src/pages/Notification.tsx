@@ -14,8 +14,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useContext } from "react";
 import { StoreContext } from "@/contexts/StoreContext";
 import { useNotifications } from "@/integrations/supabase/hooks/notifications";
+import { useTranslation } from 'react-i18next';
 
 const Notifications = () => {
+  const { t } = useTranslation('pages');
   const { user } = useAuth();
   const theStore = useContext(StoreContext);
   const { data: notifications = [] } = useNotifications(user?.id || "", theStore?.id || "");
@@ -32,7 +34,7 @@ const Notifications = () => {
             <div className="flex items-center justify-start space-x-3">
               <div>
                 <h1 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                  Notifications
+                  {t('notification.title')}
                 </h1>
               </div>
             </div>
@@ -41,7 +43,7 @@ const Notifications = () => {
               <div className="flex items-center justify-center space-x-2">
                 <Badge variant="destructive" className="bg-red-500 hover:bg-red-600">
                   <Sparkles className="w-3 h-3 mr-1" />
-                  {unreadCount} new notification{unreadCount !== 1 ? 's' : ''}
+                  {unreadCount} {t('notification.newNotification')}{unreadCount !== 1 ? 's' : ''}
                 </Badge>
               </div>
             )}
@@ -55,11 +57,11 @@ const Notifications = () => {
               <TabsList className="grid w-full max-w-md grid-cols-3 mx-auto">
                 <TabsTrigger value="all" className="flex items-center space-x-2">
                   <Bell className="w-4 h-4" />
-                  <span>All</span>
+                  <span>{t('notification.all')}</span>
                 </TabsTrigger>
                 <TabsTrigger value="unread" className="flex items-center space-x-2">
                   <BellRing className="w-4 h-4" />
-                  <span>Unread</span>
+                  <span>{t('notification.unread')}</span>
                   {unreadCount > 0 && (
                     <Badge variant="secondary" className="ml-1 text-xs">
                       {unreadCount}
@@ -68,7 +70,7 @@ const Notifications = () => {
                 </TabsTrigger>
                 <TabsTrigger value="read" className="flex items-center space-x-2">
                   <MailOpen className="w-4 h-4" />
-                  <span>Read</span>
+                  <span>{t('notification.read')}</span>
                 </TabsTrigger>
               </TabsList>
             </div>
