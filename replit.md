@@ -12,6 +12,27 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+**November 23, 2025 - Translation System Fixes**
+- **Issue**: Multiple UI elements across the application were displaying hardcoded English text instead of using translations, breaking the multi-language support for Igbo, Yoruba, Hausa, and Pidgin users
+- **Root Cause**: Missing translation keys in language files and hardcoded strings in components
+- **Implementation**:
+  - Updated Sidebar component to use translation namespace keys (`sidebar.dashboard`, `sidebar.inventory`, `sidebar.sales`, `sidebar.finance`, `sidebar.settings`, `sidebar.notes`) instead of hardcoded strings
+  - Added missing translation keys to all 5 language files (en, ig, yo, ha, pidgin) for:
+    - Navigation sidebar items
+    - Store selector (Active Store, Add New Store, Select Store)
+    - Notification Settings (notification settings, enable push notifications, notifications enabled/disabled)
+    - Sales actions (Add New Sale, Export Report, Filter Sales)
+  - Removed all `[TRANSLATE]` placeholder text with proper localized translations
+  - Fixed missing "addNewSale" translation key in Igbo and Yoruba pages.json files
+  - Changed service worker `registerType` from "autoUpdate" to "prompt" in vite.config.ts to prevent automatic page reloads when service worker updates
+- **User Experience**: 
+  - All navigation menu items now display in the user's selected language
+  - Store selector and notification settings properly translated
+  - Sales page buttons (Add New Sale, Export Report, Filter Sales) display correctly in all languages
+  - Service worker updates now prompt users instead of forcing automatic page reloads
+- **Files Modified**: `client/src/components/sidebar/Sidebar.tsx`, `vite.config.ts`, `client/src/i18n/resources/*/navigation.json`, `client/src/i18n/resources/*/pages.json` (for all 5 languages)
+- **Impact**: Multi-language support now works correctly across the entire application for all supported languages (English, Igbo, Yoruba, Hausa, Pidgin)
+
 **November 21, 2025 - Navigation Flow Fixes**
 - **Issue**: Clicking the SheBalance logo or reloading the page incorrectly redirected authenticated users to the login page instead of the dashboard
 - **Root Cause**: LandingPageWrapper forced all returning visitors (even authenticated ones) to the login page; logo click always navigated to "/" which triggered the wrapper's redirect logic

@@ -50,6 +50,7 @@ import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 const Savings = () => {
   const { t } = useTranslation('pages');
   const { t: tc } = useTranslation('common');
+  const { t: tn } = useTranslation('notifications');
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const { isOnline } = useOfflineStatus();
@@ -168,17 +169,17 @@ const Savings = () => {
     e.preventDefault();
 
     if (!selectedStore?.id || !user?.id) {
-      toast.error("No store selected or user not logged in");
+      toast.error(tn('savings.noStoreSelected'));
       return;
     }
 
     if (!createFormData.title.trim() || !createFormData.contributing_to.trim() || parseFloat(createFormData.target_amount) <= 0) {
-      toast.error("Please fill in all fields correctly");
+      toast.error(tn('savings.fillAllFields'));
       return;
     }
 
     if (new Date(createFormData.end_date) <= new Date(createFormData.start_date)) {
-      toast.error("End date must be after start date");
+      toast.error(tn('savings.endDateAfterStartDate'));
       return;
     }
 
@@ -197,7 +198,7 @@ const Savings = () => {
     try {
       await createSavingsPlan.mutateAsync(planData);
 
-      toast.success("Savings plan created successfully!");
+      toast.success(tn('savings.savingsPlanCreated'));
       setIsCreateModalOpen(false);
       setCreateFormData({
         title: "",
@@ -209,7 +210,7 @@ const Savings = () => {
       });
       refetch();
     } catch (error) {
-      toast.error("Failed to create savings plan");
+      toast.error(tn('savings.failedToCreate'));
       console.error(error);
     }
   };
@@ -220,12 +221,12 @@ const Savings = () => {
     console.log("Adding contribution:", contributionData);
 
     if (!selectedStore?.id || !user?.id) {
-      toast.error("No store selected or user not logged in");
+      toast.error(tn('savings.noStoreSelected'));
       return;
     }
 
     if (parseFloat(contributionData.amount) <= 0) {
-      toast.error("Amount must be greater than 0");
+      toast.error(tn('savings.amountGreaterThanZero'));
       return;
     }
 
@@ -233,13 +234,13 @@ const Savings = () => {
     const selectedPlanData = savingsPlans?.find(plan => plan.id === contributionData.savings_plan_id);
 
     if (!selectedPlanData) {
-      toast.error("Selected savings plan not found");
+      toast.error(tn('savings.planNotFound'));
       return;
     }
 
     // Check if plan is withdrawn
     if (selectedPlanData.status === 'withdrawn') {
-      toast.error("Cannot contribute to a withdrawn savings plan");
+      toast.error(tn('savings.cannotContributeWithdrawn'));
       return;
     }
 
@@ -255,7 +256,7 @@ const Savings = () => {
     // Check if contribution would exceed target
     if (newTotal > targetAmount) {
       const remainingAmount = targetAmount - effectiveSaved;
-      toast.error(`Amount exceeds target. You can only contribute ₦${remainingAmount.toLocaleString()} more to reach your target of ₦${targetAmount.toLocaleString()}`);
+      toast.error(tn('savings.amountExceedsTarget').replace('{{remaining}}', remainingAmount.toLocaleString()).replace('{{target}}', targetAmount.toLocaleString()));
       return;
     }
 
@@ -273,7 +274,7 @@ const Savings = () => {
 
       console.log("Contribution added successfully:", result);
 
-      toast.success("Contribution added successfully!");
+      toast.success(tn('savings.contributionAdded'));
       setIsContributionModalOpen(false);
       setContributionWarning(null);
       setContributionData({
@@ -288,18 +289,18 @@ const Savings = () => {
 
     } catch (error) {
       console.error("Failed to add contribution:", error);
-      toast.error("Failed to add contribution");
+      toast.error(tn('savings.failedToAddContribution'));
     }
   };
 
   const handleDeletePlan = async (planId: string) => {
-    if (confirm("Are you sure you want to delete this savings plan? This action cannot be undone.")) {
-      try {
+    if (confirm(tc('confirmDeleteRecord'))) {
+      try{
         await deleteSavingsPlan.mutateAsync({ planId, storeId: selectedStore?.id || "" });
-        toast.success("Savings plan deleted successfully!");
+        toast.success(tn('savings.planDeleted'));
         refetch();
       } catch (error) {
-        toast.error("Failed to delete savings plan");
+        toast.error(tn('savings.failedToDelete'));
         console.error(error);
       }
     }
@@ -322,7 +323,7 @@ const Savings = () => {
       const currentAmount = (typeof selectedPlanForWithdrawal.current_amount === 'number' ? selectedPlanForWithdrawal.current_amount : parseFloat(selectedPlanForWithdrawal.current_amount)) ||
         (selectedPlanForWithdrawal.contributions?.reduce((sum: number, c: any) => sum + parseFloat(c.amount), 0) || 0);
       if (amount <= 0 || amount > currentAmount) {
-        toast.error("Invalid withdrawal amount");
+        toast.error(tn('savings.invalidWithdrawalAmount'));
         return;
       }
 
@@ -343,12 +344,12 @@ const Savings = () => {
       try {
         await withdrawPartial.mutateAsync(withdrawalData);
         setLastWithdrawal({ planId: selectedPlanForWithdrawal.id, amount, at: new Date().toISOString() });
-        toast.success("Withdrawal recorded successfully");
+        toast.success(tn('savings.withdrawalRecorded'));
         setIsWithdrawModalOpen(false);
         setSelectedPlanForWithdrawal(null);
         refetch();
       } catch (error) {
-        toast.error("Failed to withdraw");
+        toast.error(tn('savings.failedToWithdraw'));
         console.error(error);
       }
       return;
@@ -368,12 +369,12 @@ const Savings = () => {
 
     try {
       await withdrawSavings.mutateAsync(withdrawalData);
-      toast.success("Savings withdrawn successfully!");
+      toast.success(tn('savings.savingsWithdrawn'));
       setIsWithdrawModalOpen(false);
       setSelectedPlanForWithdrawal(null);
       refetch();
     } catch (error) {
-      toast.error("Failed to withdraw savings");
+      toast.error(tn('savings.failedToWithdraw'));
       console.error(error);
     }
   };
@@ -459,32 +460,32 @@ const Savings = () => {
                 className="md:hidden"
               >
                 <Filter className="w-4 h-4 mr-2" />
-                Filters
+                {tc('filters')}
               </Button>
               <Dialog open={isFilterModalOpen} onOpenChange={setIsFilterModalOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="hidden md:flex items-center gap-2">
                     <Filter className="h-4 w-4" />
-                    <span>Filters</span>
+                    <span>{tc('filters')}</span>
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Filter Savings Plans</DialogTitle>
+                    <DialogTitle>{tc('filterSavingsPlans')}</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="status-filter">Status</Label>
+                      <Label htmlFor="status-filter">{tc('status')}</Label>
                       <Select value={filterStatus} onValueChange={setFilterStatus}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All Plans</SelectItem>
-                          <SelectItem value="just_started">Just Started</SelectItem>
-                          <SelectItem value="in_progress">In Progress</SelectItem>
-                          <SelectItem value="completed">Completed</SelectItem>
-                          <SelectItem value="withdrawn">Withdrawn</SelectItem>
+                          <SelectItem value="all">{tc('allPlans')}</SelectItem>
+                          <SelectItem value="just_started">{t('savings.justStarted')}</SelectItem>
+                          <SelectItem value="in_progress">{tc('inProgress')}</SelectItem>
+                          <SelectItem value="completed">{tc('completed')}</SelectItem>
+                          <SelectItem value="withdrawn">{t('savings.withdrawn')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -497,13 +498,13 @@ const Savings = () => {
                         }}
                         className="flex-1"
                       >
-                        Clear Filters
+                        {tc('clearFilters')}
                       </Button>
                       <Button
                         onClick={() => setIsFilterModalOpen(false)}
                         className="flex-1"
                       >
-                        Apply Filters
+                        {tc('applyFilters')}
                       </Button>
                     </div>
                   </div>
@@ -518,7 +519,7 @@ const Savings = () => {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Create New Savings Plan</DialogTitle>
+                    <DialogTitle>{t('savings.createSavingsPlan')}</DialogTitle>
                   </DialogHeader>
                   <form onSubmit={handleCreatePlan} className="space-y-4">
                     <div className="space-y-2">
@@ -587,7 +588,7 @@ const Savings = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="target_amount">Target Amount (₦)</Label>
+                      <Label htmlFor="target_amount">{tc('targetAmount')} (₦)</Label>
                       <Input
                         id="target_amount"
                         type="number"
@@ -602,10 +603,10 @@ const Savings = () => {
 
                     <div className="flex gap-2 pt-4">
                       <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={createSavingsPlan.isPending}>
-                        {createSavingsPlan.isPending ? "Creating..." : "Create Plan"}
+                        {createSavingsPlan.isPending ? tc('creating') : tc('createPlan')}
                       </Button>
                       <Button type="button" variant="outline" onClick={() => setIsCreateModalOpen(false)}>
-                        Cancel
+                        {tc('cancel')}
                       </Button>
                     </div>
                   </form>
@@ -615,49 +616,6 @@ const Savings = () => {
           </div>
         </div>
 
-        {/* Filter Modal */}
-        <Dialog open={isFilterModalOpen} onOpenChange={setIsFilterModalOpen}>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
-              <DialogTitle>Filter Savings Plans</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="status-filter">Status</Label>
-                <Select value={filterStatus} onValueChange={setFilterStatus}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Plans</SelectItem>
-                    <SelectItem value="just_started">Just Started</SelectItem>
-                    <SelectItem value="in_progress">In Progress</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="withdrawn">Withdrawn</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex gap-2 pt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setFilterStatus("all");
-                  }}
-                  className="flex-1"
-                >
-                  Clear Filters
-                </Button>
-                <Button
-                  onClick={() => setIsFilterModalOpen(false)}
-                  className="flex-1"
-                >
-                  Apply Filters
-                </Button>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
 
         {/* Summary Cards */}
         {summary && (
@@ -836,7 +794,7 @@ const Savings = () => {
                           }}
                           disabled={actualStatus === 'completed' || actualStatus === 'withdrawn'}
                         >
-                          {actualStatus === 'withdrawn' ? 'Plan Withdrawn' : 'Make Contribution'}
+                          {actualStatus === 'withdrawn' ? t('savings.planWithdrawn') : tc('makeContribution')}
                         </Button>
                         {actualStatus !== 'withdrawn' && (
                           <Button
@@ -849,7 +807,7 @@ const Savings = () => {
                             }}
                             disabled={withdrawPartial.isPending || actualStatus === 'completed'}
                           >
-                            Withdraw
+                            {t('savings.withdraw')}
                           </Button>
                         )}
                       </div>
@@ -898,11 +856,11 @@ const Savings = () => {
         }}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Add Contribution</DialogTitle>
+              <DialogTitle>{t('savings.addContribution')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleAddContribution} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="contribution_amount">Amount (₦)</Label>
+                <Label htmlFor="contribution_amount">{tc('amount')} (₦)</Label>
                 <Input
                   id="contribution_amount"
                   type="number"
@@ -939,10 +897,10 @@ const Savings = () => {
 
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={addContribution.isPending}>
-                  {addContribution.isPending ? "Adding..." : "Add Contribution"}
+                  {addContribution.isPending ? tc('adding') : t('savings.addContribution')}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setIsContributionModalOpen(false)}>
-                  Cancel
+                  {tc('cancel')}
                 </Button>
               </div>
             </form>
@@ -1022,10 +980,10 @@ const Savings = () => {
                             <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
                             <div className="space-y-1">
                               <h4 className="font-medium text-red-800 dark:text-red-200">
-                                Plan Withdrawn
+                                {t('savings.planWithdrawn')}
                               </h4>
                               <p className="text-sm text-red-700 dark:text-red-300">
-                                This savings plan has been withdrawn. No further contributions can be made to this plan.
+                                {t('savings.planWithdrawnDescription')}
                               </p>
                             </div>
                           </div>
@@ -1202,13 +1160,13 @@ const Savings = () => {
                           }}
                           disabled={planStatus === 'completed' || planStatus === 'withdrawn'}
                         >
-                          {planStatus === 'withdrawn' ? 'Plan Withdrawn' : 'Add Contribution'}
+                          {planStatus === 'withdrawn' ? t('savings.planWithdrawn') : t('savings.addContribution')}
                         </Button>
                         <Button
                           variant="outline"
                           onClick={() => setIsDetailsModalOpen(false)}
                         >
-                          Close
+                          {tc('close')}
                         </Button>
                       </div>
                     </>
@@ -1301,7 +1259,7 @@ const Savings = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="target_amount">Target Amount (₦)</Label>
+                <Label htmlFor="target_amount">{tc('targetAmount')} (₦)</Label>
                 <Input
                   id="target_amount"
                   type="number"
@@ -1316,10 +1274,10 @@ const Savings = () => {
 
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={createSavingsPlan.isPending}>
-                  {createSavingsPlan.isPending ? "Creating..." : "Create Plan"}
+                  {createSavingsPlan.isPending ? tc('creating') : tc('createPlan')}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setIsCreateModalOpen(false)}>
-                  Cancel
+                  {tc('cancel')}
                 </Button>
               </div>
             </form>
