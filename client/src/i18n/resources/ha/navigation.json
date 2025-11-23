@@ -33,5 +33,10 @@
     "home": "Home",
     "dashboard": "Dashboard",
     "admin": "Admin"
+  },
+  "storeSelector": {
+    "activeStore": "[TRANSLATE] Active Store",
+    "addNewStore": "[TRANSLATE] Add New Store",
+    "selectStore": "[TRANSLATE] Select Store"
   }
 }

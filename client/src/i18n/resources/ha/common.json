@@ -224,5 +224,13 @@
   "failedToDeleteFinancialRecord": "An kasa share rikodin kuɗi",
   "amountNairaLabel": "Adadi (₦)",
   "placeholderAmount": "0.00",
-  "itemsSold": "Abubuwan da aka sayar:"
+  "itemsSold": "Abubuwan da aka sayar:",
+  "total": "[TRANSLATE] Total:",
+  "savedLocallyWillSync": "[TRANSLATE] Saved locally. Will sync when online.",
+  "failedToSaveOffline": "[TRANSLATE] Failed to save offline",
+  "pleaseTryAgain": "[TRANSLATE] Please try again",
+  "confirmSale": "[TRANSLATE] Confirm Sale",
+  "viewAllNotifications": "[TRANSLATE] View all notifications",
+  "loadingNotifications": "[TRANSLATE] Loading notifications...",
+  "noNotificationsYet": "[TRANSLATE] No notifications yet"
 }

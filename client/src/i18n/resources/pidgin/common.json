@@ -224,5 +224,13 @@
   "failedToDeleteFinancialRecord": "E no work to delete money record",
   "amountNairaLabel": "Amount (₦)",
   "placeholderAmount": "0.00",
-  "itemsSold": "Things wey dem sell:"
+  "itemsSold": "Things wey dem sell:",
+  "total": "[TRANSLATE] Total:",
+  "savedLocallyWillSync": "[TRANSLATE] Saved locally. Will sync when online.",
+  "failedToSaveOffline": "[TRANSLATE] Failed to save offline",
+  "pleaseTryAgain": "[TRANSLATE] Please try again",
+  "confirmSale": "[TRANSLATE] Confirm Sale",
+  "viewAllNotifications": "[TRANSLATE] View all notifications",
+  "loadingNotifications": "[TRANSLATE] Loading notifications...",
+  "noNotificationsYet": "[TRANSLATE] No notifications yet"
 }

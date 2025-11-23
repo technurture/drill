@@ -81,5 +81,41 @@
     "total": "Total",
     "cancel": "Cancel",
     "completeSale": "Complete Sale"
+  },
+  "cart": {
+    "title": "Cart",
+    "name": "Name",
+    "priceOption": "Price Option",
+    "price": "Price",
+    "quantity": "Quantity",
+    "amount": "Amount",
+    "delete": "Delete",
+    "selectOption": "Select Option",
+    "retail": "Retail",
+    "wholesale": "Wholesale",
+    "noPriceAvailable": "No price available",
+    "stock": "Stock",
+    "cartEmpty": "Your cart is empty",
+    "addItemsToStart": "Add items to start making a sale",
+    "totalPrice": "Total Price:",
+    "paymentMode": "Payment Mode",
+    "confirmSale": "Confirm Sale",
+    "processing": "Processing...",
+    "insufficientStock": "Insufficient Stock",
+    "pleaseSelectPaymentMode": "Please select a payment mode",
+    "cartIsEmpty": "Cart is empty",
+    "pleaseSelectPriceOption": "Please select a price option for",
+    "invalidQuantity": "Invalid quantity for",
+    "quantityMustBeAtLeastOne": "Quantity must be at least 1",
+    "retailPriceNotAvailable": "Retail price not available for this product",
+    "wholesalePriceNotAvailable": "Wholesale price not available for this product",
+    "saleCompletedSuccessfully": "Sale completed successfully",
+    "saleSavedOffline": "Sale saved offline and will sync when you're back online",
+    "failedToCompleteSale": "Failed to complete sale"
+  },
+  "financialRecord": {
+    "storeAndUserRequired": "Store and user information required",
+    "salesRevenueInvestmentReturns": "e.g., Sales revenue, Investment returns",
+    "rentPaymentEquipmentPurchase": "e.g., Rent payment, Equipment purchase"
   }
 }

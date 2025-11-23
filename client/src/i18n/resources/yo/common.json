@@ -224,5 +224,13 @@
   "failedToDeleteFinancialRecord": "Kò ṣe é ṣe láti pa ìgbàsílẹ̀ owó rẹ́",
   "amountNairaLabel": "Iye (₦)",
   "placeholderAmount": "0.00",
-  "itemsSold": "Àwọn ohun tí a ta:"
+  "itemsSold": "Àwọn ohun tí a ta:",
+  "total": "[TRANSLATE] Total:",
+  "savedLocallyWillSync": "[TRANSLATE] Saved locally. Will sync when online.",
+  "failedToSaveOffline": "[TRANSLATE] Failed to save offline",
+  "pleaseTryAgain": "[TRANSLATE] Please try again",
+  "confirmSale": "[TRANSLATE] Confirm Sale",
+  "viewAllNotifications": "[TRANSLATE] View all notifications",
+  "loadingNotifications": "[TRANSLATE] Loading notifications...",
+  "noNotificationsYet": "[TRANSLATE] No notifications yet"
 }

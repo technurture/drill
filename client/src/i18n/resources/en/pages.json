@@ -410,7 +410,21 @@
     "theme": "Theme",
     "lightMode": "Light Mode",
     "darkMode": "Dark Mode",
-    "systemDefault": "System Default"
+    "systemDefault": "System Default",
+    "dangerZone": "Danger Zone",
+    "deleteStore": "Delete Store",
+    "deleteStoreWarning": "This action will permanently delete your store and all its data including sales, inventory, and notes. This action cannot be undone.",
+    "deleteStoreAction": "Delete Store",
+    "deleteStoreConfirm": "This action will permanently delete your store and all its data. This cannot be undone.",
+    "deleteAccount": "Delete Account",
+    "deleteAccountWarning": "This action will permanently delete your account and all associated stores, sales, inventory, and notes. This action cannot be undone.",
+    "deleteAccountAction": "Delete Account",
+    "deleteAccountConfirm": "This action will permanently delete your account and all associated data. This cannot be undone.",
+    "storeDeletedSuccess": "Store deleted successfully",
+    "failedToDeleteStore": "Failed to delete Store",
+    "minimumStoreError": "Failed to delete store, minimum number of store can only be 1 !!!",
+    "accountDeletedSuccess": "Account deleted successfully",
+    "failedToDeleteAccount": "Failed to delete Account"
   },
   "help": {
     "title": "Help Center",
@@ -621,6 +635,37 @@
         "step3": "Leverage savings plans to reach your goals"
       }
     }
+  },
+  "createStore": {
+    "createFirstStore": "Create Your First Store",
+    "createNewStore": "Create a New Store",
+    "createFirstStoreDesc": "Set up your first store to start managing your business. You can add location and market details later in Settings.",
+    "createNewStoreDesc": "Add another store to your business portfolio. You can add location and market details later in Settings.",
+    "storeName": "Store Name",
+    "enterStoreName": "Enter store name",
+    "location": "Location",
+    "selectLocation": "Select a location",
+    "market": "Market",
+    "selectMarket": "Select a market",
+    "selectLocationFirst": "Select location first",
+    "noMarketsAvailable": "No markets available for this location",
+    "creatingStore": "Creating Store...",
+    "createStore": "Create Store",
+    "storeCreatedSuccess": "Store created successfully!",
+    "storeCreatedDesc": "Your store has been created and is ready to use.",
+    "errorCreatingStore": "Error creating store",
+    "somethingWentWrong": "Something went wrong. Please try again.",
+    "readyToStart": "Ready to start your business journey with SheBalance!",
+    "skip": "Skip",
+    "back": "Back"
+  },
+  "notification": {
+    "title": "Notifications",
+    "all": "All",
+    "unread": "Unread",
+    "read": "Read",
+    "newNotification": "new notification",
+    "newNotifications": "new notifications"
   },
   "profile": {
     "title": "Profile",

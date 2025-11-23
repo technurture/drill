@@ -81,5 +81,41 @@
     "total": "Total",
     "cancel": "Cancel",
     "completeSale": "Complete Sale"
+  },
+  "cart": {
+    "title": "[TRANSLATE] Cart",
+    "name": "[TRANSLATE] Name",
+    "priceOption": "[TRANSLATE] Price Option",
+    "price": "[TRANSLATE] Price",
+    "quantity": "[TRANSLATE] Quantity",
+    "amount": "[TRANSLATE] Amount",
+    "delete": "[TRANSLATE] Delete",
+    "selectOption": "[TRANSLATE] Select Option",
+    "retail": "[TRANSLATE] Retail",
+    "wholesale": "[TRANSLATE] Wholesale",
+    "noPriceAvailable": "[TRANSLATE] No price available",
+    "stock": "[TRANSLATE] Stock",
+    "cartEmpty": "[TRANSLATE] Your cart is empty",
+    "addItemsToStart": "[TRANSLATE] Add items to start making a sale",
+    "totalPrice": "[TRANSLATE] Total Price:",
+    "paymentMode": "[TRANSLATE] Payment Mode",
+    "confirmSale": "[TRANSLATE] Confirm Sale",
+    "processing": "[TRANSLATE] Processing...",
+    "insufficientStock": "[TRANSLATE] Insufficient Stock",
+    "pleaseSelectPaymentMode": "[TRANSLATE] Please select a payment mode",
+    "cartIsEmpty": "[TRANSLATE] Cart is empty",
+    "pleaseSelectPriceOption": "[TRANSLATE] Please select a price option for",
+    "invalidQuantity": "[TRANSLATE] Invalid quantity for",
+    "quantityMustBeAtLeastOne": "[TRANSLATE] Quantity must be at least 1",
+    "retailPriceNotAvailable": "[TRANSLATE] Retail price not available for this product",
+    "wholesalePriceNotAvailable": "[TRANSLATE] Wholesale price not available for this product",
+    "saleCompletedSuccessfully": "[TRANSLATE] Sale completed successfully",
+    "saleSavedOffline": "[TRANSLATE] Sale saved offline and will sync when you're back online",
+    "failedToCompleteSale": "[TRANSLATE] Failed to complete sale"
+  },
+  "financialRecord": {
+    "storeAndUserRequired": "[TRANSLATE] Store and user information required",
+    "salesRevenueInvestmentReturns": "[TRANSLATE] e.g., Sales revenue, Investment returns",
+    "rentPaymentEquipmentPurchase": "[TRANSLATE] e.g., Rent payment, Equipment purchase"
   }
 }

@@ -19,13 +19,15 @@
     "recentSales": "Àwọn Títà Tuntun",
     "topProducts": "Ọjà Tó Ń Tà Jùlọ",
     "viewAll": "Wo Gbogbo",
-    "incomeBreakdown": "Pípin Owó Wọlé",
-    "paymentMethods": "Àwọn Ọ̀nà Ìsanwó",
-    "quickActions": "Àwọn Ìgbésẹ̀ Kíákíá",
     "addIncome": "Ṣàfikún Owó Wọlé",
     "addExpense": "Ṣàfikún Ìnáwó",
     "addSavings": "Ṣàfikún Ìfowópamọ́",
-    "addNewSale": "Ṣàfikún Títà Tuntun"
+    "addNewSale": "Ṣàfikún Títà Tuntun",
+    "welcomeToSheBalance": "[TRANSLATE] Welcome to SheBalance!",
+    "createFirstStoreDesc": "[TRANSLATE] Create your first store to start managing your business and track your sales, inventory, and finances.",
+    "incomeBreakdown": "Pípin Owó Wọlé",
+    "paymentMethods": "Àwọn Ọ̀nà Ìsanwó",
+    "quickActions": "Àwọn Ìgbésẹ̀ Kíákíá"
   },
   "inventory": {
     "title": "Ìkójọpọ̀ / Àtòjọ Ọjà",

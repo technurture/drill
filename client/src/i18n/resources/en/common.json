@@ -228,5 +228,9 @@
   "total": "Total:",
   "savedLocallyWillSync": "Saved locally. Will sync when online.",
   "failedToSaveOffline": "Failed to save offline",
-  "pleaseTryAgain": "Please try again"
+  "pleaseTryAgain": "Please try again",
+  "confirmSale": "Confirm Sale",
+  "viewAllNotifications": "View all notifications",
+  "loadingNotifications": "Loading notifications...",
+  "noNotificationsYet": "No notifications yet"
 }

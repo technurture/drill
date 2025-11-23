@@ -33,5 +33,10 @@
     "home": "Home",
     "dashboard": "Dashboard",
     "admin": "Admin"
+  },
+  "storeSelector": {
+    "activeStore": "Active Store",
+    "addNewStore": "Add New Store",
+    "selectStore": "Select Store"
   }
 }

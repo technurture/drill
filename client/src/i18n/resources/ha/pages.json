@@ -19,13 +19,15 @@
     "recentSales": "Tallace-tallacen Baya-bayan nan",
     "topProducts": "Kayayyakin da Suka Fi Sayarwa",
     "viewAll": "Duba Duka",
-    "incomeBreakdown": "Rarraba Kudaden Shiga",
-    "paymentMethods": "Hanyoyin Biyan Kuɗi",
-    "quickActions": "Ayyuka Masu Sauri",
     "addIncome": "Ƙara Kudaden Shiga",
     "addExpense": "Ƙara Kashe Kuɗi",
     "addSavings": "Ƙara Ajiyar Kuɗi",
-    "addNewSale": "Ƙara Sabon Tallace-tallace"
+    "addNewSale": "Ƙara Sabon Tallace-tallace",
+    "welcomeToSheBalance": "[TRANSLATE] Welcome to SheBalance!",
+    "createFirstStoreDesc": "[TRANSLATE] Create your first store to start managing your business and track your sales, inventory, and finances.",
+    "incomeBreakdown": "Rarraba Kudaden Shiga",
+    "paymentMethods": "Hanyoyin Biyan Kuɗi",
+    "quickActions": "Ayyuka Masu Sauri"
   },
   "inventory": {
     "title": "Kaya / Jerin Kayayyaki",
