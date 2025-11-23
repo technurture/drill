@@ -25,7 +25,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const addFinancialRecord = useAddFinancialRecord();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'modals']);
 
   const [formData, setFormData] = useState({
     type: defaultType,
@@ -38,7 +38,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
     e.preventDefault();
     
     if (!selectedStore?.id || !user?.id) {
-      toast.error("Store and user information required");
+      toast.error(t('financialRecord.storeAndUserRequired', { ns: 'modals' }));
       return;
     }
 
@@ -69,7 +69,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
     try {
       await addFinancialRecord.mutateAsync(recordData);
       
-      toast.success(`${formData.type === 'income' ? 'Income' : 'Expense'} added successfully!`);
+      toast.success(formData.type === 'income' ? t('incomeAddedSuccessfully') : t('expenseAddedSuccessfully'));
       setOpen(false);
       setFormData({
         type: defaultType,
@@ -109,7 +109,7 @@ const AddFinancialRecordModal: React.FC<AddFinancialRecordModalProps> = ({
               id="reason"
               value={formData.reason}
               onChange={(e) => setFormData({...formData, reason: e.target.value})}
-              placeholder={defaultType === 'income' ? "e.g., Sales revenue, Investment returns" : "e.g., Rent payment, Equipment purchase"}
+              placeholder={defaultType === 'income' ? t('financialRecord.salesRevenueInvestmentReturns', { ns: 'modals' }) : t('financialRecord.rentPaymentEquipmentPurchase', { ns: 'modals' })}
               required
             />
           </div>

@@ -21,7 +21,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
   const selectedStore = useContext(StoreContext);
   const { user } = useAuth();
   const createSavingsPlan = useCreateSavingsPlan();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'modals', 'notifications']);
 
   const [formData, setFormData] = useState<{
     title: string;
@@ -43,7 +43,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
     e.preventDefault();
 
     if (!selectedStore?.id || !user?.id) {
-      toast.error("Store and user information required");
+      toast.error(t('financialRecord.storeAndUserRequired', { ns: 'modals' }));
       return;
     }
 
@@ -75,7 +75,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
     try {
       await createSavingsPlan.mutateAsync(planData);
 
-      toast.success("Savings plan created successfully!");
+      toast.success(t('savingsPlanCreated', { ns: 'notifications' }));
       setOpen(false);
       setFormData({
         title: "",
@@ -104,7 +104,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
               id="title"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              placeholder="e.g., House rent or Shop rent"
+              placeholder={t('housePlaceholder')}
               required
             />
           </div>
@@ -139,7 +139,7 @@ const CreateSavingsModal: React.FC<CreateSavingsModalProps> = ({ open, setOpen }
               id="contributing_to"
               value={formData.contributing_to}
               onChange={(e) => setFormData({ ...formData, contributing_to: e.target.value })}
-              placeholder="e.g., Iya Omo, Baba Alajo Ipata, or Self"
+              placeholder={t('contributingToPlaceholder')}
               required
             />
           </div>
