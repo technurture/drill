@@ -31,6 +31,7 @@ import React from "react";
 import NoStoreMessage from "@/components/NoStoreMessage";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 interface CartItem extends Product {
   cartQuantity: number;
@@ -38,6 +39,7 @@ interface CartItem extends Product {
 }
 
 const AddSales = () => {
+  const { t } = useTranslation(['pages', 'modals', 'common']);
   const theStore = useContext(StoreContext);
   const subscriptionData = useContext(SubscriptionContext);
   const addProduct = useAddProduct();
@@ -95,7 +97,7 @@ const AddSales = () => {
   ) => {
     try {
       if (!theStore?.id) {
-        toast.error("No store selected");
+        toast.error(t('common:selectStoreFirst'));
         return;
       }
 
@@ -110,14 +112,14 @@ const AddSales = () => {
         ...productData,
         store_id: theStore?.id,
       } as Omit<Product, "id">);
-      toast.success("Product added successfully");
+      toast.success(t('pages:inventory.productAddedSuccessfully'));
       // } else {
       //   toast.error("Upgrade your plan to add more products");
       // }
       setModal(false);
     } catch (error) {
       console.error("Error adding product:", error);
-      toast.error("Failed to add product");
+      toast.error(t('pages:inventory.failedToAddProduct'));
     }
   };
 
@@ -131,13 +133,13 @@ const AddSales = () => {
     console.log('Adding to cart:', product.name, 'Quantity:', quantity, 'Price Option:', priceOption, 'Custom:', customPrice);
 
     if (quantity <= 0 || quantity > product.quantity) {
-      toast.error("Invalid quantity");
+      toast.error(t('modals:cart.invalidQuantity'));
       return;
     }
 
     if (priceOption === 'custom') {
       if (customPrice === undefined || isNaN(customPrice) || customPrice <= 0) {
-        toast.error('Enter a valid custom price');
+        toast.error(t('modals:cart.enterValidCustomPrice'));
         return;
       }
     }
@@ -148,7 +150,7 @@ const AddSales = () => {
       if (existingItem) {
         const newQuantity = existingItem.cartQuantity + quantity;
         if (newQuantity > product.quantity) {
-          toast.error(`Only ${product.quantity - existingItem.cartQuantity} more available`);
+          toast.error(t('modals:cart.onlyMoreAvailable', { count: product.quantity - existingItem.cartQuantity }));
           return prevItems;
         }
         const updatedItems = prevItems.map(item =>
@@ -172,8 +174,8 @@ const AddSales = () => {
       }
     });
 
-    toast.success(`${product.name} added to cart`);
-  }, []);
+    toast.success(t('modals:cart.productAddedToCart', { name: product.name }));
+  }, [t]);
 
   const updateCartItem = useCallback((productId: string, updates: Partial<CartItem>) => {
     console.log('Updating cart item:', productId, updates);
@@ -185,11 +187,11 @@ const AddSales = () => {
           // Validate cartQuantity if it's being updated
           if (updates.cartQuantity !== undefined) {
             if (updates.cartQuantity < 0.1) {
-              toast.error("Minimum quantity is 0.1");
+              toast.error(t('modals:cart.minimumQuantity'));
               return item; // Return original item without update
             }
             if (updates.cartQuantity > item.quantity) {
-              toast.error("Insufficient stock available");
+              toast.error(t('modals:cart.insufficientStock'));
               return item; // Return original item without update
             }
           }
@@ -230,7 +232,7 @@ const AddSales = () => {
   const toggleFavourite = useCallback((product: Product) => {
     const favCount = favouriteProducts.length;
     if (!product.favourite && favCount >= 10) {
-      toast.error("Sorry, you cannot add more than 10 products to favourites");
+      toast.error(t('common:favoriteLimitError'));
       return;
     }
 
@@ -253,12 +255,12 @@ const AddSales = () => {
       return;
     }
     if (cartItems.length === 0) {
-      toast.error("Cart is empty");
+      toast.error(t('modals:cart.cartIsEmpty'));
       return;
     }
 
     if (!paymentMode) {
-      toast.error("Please select a payment method");
+      toast.error(t('modals:cart.pleaseSelectPaymentMode'));
       return;
     }
 
@@ -448,7 +450,7 @@ const AddSales = () => {
         }
       }
 
-      toast.success(isOnline ? "Sale completed successfully!" : "Sale saved offline! It will sync when you're back online.");
+      toast.success(isOnline ? t('modals:cart.saleCompletedSuccessfully') : t('modals:cart.saleSavedOffline'));
 
       // Clear cart and close modals
       setCartItems([]);
@@ -461,7 +463,7 @@ const AddSales = () => {
 
     } catch (error: any) {
       console.error("Checkout error:", error);
-      toast.error("Failed to complete sale: " + (error.message || "Unknown error"));
+      toast.error(t('modals:cart.failedToCompleteSale') + ': ' + (error.message || t('common:unknownError')));
     } finally {
       setIsCheckingOut(false);
     }
@@ -566,8 +568,8 @@ const AddSales = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="retail">Unit Price</SelectItem>
-                  <SelectItem value="custom">Custom price</SelectItem>
+                  <SelectItem value="retail">{t('modals:cart.unitPrice')}</SelectItem>
+                  <SelectItem value="custom">{t('modals:cart.customPrice')}</SelectItem>
                 </SelectContent>
               </Select>
               {priceOption === 'custom' && (
@@ -575,7 +577,7 @@ const AddSales = () => {
                   type="number"
                   min="0.01"
                   step="0.01"
-                  placeholder="Enter price"
+                  placeholder={t('modals:cart.enterPrice')}
                   value={customPrice === undefined ? '' : customPrice}
                   onChange={(e) => setCustomPrice(e.target.value === '' ? undefined : parseFloat(e.target.value))}
                   className="w-28 text-xs md:text-sm border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 bg-white dark:bg-gray-800 focus:outline-none"
@@ -587,7 +589,7 @@ const AddSales = () => {
                 disabled={product.quantity <= 0}
                 className="flex-1 h-8 text-xs md:text-sm bg-green-600 hover:bg-green-700 text-white"
               >
-                Add
+                {t('modals:cart.addToCart')}
               </Button>
             </div>
           </div>
@@ -841,7 +843,7 @@ const AddSales = () => {
                                       if (newQuantity <= item.quantity) {
                                         updateCartItem(item.id, { cartQuantity: newQuantity });
                                       } else {
-                                        toast.error("Maximum quantity reached");
+                                        toast.error(t('modals:cart.maximumQuantityReached'));
                                       }
                                     }}
                                     disabled={item.cartQuantity >= item.quantity}
@@ -852,7 +854,7 @@ const AddSales = () => {
                                 </div>
                                 <div className="text-right">
                                   <p className="text-sm font-medium">₦{(item.unit_price * item.cartQuantity).toLocaleString()}</p>
-                                  <p className="text-xs text-gray-500">₦{item.unit_price?.toLocaleString()} each</p>
+                                  <p className="text-xs text-gray-500">₦{item.unit_price?.toLocaleString()} {t('modals:cart.each')}</p>
                                 </div>
                               </div>
                             </div>
@@ -867,13 +869,13 @@ const AddSales = () => {
                 {cartItems.length > 0 && (
                   <div className="border-t border-gray-200 dark:border-gray-700 p-4 space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-semibold">Total:</span>
+                      <span className="text-lg font-semibold">{t('common:total')}:</span>
                       <span className="text-lg font-bold text-green-600">₦{getTotalAmount.toLocaleString()}</span>
                     </div>
 
                     {/* Payment Mode Selection */}
                     <div className="space-y-2">
-                      <Label className="text-sm font-medium">Payment Method:</Label>
+                      <Label className="text-sm font-medium">{t('common:paymentMethod')}:</Label>
                       <Select
                         value={paymentMode}
                         onValueChange={(value: 'cash' | 'credit' | 'bank_transfer' | 'POS') => {
@@ -882,16 +884,16 @@ const AddSales = () => {
                         }}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select payment method" />
+                          <SelectValue placeholder={t('modals:cart.selectPaymentMethod')} />
                         </SelectTrigger>
                         <SelectContent className="z-[99999] bg-white dark:bg-[#18191A]">
-                          <SelectItem value="cash">Cash</SelectItem>
-                          <SelectItem value="POS">POS</SelectItem>
-                          <SelectItem value="credit">Credit</SelectItem>
-                          <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
+                          <SelectItem value="cash">{t('common:cash')}</SelectItem>
+                          <SelectItem value="POS">{t('common:pos')}</SelectItem>
+                          <SelectItem value="credit">{t('common:credit')}</SelectItem>
+                          <SelectItem value="bank_transfer">{t('common:bankTransfer')}</SelectItem>
                         </SelectContent>
                       </Select>
-                      <p className="text-xs text-gray-500">Selected: {paymentMode}</p>
+                      <p className="text-xs text-gray-500">{t('modals:cart.selected')}: {paymentMode}</p>
                     </div>
 
                     <Button
@@ -902,10 +904,10 @@ const AddSales = () => {
                       {isCheckingOut ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Processing...
+                          {t('modals:cart.processing')}
                         </>
                       ) : (
-                        'Complete Sale'
+                        t('modals:cart.completeSale')
                       )}
                     </Button>
                   </div>
@@ -1011,7 +1013,7 @@ const AddSales = () => {
                                       if (newQuantity <= item.quantity) {
                                         updateCartItem(item.id, { cartQuantity: newQuantity });
                                       } else {
-                                        toast.error("Maximum quantity reached");
+                                        toast.error(t('modals:cart.maximumQuantityReached'));
                                       }
                                     }}
                                     disabled={item.cartQuantity >= item.quantity}
@@ -1023,7 +1025,7 @@ const AddSales = () => {
                               </div>
                               <div className="text-right">
                                 <p className="text-base font-medium">₦{(item.unit_price * item.cartQuantity).toLocaleString()}</p>
-                                <p className="text-sm text-gray-500">₦{item.unit_price?.toLocaleString()} each</p>
+                                <p className="text-sm text-gray-500">₦{item.unit_price?.toLocaleString()} {t('modals:cart.each')}</p>
                               </div>
                             </div>
                           </div>
@@ -1037,13 +1039,13 @@ const AddSales = () => {
                 {cartItems.length > 0 && (
                   <div className="border-t border-gray-200 dark:border-gray-700 p-6 space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-xl font-semibold">Total:</span>
+                      <span className="text-xl font-semibold">{t('common:total')}:</span>
                       <span className="text-xl font-bold text-green-600">₦{getTotalAmount.toLocaleString()}</span>
                     </div>
 
                     {/* Payment Mode Selection */}
                     <div className="space-y-2">
-                      <Label className="text-sm font-medium">Payment Method:</Label>
+                      <Label className="text-sm font-medium">{t('common:paymentMethod')}:</Label>
                       <Select
                         value={paymentMode}
                         onValueChange={(value: 'cash' | 'credit' | 'bank_transfer' | 'POS') => {
@@ -1052,16 +1054,16 @@ const AddSales = () => {
                         }}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select payment method" />
+                          <SelectValue placeholder={t('modals:cart.selectPaymentMethod')} />
                         </SelectTrigger>
                         <SelectContent className="z-[99999] bg-white dark:bg-[#18191A]">
-                          <SelectItem value="cash">Cash</SelectItem>
-                          <SelectItem value="POS">POS</SelectItem>
-                          <SelectItem value="credit">Credit</SelectItem>
-                          <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
+                          <SelectItem value="cash">{t('common:cash')}</SelectItem>
+                          <SelectItem value="POS">{t('common:pos')}</SelectItem>
+                          <SelectItem value="credit">{t('common:credit')}</SelectItem>
+                          <SelectItem value="bank_transfer">{t('common:bankTransfer')}</SelectItem>
                         </SelectContent>
                       </Select>
-                      <p className="text-xs text-gray-500">Selected: {paymentMode}</p>
+                      <p className="text-xs text-gray-500">{t('modals:cart.selected')}: {paymentMode}</p>
                     </div>
 
                     <Button
@@ -1072,10 +1074,10 @@ const AddSales = () => {
                       {isCheckingOut ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Processing...
+                          {t('modals:cart.processing')}
                         </>
                       ) : (
-                        'Complete Sale'
+                        t('modals:cart.completeSale')
                       )}
                     </Button>
                   </div>

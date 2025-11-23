@@ -99,7 +99,9 @@
     "purchaseValue": "Purchase Value",
     "basedOnPurchasePrice": "Based on purchase price",
     "topSellingProduct": "Top-Selling Product",
-    "unitsSold": "units sold"
+    "unitsSold": "units sold",
+    "productAddedSuccessfully": "Product added successfully",
+    "failedToAddProduct": "Failed to add product"
   },
   "sales": {
     "title": "Sales",

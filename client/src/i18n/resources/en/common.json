@@ -43,6 +43,8 @@
   "signOutConfirmation": "Are you sure you want to sign out? You'll need to sign in again to access your account.",
   "loggedOutSuccess": "Logged out successfully",
   "logoutError": "Error logging out",
+  "unknown": "Unknown",
+  "unknownError": "Unknown error",
   "type": "Type",
   "income": "Income",
   "expense": "Expense",

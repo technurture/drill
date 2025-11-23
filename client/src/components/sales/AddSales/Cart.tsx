@@ -42,6 +42,7 @@ import { checkSalesRestriction } from "@/utils/subscriptionHelpers/salesRestrict
 import { getProductAmount } from "@/utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { useTranslation } from "react-i18next";
 
 type cartType = {
   result: Product[];
@@ -49,6 +50,7 @@ type cartType = {
 };
 
 const Cart = ({ result, removeCart }: cartType) => {
+  const { t } = useTranslation(['modals', 'common']);
   const theStore = useContext(StoreContext);
   const { data: token } = useGetDeviceToken(theStore?.owner_id);
   const { user } = useAuth();
@@ -70,10 +72,10 @@ const Cart = ({ result, removeCart }: cartType) => {
   const [cartItem, setCartItem] = useState<Product[]>([]);
 
   const paymentModes = [
-    { key: "cash", value: "Cash" },
-    { key: "POS", value: "POS" },
-    { key: "credit", value: "Credit" },
-    { key: "bank_transfer", value: "Bank Transfer" },
+    { key: "cash", value: t('common:cash') },
+    { key: "POS", value: t('common:pos') },
+    { key: "credit", value: t('common:credit') },
+    { key: "bank_transfer", value: t('common:bankTransfer') },
   ];
 
   const pushNotification = (message: string, title: string) => {
@@ -157,12 +159,12 @@ const Cart = ({ result, removeCart }: cartType) => {
     const hasWholesalePrice = item.wholesale_price !== undefined && item.wholesale_price !== null && item.wholesale_price > 0;
 
     if (value === "retail" && !hasRetailPrice) {
-      toast.error("Retail price not available for this product");
+      toast.error(t('modals:cart.retailPriceNotAvailable'));
       return;
     }
 
     if (value === "wholesale" && !hasWholesalePrice) {
-      toast.error("Wholesale price not available for this product");
+      toast.error(t('modals:cart.wholesalePriceNotAvailable'));
       return;
     }
 
@@ -175,7 +177,7 @@ const Cart = ({ result, removeCart }: cartType) => {
     const item = updatedItems[index];
 
     if ((item.amount || 0) >= item.quantity) {
-      toast.error("Insufficient Stock");
+      toast.error(t('modals:cart.insufficientStock'));
       return;
     }
 
@@ -201,12 +203,12 @@ const Cart = ({ result, removeCart }: cartType) => {
     const newAmount = parseInt(value) || 0;
 
     if (newAmount < 1) {
-      toast.error("Quantity must be at least 1");
+      toast.error(t('modals:cart.quantityMustBeAtLeastOne'));
       return;
     }
 
     if (newAmount > item.quantity) {
-      toast.error("Insufficient Stock");
+      toast.error(t('modals:cart.insufficientStock'));
       return;
     }
 
@@ -216,27 +218,27 @@ const Cart = ({ result, removeCart }: cartType) => {
 
   const handleSubmit = async () => {
     if (!paymentMode) {
-      toast.error("Please select a payment mode");
+      toast.error(t('modals:cart.pleaseSelectPaymentMode'));
       return;
     }
 
     if (cartItem.length === 0) {
-      toast.error("Cart is empty");
+      toast.error(t('modals:cart.cartIsEmpty'));
       return;
     }
 
     // Validate all items have valid price options and amounts
     for (const item of cartItem) {
       if (!item.price_option) {
-        toast.error(`Please select a price option for ${item.name}`);
+        toast.error(`${t('modals:cart.pleaseSelectPriceOption')} ${item.name}`);
         return;
       }
       if (!item.amount || item.amount < 1) {
-        toast.error(`Invalid quantity for ${item.name}`);
+        toast.error(`${t('modals:cart.invalidQuantity')} ${item.name}`);
         return;
       }
       if (item.amount > item.quantity) {
-        toast.error(`Insufficient stock for ${item.name}`);
+        toast.error(t('modals:cart.insufficientStock'));
         return;
       }
     }
@@ -362,13 +364,13 @@ const Cart = ({ result, removeCart }: cartType) => {
       }
 
       const successMessage = isOnline
-        ? "Sale completed successfully"
-        : "Sale saved offline and will sync when you're back online";
+        ? t('modals:cart.saleCompletedSuccessfully')
+        : t('modals:cart.saleSavedOffline');
       toast.success(successMessage);
       navigate("/dashboard/sales");
     } catch (error: any) {
       console.error("Sale error:", error);
-      toast.error("Failed to complete sale: " + (error.message || "Unknown error"));
+      toast.error(t('modals:cart.failedToCompleteSale') + ': ' + (error.message || t('common:unknown')));
     } finally {
       setIsSubmitting(false);
     }
@@ -383,18 +385,18 @@ const Cart = ({ result, removeCart }: cartType) => {
     <div className="hidden xl:flex flex-col justify-between py-4 w-full w-6/12 h-full rounded-[37px] bg-neutral-200 dark:bg-neutral-900 transition-all duration-300 ease-in-out transform hover:translate-x-1 hover:shadow-lg">
       <div className="overflow-y-scroll w-full">
         <div className="flex items-center gap-x-4 p-4 sticky top-0 z-10 bg-neutral-200 dark:bg-neutral-900 rounded-[15px] transition-colors duration-200">
-          Cart <Trolley className="dark:fill-[#FFFFFF] transition-transform duration-200 hover:scale-110" />
+          {t('modals:cart.title')} <Trolley className="dark:fill-[#FFFFFF] transition-transform duration-200 hover:scale-110" />
         </div>
 
         <Table className="w-full">
           <TableHeader>
             <TableRow className="text-[14px] bg-transparent sticky top-0">
-              <TableHead>Name</TableHead>
-              <TableHead>Price Option</TableHead>
-              <TableHead>Price</TableHead>
-              <TableHead>Quantity</TableHead>
-              <TableHead>Amount</TableHead>
-              <TableHead>Delete</TableHead>
+              <TableHead>{t('modals:cart.name')}</TableHead>
+              <TableHead>{t('modals:cart.priceOption')}</TableHead>
+              <TableHead>{t('modals:cart.price')}</TableHead>
+              <TableHead>{t('modals:cart.quantity')}</TableHead>
+              <TableHead>{t('modals:cart.amount')}</TableHead>
+              <TableHead>{t('modals:cart.delete')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -413,22 +415,22 @@ const Cart = ({ result, removeCart }: cartType) => {
                       disabled={!(hasRetailPrice || hasWholesalePrice) ? true : false}
                     >
                       <SelectTrigger className="w-[130px] bg-neutral-100 dark:bg-neutral-800 focus:ring-2 focus:ring-blue-500">
-                        <SelectValue placeholder="Select Option" />
+                        <SelectValue placeholder={t('modals:cart.selectOption')} />
                       </SelectTrigger>
                       <SelectContent>
                         {hasRetailPrice && (
                           <SelectItem value="retail">
-                            Retail - ₦{item.unit_price?.toLocaleString()}
+                            {t('modals:cart.retail')} - ₦{item.unit_price?.toLocaleString()}
                           </SelectItem>
                         )}
                         {hasWholesalePrice && (
                           <SelectItem value="wholesale">
-                            Wholesale - ₦{item.wholesale_price?.toLocaleString()}
+                            {t('modals:cart.wholesale')} - ₦{item.wholesale_price?.toLocaleString()}
                           </SelectItem>
                         )}
                         {!hasRetailPrice && !hasWholesalePrice && (
                           <SelectItem value="retail" disabled>
-                            No price available
+                            {t('modals:cart.noPriceAvailable')}
                           </SelectItem>
                         )}
                       </SelectContent>
@@ -474,7 +476,7 @@ const Cart = ({ result, removeCart }: cartType) => {
                       </button>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
-                      Stock: {item.quantity}
+                      {t('modals:cart.stock')}: {item.quantity}
                     </div>
                   </TableCell>
 
@@ -507,8 +509,8 @@ const Cart = ({ result, removeCart }: cartType) => {
 
         {cartItem.length === 0 && (
           <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-            <p>Your cart is empty</p>
-            <p className="text-sm">Add items to start making a sale</p>
+            <p>{t('modals:cart.cartEmpty')}</p>
+            <p className="text-sm">{t('modals:cart.addItemsToStart')}</p>
           </div>
         )}
       </div>
@@ -516,16 +518,16 @@ const Cart = ({ result, removeCart }: cartType) => {
       <div className="flex items-center w-full py-4 px-2 justify-between border-t-[1px] border-gray-300 dark:border-gray-600">
         <div className="flex items-start gap-x-6 px-2">
           <div className="flex flex-col gap-y-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Total Price:</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{t('modals:cart.totalPrice')}</span>
             <span className="font-bold text-lg text-green-600 dark:text-green-400">
               ₦{totalAmount.toLocaleString()}
             </span>
           </div>
           <div className="flex flex-col gap-y-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Payment Mode</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{t('modals:cart.paymentMode')}</span>
             <Select value={paymentMode} onValueChange={setPaymentMode}>
               <SelectTrigger className="w-[140px] text-[14px]">
-                <SelectValue placeholder="Payment Mode" />
+                <SelectValue placeholder={t('modals:cart.paymentMode')} />
               </SelectTrigger>
               <SelectContent>
                 {paymentModes.map((mode) => (
@@ -547,10 +549,10 @@ const Cart = ({ result, removeCart }: cartType) => {
           {isSubmitting ? (
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              <span>Processing...</span>
+              <span>{t('modals:cart.processing')}</span>
             </div>
           ) : (
-            "Confirm Sale"
+            t('modals:cart.confirmSale')
           )}
         </Button>
       </div>
