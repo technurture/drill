@@ -29,6 +29,87 @@ try {
 
 export { app, messaging };
 
+/**
+ * Get FCM token without requesting permission (for already-granted permission)
+ * This is Safari-compatible as it doesn't trigger the permission prompt
+ */
+export const getNotificationToken = async (userId: string) => {
+  try {
+    if (!messaging) {
+      console.warn("Firebase messaging not initialized");
+      return null;
+    }
+
+    const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY;
+    if (!vapidKey) {
+      console.warn("VAPID key not configured");
+      return null;
+    }
+
+    // Only proceed if permission is already granted
+    if (Notification.permission !== "granted") {
+      console.log("Notification permission not granted yet");
+      return null;
+    }
+
+    const token = await getToken(messaging, { vapidKey });
+
+    if (token) {
+      // ✅ Log FCM token for testing
+      console.log("🔔 FCM Registration Token:");
+      console.log(token);
+      console.log("\n📋 Copy the token above to test Firebase notifications!");
+      console.log("👉 Go to Firebase Console → Messaging → Send test message");
+
+      // Check if user already has ANY token registered
+      const { data: existingTokens, error } = await supabase
+        .from("devices_token")
+        .select("*")
+        .eq("user_id", userId);
+
+      if (error) {
+        console.error("Error checking token:", error);
+        return null;
+      }
+
+      // Check if the current token is already registered
+      const tokenExists = existingTokens?.some(t => t.token === token);
+
+      if (tokenExists) {
+        console.log("✅ Token already registered in database");
+        return token;
+      } else {
+        // Add new token WITHOUT deleting old ones
+        // This allows users to receive notifications on multiple devices/browsers
+        console.log("📱 Registering new device token...");
+
+        const { error: insertError } = await supabase
+          .from("devices_token")
+          .insert({ token: token, user_id: userId });
+
+        if (insertError) {
+          console.error("Error saving token:", insertError);
+          return null;
+        }
+
+        console.log("✅ Token saved to database");
+        console.log(`📊 User now has ${(existingTokens?.length || 0) + 1} registered device(s)`);
+        toast.success("Push notifications enabled on this device!");
+        return token;
+      }
+    } else {
+      console.warn("⚠️ No FCM token received. Check Firebase configuration.");
+    }
+  } catch (error) {
+    console.error("Error getting notification token:", error);
+    return null;
+  }
+};
+
+/**
+ * Request notification permission (requires user gesture in Safari)
+ * Use this from button clicks or user interactions
+ */
 export const requestNotificationPermission = async (userId: string) => {
   try {
     if (!messaging) {
@@ -48,46 +129,8 @@ export const requestNotificationPermission = async (userId: string) => {
       return null;
     }
 
-    const token = await getToken(messaging, { vapidKey });
-
-    if (token) {
-      // ✅ Log FCM token for testing
-      console.log("🔔 FCM Registration Token:");
-      console.log(token);
-      console.log("\n📋 Copy the token above to test Firebase notifications!");
-      console.log("👉 Go to Firebase Console → Messaging → Send test message");
-
-      const { data, error } = await supabase
-        .from("devices_token")
-        .select("*")
-        .eq("user_id", userId)
-        .eq("token", token);
-
-      if (error) {
-        console.error("Error checking token:", error);
-        return null;
-      }
-
-      if (data && data.length > 0) {
-        console.log("✅ Token already registered in database");
-        return token;
-      } else {
-        const { error: insertError } = await supabase
-          .from("devices_token")
-          .insert({ token: token, user_id: userId });
-
-        if (insertError) {
-          console.error("Error saving token:", insertError);
-          return null;
-        }
-
-        console.log("✅ Token saved to database");
-        toast.success("Push notifications enabled!");
-        return token;
-      }
-    } else {
-      console.warn("⚠️ No FCM token received. Check Firebase configuration.");
-    }
+    // After permission granted, get the token
+    return await getNotificationToken(userId);
   } catch (error) {
     console.error("Error requesting notification permission:", error);
     toast.error("Failed to enable notifications");

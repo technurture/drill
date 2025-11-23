@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import fs from "fs";
 import path from "path";
 import http from "http";
@@ -12,6 +13,44 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+// CORS configuration for development and production
+const corsOptions: cors.CorsOptions = {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    // Allow requests with no origin (like mobile apps, curl, or Postman)
+    if (!origin) return callback(null, true);
+
+    // In development, allow localhost and 0.0.0.0 on any port
+    if (process.env.NODE_ENV !== 'production') {
+      const allowedOrigins = [
+        /^http:\/\/localhost(:\d+)?$/,
+        /^http:\/\/127\.0\.0\.1(:\d+)?$/,
+        /^http:\/\/0\.0\.0\.0(:\d+)?$/,
+      ];
+
+      if (allowedOrigins.some(pattern => pattern.test(origin))) {
+        return callback(null, true);
+      }
+    }
+
+    // In production, allow your production domain
+    const allowedProductionOrigins = [
+      'https://www.shebalance.org',
+      'https://shebalance.org',
+    ];
+
+    if (allowedProductionOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

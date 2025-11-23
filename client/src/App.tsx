@@ -7,6 +7,7 @@ import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import DashboardLayout from "./components/DashboardLayout";
@@ -14,7 +15,7 @@ import PWAInstallPopup from "./components/PWAInstallPopup";
 import { OfflineIndicator } from "./components/OfflineIndicator";
 import { setupAutoSync, setQueryClient } from "./services/offlineSync";
 import { useHydrateOfflineCache } from "./hooks/useHydrateOfflineCache";
-import { onNotificationReceived, setupNotificationClickHandler, requestNotificationPermission } from "./integrations/firebase/firebase";
+import { onNotificationReceived, setupNotificationClickHandler, requestNotificationPermission, getNotificationToken } from "./integrations/firebase/firebase";
 import { useNotificationSubscription } from "./hooks/useNotificationSubscription";
 import { useContext } from "react";
 import { StoreContext } from "./contexts/StoreContext";
@@ -114,11 +115,33 @@ function FCMNotifications() {
       navigate(link);
     });
 
-    // Request notification permission if not already granted
-    if (Notification.permission === 'default') {
-      requestNotificationPermission(user.id).catch(err =>
-        console.log('Notification permission request failed:', err)
+    // Request notification permission and register token
+    // This will re-register the token if it was cleared from the database
+    if (Notification.permission === 'granted') {
+      // Permission already granted, just get/register the token (Safari-safe)
+      getNotificationToken(user.id).catch(err =>
+        console.log('Notification token registration failed:', err)
       );
+    } else if (Notification.permission === 'default') {
+      // Permission not yet requested - show a helpful message
+      console.log('Notification permission not yet requested.');
+      // Show a one-time toast prompting user to enable notifications
+      const hasShownPrompt = localStorage.getItem('notification-prompt-shown');
+      if (!hasShownPrompt) {
+        setTimeout(() => {
+          toast.info('Enable push notifications in Settings to get alerts!', {
+            duration: 8000,
+            action: {
+              label: 'Go to Settings',
+              onClick: () => navigate('/dashboard/settings')
+            }
+          });
+        }, 3000); // Wait 3 seconds after login
+        localStorage.setItem('notification-prompt-shown', 'true');
+      }
+    } else if (Notification.permission === 'denied') {
+      // Permission was denied - let user know they can change it
+      console.log('Notification permission denied. User must enable in browser settings.');
     }
   }, [user?.id, navigate]);
 
