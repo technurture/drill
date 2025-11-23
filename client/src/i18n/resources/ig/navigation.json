@@ -8,18 +8,19 @@
     "viewAllNotifications": "View all notifications"
   },
   "sidebar": {
-    "dashboard": "Dashboard",
-    "inventory": "Inventory",
-    "sales": "Sales",
-    "customers": "Customers",
-    "finance": "Finance",
-    "savings": "Savings",
-    "loans": "Loans",
-    "expenses": "Expenses",
-    "reports": "Reports",
-    "settings": "Settings",
-    "help": "Help",
-    "logout": "Logout",
+    "dashboard": "Dashbọọdụ",
+    "inventory": "Ngwa Ahịa",
+    "sales": "Ahịa",
+    "customers": "Ndị Ahịa",
+    "finance": "Ego",
+    "savings": "Nchekwa",
+    "loans": "Mbinye Ego",
+    "expenses": "Mmefu",
+    "reports": "Akụkọ",
+    "settings": "Ntọala",
+    "notes": "Ndetu",
+    "help": "Enyemaka",
+    "logout": "Pụọ",
     "admin": "Admin Panel"
   },
   "bottomNav": {
@@ -35,8 +36,8 @@
     "admin": "Admin"
   },
   "storeSelector": {
-    "activeStore": "[TRANSLATE] Active Store",
-    "addNewStore": "[TRANSLATE] Add New Store",
-    "selectStore": "[TRANSLATE] Select Store"
+    "activeStore": "Ụlọ Ahịa Na-arụ Ọrụ",
+    "addNewStore": "Tinye Ụlọ Ahịa Ọhụrụ",
+    "selectStore": "Họrọ Ụlọ Ahịa"
   }
 }

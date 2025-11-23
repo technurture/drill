@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, Package, BarChart2, Settings, StickyNote, X, Coins } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface SidebarProps {
   isSideBar?: boolean;
@@ -7,15 +8,16 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { path: "/dashboard/inventory", icon: Package, label: "Inventory" },
-  { path: "/dashboard/sales", icon: BarChart2, label: "Sales" },
-  { path: "/dashboard/finance", icon: Coins, label: "Finance" },
-  { path: "/dashboard/settings", icon: Settings, label: "Settings" },
-  { path: "/dashboard/notes", icon: StickyNote, label: "Notes" },
+  { path: "/dashboard", icon: LayoutDashboard, labelKey: "sidebar.dashboard" },
+  { path: "/dashboard/inventory", icon: Package, labelKey: "sidebar.inventory" },
+  { path: "/dashboard/sales", icon: BarChart2, labelKey: "sidebar.sales" },
+  { path: "/dashboard/finance", icon: Coins, labelKey: "sidebar.finance" },
+  { path: "/dashboard/settings", icon: Settings, labelKey: "sidebar.settings" },
+  { path: "/dashboard/notes", icon: StickyNote, labelKey: "sidebar.notes" },
 ];
 
 export const Sidebar = ({ isSideBar, onClose }: SidebarProps) => {
+  const { t } = useTranslation('navigation');
   const location = useLocation();
   return (
     <aside className="sidebar bg-white dark:bg-neutral-900 w-64 h-full flex flex-col p-4 border-r border-gray-100 dark:border-neutral-800 relative">
@@ -43,7 +45,7 @@ export const Sidebar = ({ isSideBar, onClose }: SidebarProps) => {
           onClick={onClose}
         >
           <item.icon className="w-5 h-5" />
-          <span>{item.label}</span>
+          <span>{t(item.labelKey)}</span>
         </Link>
       ))}
     </aside>

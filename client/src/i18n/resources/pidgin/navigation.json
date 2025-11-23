@@ -9,17 +9,18 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
-    "inventory": "Inventory",
+    "inventory": "Goods",
     "sales": "Sales",
     "customers": "Customers",
-    "finance": "Finance",
+    "finance": "Money",
     "savings": "Savings",
     "loans": "Loans",
-    "expenses": "Expenses",
+    "expenses": "Money Wey You Spend",
     "reports": "Reports",
     "settings": "Settings",
+    "notes": "Notes",
     "help": "Help",
-    "logout": "Logout",
+    "logout": "Comot",
     "admin": "Admin Panel"
   },
   "bottomNav": {
@@ -35,8 +36,8 @@
     "admin": "Admin"
   },
   "storeSelector": {
-    "activeStore": "[TRANSLATE] Active Store",
-    "addNewStore": "[TRANSLATE] Add New Store",
-    "selectStore": "[TRANSLATE] Select Store"
+    "activeStore": "Shop Wey Dey Work Now",
+    "addNewStore": "Add New Shop",
+    "selectStore": "Choose Shop"
   }
 }

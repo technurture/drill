@@ -98,6 +98,9 @@
     "transactions": "azụmaahịa",
     "transactionFound": "azụmaahịa achọtara",
     "transactionsFound": "azụmaahịa achọtara",
+    "filterSales": "Họrọ Ahịa",
+    "exportReport": "Mepụta Akụkọ",
+    "addNewSale": "Tinye Ahịa Ọhụrụ",
     "revenueGenerated": "Ego enwetara",
     "completedSales": "Ahịa Emechara",
     "totalProfit": "Mkpokọta Uru",
@@ -253,12 +256,12 @@
     "accountSettings": "Ntọala Akaụntụ",
     "theme": "Ọdịdị",
     "selectTheme": "Họrọ Ọdịdị",
-    "notificationSettings": "[TRANSLATE] Notification Settings",
-    "enablePushNotifications": "[TRANSLATE] Enable Push Notifications",
-    "enablePushNotificationsDesc": "[TRANSLATE] Receive push notifications for sales, low stock alerts, and important updates",
-    "notificationsEnabled": "[TRANSLATE] Push notifications enabled",
-    "notificationsDisabled": "[TRANSLATE] Push notifications disabled",
-    "notificationPermissionDenied": "[TRANSLATE] Notification permission denied. Please enable notifications in your browser settings."
+    "notificationSettings": "Ntọala Ọkwa Ozi",
+    "enablePushNotifications": "Kwụọ Ọkwa Ozi",
+    "enablePushNotificationsDesc": "Nata ọkwa ozi maka ahịa, ọkwa ngwaahịa dị ole, na mmelite dị mkpa",
+    "notificationsEnabled": "Ọkwa ozi ekwuola",
+    "notificationsDisabled": "Ọkwa ozi akwụsịla",
+    "notificationPermissionDenied": "A jụrụ ikike ọkwa ozi. Biko kwụọ ọkwa ozi na ntọala ihe nchọgharị gị."
   },
   "help": {
     "title": "Ebe Enyemaka",

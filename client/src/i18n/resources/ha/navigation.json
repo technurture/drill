@@ -9,17 +9,18 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
-    "inventory": "Inventory",
-    "sales": "Sales",
-    "customers": "Customers",
-    "finance": "Finance",
-    "savings": "Savings",
-    "loans": "Loans",
-    "expenses": "Expenses",
-    "reports": "Reports",
-    "settings": "Settings",
-    "help": "Help",
-    "logout": "Logout",
+    "inventory": "Kaya",
+    "sales": "Tallace-tallace",
+    "customers": "Abokan Ciniki",
+    "finance": "Kuɗi",
+    "savings": "Ajiyar Kuɗi",
+    "loans": "Rancen Kuɗi",
+    "expenses": "Kashe Kuɗi",
+    "reports": "Rahotanni",
+    "settings": "Saitunan",
+    "notes": "Bayanai",
+    "help": "Taimako",
+    "logout": "Fita",
     "admin": "Admin Panel"
   },
   "bottomNav": {
@@ -35,8 +36,8 @@
     "admin": "Admin"
   },
   "storeSelector": {
-    "activeStore": "[TRANSLATE] Active Store",
-    "addNewStore": "[TRANSLATE] Add New Store",
-    "selectStore": "[TRANSLATE] Select Store"
+    "activeStore": "Kantin Da Ke Aiki",
+    "addNewStore": "Ƙara Sabuwar Kanti",
+    "selectStore": "Zaɓi Kanti"
   }
 }

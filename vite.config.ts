@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => ({
       strategies: "injectManifest",
       srcDir: "src",
       filename: "sw-custom.ts",
-      registerType: "autoUpdate",
+      registerType: "prompt",
       includeAssets: [
         "Shebanlace_favicon.png",
         "favicon.ico",

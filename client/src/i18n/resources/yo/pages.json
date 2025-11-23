@@ -98,6 +98,9 @@
     "transactions": "àwọn ìṣòwò",
     "transactionFound": "ìṣòwò tí a rí",
     "transactionsFound": "àwọn ìṣòwò tí a rí",
+    "filterSales": "Ṣàlọ́ Títà",
+    "exportReport": "Gbe Ìjábọ̀ Jáde",
+    "addNewSale": "Ṣàfikún Títà Tuntun",
     "revenueGenerated": "Owó tí a gbà",
     "completedSales": "Títà tó ti parí",
     "totalProfit": "Àpapọ̀ Èrè",
@@ -253,12 +256,12 @@
     "accountSettings": "Ètò Àkáǹtì",
     "theme": "Àpẹẹrẹ",
     "selectTheme": "Yan Àpẹẹrẹ",
-    "notificationSettings": "[TRANSLATE] Notification Settings",
-    "enablePushNotifications": "[TRANSLATE] Enable Push Notifications",
-    "enablePushNotificationsDesc": "[TRANSLATE] Receive push notifications for sales, low stock alerts, and important updates",
-    "notificationsEnabled": "[TRANSLATE] Push notifications enabled",
-    "notificationsDisabled": "[TRANSLATE] Push notifications disabled",
-    "notificationPermissionDenied": "[TRANSLATE] Notification permission denied. Please enable notifications in your browser settings."
+    "notificationSettings": "Ètò Ìkìlọ̀",
+    "enablePushNotifications": "Mú Ìkìlọ̀ Títa Ṣiṣẹ́",
+    "enablePushNotificationsDesc": "Gba àwọn ìkìlọ̀ títa fún títà, ìkìlọ̀ ọjà kékeré, àti àwọn ìmúdójúìwọ̀n pàtàkì",
+    "notificationsEnabled": "Ìkìlọ̀ títa ti ṣiṣẹ́",
+    "notificationsDisabled": "Ìkìlọ̀ títa ti kò ṣiṣẹ́",
+    "notificationPermissionDenied": "A kọ̀ ìgbàníláàyè ìkìlọ̀. Jọ̀wọ́ mú ìkìlọ̀ ṣiṣẹ́ nínú ètò iṣèṣírò rẹ."
   },
   "help": {
     "title": "Ilé Ìrànwọ́",

@@ -8,18 +8,19 @@
     "viewAllNotifications": "View all notifications"
   },
   "sidebar": {
-    "dashboard": "Dashboard",
-    "inventory": "Inventory",
-    "sales": "Sales",
-    "customers": "Customers",
-    "finance": "Finance",
-    "savings": "Savings",
-    "loans": "Loans",
-    "expenses": "Expenses",
-    "reports": "Reports",
-    "settings": "Settings",
-    "help": "Help",
-    "logout": "Logout",
+    "dashboard": "Pátákó",
+    "inventory": "Ìkójọpọ̀",
+    "sales": "Títà",
+    "customers": "Àwọn Oníbàárà",
+    "finance": "Owó",
+    "savings": "Ìfowópamọ́",
+    "loans": "Àwọn Wín",
+    "expenses": "Ìnáwó",
+    "reports": "Àwọn Ìjábọ̀",
+    "settings": "Ètò",
+    "notes": "Àwọn Àkọsílẹ̀",
+    "help": "Ìrànlọ́wọ́",
+    "logout": "Jáde",
     "admin": "Admin Panel"
   },
   "bottomNav": {
@@ -35,8 +36,8 @@
     "admin": "Admin"
   },
   "storeSelector": {
-    "activeStore": "[TRANSLATE] Active Store",
-    "addNewStore": "[TRANSLATE] Add New Store",
-    "selectStore": "[TRANSLATE] Select Store"
+    "activeStore": "Ilé Ìtajà Tó Ń Ṣiṣẹ́",
+    "addNewStore": "Ṣàfikún Ilé Ìtajà Tuntun",
+    "selectStore": "Yan Ilé Ìtajà"
   }
 }

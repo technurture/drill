@@ -308,12 +308,12 @@
     "lightMode": "Light Mode",
     "darkMode": "Dark Mode",
     "systemDefault": "System Default",
-    "notificationSettings": "[TRANSLATE] Notification Settings",
-    "enablePushNotifications": "[TRANSLATE] Enable Push Notifications",
-    "enablePushNotificationsDesc": "[TRANSLATE] Receive push notifications for sales, low stock alerts, and important updates",
-    "notificationsEnabled": "[TRANSLATE] Push notifications enabled",
-    "notificationsDisabled": "[TRANSLATE] Push notifications disabled",
-    "notificationPermissionDenied": "[TRANSLATE] Notification permission denied. Please enable notifications in your browser settings."
+    "notificationSettings": "Notification Settings",
+    "enablePushNotifications": "On Push Notifications",
+    "enablePushNotificationsDesc": "Receive notifications for sales, low stock alerts, and important updates",
+    "notificationsEnabled": "Push notifications don dey on",
+    "notificationsDisabled": "Push notifications don dey off",
+    "notificationPermissionDenied": "Dem no allow notification. Abeg on notification for your browser settings."
   },
   "help": {
     "title": "Help Center",

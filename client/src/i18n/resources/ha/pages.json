@@ -325,12 +325,12 @@
     "lightMode": "Yanayin Haske",
     "darkMode": "Yanayin Duhu",
     "systemDefault": "Ainihin Tsarin",
-    "notificationSettings": "[TRANSLATE] Notification Settings",
-    "enablePushNotifications": "[TRANSLATE] Enable Push Notifications",
-    "enablePushNotificationsDesc": "[TRANSLATE] Receive push notifications for sales, low stock alerts, and important updates",
-    "notificationsEnabled": "[TRANSLATE] Push notifications enabled",
-    "notificationsDisabled": "[TRANSLATE] Push notifications disabled",
-    "notificationPermissionDenied": "[TRANSLATE] Notification permission denied. Please enable notifications in your browser settings."
+    "notificationSettings": "Saitunan Sanarwa",
+    "enablePushNotifications": "Kunna Sanarwar Turawa",
+    "enablePushNotificationsDesc": "Karɓi sanarwar tallace-tallace, faɗakarwar ƙarancin kaya, da mahimman sabuntawa",
+    "notificationsEnabled": "An kunna sanarwar turawa",
+    "notificationsDisabled": "An kashe sanarwar turawa",
+    "notificationPermissionDenied": "An ƙi izinin sanarwa. Don Allah kunna sanarwa a cikin saitunan binciken ku."
   },
   "help": {
     "title": "Cibiyar Taimako",
