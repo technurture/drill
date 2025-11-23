@@ -252,7 +252,13 @@
     "appAlreadyInstalled": "Àpọtí Ti Wà Nílẹ̀ Tẹ́lẹ̀",
     "accountSettings": "Ètò Àkáǹtì",
     "theme": "Àpẹẹrẹ",
-    "selectTheme": "Yan Àpẹẹrẹ"
+    "selectTheme": "Yan Àpẹẹrẹ",
+    "notificationSettings": "[TRANSLATE] Notification Settings",
+    "enablePushNotifications": "[TRANSLATE] Enable Push Notifications",
+    "enablePushNotificationsDesc": "[TRANSLATE] Receive push notifications for sales, low stock alerts, and important updates",
+    "notificationsEnabled": "[TRANSLATE] Push notifications enabled",
+    "notificationsDisabled": "[TRANSLATE] Push notifications disabled",
+    "notificationPermissionDenied": "[TRANSLATE] Notification permission denied. Please enable notifications in your browser settings."
   },
   "help": {
     "title": "Ilé Ìrànwọ́",

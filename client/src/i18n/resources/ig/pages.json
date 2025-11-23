@@ -252,7 +252,13 @@
     "appAlreadyInstalled": "Ngwa Ewụnyela",
     "accountSettings": "Ntọala Akaụntụ",
     "theme": "Ọdịdị",
-    "selectTheme": "Họrọ Ọdịdị"
+    "selectTheme": "Họrọ Ọdịdị",
+    "notificationSettings": "[TRANSLATE] Notification Settings",
+    "enablePushNotifications": "[TRANSLATE] Enable Push Notifications",
+    "enablePushNotificationsDesc": "[TRANSLATE] Receive push notifications for sales, low stock alerts, and important updates",
+    "notificationsEnabled": "[TRANSLATE] Push notifications enabled",
+    "notificationsDisabled": "[TRANSLATE] Push notifications disabled",
+    "notificationPermissionDenied": "[TRANSLATE] Notification permission denied. Please enable notifications in your browser settings."
   },
   "help": {
     "title": "Ebe Enyemaka",
