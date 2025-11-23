@@ -13,8 +13,10 @@ import {
 import { useAddNotification } from "@/integrations/supabase/hooks/notifications";
 import { format } from "date-fns";
 import { sendPushNotification } from "@/utils/pushNotification";
+import { useTranslation } from "react-i18next";
 
 export const StoreSelector = ({ onClose }: { onClose?: () => void }) => {
+  const { t } = useTranslation('navigation');
   const { user, loginState, setLoginState } = useAuth();
   const theStore = useContext(StoreContext);
   const deviceTOk = useContext(deviceToken);
@@ -57,7 +59,7 @@ export const StoreSelector = ({ onClose }: { onClose?: () => void }) => {
               <Store size={12} />
             </div>
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Active Store
+              {t('storeSelector.activeStore')}
             </span>
           </div>
           <Select
@@ -69,7 +71,7 @@ export const StoreSelector = ({ onClose }: { onClose?: () => void }) => {
               );
               handleStoreChange(selectedStore);
             }}
-            placeholder={theStore?.store_name || "Select Store"}
+            placeholder={theStore?.store_name || t('storeSelector.selectStore')}
             classNames={{
               trigger:
                 "!h-12 !px-4 !pr-10 !flex !items-center !justify-between !rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 focus:border-blue-500 dark:focus:border-blue-500 transition-colors",
@@ -103,7 +105,7 @@ export const StoreSelector = ({ onClose }: { onClose?: () => void }) => {
             className="w-full h-10 border-dashed border-gray-300 dark:border-gray-600 hover:border-green-500 dark:hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-950/20 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-all duration-200"
           >
             <Plus size={16} className="mr-2" />
-            Add New Store
+            {t('storeSelector.addNewStore')}
           </Button>
         </div>
       )}
