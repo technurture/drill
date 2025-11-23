@@ -12,8 +12,10 @@ import { AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase";
 import { setStoreContext } from "@/contexts/StoreContext";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 const Deletion = ({ storeId }: { storeId: string }) => {
+  const { t } = useTranslation('pages');
   const deleteStore = useDeleteStore();
   const deleteAccount = useDeleteUser();
   const navigate = useNavigate();
@@ -41,15 +43,13 @@ const Deletion = ({ storeId }: { storeId: string }) => {
                 navigate("/create-store");
               }
             });
-          toast.success("Store deleted successfully");
+          toast.success(t('settings.storeDeletedSuccess'));
         });
       } catch (error) {
-        toast.error("Failed to delete Store");
+        toast.error(t('settings.failedToDeleteStore'));
       }
     } else {
-      toast.error(
-        "Failed to delete store, minimum number of store can only be 1 !!!",
-      );
+      toast.error(t('settings.minimumStoreError'));
     }
   };
 
@@ -57,10 +57,10 @@ const Deletion = ({ storeId }: { storeId: string }) => {
     try {
       await deleteAccount.mutateAsync(user?.id).then(() => {
         navigate("/signup");
-        toast.success("Account deleted successfully");
+        toast.success(t('settings.accountDeletedSuccess'));
       });
     } catch (error) {
-      toast.error("Failed to delete Account");
+      toast.error(t('settings.failedToDeleteAccount'));
     }
   };
 
@@ -69,7 +69,7 @@ const Deletion = ({ storeId }: { storeId: string }) => {
       <CardHeader>
         <CardTitle className="text-sm text-destructive flex items-center gap-2">
           <AlertTriangle className="h-4 w-4" />
-          Danger Zone
+          {t('settings.dangerZone')}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 md:space-y-6">
@@ -77,17 +77,15 @@ const Deletion = ({ storeId }: { storeId: string }) => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="space-y-1">
               <h3 className="text-sm md:text-sm font-semibold text-destructive">
-                Delete Store
+                {t('settings.deleteStore')}
               </h3>
               <p className="text-sm text-muted-foreground max-w-[500px]">
-                This action will permanently delete your store and all its data
-                including sales, inventory, and notes. This action cannot be
-                undone.
+                {t('settings.deleteStoreWarning')}
               </p>
             </div>
             <DeleteDialog
-              actionStatement="Delete Store"
-              details="This action will permanently delete your store and all its data. This cannot be undone."
+              actionStatement={t('settings.deleteStoreAction')}
+              details={t('settings.deleteStoreConfirm')}
               action={handleDeleteStore}
               type="store"
               storeName={currentStore?.store_name}
@@ -99,17 +97,15 @@ const Deletion = ({ storeId }: { storeId: string }) => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="space-y-1">
               <h3 className="text-md md:text-md font-semibold text-destructive">
-                Delete Account
+                {t('settings.deleteAccount')}
               </h3>
               <p className="text-sm text-muted-foreground max-w-[500px]">
-                This action will permanently delete your account and all
-                associated stores, sales, inventory, and notes. This action
-                cannot be undone.
+                {t('settings.deleteAccountWarning')}
               </p>
             </div>
             <DeleteDialog
-              actionStatement="Delete Account"
-              details="This action will permanently delete your account and all associated data. This cannot be undone."
+              actionStatement={t('settings.deleteAccountAction')}
+              details={t('settings.deleteAccountConfirm')}
               action={handleDeleteAccount}
               type="account"
             />

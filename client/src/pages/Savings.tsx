@@ -513,7 +513,7 @@ const Savings = () => {
                 <DialogTrigger asChild>
                   <Button className="hidden md:flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white">
                     <Plus className="w-4 h-4" />
-                    Create Savings Plan
+                    {t('savings.createSavingsPlan')}
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
