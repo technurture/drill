@@ -46,6 +46,7 @@ import Loans from "./pages/Loans";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Help from "./pages/Help";
+import { UpdateNotification } from "./components/UpdateNotification";
 
 // Create a client with offline-friendly defaults
 const queryClient = new QueryClient({
@@ -174,6 +175,7 @@ function App() {
                     <OfflineSync />
                     <FCMNotifications />
                     <RealtimeNotifications />
+                    <UpdateNotification />
                     <ScrollToTop />
                     <Routes>
                       <Route path="/" element={<LandingPageWrapper />} />

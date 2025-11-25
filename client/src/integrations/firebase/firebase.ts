@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, onMessage } from "firebase/messaging";
 import { supabase } from "../supabase";
 import { toast } from "sonner";
+import { fcmTokenService } from "@/services/fcmTokenService";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -32,17 +33,12 @@ export { app, messaging };
 /**
  * Get FCM token without requesting permission (for already-granted permission)
  * This is Safari-compatible as it doesn't trigger the permission prompt
+ * Now uses FCM token service for better token management
  */
 export const getNotificationToken = async (userId: string) => {
   try {
     if (!messaging) {
       console.warn("Firebase messaging not initialized");
-      return null;
-    }
-
-    const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY;
-    if (!vapidKey) {
-      console.warn("VAPID key not configured");
       return null;
     }
 
@@ -52,7 +48,11 @@ export const getNotificationToken = async (userId: string) => {
       return null;
     }
 
-    const token = await getToken(messaging, { vapidKey });
+    // Clear any invalid tokens first
+    await fcmTokenService.clearInvalidTokens();
+
+    // Get token using the service (handles validation and refresh)
+    const token = await fcmTokenService.getToken();
 
     if (token) {
       // ✅ Log FCM token for testing

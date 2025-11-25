@@ -135,7 +135,7 @@ registerRoute(
 // Notifies the app to sync when connection is restored
 self.addEventListener('sync', (event: any) => {
   console.log('[SW] Sync event received:', event.tag);
-  
+
   if (event.tag === 'offline-sync') {
     event.waitUntil(
       self.clients.matchAll().then(clients => {
@@ -153,20 +153,60 @@ self.addEventListener('sync', (event: any) => {
 
 self.addEventListener('install', (event) => {
   console.log('[SW] Service worker installing...');
+  // Skip waiting to activate immediately
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   console.log('[SW] Service worker activating...');
-  event.waitUntil(self.clients.claim());
+
+  event.waitUntil(
+    (async () => {
+      // Take control of all clients immediately
+      await self.clients.claim();
+
+      // Clear old caches for Safari and other browsers
+      const cacheNames = await caches.keys();
+      const oldCaches = cacheNames.filter(name =>
+        !name.includes('workbox-precache') ||
+        name.includes('old') ||
+        name.includes('temp')
+      );
+
+      await Promise.all(
+        oldCaches.map(cacheName => {
+          console.log('[SW] Deleting old cache:', cacheName);
+          return caches.delete(cacheName);
+        })
+      );
+
+      // Notify all clients that a new version is active
+      const clients = await self.clients.matchAll({ type: 'window' });
+      clients.forEach(client => {
+        client.postMessage({
+          type: 'SW_UPDATED',
+          timestamp: Date.now()
+        });
+      });
+
+      console.log('[SW] Service worker activated and clients claimed');
+    })()
+  );
 });
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
-  
+
   if (event.data && event.data.type === 'QUEUE_ACTION') {
     console.log('[SW] Action queued for sync:', event.data.action);
+  }
+
+  // Handle update check request from client
+  if (event.data && event.data.type === 'CHECK_UPDATE') {
+    self.registration.update().then(() => {
+      console.log('[SW] Update check completed');
+    });
   }
 });

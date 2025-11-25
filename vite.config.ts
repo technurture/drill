@@ -14,9 +14,9 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: true,
     hmr: process.env.REPL_OWNER
       ? {
-          protocol: "wss",
-          clientPort: 443,
-        }
+        protocol: "wss",
+        clientPort: 443,
+      }
       : true,
   },
   build: {
@@ -32,7 +32,12 @@ export default defineConfig(({ mode }) => ({
       strategies: "injectManifest",
       srcDir: "src",
       filename: "sw-custom.ts",
-      registerType: "prompt",
+      registerType: "autoUpdate",
+      workbox: {
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
+      },
       includeAssets: [
         "Shebanlace_favicon.png",
         "favicon.ico",
