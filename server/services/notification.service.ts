@@ -97,9 +97,20 @@ export const sendNotification = async (
 ): Promise<{ success: boolean; failedTokens: string[] }> => {
     const app = initializeFirebaseAdmin();
 
-    if (!app || tokens.length === 0) {
+    if (!app) {
+        console.error('❌ Firebase Admin not initialized - cannot send notifications');
         return { success: false, failedTokens: tokens };
     }
+
+    if (tokens.length === 0) {
+        console.warn('⚠️ No tokens provided - skipping notification');
+        return { success: false, failedTokens: [] };
+    }
+
+    console.log('📤 Sending notification to', tokens.length, 'device(s)');
+    console.log('📧 Title:', title);
+    console.log('📝 Body:', body);
+    console.log('🎯 Recipients (tokens):', tokens.map(t => `${t.substring(0, 20)}...`));
 
     try {
         const message: admin.messaging.MulticastMessage = {
@@ -127,27 +138,29 @@ export const sendNotification = async (
         response.responses.forEach((resp, idx) => {
             if (!resp.success) {
                 failedTokens.push(tokens[idx]);
-                console.error(`Failed to send to token ${tokens[idx]}:`, resp.error);
+                console.error(`❌ Failed to send to token ${tokens[idx].substring(0, 20)}...:`, resp.error?.message);
+            } else {
+                console.log(`✅ Successfully sent to token ${tokens[idx].substring(0, 20)}...`);
             }
         });
 
         // Cleanup invalid tokens
         if (failedTokens.length > 0) {
-            console.log(`Cleaning up ${failedTokens.length} invalid tokens...`);
+            console.log(`🧹 Cleaning up ${failedTokens.length} invalid tokens...`);
             await supabase
                 .from('devices_token')
                 .delete()
                 .in('token', failedTokens);
         }
 
-        console.log(`✅ Sent ${response.successCount}/${tokens.length} notifications`);
+        console.log(`✅ Sent ${response.successCount}/${tokens.length} notifications successfully`);
 
         return {
             success: response.successCount > 0,
             failedTokens,
         };
     } catch (error) {
-        console.error('Error sending notification:', error);
+        console.error('❌ Error sending notification:', error);
         return { success: false, failedTokens: tokens };
     }
 };
@@ -162,23 +175,35 @@ export const sendToUser = async (
     data?: Record<string, string>
 ): Promise<boolean> => {
     try {
+        console.log(`👤 Sending notification to user: ${userId}`);
+
         // Get user's FCM tokens from database
         const { data: tokens, error } = await supabase
             .from('devices_token')
-            .select('token')
+            .select('token, created_at')
             .eq('user_id', userId);
 
-        if (error || !tokens || tokens.length === 0) {
-            console.log(`No FCM tokens found for user ${userId}`);
+        if (error) {
+            console.error(`❌ Error fetching tokens for user ${userId}:`, error);
             return false;
         }
+
+        if (!tokens || tokens.length === 0) {
+            console.warn(`⚠️ No FCM tokens found for user ${userId}`);
+            return false;
+        }
+
+        console.log(`📱 Found ${tokens.length} device(s) for user ${userId}:`);
+        tokens.forEach((device, idx) => {
+            console.log(`  Device ${idx + 1}: registered ${device.created_at}`);
+        });
 
         const fcmTokens = tokens.map(t => t.token);
         const result = await sendNotification(fcmTokens, title, body, data);
 
         return result.success;
     } catch (error) {
-        console.error(`Error sending notification to user ${userId}:`, error);
+        console.error(`❌ Error sending notification to user ${userId}:`, error);
         return false;
     }
 };
@@ -193,6 +218,7 @@ export const sendToStore = async (
     data?: Record<string, string>
 ): Promise<boolean> => {
     try {
+        console.log(`🏪 Sending notification to store: ${storeId}`);
         let userIds: string[] = [];
 
         // 1. Get sales reps emails
@@ -202,55 +228,74 @@ export const sendToStore = async (
             .eq('store_id', storeId);
 
         if (!repsError && salesReps && salesReps.length > 0) {
+            console.log(`👥 Found ${salesReps.length} sales rep(s)`);
             const emails = salesReps.map(r => r.email);
 
             // 2. Get user IDs for these emails
             const { data: users, error: usersError } = await supabase
                 .from('users')
-                .select('id')
+                .select('id, email')
                 .in('email', emails);
 
             if (!usersError && users) {
                 userIds = users.map(u => u.id);
+                console.log(`  Sales reps:`, users.map(u => u.email));
             }
         }
 
         // 3. Also get the store owner
         const { data: store, error: storeError } = await supabase
             .from('stores')
-            .select('owner_id')
+            .select('owner_id, store_name')
             .eq('id', storeId)
             .single();
 
         if (!storeError && store?.owner_id) {
+            console.log(`👑 Store owner: ${store.owner_id}`);
+            console.log(`🏪 Store name: ${store.store_name}`);
             userIds.push(store.owner_id);
         }
 
         if (userIds.length === 0) {
-            console.log(`No users found for store ${storeId}`);
+            console.warn(`⚠️ No users found for store ${storeId}`);
             return false;
         }
 
         // Remove duplicates
         userIds = [...new Set(userIds)];
+        console.log(`📊 Total unique users to notify: ${userIds.length}`);
 
         // Get all FCM tokens for these users
         const { data: tokens, error: tokenError } = await supabase
             .from('devices_token')
-            .select('token')
+            .select('token, user_id')
             .in('user_id', userIds);
 
-        if (tokenError || !tokens || tokens.length === 0) {
-            console.log(`No FCM tokens found for store ${storeId}`);
+        if (tokenError) {
+            console.error(`❌ Error fetching tokens for store ${storeId}:`, tokenError);
             return false;
         }
+
+        if (!tokens || tokens.length === 0) {
+            console.warn(`⚠️ No FCM tokens found for store ${storeId}`);
+            return false;
+        }
+
+        console.log(`📱 Found ${tokens.length} device(s) across ${userIds.length} user(s)`);
+        const devicesByUser = tokens.reduce((acc, token) => {
+            acc[token.user_id] = (acc[token.user_id] || 0) + 1;
+            return acc;
+        }, {} as Record<string, number>);
+        Object.entries(devicesByUser).forEach(([userId, count]) => {
+            console.log(`  User ${userId}: ${count} device(s)`);
+        });
 
         const fcmTokens = tokens.map(t => t.token);
         const result = await sendNotification(fcmTokens, title, body, data);
 
         return result.success;
     } catch (error) {
-        console.error(`Error sending notification to store ${storeId}:`, error);
+        console.error(`❌ Error sending notification to store ${storeId}:`, error);
         return false;
     }
 };

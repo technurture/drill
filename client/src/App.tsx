@@ -47,6 +47,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Help from "./pages/Help";
 import { UpdateNotification } from "./components/UpdateNotification";
+import { NotificationDebugger } from "./components/debug/NotificationDebugger";
 
 // Create a client with offline-friendly defaults
 const queryClient = new QueryClient({
@@ -340,6 +341,16 @@ function App() {
                           <ProtectedRoute>
                             <DashboardLayout>
                               <Help />
+                            </DashboardLayout>
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/dashboard/debug-notifications"
+                        element={
+                          <ProtectedRoute>
+                            <DashboardLayout>
+                              <NotificationDebugger />
                             </DashboardLayout>
                           </ProtectedRoute>
                         }
