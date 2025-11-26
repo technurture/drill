@@ -50,6 +50,7 @@ export default defineConfig(({ mode }) => ({
       devOptions: {
         enabled: true,
         type: "module",
+        navigateFallback: undefined,
       },
       manifest: {
         name: "SheBalance",
