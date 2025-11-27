@@ -523,7 +523,7 @@ const Savings = () => {
                   </DialogHeader>
                   <form onSubmit={handleCreatePlan} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="title">Title</Label>
+                      <Label htmlFor="title">{tc('title')}</Label>
                       <Input
                         id="title"
                         value={createFormData.title}
@@ -535,7 +535,7 @@ const Savings = () => {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="start_date">Start Date</Label>
+                        <Label htmlFor="start_date">{tc('startDate')}</Label>
                         <Input
                           id="start_date"
                           type="date"
@@ -546,7 +546,7 @@ const Savings = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="end_date">End Date</Label>
+                        <Label htmlFor="end_date">{tc('endDate')}</Label>
                         <Input
                           id="end_date"
                           type="date"
@@ -558,7 +558,7 @@ const Savings = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="contributing_to">Contributing To</Label>
+                      <Label htmlFor="contributing_to">{tc('contributingTo')}</Label>
                       <Input
                         id="contributing_to"
                         value={createFormData.contributing_to}
@@ -569,7 +569,7 @@ const Savings = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="savings_duration">Savings Duration</Label>
+                      <Label htmlFor="savings_duration">{tc('savingsDuration')}</Label>
                       <Select
                         value={createFormData.savings_duration}
                         onValueChange={(value) => setCreateFormData({ ...createFormData, savings_duration: value as any })}
@@ -992,7 +992,7 @@ const Savings = () => {
 
                       {/* Progress Section */}
                       <div className="space-y-4">
-                        <h4 className="font-semibold">Progress Overview</h4>
+                        <h4 className="font-semibold">{t('savings.progressOverview')}</h4>
                         {(() => {
                           const planContributions = selectedPlanForDetails.contributions || [];
                           const planTotalContributions = planContributions.reduce((sum: number, contribution: any) =>
@@ -1011,19 +1011,19 @@ const Savings = () => {
                                   <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                                     ₦{effectiveSaved.toLocaleString()}
                                   </p>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">Total Saved</p>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">{t('savings.totalSaved')}</p>
                                 </div>
                                 <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
                                   <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                                     ₦{parseFloat(selectedPlanForDetails.target_amount).toLocaleString()}
                                   </p>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">Target Amount</p>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">{tc('targetAmount')}</p>
                                 </div>
                                 <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                                   <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                                     {planProgress.toFixed(1)}%
                                   </p>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">Progress</p>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">{t('savings.progress')}</p>
                                 </div>
                                 <div className="text-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
                                   <p className="text-2xl font-bold text-red-600 dark:text-red-400">
@@ -1040,17 +1040,17 @@ const Savings = () => {
 
                       {/* Timeline Section */}
                       <div className="space-y-4">
-                        <h4 className="font-semibold">Timeline</h4>
+                        <h4 className="font-semibold">{t('savings.timeline')}</h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                           <div>
-                            <p className="text-gray-500">Start Date</p>
+                            <p className="text-gray-500">{tc('startDate')}</p>
                             <p className="font-medium">
                               {format(parseISO(selectedPlanForDetails.start_date), "EEEE, MMMM dd, yyyy")}
                             </p>
                           </div>
                           <div>
                             <p className="text-gray-500">
-                              {planStatus === 'withdrawn' ? 'Withdrawal Date' : 'End Date'}
+                              {planStatus === 'withdrawn' ? t('savings.withdrawalDate') : tc('endDate')}
                             </p>
                             <p className="font-medium">
                               {format(parseISO(selectedPlanForDetails.end_date), "EEEE, MMMM dd, yyyy")}
@@ -1062,7 +1062,7 @@ const Savings = () => {
                       {/* Contributions Section */}
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                          <h4 className="font-semibold">Contributions History</h4>
+                          <h4 className="font-semibold">{t('savings.contributionsHistory')}</h4>
                           <span className="text-sm text-gray-500">
                             {planContributions.length} contribution{planContributions.length !== 1 ? 's' : ''}
                           </span>
@@ -1070,7 +1070,7 @@ const Savings = () => {
                         {lastWithdrawal && selectedPlanForDetails?.id === lastWithdrawal.planId && (
                           <div className="flex items-center justify-between p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
                             <div className="text-sm">
-                              <div className="font-medium text-red-700 dark:text-red-300">Withdrawn</div>
+                              <div className="font-medium text-red-700 dark:text-red-300">{t('savings.withdrawn')}</div>
                               <div className="text-gray-600 dark:text-gray-400 text-xs">
                                 {format(parseISO(lastWithdrawal.at), "EEEE, MMMM dd, yyyy 'at' h:mm a")}
                               </div>
@@ -1106,8 +1106,8 @@ const Savings = () => {
                         ) : (
                           <div className="text-center py-8">
                             <PiggyBank className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                            <p className="text-gray-500">No contributions made yet</p>
-                            <p className="text-sm text-gray-400">Start contributing to see your progress</p>
+                            <p className="text-gray-500">{t('savings.noContributions')}</p>
+                            <p className="text-sm text-gray-400">{t('savings.startContributing')}</p>
                           </div>
                         )}
                       </div>
@@ -1116,7 +1116,7 @@ const Savings = () => {
                       {withdrawals && withdrawals.length > 0 && (
                         <div className="space-y-4">
                           <div className="flex items-center justify-between">
-                            <h4 className="font-semibold">Withdrawal History</h4>
+                            <h4 className="font-semibold">{t('savings.withdrawalHistory')}</h4>
                             <span className="text-sm text-gray-500">
                               {withdrawals.length} withdrawal{withdrawals.length !== 1 ? 's' : ''}
                             </span>
@@ -1190,11 +1190,11 @@ const Savings = () => {
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Create New Savings Plan</DialogTitle>
+              <DialogTitle>{tc('createNewSavingsPlan')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleCreatePlan} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title">{tc('title')}</Label>
                 <Input
                   id="title"
                   value={createFormData.title}
@@ -1206,7 +1206,7 @@ const Savings = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="start_date">Start Date</Label>
+                  <Label htmlFor="start_date">{tc('startDate')}</Label>
                   <Input
                     id="start_date"
                     type="date"
@@ -1217,7 +1217,7 @@ const Savings = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="end_date">End Date</Label>
+                  <Label htmlFor="end_date">{tc('endDate')}</Label>
                   <Input
                     id="end_date"
                     type="date"
@@ -1229,7 +1229,7 @@ const Savings = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="contributing_to">Contributing To</Label>
+                <Label htmlFor="contributing_to">{tc('contributingTo')}</Label>
                 <Input
                   id="contributing_to"
                   value={createFormData.contributing_to}
@@ -1240,7 +1240,7 @@ const Savings = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="savings_duration">Savings Duration</Label>
+                <Label htmlFor="savings_duration">{tc('savingsDuration')}</Label>
                 <Select
                   value={createFormData.savings_duration}
                   onValueChange={(value) => setCreateFormData({ ...createFormData, savings_duration: value as any })}

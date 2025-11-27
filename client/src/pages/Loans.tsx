@@ -241,7 +241,7 @@ const Loans = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <Label>{t('startDate')}</Label>
+                    <Label>{tc('startDate')}</Label>
                     <Input type="date" value={createForm.start_date} onChange={e => setCreateForm(f => ({ ...f, start_date: e.target.value }))} />
                   </div>
                   <div>
@@ -267,8 +267,8 @@ const Loans = () => {
                   <Input value={createForm.purpose} onChange={e => setCreateForm(f => ({ ...f, purpose: e.target.value }))} placeholder={t('loans.purposePlaceholder')} />
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{t('create')}</Button>
-                  <Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>{t('cancel')}</Button>
+                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{tc('create')}</Button>
+                  <Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>{tc('cancel')}</Button>
                 </div>
               </form>
             </DialogContent>
@@ -422,8 +422,8 @@ const Loans = () => {
                 </div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{t('save')}</Button>
-                <Button type="button" variant="outline" onClick={() => setIsRepayOpen(false)}>{t('cancel')}</Button>
+                <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">{tc('save')}</Button>
+                <Button type="button" variant="outline" onClick={() => setIsRepayOpen(false)}>{tc('cancel')}</Button>
               </div>
             </form>
           </DialogContent>
@@ -437,7 +437,7 @@ const Loans = () => {
             if (!activeLoan) return;
             try {
               await deleteLoan.mutateAsync({ loanId: activeLoan.id, storeId: store?.id || "" });
-              toast.success(t('loanDeleted'));
+              toast.success(tc('loanDeleted'));
             } catch (err: any) {
               toast.error(err?.message || tc('failedToCreateLoan'));
             } finally {
@@ -458,7 +458,7 @@ const Loans = () => {
               {activeLoan ? (
                 <LoanHistory loanId={activeLoan.id} t={t} />
               ) : (
-                <div className="text-sm text-gray-500">{t('noLoanSelected')}</div>
+                <div className="text-sm text-gray-500">{t('loans.noLoanSelected')}</div>
               )}
             </div>
           </DialogContent>
@@ -473,7 +473,7 @@ const EquivalentFromPercent = ({ principal, percent, t }: { principal: string; p
   const pct = Number(percent || 0);
   const amount = p > 0 && pct > 0 ? (p * pct) / 100 : 0;
   return (
-    <div className="mt-1 text-xs text-gray-500">{t('equivalentInterestAmount')}: ₦{amount.toLocaleString()}</div>
+    <div className="mt-1 text-xs text-gray-500">{t('loans.equivalentInterestAmount', { amount: amount.toLocaleString() })}</div>
   );
 };
 
@@ -482,7 +482,7 @@ const EquivalentFromAmount = ({ principal, amount, t }: { principal: string; amo
   const a = Number(amount || 0);
   const pct = p > 0 && a > 0 ? (a / p) * 100 : 0;
   return (
-    <div className="mt-1 text-xs text-gray-500">{t('equivalentInterestPercent')}: {pct.toFixed(2)}%</div>
+    <div className="mt-1 text-xs text-gray-500">{t('loans.equivalentInterestPercent', { percent: pct.toFixed(2) })}</div>
   );
 };
 
@@ -495,15 +495,15 @@ const LoanHistory = ({ loanId, t }: { loanId: string; t: any }) => {
         <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
           <History className="h-6 w-6 text-gray-400" />
         </div>
-        <div className="text-sm text-gray-600 dark:text-gray-300">{t('noRepaymentsYet')}</div>
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('repaymentsWillAppear')}</div>
+        <div className="text-sm text-gray-600 dark:text-gray-300">{t('loans.noRepaymentsYet')}</div>
+        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('loans.repaymentsWillAppear')}</div>
       </div>
     );
   }
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between rounded-lg border border-gray-200 dark:border-gray-800 p-3 bg-white dark:bg-[#18191A]">
-        <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{t('totalRepaid')}</div>
+        <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{t('loans.totalRepaid')}</div>
         <div className="text-base md:text-lg font-semibold text-green-600">₦{new Intl.NumberFormat().format(totalRepaid)}</div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-800 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
