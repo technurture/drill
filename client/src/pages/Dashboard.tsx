@@ -542,7 +542,7 @@ const Dashboard = () => {
                 <CardHeader className="flex flex-row items-center justify-between pb-3">
                   <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400 flex items-center gap-2">
                     
-                    <span>Total Sales Revenue</span>
+                    <span>{t('pages:dashboard.totalSalesRevenue')}</span>
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     {obscureStatus?.main ? (
@@ -567,7 +567,7 @@ const Dashboard = () => {
                         ₦{"*****"}
                       </div>
                     )}
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Total revenue generated from sales</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t('pages:dashboard.totalRevenueDesc')}</p>
                   </div>
                 </CardContent>
               </Card>
