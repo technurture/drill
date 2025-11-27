@@ -67,7 +67,12 @@
     "purchaseValue": "Purchase Value",
     "basedOnPurchasePrice": "Based on purchase price",
     "topSellingProduct": "Top Selling Product",
-    "unitsSold": "units wey dem sell"
+    "unitsSold": "units wey dem sell",
+    "productAddedSuccessfully": "Product don add well well",
+    "failedToAddProduct": "E no work to add product",
+    "purchasedPrice": "Purchase Price",
+    "purchasedPriceOptional": "Purchase price (optional)",
+    "unitPriceOptional": "Unit price (optional)"
   },
   "sales": {
     "title": "Sales",

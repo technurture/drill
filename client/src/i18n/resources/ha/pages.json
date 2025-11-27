@@ -23,8 +23,8 @@
     "addExpense": "Ƙara Kashe Kuɗi",
     "addSavings": "Ƙara Ajiyar Kuɗi",
     "addNewSale": "Ƙara Sabon Tallace-tallace",
-    "welcomeToSheBalance": "[TRANSLATE] Welcome to SheBalance!",
-    "createFirstStoreDesc": "[TRANSLATE] Create your first store to start managing your business and track your sales, inventory, and finances.",
+    "welcomeToSheBalance": "Barka da zuwa SheBalance!",
+    "createFirstStoreDesc": "Ƙirƙiri shagon ku na farko don fara sarrafa kasuwancin ku da bin diddigin tallace-tallace, kayan ajiya, da kuɗi.",
     "incomeBreakdown": "Rarraba Kudaden Shiga",
     "paymentMethods": "Hanyoyin Biyan Kuɗi",
     "quickActions": "Ayyuka Masu Sauri"
@@ -99,7 +99,11 @@
     "purchaseValue": "Darajar Saye",
     "basedOnPurchasePrice": "Dangane da farashin saye",
     "topSellingProduct": "Kayan Da Ya Fi Sayarwa",
-    "unitsSold": "raka'o'i da aka sayar"
+    "unitsSold": "raka'o'i da aka sayar",
+    "productAddedSuccessfully": "An ƙara kaya cikin nasara",
+    "failedToAddProduct": "An kasa ƙara kaya",
+    "purchasedPriceOptional": "Farashin saye (ba dole ba)",
+    "unitPriceOptional": "Farashin ɗaya (ba dole ba)"
   },
   "sales": {
     "title": "Tallace-tallace",

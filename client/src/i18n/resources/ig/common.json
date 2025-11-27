@@ -225,12 +225,12 @@
   "amountNairaLabel": "Ego (₦)",
   "placeholderAmount": "0.00",
   "itemsSold": "Ihe ndị e rere:",
-  "total": "[TRANSLATE] Total:",
-  "savedLocallyWillSync": "[TRANSLATE] Saved locally. Will sync when online.",
-  "failedToSaveOffline": "[TRANSLATE] Failed to save offline",
-  "pleaseTryAgain": "[TRANSLATE] Please try again",
-  "confirmSale": "[TRANSLATE] Confirm Sale",
-  "viewAllNotifications": "[TRANSLATE] View all notifications",
-  "loadingNotifications": "[TRANSLATE] Loading notifications...",
-  "noNotificationsYet": "[TRANSLATE] No notifications yet"
+  "total": "Niile:",
+  "savedLocallyWillSync": "E debere n'ime ụlọ. Ọ ga-ejikọ mgbe ọ nwere ịntanetị.",
+  "failedToSaveOffline": "Ndebe n'enweghị ịntanetị agaghị nke ọma",
+  "pleaseTryAgain": "Biko nwaa ọzọ",
+  "confirmSale": "Kwenye Ire Ahịa",
+  "viewAllNotifications": "Lee ozi niile",
+  "loadingNotifications": "Ana ebunye ozi...",
+  "noNotificationsYet": "Enweghị ozi ọbụla"
 }

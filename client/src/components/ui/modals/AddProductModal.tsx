@@ -12,6 +12,7 @@ import SlideInModal from "../SlideInModal";
 import { Loader2, ArrowLeft } from "lucide-react";
 import toast from "react-hot-toast";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { useTranslation } from "react-i18next";
 
 // Full screen mobile component
 const MobileAddProductScreen = ({ 
@@ -23,7 +24,8 @@ const MobileAddProductScreen = ({
   storesLoading,
   popoverOpen,
   setPopoverOpen,
-  formContent 
+  formContent,
+  t
 }) => {
   if (!open) return null;
 
@@ -41,7 +43,7 @@ const MobileAddProductScreen = ({
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Add Product
+            {t('modals:addProduct.title')}
           </h1>
         </div>
       </div>
@@ -60,6 +62,7 @@ interface AddProductModalProps {
 }
 
 const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
+  const { t } = useTranslation(['modals', 'common', 'pages']);
   const { register, handleSubmit, reset, control, formState: { errors } } = useForm();
   const theStore = useContext(StoreContext);
   const { user } = useAuth();
@@ -101,7 +104,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
     console.log("Selected store IDs:", selectedStoreIds);
     
     if (selectedStoreIds.length === 0) {
-      alert("Please select at least one store");
+      alert(t('common:selectStoreFirst'));
       return;
     }
 
@@ -154,10 +157,10 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
       reset();
       setOpen(false);
       setSelectedStoreIds(theStore?.id ? [theStore.id] : []);
-      toast.success('Product added successfully!');
+      toast.success(t('pages:inventory.productAddedSuccessfully'));
     } catch (error) {
       console.error("Error adding product:", error);
-      toast.error('Failed to add product');
+      toast.error(t('pages:inventory.failedToAddProduct'));
     } finally {
       setIsLoading(false);
     }
@@ -169,7 +172,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
         {/* Store Select Field - Always show if multiple stores */}
         {stores && stores.length > 1 && (
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Select Stores</label>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('common:selectStores')}</label>
             <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
               <PopoverTrigger asChild>
                 <Button 
@@ -180,12 +183,12 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
                 >
                   <span className={selectedStoreIds.length > 0 ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400"}>
                     {storesLoading
-                      ? "Loading stores..."
+                      ? t('common:loadingStores')
                       : selectedStoreIds.length === 0
-                      ? "Select store(s)"
+                      ? t('common:select')
                       : selectedStoreIds.length === 1
                       ? stores.find(s => s.id === selectedStoreIds[0])?.store_name
-                      : `${selectedStoreIds.length} stores selected`}
+                      : `${selectedStoreIds.length} ${t('common:selected')}`}
                   </span>
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -217,7 +220,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
                       </div>
                     ))
                   ) : (
-                    <div className="px-4 py-2 text-sm text-gray-500">No stores found</div>
+                    <div className="px-4 py-2 text-sm text-gray-500">{t('common:noStoresFound')}</div>
                   )}
                 </div>
                 <div className="border-t pt-2 mt-2">
@@ -227,13 +230,13 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
                     className="w-full"
                     onClick={() => setPopoverOpen(false)}
                   >
-                    Done
+                    {t('common:close')}
                   </Button>
                 </div>
               </PopoverContent>
             </Popover>
             {selectedStoreIds.length === 0 && (
-              <p className="text-xs text-red-500">Please select at least one store</p>
+              <p className="text-xs text-red-500">{t('common:selectStoreFirst')}</p>
             )}
           </div>
         )}
@@ -241,11 +244,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
         {/* Form Fields */}
         <div className="flex flex-col gap-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Name
+            {t('common:name')}
           </label>
           <Input
             className="w-full focus:outline-none focus:border-none"
-            placeholder="Name"
+            placeholder={t('modals:addProduct.productNamePlaceholder')}
             id="name"
             {...register("name", { required: true })}
           />
@@ -253,11 +256,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
 
         <div className="flex flex-col gap-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Purchased Price (This is the price at which you bought this product)
+            {t('pages:inventory.purchasedPrice')}
           </label>
           <Input
             id="purchased_price"
-            placeholder="Purchased Price (optional)"
+            placeholder={t('pages:inventory.purchasedPriceOptional')}
             type="number"
             className="w-full focus:outline-none focus:border-none"
             step="0.01"
@@ -267,11 +270,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
 
         <div className="flex flex-col gap-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Unit Price (This is the price at which you sell this product)
+            {t('pages:inventory.unitPrice')}
           </label>
           <Input
             id="unit_price"
-            placeholder="Unit Price (optional)"
+            placeholder={t('pages:inventory.unitPriceOptional')}
             type="number"
             className="w-full focus:outline-none focus:border-none"
             step="0.01"
@@ -281,11 +284,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
 
         <div className="flex flex-col gap-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Quantity (This is the quantity of the product in stock)
+            {t('pages:inventory.quantity')}
           </label>
           <Input
             id="quantity"
-            placeholder="Quantity"
+            placeholder={t('modals:addProduct.quantityPlaceholder')}
             type="number"
             step="0.1"
             className="w-full focus:outline-none focus:border-none"
@@ -295,11 +298,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
 
         <div className="flex flex-col gap-y-2">
           <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Low Stock Threshold (This is the quantity at which you will be notified to restock)
+            {t('pages:inventory.lowStockThreshold')}
           </label>
           <Input
             id="low_stock_threshold"
-            placeholder="Low Stock Threshold"
+            placeholder={t('modals:addProduct.lowStockPlaceholder')}
             type="number"
             className="w-full focus:outline-none focus:border-none"
             {...register("low_stock_threshold", { required: true, min: 0, setValueAs: v => v === '' ? 0 : parseFloat(v) })}
@@ -309,16 +312,16 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
 
       <div className="flex justify-end space-x-3 pt-4">
         <Button type="button" variant="outline" onClick={() => setOpen(false)} className="flex-1 max-w-[200px]">
-          Cancel
+          {t('common:cancel')}
         </Button>
         <Button type="submit" disabled={isLoading || selectedStoreIds.length === 0} className="flex-1 max-w-[200px]">
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Adding...
+              {t('common:adding')}
             </>
           ) : (
-            "Add Product"
+            t('modals:addProduct.add')
           )}
         </Button>
       </div>
@@ -338,6 +341,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
         popoverOpen={popoverOpen}
         setPopoverOpen={setPopoverOpen}
         formContent={formContent}
+        t={t}
       />
     );
   }
@@ -347,7 +351,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ open, setOpen }) => {
     <SlideInModal
       isOpen={open}
       onClose={() => setOpen(false)}
-      title="Add Product"
+      title={t('modals:addProduct.title')}
       width="w-[400px]"
     >
       {formContent}

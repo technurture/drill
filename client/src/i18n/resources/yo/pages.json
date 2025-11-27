@@ -23,8 +23,8 @@
     "addExpense": "Ṣàfikún Ìnáwó",
     "addSavings": "Ṣàfikún Ìfowópamọ́",
     "addNewSale": "Ṣàfikún Títà Tuntun",
-    "welcomeToSheBalance": "[TRANSLATE] Welcome to SheBalance!",
-    "createFirstStoreDesc": "[TRANSLATE] Create your first store to start managing your business and track your sales, inventory, and finances.",
+    "welcomeToSheBalance": "Ẹ kú àbọ̀ sí SheBalance!",
+    "createFirstStoreDesc": "Ṣẹ̀dá ilé ìtajà àkọ́kọ́ rẹ láti bẹ̀rẹ̀ ṣíṣàkóso iṣẹ́ rẹ àti láti tọpinpin títà, ọjà àti owó rẹ.",
     "incomeBreakdown": "Pípin Owó Wọlé",
     "paymentMethods": "Àwọn Ọ̀nà Ìsanwó",
     "quickActions": "Àwọn Ìgbésẹ̀ Kíákíá"
@@ -66,7 +66,12 @@
     "purchaseValue": "Iye Ìrà",
     "basedOnPurchasePrice": "Dá lórí owó ìrà",
     "topSellingProduct": "Ọjà Tó Ń Tà Jùlọ",
-    "unitsSold": "àwọn ọjà tí a ta"
+    "unitsSold": "àwọn ọjà tí a ta",
+    "productAddedSuccessfully": "A ti ṣàfikún ọjà ní àṣeyọrí",
+    "failedToAddProduct": "Kò ṣe é ṣe láti ṣàfikún ọjà",
+    "purchasedPrice": "Owó Ìrà",
+    "purchasedPriceOptional": "Owó ìrà (kò dandan)",
+    "unitPriceOptional": "Iye ọ̀kọ̀ọ̀kan (kò dandan)"
   },
   "sales": {
     "title": "Títà",

@@ -23,8 +23,8 @@
     "addExpense": "Tinye Mmefu",
     "addSavings": "Tinye Nchekwa",
     "addNewSale": "Tinye Ahịa Ọhụrụ",
-    "welcomeToSheBalance": "[TRANSLATE] Welcome to SheBalance!",
-    "createFirstStoreDesc": "[TRANSLATE] Create your first store to start managing your business and track your sales, inventory, and finances.",
+    "welcomeToSheBalance": "Nnọọ na SheBalance!",
+    "createFirstStoreDesc": "Mepụta ụlọ ahịa mbụ gị iji malite ijikwa azụmahịa gị ma soro ahịa, ngwa ahịa, na ego gị.",
     "incomeBreakdown": "Nkewa Ego Abata",
     "paymentMethods": "Ụzọ Ịkwụ Ụgwọ",
     "quickActions": "Ngwa Ngwa Omume"
@@ -66,7 +66,12 @@
     "purchaseValue": "Uru Ịzụta",
     "basedOnPurchasePrice": "Dabere na ọnụahịa ịzụta",
     "topSellingProduct": "Ngwaahịa Na-ere Kacha Mma",
-    "unitsSold": "ngwaahịa e rere"
+    "unitsSold": "ngwaahịa e rere",
+    "productAddedSuccessfully": "Etinyela ngwaahịa nke ọma",
+    "failedToAddProduct": "Enweghị ike itinye ngwaahịa",
+    "purchasedPrice": "Ọnụahịa Ịzụta",
+    "purchasedPriceOptional": "Ọnụahịa ịzụta (ọ dịghị mkpa)",
+    "unitPriceOptional": "Ọnụ ahịa otu (ọ dịghị mkpa)"
   },
   "sales": {
     "title": "Ahịa",

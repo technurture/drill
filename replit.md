@@ -12,6 +12,25 @@ Multi-language support: English, Igbo, Yoruba, Hausa, Pidgin
 
 ## Recent Changes
 
+**November 27, 2025 - Comprehensive Translation Updates**
+- **Issue**: Multiple translation placeholders ([TRANSLATE]) remaining in language files and missing translations for key components like AddProductModal
+- **Implementation**:
+  - Updated `AddProductModal.tsx` with full i18n support using useTranslation hook
+  - Replaced all hardcoded English strings with translation keys (`modals:addProduct.*`, `common:*`, `pages:inventory.*`)
+  - Completed Yoruba (yo) translations: modals.json, common.json, pages.json
+  - Completed Hausa (ha) translations: modals.json, common.json, pages.json
+  - Completed Igbo (ig) translations: All modal sections (deleteNote, deleteSalesRep, logout, deleteProduct, deleteSale, deleteStore, withdrawal, addProduct, addSale, cart, financialRecord)
+  - Completed Nigerian Pidgin translations: modals.json, common.json
+  - Added missing inventory translation keys: productAddedSuccessfully, failedToAddProduct, purchasedPriceOptional, unitPriceOptional to all languages
+  - Removed all [TRANSLATE] placeholders from translation files
+- **Translation Quality**: Proper culturally appropriate translations for Nigerian languages:
+  - Yoruba: Natural phrasing with proper diacritics (e.g., "Ẹ kú àbọ̀ sí SheBalance!")
+  - Hausa: Proper Hausa dialect (e.g., "Barka da zuwa SheBalance!")
+  - Igbo: Correct structure (e.g., "Nnọọ na SheBalance!")
+  - Pidgin: Authentic Nigerian Pidgin (e.g., "Product don add well well")
+- **Files Modified**: `AddProductModal.tsx`, and translation files across yo/, ha/, ig/, pidgin/ directories (modals.json, common.json, pages.json)
+- **Impact**: Users now see fully translated content in their selected language across all app features
+
 **November 23, 2025 - Translation System Fixes**
 - **Issue**: Multiple UI elements across the application were displaying hardcoded English text instead of using translations, breaking the multi-language support for Igbo, Yoruba, Hausa, and Pidgin users
 - **Root Cause**: Missing translation keys in language files and hardcoded strings in components
