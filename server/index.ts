@@ -20,12 +20,16 @@ const corsOptions: cors.CorsOptions = {
     // Allow requests with no origin (like mobile apps, curl, or Postman)
     if (!origin) return callback(null, true);
 
-    // In development, allow localhost and 0.0.0.0 on any port
+    // In development, allow localhost, 0.0.0.0, and Replit domains
     if (process.env.NODE_ENV !== 'production') {
       const allowedOrigins = [
         /^http:\/\/localhost(:\d+)?$/,
         /^http:\/\/127\.0\.0\.1(:\d+)?$/,
         /^http:\/\/0\.0\.0\.0(:\d+)?$/,
+        /\.replit\.dev$/,
+        /\.replit\.app$/,
+        /\.repl\.co$/,
+        /\.picard\.replit\.dev$/,
       ];
 
       if (allowedOrigins.some(pattern => pattern.test(origin))) {
@@ -33,13 +37,20 @@ const corsOptions: cors.CorsOptions = {
       }
     }
 
-    // In production, allow your production domain
+    // In production, allow your production domain and Replit domains
     const allowedProductionOrigins = [
       'https://www.shebalance.org',
       'https://shebalance.org',
     ];
 
-    if (allowedProductionOrigins.includes(origin)) {
+    // Also allow Replit domains in production
+    const replitPatterns = [
+      /\.replit\.dev$/,
+      /\.replit\.app$/,
+      /\.repl\.co$/,
+    ];
+
+    if (allowedProductionOrigins.includes(origin) || replitPatterns.some(p => p.test(origin))) {
       return callback(null, true);
     }
 
