@@ -11,8 +11,35 @@ const fromSupabase = async (query) => {
 export const useStores = (userId: string) =>
   useQuery({
     queryKey: ["stores", userId],
-    queryFn: () =>
-      fromSupabase(supabase.from("stores").select("*").eq("owner_id", userId)),
+    queryFn: async () => {
+      if (!userId) return [];
+
+      // First get user data to check if they're registered under an agent
+      const { data: userData, error: userError } = await supabase
+        .from("users")
+        .select("registered_by")
+        .eq("id", userId)
+        .single();
+
+      if (userError) {
+        console.error("Error fetching user data:", userError);
+        // If there's an error fetching user data, try to fetch stores anyway
+        return fromSupabase(
+          supabase.from("stores").select("*").eq("owner_id", userId)
+        );
+      }
+
+      // Query stores based on ownership or agent relationship
+      const ownerId = userData?.registered_by || userId;
+
+      console.log("useStores - userId:", userId);
+      console.log("useStores - registered_by:", userData?.registered_by);
+      console.log("useStores - querying for owner_id:", ownerId);
+
+      return fromSupabase(
+        supabase.from("stores").select("*").eq("owner_id", ownerId)
+      );
+    },
     enabled: !!userId,
   });
 export const useStoresSalesRep = (storeId: string) =>
@@ -35,14 +62,14 @@ export const useStore = (storeId: string) =>
 
 export const useUpdateStoreLocation = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async ({ storeId, locationId, marketId }: { storeId: string; locationId: string; marketId: string | null }) => {
       const { data, error } = await supabase
         .from("stores")
-        .update({ 
+        .update({
           location_id: locationId,
-          market_id: marketId 
+          market_id: marketId
         })
         .eq("id", storeId)
         .select()
@@ -89,10 +116,10 @@ export const useUpdateStoreName = () => {
       name: string;
     }) => {
       console.log('Updating store name:', { storeId, name });
-      
+
       // Try both field names to see which one works
       let data, error;
-      
+
       try {
         // First try with store_name
         const result1 = await supabase
@@ -101,10 +128,10 @@ export const useUpdateStoreName = () => {
           .eq("id", storeId)
           .select()
           .single();
-        
+
         data = result1.data;
         error = result1.error;
-        
+
         if (!error) {
           console.log('Success with store_name field');
           return data;
@@ -112,7 +139,7 @@ export const useUpdateStoreName = () => {
       } catch (e) {
         console.log('Failed with store_name, trying name field');
       }
-      
+
       // If that failed, try with name
       const result2 = await supabase
         .from("stores")
@@ -134,7 +161,7 @@ export const useUpdateStoreName = () => {
         });
         throw error;
       }
-      
+
       console.log('Store updated successfully:', data);
       return data;
     },

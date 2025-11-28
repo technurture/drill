@@ -27,9 +27,10 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const { data: stores } = useStores(user?.id || "");
   const { data: token } = useGetDeviceToken(selectedStore?.owner_id);
   const [tokens, setTokens] = useState();
-  
+
   // Debug logging
   console.log("StoreContext - User:", user);
+  console.log("StoreContext - User registered_by:", (user as any)?.registered_by);
   console.log("StoreContext - Stores:", stores);
   console.log("StoreContext - Selected store:", selectedStore);
 

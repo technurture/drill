@@ -29,12 +29,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  setUser: async () => {},
-  signIn: async () => {},
-  signUp: async () => {},
-  signInWithOtp: async () => {},
-  verifyOtp: async () => {},
-  signOut: async () => {},
+  setUser: async () => { },
+  signIn: async () => { },
+  signUp: async () => { },
+  signInWithOtp: async () => { },
+  verifyOtp: async () => { },
+  signOut: async () => { },
   loading: true,
   loginState: false,
   setLoginState: "",
@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (user && isOnline && stores) {
       // Cache stores data
       cache.set(`stores_${user.id}`, stores);
-      
+
       // Cache user data
       cache.set(`user_${user.id}`, user);
     }
@@ -131,13 +131,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
-      
+
       // Only clear auth-related localStorage items when user logs out
       if (!session && isOnline) {
         localStorage.removeItem("userType");
         localStorage.removeItem("pendingSync");
       }
-      
+
       setLoading(false);
     });
 
@@ -146,18 +146,45 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const checkForStore = async (user_id: any) => {
     try {
-      const { data, error } = await supabase
+      // First get user data to check if they're registered under an agent
+      const { data: userData, error: userError } = await supabase
+        .from("users")
+        .select("registered_by")
+        .eq("id", user_id)
+        .single();
+
+      if (userError) {
+        console.error("Error fetching user data:", userError);
+        navigate("/dashboard");
+        return;
+      }
+
+      // Check for stores owned by user OR by their agent
+      const query = supabase
         .from("stores")
-        .select("*")
-        .eq("owner_id", user_id);
-      
+        .select("*");
+
+      if (userData?.registered_by) {
+        // User is registered under an agent - check for agent's stores
+        console.log("User registered under agent:", userData.registered_by);
+        query.eq("owner_id", userData.registered_by);
+      } else {
+        // Regular user - check for their own stores
+        console.log("Regular user, checking own stores");
+        query.eq("owner_id", user_id);
+      }
+
+      const { data, error } = await query;
+
       if (error) {
         console.error("Error checking store:", error);
         // If there's an error, still navigate to dashboard as fallback
         navigate("/dashboard");
         return;
       }
-      
+
+      console.log("Stores found:", data?.length || 0);
+
       if (data && data.length > 0) {
         navigate("/dashboard");
       } else {
@@ -201,11 +228,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email: email,
         password,
       });
-      
+
       if (response.error) {
         // Provide user-friendly error messages
         let errorMessage = "Login failed. Please try again.";
-        
+
         switch (response.error.message) {
           case "Invalid login credentials":
             showErrorToast.invalidCredentials();
@@ -230,7 +257,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
         throw response.error;
       }
-      
+
       if (response.data.session !== null && response.data.user !== null) {
         toast.success("Welcome back!");
         checkForStore(response?.data?.user?.id);
@@ -262,11 +289,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           emailRedirectTo: `${window.location.origin}/email-verification`,
         }
       });
-      
+
       if (error) {
         // Provide user-friendly error messages
         let errorMessage = "Sign up failed. Please try again.";
-        
+
         switch (error.message) {
           case "User already registered":
             errorMessage = "An account with this email already exists. Please try logging in instead.";
@@ -291,11 +318,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               errorMessage = error.message;
             }
         }
-        
+
         toast.error(errorMessage);
         throw error;
       }
-      
+
       // Explicitly insert user data into the users table
       if (data.user) {
         const { error: userUpsertError } = await supabase
@@ -315,19 +342,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             onConflict: 'id',
             ignoreDuplicates: false
           });
-        
+
         if (userUpsertError) {
           console.error("Error upserting user data:", userUpsertError);
           // Don't throw error here as auth signup was successful
           // The user can still verify their phone and complete setup
         }
       }
-      
-              // Success message
-        if (data.user && !data.session) {
-          toast.success("Account created successfully! Please check your email for verification link.");
-        }
-      
+
+      // Success message
+      if (data.user && !data.session) {
+        toast.success("Account created successfully! Please check your email for verification link.");
+      }
+
     } catch (error: any) {
       console.error("Sign up error:", error);
       // Error message already shown above, so we don't need to show it again
@@ -349,12 +376,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           shouldCreateUser: true,
         },
       });
-      
+
       if (error) {
         toast.error(error.message || "Failed to send verification email");
         throw error;
       }
-      
+
       toast.success("Verification email sent! Please check your inbox (and spam). ");
     } catch (error: any) {
       console.error("Email OTP sign in error:", error);
@@ -369,12 +396,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         token: otp,
         type: 'email',
       });
-      
+
       if (error) {
         toast.error(error.message || "Invalid or expired code");
         throw error;
       }
-      
+
       if (data.session && data.user) {
         checkForStore(data.user.id);
         localStorage.setItem("userType", "admin");
